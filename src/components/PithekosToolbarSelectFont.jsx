@@ -37,13 +37,13 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
     const webFontsHebrew = [
       { name: 'Ezra SIL 2.51', id: 'Pankosmia-EzraSIL' },
       { name: 'Ezra SIL SR 2.51', id: 'Pankosmia-EzraSILSR' },
-      { name: '- ' + doI18n("pages:core-client-settings:other-fallback", i18n) + ' -', id: '' },
+      { name: '- ' + doI18n("pages:core-settings:other-fallback", i18n) + ' -', id: '' },
     ];
   
     const webFontsMyanmar = [
       { name: 'Padauk 5.100', id: 'Pankosmia-Padauk' },
       { name: 'Padauk Book 5.100', id: 'Pankosmia-PadaukBook' },
-      { name: '- ' + doI18n("pages:core-client-settings:other-fallback", i18n) + ' -', id: '' },
+      { name: '- ' + doI18n("pages:core-settings:other-fallback", i18n) + ' -', id: '' },
     ];
   
     const webFontsArabicUrdu = [
@@ -52,7 +52,7 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
       { name: 'Awami Nastaliq Semi Bold 3.300*', id: 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu' },
       { name: 'Awami Nastaliq Extra Bold 3.300*', id: 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu' },
       { name: 'Noto Naskh Arabic 2022', id: 'Pankosmia-NotoNaskhArabic' },
-      { name: '- ' + doI18n("pages:core-client-settings:other-fallback", i18n) + ' -', id: '' },
+      { name: '- ' + doI18n("pages:core-settings:other-fallback", i18n) + ' -', id: '' },
     ];
     
     const webFontsOther = [
@@ -65,7 +65,7 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
       { name: 'Roboto Light 2004', id: 'Pankosmia-RobotoLight' },
       { name: 'Roboto Medium 2004', id: 'Pankosmia-RobotoMedium' },
       { name: 'Roboto Thin 2004', id: 'Pankosmia-RobotoThin' },
-      { name: '- ' + doI18n("pages:core-client-settings:fallback", i18n) + ' -', id: '' },
+      { name: '- ' + doI18n("pages:core-settings:fallback", i18n) + ' -', id: '' },
     ];
   
     const webFontsFallback = [
@@ -85,7 +85,8 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
 
     const webFontsArabicUrduIds = webFontsArabicUrdu.map((font, index) => (font.id));
     const fontClassAwamiToAdj = fontClassIds.filter(item => item.includes('AwamiNastaliq'));
-    const activeArabicUrduId = (fontClassAwamiToAdj !== '' ? fontClassAwamiToAdj + 'Pankosmia-NotoNastaliqUrdu' : fontClassIds.filter(item => webFontsArabicUrduIds.includes(item)));
+    const activeArabicUrduIdAdj = (fontClassAwamiToAdj !== '' ? fontClassAwamiToAdj + 'Pankosmia-NotoNastaliqUrdu' : fontClassIds.filter(item => webFontsArabicUrduIds.includes(item)));
+    const activeArabicUrduId = (activeArabicUrduIdAdj === 'Pankosmia-NotoNastaliqUrdu' ? '' : activeArabicUrduIdAdj)
     setActiveArabicUrduFontClass(activeArabicUrduId);
 
     const webFontsOtherIds = webFontsOther.map((font, index) => (font.id));
@@ -132,13 +133,13 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
   const webFontsSelectableHebrew = [
     { name: 'Ezra SIL 2.51', id: 'Pankosmia-EzraSIL' },
     { name: 'Ezra SIL SR 2.51', id: 'Pankosmia-EzraSILSR' },
-    { name: '- ' + doI18n("pages:core-client-settings:other-fallback", i18n) + ' -', id: '' },
+    { name: '- ' + doI18n("pages:core-settings:other-fallback", i18n) + ' -', id: '' },
   ];
 
   const webFontsSelectableMyanmar = [
     { name: 'Padauk 5.100', id: 'Pankosmia-Padauk' },
     { name: 'Padauk Book 5.100', id: 'Pankosmia-PadaukBook' },
-    { name: '- ' + doI18n("pages:core-client-settings:other-fallback", i18n) + ' -', id: '' },
+    { name: '- ' + doI18n("pages:core-settings:other-fallback", i18n) + ' -', id: '' },
   ];
 
   const webFontsSelectableArabicUrdu = [
@@ -147,7 +148,7 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
     { name: 'Awami Nastaliq Semi Bold 3.300*', id: 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu' },
     { name: 'Awami Nastaliq Extra Bold 3.300*', id: 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu' },
     { name: 'Noto Naskh Arabic 2022', id: 'Pankosmia-NotoNaskhArabic' },
-    { name: '- ' + doI18n("pages:core-client-settings:other-fallback", i18n) + ' -', id: '' },
+    { name: '- ' + doI18n("pages:core-settings:other-fallback", i18n) + ' -', id: '' },
   ];
   
   const webFontsSelectableOther = [
@@ -160,7 +161,7 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
     { name: 'Roboto Light 2004', id: 'Pankosmia-RobotoLight' },
     { name: 'Roboto Medium 2004', id: 'Pankosmia-RobotoMedium' },
     { name: 'Roboto Thin 2004', id: 'Pankosmia-RobotoThin' },
-    { name: '- ' + doI18n("pages:core-client-settings:fallback", i18n) + ' -', id: '' },
+    { name: '- ' + doI18n("pages:core-settings:fallback", i18n) + ' -', id: '' },
   ];
 
   const webFontsSelectableFallback = [
@@ -210,7 +211,7 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
             <Box sx={{minWidth: 170}}>
                 <FormControl fullWidth style={{maxWidth: 300}} size="small">
                     <InputLabel id="select-hebrew-font-label" htmlFor="select-hebrew-font-id" sx={sx.inputLabel}>
-                      {doI18n("pages:core-client-settings:select_hebrewscriptfont", i18n)}
+                      {doI18n("pages:core-settings:select_hebrewscriptfont", i18n)}
                     </InputLabel>
                     <Select
                         variant="outlined"
@@ -220,7 +221,7 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
                             id: "select-hebrew-font-id",
                         }}
                         value={hebrew}
-                        label={doI18n("pages:core-client-settings:select_hebrewscriptfont", i18n)}
+                        label={doI18n("pages:core-settings:select_hebrewscriptfont", i18n)}
                         onChange={handleChangeHebrew}
                         sx={sx.select}
                     >
@@ -235,7 +236,7 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
             <Box sx={{minWidth: 185}}>
                 <FormControl fullWidth style={{maxWidth: 300}} size="small">
                     <InputLabel id="select-myanmar-font-label" htmlFor="select-myanmar-font-id" sx={sx.inputLabel}>
-                      {doI18n("pages:core-client-settings:select_myanmarscriptfont", i18n)}
+                      {doI18n("pages:core-settings:select_myanmarscriptfont", i18n)}
                     </InputLabel>
                     <Select
                         variant="outlined"
@@ -245,7 +246,7 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
                             id: "select-myanmar-font-id",
                         }}
                         value={myanmar}
-                        label={doI18n("pages:core-client-settings:select_myanmarscriptfont", i18n)}
+                        label={doI18n("pages:core-settings:select_myanmarscriptfont", i18n)}
                         onChange={handleChangeMyanmar}
                         sx={sx.select}
                     >
@@ -260,7 +261,7 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
             <Box sx={{minWidth: 275}}>
                 <FormControl fullWidth style={{maxWidth: 300}} size="small">
                     <InputLabel id="select-arabic-urdu-font-label" htmlFor="select-arabic-urdu-font-id" sx={sx.inputLabel}>
-                      {doI18n("pages:core-client-settings:select_arabicurduscriptfont", i18n)}
+                      {doI18n("pages:core-settings:select_arabicurduscriptfont", i18n)}
                     </InputLabel>
                     <Select
                         variant="outlined"
@@ -270,13 +271,13 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
                             id: "select-arabic-urdu-font-id",
                         }}
                         value={arabicUrdu}
-                        label={doI18n("pages:core-client-settings:select_arabicurduscriptfont", i18n)}
+                        label={doI18n("pages:core-settings:select_arabicurduscriptfont", i18n)}
                         onChange={handleChangeArabicUrdu}
                         sx={sx.select}
                     >
                       {WebFontsSelectableArabicUrdu}
                     </Select>
-                    <FormHelperText>{doI18n("pages:core-client-settings:replaceawamiifnotfirefox", i18n)}</FormHelperText>
+                    <FormHelperText>{doI18n("pages:core-settings:replaceawamiifnotfirefox", i18n)}</FormHelperText>
                 </FormControl>
             </Box>
         </div>
@@ -286,7 +287,7 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
             <Box sx={{minWidth: 200}}>
                 <FormControl fullWidth style={{maxWidth: 300}} size="small">
                     <InputLabel id="select-other-font-label" htmlFor="select-other-font-id" sx={sx.inputLabel}>
-                      {doI18n("pages:core-client-settings:select_otherscriptfont", i18n)}
+                      {doI18n("pages:core-settings:select_otherscriptfont", i18n)}
                     </InputLabel>
                     <Select
                         variant="outlined"
@@ -296,7 +297,7 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
                             id: "select-other-font-id",
                         }}
                         value={other}
-                        label={doI18n("pages:core-client-settings:select_otherscriptfont", i18n)}
+                        label={doI18n("pages:core-settings:select_otherscriptfont", i18n)}
                         onChange={handleChangeOther}
                         sx={sx.select}
                     >
@@ -311,7 +312,7 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
             <Box sx={{minWidth: 225}}>
                 <FormControl fullWidth style={{maxWidth: 300}} size="small">
                     <InputLabel id="select-fallback-font-label" htmlFor="select-fallback-font-id" sx={sx.inputLabel}>
-                      {doI18n("pages:core-client-settings:select_fallbackscriptfont", i18n)}
+                      {doI18n("pages:core-settings:select_fallbackscriptfont", i18n)}
                     </InputLabel>
                     <Select
                         variant="outlined"
@@ -321,7 +322,7 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
                             id: "select-fallback-font-id",
                         }}
                         value={fallback}
-                        label={doI18n("pages:core-client-settings:select_fallbackscriptfont", i18n)}
+                        label={doI18n("pages:core-settings:select_fallbackscriptfont", i18n)}
                         onChange={handleChangeFallback}
                         sx={sx.select}
                     >

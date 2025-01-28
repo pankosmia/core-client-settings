@@ -23,10 +23,10 @@ function App() {
       []
     );
     useEffect( () => {
-      setSelectedFontClass(fontClass.font_class);
-    },[fontClass.font_class]);
+      setSelectedFontClass(fontClass.font_set);
+    },[fontClass.font_set]);
 
-    const activeFontClass = fontClass.font_class;
+    const activeFontClass = fontClass.font_set;
 
     const pithekosToolbarProps = {
       activeFontClass,
@@ -61,17 +61,17 @@ function App() {
                 <Grid2 item size={12}>
                   <Box sx={{ borderTop: 1 }}>
                     <br/>
-                    <b>Active font_class:</b> {fontClass.font_class}<br/><br/>
-                    <b>Change font_class:</b><br />
+                    <b>Active font_set:</b> {fontClass.font_set}<br/><br/>
+                    <b>Change font_set:</b><br />
                     <PithekosToolbar key="pithekos toolbar" {...pithekosToolbarProps} />
-                    {fontClass.font_class !== selectedFontClass &&
+                    {fontClass.font_set !== selectedFontClass &&
                       <Box sx={{ paddingLeft: "20pt" }}>
                         <em>Instructions:</em>
                         <ol>
-                          <li>Change font_class in <em>~/pankosmia_working/user_settings.json</em>
+                          <li>Change font_set in <em>~/pankosmia_working/user_settings.json</em>
                             <ul>
-                              <li><b>from:</b> "font_class": "{fontClass.font_class}",</li>
-                              <li><b>to:</b> "font_class": "{selectedFontClass}",</li>
+                              <li><b>from:</b> "font_set": "{fontClass.font_set}",</li>
+                              <li><b>to:</b> "font_set": "{selectedFontClass}",</li>
                             </ul>
                           </li>
                           <li>Save <em>~/pankosmia_working/user_settings.json.</em></li>
