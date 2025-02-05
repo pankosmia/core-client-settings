@@ -15,6 +15,38 @@
     "debug_prompt": {
       "en": "Debug?",
       "fr": "Débogage ?"
+    },
+    "select_hebrewscriptfont": {
+      "en": "Hebrew Script Font",
+      "fr": "Police d'écriture Hébraïque"
+    },
+    "select_myanmarscriptfont": {
+      "en": "Myanmar Script Font",
+      "fr": "Police d'écriture Myanmar"
+    },
+    "select_arabicurduscriptfont": {
+      "en": "Arabic/Urdu Script Font",
+      "fr": "Police d'écriture Arabe/Ourdou"
+    },
+    "select_otherscriptfont": {
+      "en": "Other Script Font",
+      "fr": "Autre police d'écriture"
+    },
+    "select_fallbackscriptfont": {
+      "en": "Fallback Script Font",
+      "fr": "Police d'écriture de retomber"
+    },
+    "other-fallback": {
+      "en": "Other/Fallback",
+      "fr": "Autre/Retomber"
+    },
+    "fallback": {
+      "en": "Fallback",
+      "fr": "Retomber"
+    },
+    "replaceawamiifnotfirefox": {
+      "en": "* Noto Nastaliq Urdu 2022 if not Firefox",
+      "fr": "* Noto Nastaliq Urdu 2022 sinon Firefox"
     }
   }
 }
