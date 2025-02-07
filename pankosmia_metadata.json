@@ -22,6 +22,10 @@
       "en": "Hebrew Script Font",
       "fr": "Police d'écriture Hébraïque"
     },
+    "select_greekscriptfont": {
+      "en": "Greek Script Font",
+      "fr": "Police d'écriture Grecque"
+    },
     "select_myanmarscriptfont": {
       "en": "Myanmar/Kayah Li Script Font",
       "fr": "Police d'écriture Myanmar/Kayah Li"

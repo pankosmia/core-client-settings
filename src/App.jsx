@@ -7,6 +7,7 @@ function App() {
     const {debugRef} = useContext(debugContext);
     const i18n = useContext(i18nContext);
     const [selectedHebrewFontClass, setSelectedHebrewFontClass] = useState('');
+    const [selectedGreekFontClass, setSelectedGreekFontClass] = useState('');
     const [selectedMyanmarFontClass, setSelectedMyanmarFontClass] = useState('');
     const [selectedArabicUrduFontClass, setSelectedArabicUrduFontClass] = useState('');
     const [selectedOtherFontClass, setSelectedOtherFontClass] = useState('');
@@ -33,6 +34,8 @@ function App() {
       setSelectedFontClass,
       selectedHebrewFontClass,
       setSelectedHebrewFontClass,
+      selectedGreekFontClass,
+      setSelectedGreekFontClass,
       selectedMyanmarFontClass,
       setSelectedMyanmarFontClass,
       selectedArabicUrduFontClass,
