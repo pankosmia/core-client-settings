@@ -118,35 +118,35 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
   const other = otherSelected ? selectedOtherFontClass : activeOtherFontClass;
   const fallback = fallbackSelected ? selectedFallbackFontClass : activeFallbackFontClass;
 
-  const handleChangeHebrew = (event) => {
-    setHebrewSelected(true);
-    setSelectedHebrewFontClass(event.target.value);
-    setSelectedFontClass('fonts-' + event.target.value + greek + myanmar + arabicUrdu + other + fallback);
-  };
   const handleChangeGreek = (event) => {
     setGreekSelected(true);
     setSelectedGreekFontClass(event.target.value);
-    setSelectedFontClass('fonts-' + hebrew + event.target.value + myanmar + arabicUrdu + other + fallback);
+    setSelectedFontClass('fonts-' + event.target.value + hebrew + myanmar + arabicUrdu + other + fallback);
+  };
+  const handleChangeHebrew = (event) => {
+    setHebrewSelected(true);
+    setSelectedHebrewFontClass(event.target.value);
+    setSelectedFontClass('fonts-' + greek + event.target.value + myanmar + arabicUrdu + other + fallback);
   };
   const handleChangeMyanmar = (event) => {
     setMyanmarSelected(true);
     setSelectedMyanmarFontClass(event.target.value);
-    setSelectedFontClass('fonts-' + hebrew + greek + event.target.value + arabicUrdu + other + fallback);
+    setSelectedFontClass('fonts-' + greek + hebrew + event.target.value + arabicUrdu + other + fallback);
   };
   const handleChangeArabicUrdu = (event) => {
     setArabicUrduSelected(true);
     setSelectedArabicUrduFontClass(event.target.value);
-    setSelectedFontClass('fonts-' + hebrew + greek + myanmar + event.target.value + other + fallback);
+    setSelectedFontClass('fonts-' + greek + hebrew + myanmar + event.target.value + other + fallback);
   };
   const handleChangeOther = (event) => {
     setOtherSelected(true);
     setSelectedOtherFontClass(event.target.value);
-    setSelectedFontClass('fonts-' + hebrew + greek + myanmar + arabicUrdu + event.target.value + fallback);
+    setSelectedFontClass('fonts-' + greek + hebrew + myanmar + arabicUrdu + event.target.value + fallback);
   };
   const handleChangeFallback = (event) => {
     setFallbackSelected(true);
     setSelectedFallbackFontClass(event.target.value);
-    setSelectedFontClass('fonts-' + hebrew + greek + myanmar + arabicUrdu + other + event.target.value);
+    setSelectedFontClass('fonts-' + greek + hebrew + myanmar + arabicUrdu + other + event.target.value);
   };
 
   const webFontsSelectableHebrew = [
