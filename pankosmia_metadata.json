@@ -20,39 +20,39 @@
     },
     "select_hebrewscriptfont": {
       "en": "Hebrew Script Font",
-      "fr": "Police d'écriture Hébraïque"
+      "fr": "Police pour Hébreu"
     },
     "select_greekscriptfont": {
       "en": "Greek Script Font",
-      "fr": "Police d'écriture Grecque"
+      "fr": "Police pour Grec"
     },
     "select_myanmarscriptfont": {
-      "en": "Myanmar/Kayah Li Script Font",
-      "fr": "Police d'écriture Myanmar/Kayah Li"
+      "en": "Myanmar / Kayah Li Script Font",
+      "fr": "Police pour Myanmar / Kayah Li"
     },
     "select_arabicurduscriptfont": {
       "en": "Arabic/Urdu Script Font",
-      "fr": "Police d'écriture Arabe/Ourdou"
+      "fr": "Police pour Arabe / Ourdou"
     },
     "select_otherscriptfont": {
       "en": "Other Script Font",
-      "fr": "Autre police d'écriture"
+      "fr": "Police supplémentaire"
     },
     "select_fallbackscriptfont": {
-      "en": "Fallback Script Font",
-      "fr": "Police d'écriture de retomber"
+      "en": "Base Script Font",
+      "fr": "Police de base"
     },
     "other-fallback": {
       "en": "Other/Fallback",
-      "fr": "Autre/Retomber"
+      "fr": "Autre / Police de base"
     },
     "fallback": {
       "en": "Fallback",
-      "fr": "Retomber"
+      "fr": "Police de base"
     },
     "replaceawamiifnotfirefox": {
-      "en": "* Noto Nastaliq Urdu 2022 if not Firefox",
-      "fr": "* Noto Nastaliq Urdu 2022 sinon Firefox"
+      "en": "* Noto Nastaliq Urdu 2022 if browser is not Firefox",
+      "fr": "* Noto Nastaliq Urdu 2022 si navigateur n'est pas Firefox"
     }
   }
 }
