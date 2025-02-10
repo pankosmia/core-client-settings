@@ -12,6 +12,8 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
       setSelectedFontClass,
       selectedHebrewFontClass,
       setSelectedHebrewFontClass,
+      selectedGreekFontClass,
+      setSelectedGreekFontClass,
       selectedMyanmarFontClass,
       setSelectedMyanmarFontClass,
       selectedArabicUrduFontClass,
@@ -23,11 +25,13 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
   } = PithekosToolbarSelectFontProps;
 
   const [activeHebrewFontClass, setActiveHebrewFontClass] = useState('');
+  const [activeGreekFontClass, setActiveGreekFontClass] = useState('');
   const [activeMyanmarFontClass, setActiveMyanmarFontClass] = useState('');
   const [activeArabicUrduFontClass, setActiveArabicUrduFontClass] = useState('');
   const [activeOtherFontClass, setActiveOtherFontClass] = useState('');
   const [activeFallbackFontClass, setActiveFallbackFontClass] = useState('');
   const [hebrewSelected, setHebrewSelected] = useState(false);
+  const [greekSelected, setGreekSelected] = useState(false);
   const [myanmarSelected, setMyanmarSelected] = useState(false);
   const [arabicUrduSelected, setArabicUrduSelected] = useState(false);
   const [otherSelected, setOtherSelected] = useState(false);
@@ -37,6 +41,12 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
     const webFontsHebrew = [
       { name: 'Ezra SIL 2.51', id: 'Pankosmia-EzraSIL' },
       { name: 'Ezra SIL SR 2.51', id: 'Pankosmia-EzraSILSR' },
+      { name: '- ' + doI18n("pages:core-settings:other-fallback", i18n) + ' -', id: '' },
+    ];
+
+    const webFontsGreek = [
+      { name: 'Cardo 2011', id: 'Pankosmia-Cardo' },
+      { name: 'Galatia SIL 2.1', id: 'Pankosmia-GalatiaSIL' },
       { name: '- ' + doI18n("pages:core-settings:other-fallback", i18n) + ' -', id: '' },
     ];
   
@@ -57,7 +67,6 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
     
     const webFontsOther = [
       { name: 'Andika 6.200', id: 'Pankosmia-Andika' },
-      { name: 'Cardo 2011', id: 'Pankosmia-Cardo' },
       { name: 'Charis SIL 6.200', id: 'Pankosmia-CharisSIL' },
       { name: 'Open Sans 2020', id: 'Pankosmia-OpenSans' },
       { name: 'Roboto 2004', id: 'Pankosmia-Roboto' },
@@ -79,6 +88,10 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
     const activeHebrewId = fontClassIds.filter(item => webFontsHebrewIds.includes(item));
     setActiveHebrewFontClass(activeHebrewId);
 
+    const webFontsGreekIds = webFontsGreek.map((font, index) => (font.id));
+    const activeGreekId = fontClassIds.filter(item => webFontsGreekIds.includes(item));
+    setActiveGreekFontClass(activeGreekId);
+
     const webFontsMyanmarIds = webFontsMyanmar.map((font, index) => (font.id));
     const activeMyanmarId = fontClassIds.filter(item => webFontsMyanmarIds.includes(item));
     setActiveMyanmarFontClass(activeMyanmarId);
@@ -99,40 +112,52 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
   },[activeFontClass, i18n])
 
   const hebrew = hebrewSelected ? selectedHebrewFontClass : activeHebrewFontClass;
+  const greek = greekSelected ? selectedGreekFontClass : activeGreekFontClass;
   const myanmar = myanmarSelected ? selectedMyanmarFontClass : activeMyanmarFontClass;
   const arabicUrdu = arabicUrduSelected ? selectedArabicUrduFontClass : activeArabicUrduFontClass;
   const other = otherSelected ? selectedOtherFontClass : activeOtherFontClass;
   const fallback = fallbackSelected ? selectedFallbackFontClass : activeFallbackFontClass;
 
+  const handleChangeGreek = (event) => {
+    setGreekSelected(true);
+    setSelectedGreekFontClass(event.target.value);
+    setSelectedFontClass('fonts-' + event.target.value + hebrew + myanmar + arabicUrdu + other + fallback);
+  };
   const handleChangeHebrew = (event) => {
     setHebrewSelected(true);
     setSelectedHebrewFontClass(event.target.value);
-    setSelectedFontClass('fonts-' + event.target.value + myanmar + arabicUrdu + other + fallback);
+    setSelectedFontClass('fonts-' + greek + event.target.value + myanmar + arabicUrdu + other + fallback);
   };
   const handleChangeMyanmar = (event) => {
     setMyanmarSelected(true);
     setSelectedMyanmarFontClass(event.target.value);
-    setSelectedFontClass('fonts-' + hebrew + event.target.value + arabicUrdu + other + fallback);
+    setSelectedFontClass('fonts-' + greek + hebrew + event.target.value + arabicUrdu + other + fallback);
   };
   const handleChangeArabicUrdu = (event) => {
     setArabicUrduSelected(true);
     setSelectedArabicUrduFontClass(event.target.value);
-    setSelectedFontClass('fonts-' + hebrew + myanmar + event.target.value + other + fallback);
+    setSelectedFontClass('fonts-' + greek + hebrew + myanmar + event.target.value + other + fallback);
   };
   const handleChangeOther = (event) => {
     setOtherSelected(true);
     setSelectedOtherFontClass(event.target.value);
-    setSelectedFontClass('fonts-' + hebrew + myanmar + arabicUrdu + event.target.value + fallback);
+    setSelectedFontClass('fonts-' + greek + hebrew + myanmar + arabicUrdu + event.target.value + fallback);
   };
   const handleChangeFallback = (event) => {
     setFallbackSelected(true);
     setSelectedFallbackFontClass(event.target.value);
-    setSelectedFontClass('fonts-' + hebrew + myanmar + arabicUrdu + other + event.target.value);
+    setSelectedFontClass('fonts-' + greek + hebrew + myanmar + arabicUrdu + other + event.target.value);
   };
 
   const webFontsSelectableHebrew = [
     { name: 'Ezra SIL 2.51', id: 'Pankosmia-EzraSIL' },
     { name: 'Ezra SIL SR 2.51', id: 'Pankosmia-EzraSILSR' },
+    { name: '- ' + doI18n("pages:core-settings:other-fallback", i18n) + ' -', id: '' },
+  ];
+
+  const webFontsSelectableGreek = [
+    { name: 'Cardo 2011', id: 'Pankosmia-Cardo' },
+    { name: 'Galatia SIL 2.1', id: 'Pankosmia-GalatiaSIL' },
     { name: '- ' + doI18n("pages:core-settings:other-fallback", i18n) + ' -', id: '' },
   ];
 
@@ -153,7 +178,6 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
   
   const webFontsSelectableOther = [
     { name: 'Andika 6.200', id: 'Pankosmia-Andika' },
-    { name: 'Cardo 2011', id: 'Pankosmia-Cardo' },
     { name: 'Charis SIL 6.200', id: 'Pankosmia-CharisSIL' },
     { name: 'Open Sans 2020', id: 'Pankosmia-OpenSans' },
     { name: 'Roboto 2004', id: 'Pankosmia-Roboto' },
@@ -175,6 +199,13 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
             <FontMenuItem font={font}/>
         </MenuItem>
     ));
+
+  const WebFontsSelectableGreek =
+  webFontsSelectableGreek.map((font, index) => (
+      <MenuItem key={index} value={font.id} dense>
+          <FontMenuItem font={font}/>
+      </MenuItem>
+  ));
 
   const WebFontsSelectableMyanmar =
     webFontsSelectableMyanmar.map((font, index) => (
@@ -226,6 +257,31 @@ export default function PithekosToolbarSelectFont(PithekosToolbarSelectFontProps
                         sx={sx.select}
                     >
                       {WebFontsSelectableHebrew}
+                    </Select>
+                </FormControl>
+            </Box>
+        </div>
+      </Grid2>
+      <Grid2>
+        <div item style={{maxWidth: 170, padding: "1.25em 0"}}>
+            <Box sx={{minWidth: 170}}>
+                <FormControl fullWidth style={{maxWidth: 300}} size="small">
+                    <InputLabel id="select-greek-font-label" htmlFor="select-greek-font-id" sx={sx.inputLabel}>
+                      {doI18n("pages:core-settings:select_greekscriptfont", i18n)}
+                    </InputLabel>
+                    <Select
+                        variant="outlined"
+                        labelId="select-greek-font-label"
+                        name="select-greek-font-name"
+                        inputProps={{
+                            id: "select-greek-font-id",
+                        }}
+                        value={greek}
+                        label={doI18n("pages:core-settings:select_greekscriptfont", i18n)}
+                        onChange={handleChangeGreek}
+                        sx={sx.select}
+                    >
+                      {WebFontsSelectableGreek}
                     </Select>
                 </FormControl>
             </Box>
