@@ -23,7 +23,7 @@ export default function FontMenuItem(fontMenuItemProps) {
           variant="body2"
           component="div"
         >
-          {font.name}
+          {font.display_name}
         </Typography>
       </div>
     </div>
@@ -32,7 +32,9 @@ export default function FontMenuItem(fontMenuItemProps) {
 
 FontMenuItem.propTypes = {
   font: PropTypes.shape({
-    fullname: PropTypes.string,
+    display_name: PropTypes.string,
+    id: PropTypes.string,
     name: PropTypes.string,
+    settings_id: PropTypes.string,
   }),
 };
