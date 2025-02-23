@@ -6,6 +6,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { renderToString } from 'react-dom/server';
 import { useDetectDir } from "font-detect-rhl";
 
+import awamiFfsLessPunc from "./data/awamiFfsLessPunc.json";
 import FontFeatureDefaults from "./helpers/FontFeatureDefaults";
 import RadioLabelText from "./helpers/RadioLabelText";
 import FontFeatureSettings from "./helpers/FontFeatureSettings";
@@ -20,7 +21,7 @@ export default function FontFeaturesArabicUrdu(fontFeaturesArabicUrduProps) {
     fontSize,
     lineHeight,
     isGraphiteAssumed,
-    ffsArr, // Options
+    // ffsArr, // Options
     exampleRegex,
     setExampleArabicUrdu, // Example text
   } = fontFeaturesArabicUrduProps;
@@ -70,7 +71,7 @@ export default function FontFeaturesArabicUrdu(fontFeaturesArabicUrduProps) {
   const diffStyle = "color: purple;";
 
   const fontSettingsArrProps = {
-    ffsArr, 
+    ffsArr: awamiFfsLessPunc, // Current unicode ranges always result in 'punc 2' (Latin); Removing that option for now.
     isGraphiteAssumed,
   };
 
@@ -172,7 +173,7 @@ export default function FontFeaturesArabicUrdu(fontFeaturesArabicUrduProps) {
     labelStyle,
     diffStyle,
     isGraphiteAssumed,
-    ffsArr,
+    ffsArr: awamiFfsLessPunc, // Current unicode ranges always result in 'punc 2' (Latin); Removing that option for now.
   };
 
   const DrawerList = (
@@ -227,7 +228,7 @@ FontFeaturesArabicUrdu.propTypes = {
   /** Is Graphite Assumed? */
   isGraphiteAssumed: PropTypes.bool.isRequired,
   /** Font Feature Settings Array (Options)*/
-  ffsArr: PropTypes.array.isRequired,
+  // ffsArr: PropTypes.array.isRequired, : // Current unicode ranges always result in 'punc 2' (Latin); Removing that option for now (awamiFfsLessPunc)
   /** Example Regular Expression */
   exampleRegex: PropTypes.func.isRequired,
   /** Set Example ArabicUrdu Text */
