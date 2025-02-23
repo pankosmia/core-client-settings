@@ -18,6 +18,14 @@
       "en": "Debug?",
       "fr": "Débogage ?"
     },
+    "fonts": {
+      "en": "Fonts",
+      "fr": "Polices"
+    },
+    "language": {
+      "en": "Language",
+      "fr": "Langue"
+    },
     "select_hebrewscriptfont": {
       "en": "Hebrew Script Font",
       "fr": "Police pour Hébreu"
