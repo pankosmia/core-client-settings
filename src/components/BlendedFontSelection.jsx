@@ -303,14 +303,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
       setFallbackFontName(fallbackName);
   },[ffsArr, fontClassIdsArr, setArabicUrduFontName, setFallbackFontName, setGreekFontName, setHebrewFontName, setMyanmarFontName, setOtherFontName, webFontsArabicUrdu, webFontsFallback, webFontsGreek, webFontsHebrew, webFontsMyanmar, webFontsOther]);
 
-  const [isOtherOn, setIsOtherOn] = useState(false);
-  useEffect(() => {
-    if ( activeOtherFontClassSubstr !== '' && selectedOtherFontClassSubstr !== '') {
-      setIsOtherOn(true);
-    } else {
-      setIsOtherOn(false);
-    }
-  },[activeOtherFontClassSubstr, selectedOtherFontClassSubstr])
+  const isOtherOn = activeOtherFontClassSubstr !== '' && selectedOtherFontClassSubstr !== '';
 
   /** Set new selections while maintaining an active set that match font_set */
   const hebrewClassSubstr = isHebrewSelected ? selectedHebrewFontClassSubstr : activeHebrewFontClassSubstr;
@@ -319,6 +312,17 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
   const arabicUrduClassSubstr = isArabicUrduSelected ? selectedArabicUrduFontClassSubstr : activeArabicUrduFontClassSubstr;
   const otherClassSubstr = isOtherSelected ? selectedOtherFontClassSubstr : activeOtherFontClassSubstr;
   const fallbackClassSubstr = isFallbackSelected ? selectedFallbackFontClassSubstr : activeFallbackFontClassSubstr;
+
+  const reAssembled2ActiveFontClass = `fonts-${greekClassSubstr}${hebrewClassSubstr}${myanmarClassSubstr}${arabicUrduClassSubstr}${otherClassSubstr}${fallbackClassSubstr}`
+  const [ranOnce, setRanOnce] = useState(false);
+  const [isActiveLoaded, setIsActiveLoaded] = useState(false);
+
+  useEffect (() => {
+    if (!ranOnce && activeFontClass === reAssembled2ActiveFontClass) {
+        setIsActiveLoaded(true);
+        setRanOnce(true);
+      }
+  },[activeFontClass, ranOnce, reAssembled2ActiveFontClass])
 
   /** For each script type, set SELECTED..
    *    - font class
@@ -549,8 +553,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
   const unicodeRangeGreek = greekClassSubstr === '' ? '' : unicodeRanges.filter(item => (item.name === 'Greek')).map((script, index) => (script.unicode_range));
   const unicodeRangeMyanmar = myanmarClassSubstr === '' ? '' : unicodeRanges.filter(item => (item.name === 'Myanmar')).map((script, index) => (script.unicode_range));
   const unicodeRangeArabicUrdu = arabicUrduClassSubstr === '' ? '' : unicodeRanges.filter(item => (item.name === 'Arabic/Urdu')).map((script, index) => (script.unicode_range));
-  // const unicodeRangeOther = otherClassSubstr === '' ? '' : unicodeRanges.filter(item => (item.name === 'Other')).map((script, index) => (script.unicode_range));
-  // const unicodeRangeFallback = fallbackClassSubstr === '' ? '' : unicodeRanges.filter(item => (item.name === 'Fallback')).map((script, index) => (script.unicode_range));
+
   const neutralScope = ' ';
 
   const regexHebrew = RegExp(`[^(${unicodeRangeHebrew}||${neutralScope})]`, 'ugm');
@@ -744,6 +747,31 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
     </div>
   );
 
+  const showHebrewFeatures = isActiveLoaded && hebrewFfsArr.length > 0;
+  const showHebrewTextArea = isActiveLoaded && hebrewClassSubstr !== '';
+  const showHebrewCss = isActiveLoaded && hebrewFfsCss !== '' && hebrewClassSubstr !== '';
+
+  const showGreekFeatures = isActiveLoaded && greekFfsArr.length > 0;
+  const showGreekTextArea = isActiveLoaded && greekClassSubstr !== '';
+  const showGreekCss = isActiveLoaded && greekFontSettings.length > 0 && greekClassSubstr !== '';
+
+  const showMyanmarFeatures = isActiveLoaded && myanmarFfsArr.length > 0;
+  const showMyanmarTextArea = isActiveLoaded && myanmarClassSubstr !== '';
+  const showMyanmarCss = isActiveLoaded && myanmarFontSettings.length > 0 && myanmarClassSubstr !== '';
+
+  const showArabicUrduFeatures = isActiveLoaded && arabicUrduFfsArr.length > 0;
+  const showArabicUrduTextArea = isActiveLoaded && arabicUrduClassSubstr !== '';
+  const showArabicUrduCss = isActiveLoaded && arabicUrduFontSettings.length > 0 && arabicUrduClassSubstr !== '';
+
+  const showOtherFeatures = isActiveLoaded && otherFfsArr.length > 0;
+  const showOtherCss = isActiveLoaded && otherFontSettings.length > 0 && otherClassSubstr !== '';
+
+  const otherFallbackExampleFontName = isOtherOn ? `${otherFontName}, ${fallbackFontName}` : fallbackFontName;
+  const otherFallbackExampleCss = isOtherOn ? otherFfsCss : fallbackFfsCss;
+
+  const showFallbackFeatures = isActiveLoaded && fallbackFfsArr.length > 0;
+  const showFallbackCss = isActiveLoaded && fallbackFfsArr.length > 0;
+
   return (
     <Grid2 container spacing={2}>
       <Grid2 size={12} sx={{ borderTop: 1, borderColor: 'purple' }}>
@@ -762,7 +790,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                         inputProps={{
                             id: "select-hebrew-font-id",
                         }}
-                        value={hebrewClassSubstr}
+                        value={isActiveLoaded && hebrewClassSubstr}
                         label={doI18n("pages:core-settings:select_hebrewscriptfont", i18n)}
                         onChange={handleChangeHebrew}
                         sx={sx.select}
@@ -770,14 +798,14 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                       {WebFontsSelectableHebrew}
                     </Select>
                 </FormControl>
-                {hebrewFfsArr.length > 0 && <FontFeaturesHebrew {...fontFeaturesHebrewProps} />}
+                {showHebrewFeatures && <FontFeaturesHebrew {...fontFeaturesHebrewProps} />}
               </Stack>
             </Box>
         </div>
       </Grid2>
       <Grid2 size={12} sx={{ borderBottom: 1, borderColor: 'purple' }}>
         <Box sx={{ padding: '10pt 0 5pt 20pt' }}>
-          {hebrewClassSubstr !== '' &&
+          {showHebrewTextArea &&
             <TextareaAutosize
               minRows={2}
               id="exampleHebrew"
@@ -785,20 +813,20 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
               onChange={handleExampleHebrew}
               name="exampleHebrew"
               style= {{
-                fontFamily: hebrewFontName,
+                fontFamily: isActiveLoaded && hebrewFontName,
                 fontSize: hebrewFontSize,
                 lineHeight: hebrewLineHeight,
                 width: '50%',
                 borderColor: "purple",
                 direction: exampleHebrewDir,
-                fontFeatureSettings: hebrewFfsCss,
-                MozFontFeatureSettings: hebrewFfsCss,
-                WebkitFontFeatureSettings: hebrewFfsCss,
+                fontFeatureSettings: hebrewFfsCss !== '' && hebrewFfsCss,
+                MozFontFeatureSettings: hebrewFfsCss !== '' && hebrewFfsCss,
+                WebkitFontFeatureSettings: hebrewFfsCss !== '' && hebrewFfsCss,
                 }}
-              value={exampleHebrew}
+              value={showHebrewTextArea && exampleHebrew}
             />
           }
-          {hebrewFfsArr.length > 0 ? hebrewCss : (<div><br /></div>)}
+          {showHebrewCss ? hebrewCss : (<div><br /></div>)}
         </Box>
       </Grid2>
       <Grid2  size={12}>
@@ -817,7 +845,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                           inputProps={{
                               id: "select-greek-font-id",
                           }}
-                          value={greekClassSubstr}
+                          value={isActiveLoaded && greekClassSubstr}
                           label={doI18n("pages:core-settings:select_greekscriptfont", i18n)}
                           onChange={handleChangeGreek}
                           sx={sx.select}
@@ -825,14 +853,14 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                         {WebFontsSelectableGreek}
                       </Select>
                   </FormControl>
-                {greekFfsArr.length > 0 && <FontFeaturesGreek {...fontFeaturesGreekProps} />}
+                {showGreekFeatures && <FontFeaturesGreek {...fontFeaturesGreekProps} />}
               </Stack>
             </Box>
         </div>
       </Grid2>
       <Grid2 size={12} sx={{ borderBottom: 1, borderColor: 'purple' }}>
         <Box sx={{ padding: '10pt 0 5pt 20pt' }}>
-          {greekClassSubstr !== '' &&
+          {showGreekTextArea &&
             <TextareaAutosize
               minRows={2}
               id="exampleGreek"
@@ -840,21 +868,21 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
               onChange={handleExampleGreek}
               name="exampleGreek"
               style= {{
-                fontFamily: greekFontName,
+                fontFamily: isActiveLoaded && greekFontName,
                 fontSize: greekFontSize,
                 lineHeight: greekLineHeight,
                 padding: '10pt 3pt',
                 width: '50%',
                 borderColor: "purple",
                 direction: exampleGreekDir,
-                fontFeatureSettings: greekFfsCss,
-                MozFontFeatureSettings: greekFfsCss,
-                WebkitFontFeatureSettings: greekFfsCss,
+                fontFeatureSettings: greekFfsCss !== '' && greekFfsCss,
+                MozFontFeatureSettings: greekFfsCss !== '' && greekFfsCss,
+                WebkitFontFeatureSettings: greekFfsCss !== '' && greekFfsCss,
                 }}
-              value={exampleGreek}
+              value={showGreekTextArea && exampleGreek}
             />
           }
-          {greekFfsArr.length > 0 ? greekCss : (<div><br /></div>)}
+          {showGreekCss ? greekCss : (<div><br /></div>)}
         </Box>
       </Grid2>
       <Grid2  size={12}>
@@ -873,7 +901,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                         inputProps={{
                             id: "select-myanmar-font-id",
                         }}
-                        value={myanmarClassSubstr}
+                        value={isActiveLoaded && myanmarClassSubstr}
                         label={doI18n("pages:core-settings:select_myanmarscriptfont", i18n)}
                         onChange={handleChangeMyanmar}
                         sx={sx.select}
@@ -881,14 +909,14 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                       {WebFontsSelectableMyanmar}
                     </Select>
                 </FormControl>
-                {myanmarFfsArr.length > 0 && <FontFeaturesMyanmar {...fontFeaturesMyanmarProps} />}
+                {showMyanmarFeatures && <FontFeaturesMyanmar {...fontFeaturesMyanmarProps} />}
               </Stack>
             </Box>
         </div>
       </Grid2>
       <Grid2 size={12} sx={{ borderBottom: 1, borderColor: 'purple' }}>
         <Box sx={{ padding: '10pt 0 5pt 20pt' }}>
-          {myanmarClassSubstr !== '' &&
+          {showMyanmarTextArea &&
             <TextareaAutosize
               minRows={2}
               id="exampleMyanmar"
@@ -896,20 +924,20 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
               onChange={handleExampleMyanmar}
               name="exampleMyanmar"
               style= {{
-                fontFamily: myanmarFontName,
+                fontFamily: isActiveLoaded && myanmarFontName,
                 fontSize: myanmarFontSize,
                 lineHeight: myanmarLineHeight,
                 width: '50%',
                 borderColor: "purple",
                 direction: exampleMyanmarDir,
-                fontFeatureSettings: myanmarFfsCss,
-                MozFontFeatureSettings: myanmarFfsCss,
-                WebkitFontFeatureSettings: myanmarFfsCss,
+                fontFeatureSettings: myanmarFfsCss !== '' && myanmarFfsCss,
+                MozFontFeatureSettings: myanmarFfsCss !== '' && myanmarFfsCss,
+                WebkitFontFeatureSettings: myanmarFfsCss !== '' && myanmarFfsCss,
                 }}
-              value={exampleMyanmar}
+              value={showMyanmarTextArea && exampleMyanmar}
             />
           }
-          {myanmarFfsArr.length > 0 ? myanmarCss : (<div><br /></div>)}
+          {showMyanmarCss ? myanmarCss : (<div><br /></div>)}
         </Box>
       </Grid2>
       <Grid2  size={12}>
@@ -928,7 +956,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                         inputProps={{
                             id: "select-arabic-urdu-font-id",
                         }}
-                        value={arabicUrduClassSubstr}
+                        value={isActiveLoaded && arabicUrduClassSubstr}
                         label={doI18n("pages:core-settings:select_arabicurduscriptfont", i18n)}
                         onChange={handleChangeArabicUrdu}
                         sx={sx.select}
@@ -937,14 +965,14 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                     </Select>
                     <FormHelperText>{arabicUrduClassSubstr.includes('AwamiNastaliq') && doI18n("pages:core-settings:replaceawamiifnotfirefox", i18n)}</FormHelperText>
                 </FormControl>
-                {arabicUrduFfsArr.length > 0 && <FontFeaturesArabicUrdu {...fontFeaturesArabicUrduProps} />}
+                {showArabicUrduFeatures && <FontFeaturesArabicUrdu {...fontFeaturesArabicUrduProps} />}
               </Stack>
             </Box>
         </div>
       </Grid2>
       <Grid2 size={12} sx={{ borderBottom: 1, borderColor: 'purple' }}>
         <Box sx={{ padding: '10pt 0 5pt 20pt' }}>
-          {arabicUrduClassSubstr !== '' &&
+          {showArabicUrduTextArea &&
             <TextareaAutosize
               minRows={isGraphiteAssumed ? 4 : 1}
               id="exampleArabicUrdu"
@@ -952,20 +980,20 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
               onChange={handleExampleArabicUrdu}
               name="exampleArabicUrdu"
               style= {{
-                fontFamily: `${arabicUrduFontName}, 'Pankosmia-Noto Nastaliq Urdu'`,
+                fontFamily: isActiveLoaded && `${arabicUrduFontName}, 'Pankosmia-Noto Nastaliq Urdu'`,
                 fontSize: arabicUrduFontSize,
                 lineHeight: arabicUrduLineHeight,
                 width: '50%',
                 borderColor: "purple",
                 direction: exampleArabicUrduDir,
-                fontFeatureSettings: arabicUrduFfsCss,
-                MozFontFeatureSettings: arabicUrduFfsCss,
-                WebkitFontFeatureSettings: arabicUrduFfsCss,
+                fontFeatureSettings: arabicUrduFfsCss !== '' && arabicUrduFfsCss,
+                MozFontFeatureSettings: arabicUrduFfsCss !== '' && arabicUrduFfsCss,
+                WebkitFontFeatureSettings: arabicUrduFfsCss !== '' && arabicUrduFfsCss,
                 }}
-              value={exampleArabicUrdu}
+              value={showArabicUrduTextArea && exampleArabicUrdu}
             />
           }
-          {arabicUrduFfsArr.length > 0 ? arabicUrduCss : (<div><br /></div>)}
+          {showArabicUrduCss ? arabicUrduCss : (<div><br /></div>)}
         </Box>
       </Grid2>
       <Grid2 size={12}>
@@ -985,7 +1013,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                           inputProps={{
                               id: "select-other-font-id",
                           }}
-                          value={otherClassSubstr}
+                          value={isActiveLoaded && otherClassSubstr}
                           label={doI18n("pages:core-settings:select_otherscriptfont", i18n)}
                           onChange={handleChangeOther}
                           sx={sx.select}
@@ -993,7 +1021,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                         {WebFontsSelectableOther}
                       </Select>
                   </FormControl>
-                  {otherFfsArr.length > 0 && <FontFeaturesOther {...fontFeaturesOtherProps} />}
+                  {showOtherFeatures && <FontFeaturesOther {...fontFeaturesOtherProps} />}
                 </Stack>
               </Box>
           </div>
@@ -1011,7 +1039,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                           inputProps={{
                               id: "select-fallback-font-id",
                           }}
-                          value={fallbackClassSubstr}
+                          value={isActiveLoaded && fallbackClassSubstr}
                           label={doI18n("pages:core-settings:select_fallbackscriptfont", i18n)}
                           onChange={handleChangeFallback}
                           sx={sx.select}
@@ -1019,7 +1047,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                         {WebFontsSelectableFallback}
                       </Select>
                   </FormControl>
-                  {fallbackFfsArr.length > 0 && <FontFeaturesFallback {...fontFeaturesFallbackProps} />}
+                  {showFallbackFeatures && <FontFeaturesFallback {...fontFeaturesFallbackProps} />}
                 </Stack>
               </Box>
             </div>
@@ -1033,20 +1061,20 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
               onChange={handleExampleOtherFallback}
               name="exampleOtherFallback"
               style= {{
-                fontFamily: isOtherOn ? `${otherFontName}, ${fallbackFontName}` : fallbackFontName,
+                fontFamily: isActiveLoaded && otherFallbackExampleFontName,
                 fontSize: fallbackFontSize,
                 lineHeight: fallbackLineHeight,
                 width: '50%',
                 borderColor: "purple",
                 direction: exampleOtherFallbackDir,
-                fontFeatureSettings: otherFfsArr.length > 0 ? otherFfsCss : fallbackFfsCss,
-                MozFontFeatureSettings: otherFfsArr.length > 0 ? otherFfsCss : fallbackFfsCss,
-                WebkitFontFeatureSettings: otherFfsArr.length > 0 ? otherFfsCss : fallbackFfsCss,
+                fontFeatureSettings:  isActiveLoaded && otherFallbackExampleCss,
+                MozFontFeatureSettings: isActiveLoaded && otherFallbackExampleCss,
+                WebkitFontFeatureSettings: isActiveLoaded && otherFallbackExampleCss,
                 }}
-              value={exampleOtherFallback}
+              value={isActiveLoaded && exampleOtherFallback}
               />
-            {otherFfsArr.length > 0 && otherCss}
-            {fallbackFfsArr.length > 0 && fallbackCss}
+            {showOtherCss && otherCss}
+            {showFallbackCss && fallbackCss}
           </Box>
         </Grid2>
       </Grid2>
