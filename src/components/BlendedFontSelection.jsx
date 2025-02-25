@@ -124,16 +124,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
   const [exampleGreek, setExampleGreek] = useState('Ἐν ἀρχῇ ἦν ὁ λόγος, καὶ ὁ λόγος ἦν πρὸς τὸν θεόν, καὶ θεὸς ἦν ὁ λόγος.');
   const [exampleMyanmar, setExampleMyanmar] = useState('အစဦး၌ နှုတ်ကပတ်တော်ရှိ၏။ နှုတ်ကပတ်တော်သည် ဘုရားသခင်နှင့်အတူရှိ၏။ နှုတ်ကပတ်တော် သည်လည်း ဘုရားသခင်ဖြစ်တော်မူ၏။');
   const [exampleArabicUrdu, setExampleArabicUrdu] = useState('في البدء كان الكلمة والكلمة كان عند الله وكان الكلمة الله.');
-  // const [exampleOther, setExampleOther] = useState('');
-  const [exampleFallback, setExampleFallback] = useState('');
   const [exampleOtherFallback, setExampleOtherFallback] = useState('Au commencement... / In the beginning...');
-  /** Using Fallback example text for Other and Fallback combined.
-  useEffect(() => {
-    if (exampleOther !== '' || exampleFallback !== '') {
-      setExampleOtherFallback(`${exampleOther} ${exampleFallback}`);
-    }
-  },[exampleFallback, exampleOther])
-  */
 
   /** Awami Nastaliq requires Graphite, and Padauk has some Graphite-only features. */
   const isGraphiteAssumed = useAssumeGraphite({}); // Tests for Firefox; A different test can show if Graphite is enabled.
@@ -679,7 +670,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
     isGraphiteAssumed,
     ffsArr: fallbackFfsArr, // Options
     exampleRegex: regexOtherFallback,
-    setExampleFallback,
+    setExampleOtherFallback,
     isOtherOn,
   };  
 
@@ -1052,7 +1043,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                 MozFontFeatureSettings: otherFfsArr.length > 0 ? otherFfsCss : fallbackFfsCss,
                 WebkitFontFeatureSettings: otherFfsArr.length > 0 ? otherFfsCss : fallbackFfsCss,
                 }}
-              value={exampleFallback}
+              value={exampleOtherFallback}
               />
             {otherFfsArr.length > 0 && otherCss}
             {fallbackFfsArr.length > 0 && fallbackCss}

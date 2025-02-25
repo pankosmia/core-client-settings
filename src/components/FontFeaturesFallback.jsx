@@ -22,7 +22,7 @@ export default function FontFeaturesFallback(fontFeaturesFallbackProps) {
     isGraphiteAssumed,
     ffsArr, // Options
     exampleRegex,
-    setExampleFallback, // Example text
+    setExampleOtherFallback, // Example text
     isOtherOn,
   } = fontFeaturesFallbackProps;
 
@@ -96,7 +96,7 @@ export default function FontFeaturesFallback(fontFeaturesFallbackProps) {
     if (fontSettingsArr.length !== 0) {
       // eslint-disable-next-line no-control-regex
       const exampleStr = 'Au commencement... / In the beginning... ' + labelStr.replace(exampleRegex, '').replace('(all letters with capital equivalents)', '').replace('(all capitals)', '').replace('                                                                    ', '');
-      setExampleFallback(exampleStr);
+      setExampleOtherFallback(exampleStr);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[ffsId]);
