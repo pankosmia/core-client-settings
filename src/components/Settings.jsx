@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Tabs, Tab, Box, Grid2, Switch } from "@mui/material";
 import { debugContext, i18nContext, doI18n, getJson } from "pithekos-lib";
 import BlendedFontsPage from "./BlendedFontsPage";
+import LanguageSelection from "./LanguageSelection";
 
 const CustomTabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -79,7 +80,7 @@ export default function Settings() {
         <BlendedFontsPage />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Select Language Page
+        <LanguageSelection />
       </CustomTabPanel>
     </Box>
   );

@@ -7,7 +7,7 @@ import { fontFeatureSettings, useAssumeGraphite, useDetectDir } from "font-detec
 import { renderToString } from 'react-dom/server';
 
 import FontMenuItem from "./FontMenuItem";
-import sx from "./BlendedFontSelection.styles";
+import sx from "./Selection.styles";
 import FontFeaturesHebrew from "./FontFeaturesHebrew";
 import FontFeaturesGreek from "./FontFeaturesGreek";
 import FontFeaturesMyanmar from "./FontFeaturesMyanmar";
