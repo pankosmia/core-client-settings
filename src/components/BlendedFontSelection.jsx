@@ -177,7 +177,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
         { display_name: 'Awami Nastaliq Medium 3.300*', id: 'Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Medium', settings_id: 'Awami Nastaliq' },
         { display_name: 'Awami Nastaliq Semi Bold 3.300*', id: 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Semi Bold', settings_id: 'Awami Nastaliq' },
         { display_name: 'Awami Nastaliq Extra Bold 3.300*', id: 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Extra Bold', settings_id: 'Awami Nastaliq' },
-        { display_name: 'Noto Naskh Arabic 2022', id: 'Pankosmia-NotoNaskhArabic', name: 'Pankosmia-Noto Naskh Arabic', settings_id: '' },
+        { display_name: 'Noto Naskh Arabic 2.018', id: 'Pankosmia-NotoNaskhArabic', name: 'Pankosmia-Noto Naskh Arabic', settings_id: '' },
       ]);
     }
   },[i18n, webFontsArabicUrdu.length]);
@@ -186,12 +186,12 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
       setWebFontsOther([
         { display_name: 'Andika 6.200', id: 'Pankosmia-Andika', name: 'Pankosmia-Andika', settings_id: 'Andika' },
         { display_name: 'Charis SIL 6.200', id: 'Pankosmia-CharisSIL', name: 'Pankosmia-Charis SIL', settings_id: 'Charis SIL' },
-        { display_name: 'Open Sans 2020', id: 'Pankosmia-OpenSans', name: 'Pankosmia-Open Sans', settings_id: '' },
-        { display_name: 'Roboto 2004', id: 'Pankosmia-Roboto', name: 'Pankosmia-Roboto', settings_id: '' },
-        { display_name: 'Roboto Black 2004', id: 'Pankosmia-RobotoBlack', name: 'Pankosmia-Roboto Black', settings_id: '' },
-        { display_name: 'Roboto Light 2004', id: 'Pankosmia-RobotoLight', name: 'Pankosmia-Roboto Light', settings_id: '' },
-        { display_name: 'Roboto Medium 2004', id: 'Pankosmia-RobotoMedium', name: 'Pankosmia-Roboto Medium', settings_id: '' },
-        { display_name: 'Roboto Thin 2004', id: 'Pankosmia-RobotoThin', name: 'Pankosmia-Roboto Thin', settings_id: '' },
+        { display_name: 'Open Sans 3.003', id: 'Pankosmia-OpenSans', name: 'Pankosmia-Open Sans', settings_id: '' },
+        { display_name: 'Roboto 2.137', id: 'Pankosmia-Roboto', name: 'Pankosmia-Roboto', settings_id: '' },
+        { display_name: 'Roboto Black 2.137', id: 'Pankosmia-RobotoBlack', name: 'Pankosmia-Roboto Black', settings_id: '' },
+        { display_name: 'Roboto Light 2.137', id: 'Pankosmia-RobotoLight', name: 'Pankosmia-Roboto Light', settings_id: '' },
+        { display_name: 'Roboto Medium 2.137', id: 'Pankosmia-RobotoMedium', name: 'Pankosmia-Roboto Medium', settings_id: '' },
+        { display_name: 'Roboto Thin 2.137', id: 'Pankosmia-RobotoThin', name: 'Pankosmia-Roboto Thin', settings_id: '' },
       ]);
     }
   },[i18n, webFontsOther.length]);
