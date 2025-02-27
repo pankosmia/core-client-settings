@@ -18,6 +18,14 @@
       "en": "Debug?",
       "fr": "Débogage ?"
     },
+    "fonts": {
+      "en": "Fonts",
+      "fr": "Polices"
+    },
+    "language": {
+      "en": "Language",
+      "fr": "Langue"
+    },
     "select_hebrewscriptfont": {
       "en": "Hebrew Script Font",
       "fr": "Police pour Hébreu"
@@ -51,8 +59,8 @@
       "fr": "Police de base"
     },
     "replaceawamiifnotfirefox": {
-      "en": "* Noto Nastaliq Urdu 2022 if browser is not Firefox",
-      "fr": "* Noto Nastaliq Urdu 2022 si navigateur n'est pas Firefox"
+      "en": "* Noto Nastaliq Urdu 4.000 if browser is not Firefox",
+      "fr": "* Noto Nastaliq Urdu 4.000 si navigateur n'est pas Firefox"
     }
   }
 }

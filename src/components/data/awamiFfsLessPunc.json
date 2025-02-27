@@ -1,0 +1,231 @@
+[
+  {
+    "name": "Awami Nastaliq",
+    "id": "awami-nastaliq",
+    "graphite_render_required": true,
+    "categories": [
+      {
+        "category": [
+          {
+            "name": "Character variants",
+            "sets": [
+              {
+                "set": [
+                  {
+                    "title": "Hook on medial heh-goal",
+                    "name": "hehk",
+                    "id": "hook-on-medial-heh-goal-label",
+                    "default": "1",
+                    "label": "ب<span style='{diffStyle}'>ہ</span>ب ب<span style='{diffStyle}'>ۂ</span>ب",
+                    "options": [
+                      {
+                        "tip": "Yes",
+                        "value": "1"
+                      },
+                      {
+                        "tip": "No",
+                        "value": "0"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "set": [
+                    {
+                    "title": "Initial heh doachashmee",
+                    "name": "hedo",
+                    "id": "initial-heh-doachashmee-label",
+                    "default": "0",
+                    "label": "<span style='{diffStyle}'>ھ</span>ا",
+                    "options": [
+                      {
+                        "tip": "Heart shaped",
+                        "value": "0"
+                      },
+                      {
+                        "tip": "Round",
+                        "value": "1"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "set": [
+                    {
+                    "title": "Lam with V",
+                    "name": "lamv",
+                    "id": "lam-with-v-label",
+                    "default": "0",
+                    "label": "<span style='{diffStyle}'>ڵ</span> ڵبڵب<span style='{diffStyle}'>ڵ</span>",
+                    "options": [
+                      {
+                        "tip": "V over stem",
+                        "value": "0"
+                      },
+                      {
+                        "tip": "V over bowl",
+                        "value": "1"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "set": [
+                    {
+                    "title": "Full Stop",
+                    "name": "cv85",
+                    "id": "full-stop-label",
+                    "default": "0",
+                    "label": "ججج<span style='{diffStyle}'>۔</span>",
+                    "options": [
+                      {
+                        "tip": "Dash",
+                        "value": "0"
+                      },
+                      {
+                        "tip": "Dot",
+                        "value": "1"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "set": [
+                    {
+                    "title": "Sukun/jazm",
+                    "name": "cv78",
+                    "id": "sukun-jazm-label",
+                    "default": "1",
+                    "label": "بْ ◌ْ",
+                    "options": [
+                      {
+                        "tip": "Open down",
+                        "value": "1"
+                      },
+                      {
+                        "tip": "Open left",
+                        "value": "2"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "set": [
+                    {
+                    "title": "Hamza",
+                    "name": "hamz",
+                    "id": "hamza-label",
+                    "default": "0",
+                    "label": "ء أ ؤ بؤ إ ۂ بۂ ۓ بۓ ٵ ݬ بݬ ځ بځ بځب بٔ بٕ",
+                    "options": [
+                      {
+                        "tip": "Urdu style",
+                        "value": "0"
+                      },
+                      {
+                        "tip": "Arabic style",
+                        "value": "1"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "set": [
+                    {
+                    "title": "Word spacing",
+                    "name": "wdsp",
+                    "id": "word-spacing-label",
+                    "default": "2",
+                    "label": "کیوں جو انسانی حقوق کنوں",
+                    "options": [
+                      {
+                        "tip": "Extra tight",
+                        "value": "0"
+                      },
+                      {
+                        "tip": "Tight",
+                        "value": "1"
+                      },
+                      {
+                        "tip": "Medium",
+                        "value": "2"
+                      },
+                      {
+                        "tip": "Wide",
+                        "value": "3"
+                      },
+                      {
+                        "tip": "Extra wide",
+                        "value": "4"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "set": [
+                    {
+                    "title": "Collision avoidance",
+                    "name": "agca",
+                    "id": "collision-avoidance-label",
+                    "default": "3",
+                    "label": "<span style='{diffStyle}'>پی</span>ٹی <span style='{diffStyle}'>اؔبِی</span>ج<span style='{diffStyle}'>یل</span> تح<span style='{diffStyle}'>ر</span>ِ<span style='{diffStyle}'>ی</span>ج",
+                    "options": [
+                      {
+                        "tip": "On",
+                        "value": "3"
+                      },
+                      {
+                        "tip": "Kern-only",
+                        "value": "1"
+                      },
+                      {
+                        "tip": "Off",
+                        "value": "0"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "set": [
+                    {
+                    "title": "Short forms",
+                    "name": "shrt",
+                    "id": "short-forms-label",
+                    "default": "3",
+                    "label": "دی<span style='{diffStyle}'>ک</span>ھت<span style='{diffStyle}'>ی</span> <span style='{diffStyle}'>ک</span>نسلٹنٹ<span style='{diffStyle}'>س</span> ن<span style='{diffStyle}'>گ</span>ھنے ت<span style='{diffStyle}'>ک</span>می<span style='{diffStyle}'>ل</span>",
+                    "options": [
+                      {
+                        "tip": "All",
+                        "value": "3"
+                      },
+                      {
+                        "tip": "Finals",
+                        "value": "2"
+                      },
+                      {
+                        "tip": "Kafs and gafs",
+                        "value": "1"
+                      },
+                      {
+                        "tip": "None",
+                        "value": "0"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

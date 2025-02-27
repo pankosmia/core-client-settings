@@ -1,8 +1,8 @@
 import { PropTypes } from "prop-types";
 import { Typography } from "@mui/material";
 
-export default function FontMenuItem(fontMenuItemProps) {
-  const { font } = fontMenuItemProps;
+export default function LanguageMenuItem(languageMenuItemProps) {
+  const { languageId } = languageMenuItemProps;
 
   const styles = {
     menuItem: {
@@ -23,18 +23,15 @@ export default function FontMenuItem(fontMenuItemProps) {
           variant="body2"
           component="div"
         >
-          {font.display_name}
+          {languageId}
         </Typography>
       </div>
     </div>
   );
 }
 
-FontMenuItem.propTypes = {
-  font: PropTypes.shape({
-    display_name: PropTypes.string,
-    id: PropTypes.string,
-    name: PropTypes.string,
-    settings_id: PropTypes.string,
+LanguageMenuItem.propTypes = {
+  languageId: PropTypes.shape({
+    index: PropTypes.string,
   }),
 };
