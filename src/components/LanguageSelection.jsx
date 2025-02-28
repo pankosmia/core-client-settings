@@ -40,9 +40,9 @@ export default function LanguageSelection() {
   return (
     <Grid2 container spacing={2}>
       <Grid2 size={12} sx={{ borderTop: 1, borderColor: 'purple' }}>
-        <div item style={{maxWidth: 350, padding: "1.25em 0 0 0"}}>
-            <Box sx={{minWidth: 350}}>
-                <FormControl fullWidth style={{maxWidth: 325}} size="small">
+        <div item style={{maxWidth: 125, padding: "1.25em 0 0 0"}}>
+            <Box sx={{minWidth: 125}}>
+                <FormControl fullWidth style={{maxWidth: 100}} size="small">
                     <InputLabel id="select-language-label" htmlFor="select-language" sx={sx.inputLabel}>
                       {doI18n("pages:core-settings:language", i18n)}
                     </InputLabel>
