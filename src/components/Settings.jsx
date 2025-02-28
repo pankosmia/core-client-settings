@@ -54,14 +54,17 @@ export default function Settings() {
           aria-label="basic tabs example"
         >
           <Tab label={doI18n("pages:core-settings:language", i18n)} {...a11yProps(0)} />
-          <Tab label={doI18n("pages:core-settings:debug_prompt", i18n)} {...a11yProps(1)} />
-          <Tab label={doI18n("pages:core-settings:fonts", i18n)} {...a11yProps(2)} />
+          <Tab label={doI18n("pages:core-settings:fonts", i18n)} {...a11yProps(1)} />
+          <Tab label={doI18n("pages:core-settings:debug_prompt", i18n)} {...a11yProps(2)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
         <LanguageSelection />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
+        <BlendedFontsPage />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={2}>
       <Grid2 container>
         <Grid2 item size={1}>
           <b>{doI18n("pages:core-settings:debug_prompt", i18n)}</b>
@@ -78,9 +81,6 @@ export default function Settings() {
             />
           </Grid2>
         </Grid2>
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
-        <BlendedFontsPage />
       </CustomTabPanel>
     </Box>
   );
