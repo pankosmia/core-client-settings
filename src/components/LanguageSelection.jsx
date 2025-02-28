@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 
 import { Grid2, Box, InputLabel, FormControl, Select, MenuItem } from "@mui/material";
-import { i18nContext, doI18n, getAndSetJson } from "pithekos-lib";
+import { i18nContext, doI18n, getAndSetJson, postEmptyJson} from "pithekos-lib";
 import sx from "./Selection.styles";
 import LanguageMenuItem from "./LanguageMenuItem";
 
@@ -10,19 +10,23 @@ export default function LanguageSelection() {
   const i18n = useContext(i18nContext);
   const [selectedLanguage, setSelectedLanguage] = useState('');
   const [usedLanguages, setUsedLanguages] = useState([]);
-    useEffect(
-      () => {
-          getAndSetJson({
-              url: "/i18n/used-languages",
-              setter: setUsedLanguages
-          }).then()},
-      []
-    );
-
-  console.log(selectedLanguage);
+  useEffect(
+    () => {
+        getAndSetJson({
+            url: "/i18n/used-languages",
+            setter: setUsedLanguages
+        }).then()
+        getAndSetJson({
+          url: "/settings/languages",
+          setter: setSelectedLanguage
+      }).then()},
+    []
+  );
 
   const handleChangeLanguage = (event) => {
     setSelectedLanguage(event.target.value);
+    postEmptyJson('/settings/languages/' + event.target.value);
+    window.location.reload(false);
   };
 
   /** Build dropdown menus */
