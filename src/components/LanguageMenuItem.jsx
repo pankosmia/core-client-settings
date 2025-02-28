@@ -2,7 +2,7 @@ import { PropTypes } from "prop-types";
 import { Typography } from "@mui/material";
 
 export default function LanguageMenuItem(languageMenuItemProps) {
-  const { languageId } = languageMenuItemProps;
+  const { language } = languageMenuItemProps;
 
   const styles = {
     menuItem: {
@@ -23,7 +23,7 @@ export default function LanguageMenuItem(languageMenuItemProps) {
           variant="body2"
           component="div"
         >
-          {languageId}
+          {language.id} {language.endonym}
         </Typography>
       </div>
     </div>
