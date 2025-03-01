@@ -53,34 +53,34 @@ export default function Settings() {
           indicatorColor="secondary"        
           aria-label="basic tabs example"
         >
-          <Tab label={doI18n("pages:core-settings:debug_prompt", i18n)} {...a11yProps(0)} />
+          <Tab label={doI18n("pages:core-settings:language", i18n)} {...a11yProps(0)} />
           <Tab label={doI18n("pages:core-settings:fonts", i18n)} {...a11yProps(1)} />
-          <Tab label={doI18n("pages:core-settings:language", i18n)} {...a11yProps(2)} />
+          <Tab label={doI18n("pages:core-settings:debug_prompt", i18n)} {...a11yProps(2)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-      <Grid2 container>
-          <Grid2 item size={1}>
-            <b>{doI18n("pages:core-settings:debug_prompt", i18n)}</b>
-          </Grid2>
-          <Grid2 item size={11}>
-            <Switch
-                checked={debugRef.current}
-                color="secondary"
-                onChange={() =>
-                    debugRef.current ?
-                        getJson("/debug/disable", debugRef.current) :
-                        getJson("/debug/enable", debugRef.current)
-                }
-            />
-          </Grid2>
-        </Grid2>
+        <LanguageSelection />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <BlendedFontsPage />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        <LanguageSelection />
+      <Grid2 container>
+        <Grid2 item size={1}>
+          <b>{doI18n("pages:core-settings:debug_prompt", i18n)}</b>
+        </Grid2>
+          <Grid2 item size={11}>
+            <Switch
+              checked={debugRef.current}
+              color="secondary"
+              onChange={() =>
+                  debugRef.current ?
+                      getJson("/debug/disable", debugRef.current) :
+                      getJson("/debug/enable", debugRef.current)
+              }
+            />
+          </Grid2>
+        </Grid2>
       </CustomTabPanel>
     </Box>
   );
