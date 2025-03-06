@@ -16,23 +16,28 @@
     },
     "debug_prompt": {
       "en": "Debug?",
-      "fr": "Débogage ?"
+      "fr": "Débogage ?",
+      "grc": "Ἐκβάλλειν τὰ ἔντομα;"
     },
     "fonts": {
       "en": "Fonts",
-      "fr": "Polices"
+      "fr": "Polices",
+      "grc": "Γράμματα"
     },
     "language": {
       "en": "Language",
-      "fr": "Langue"
+      "fr": "Langue",
+      "grc": "Γλῶσσα"
     },
     "select_hebrewscriptfont": {
       "en": "Hebrew Script Font",
-      "fr": "Police pour Hébreu"
+      "fr": "Police pour Hébreu",
+      "grc": "Ἑβραϊκὰ γράμματα"
     },
     "select_greekscriptfont": {
       "en": "Greek Script Font",
-      "fr": "Police pour Grec"
+      "fr": "Police pour Grec",
+      "grc": "Ἑλληνικὰ γράμματα"
     },
     "select_myanmarscriptfont": {
       "en": "Myanmar / Kayah Li Script Font",
@@ -40,7 +45,8 @@
     },
     "select_arabicurduscriptfont": {
       "en": "Arabic/Urdu Script Font",
-      "fr": "Police pour Arabe / Ourdou"
+      "fr": "Police pour Arabe / Ourdou",
+      "grc": "Ἀραϐικὰ γράμματα"
     },
     "select_otherscriptfont": {
       "en": "Other Script Font",
@@ -52,7 +58,8 @@
     },
     "other-fallback": {
       "en": "Other/Fallback",
-      "fr": "Autre / Police de base"
+      "fr": "Autre / Police de base",
+      "grc": "Ἁλλὰ γράμματα"
     },
     "fallback": {
       "en": "Fallback",
