@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 
-import { Grid2, Box, InputLabel, FormControl, Select, MenuItem } from "@mui/material";
+import { Grid2, Box, InputLabel, FormControl, Select, MenuItem, Stack } from "@mui/material";
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { i18nContext, doI18n, getAndSetJson, postEmptyJson} from "pithekos-lib";
 import sx from "./Selection.styles";
 import LanguageMenuItem from "./LanguageMenuItem";
@@ -9,7 +10,13 @@ export default function LanguageSelection() {
 
   const i18n = useContext(i18nContext);
   const [usedEndonyms, setUsedEndonyms] = useState([]);
-  const [selectedLanguage, setSelectedLanguage] = useState('');
+  const [secondUsedEndonyms, setSecondUsedEndonyms] = useState([]);
+  const [thirdUsedEndonyms, setThirdUsedEndonyms] = useState([]);
+  const [selectedLanguages, setSelectedLanguages] = useState('');
+  const [firstSelectedLanguage, setFirstSelectedLanguage] = useState('');
+  const [secondSelectedLanguage, setSecondSelectedLanguage] = useState('');
+  const [thirdSelectedLanguage, setThirdSelectedLanguage] = useState('');
+  const [fourthSelectedLanguage, setFourthSelectedLanguage] = useState('');
   const [usedLanguages, setUsedLanguages] = useState([]);
   useEffect(
     () => {
@@ -19,8 +26,8 @@ export default function LanguageSelection() {
         }).then()
         getAndSetJson({
           url: "/settings/languages",
-          setter: setSelectedLanguage
-      }).then()},
+          setter: setSelectedLanguages
+        }).then()},
     []
   );
 
@@ -83,6 +90,7 @@ export default function LanguageSelection() {
       { id: 'ka', endonym: 'ქართული (Kharthuli)' },
       { id: 'de', endonym: 'Deutsch' },
       { id: 'el', endonym: 'Νέα Ελληνικά; (Néa Ellêniká)' },
+      { id: 'grc', endonym: 'Ἑλλάς'},
       { id: 'gn', endonym: 'Avañe\'ẽ' },
       { id: 'gu', endonym: 'ગુજરાતી (Gujarātī)' },
       { id: 'ht', endonym: 'Kreyòl ayisyen' },
@@ -216,9 +224,56 @@ export default function LanguageSelection() {
   
   },[usedLanguages]);
 
-  const handleChangeLanguage = (event) => {
-    setSelectedLanguage(event.target.value);
-    postEmptyJson('/settings/languages/' + event.target.value);
+  useEffect( () => {
+    setSecondUsedEndonyms(usedEndonyms.filter(item => (item.id !== firstSelectedLanguage)));
+    setThirdUsedEndonyms(usedEndonyms.filter(item => ((item.id !== firstSelectedLanguage) && (item.id !== secondSelectedLanguage))));
+  },[firstSelectedLanguage, secondSelectedLanguage, usedEndonyms]);
+
+  useEffect(() => {
+    setFirstSelectedLanguage(selectedLanguages[0]);
+    setSecondSelectedLanguage(selectedLanguages[1]);
+    setThirdSelectedLanguage(selectedLanguages[2]);
+    setFourthSelectedLanguage(selectedLanguages[3]);
+  },[selectedLanguages]);
+  
+  const handleFirstChangeLanguage = (event) => {
+    const addEn = ((event.target.value !== 'en') && (secondSelectedLanguage !== 'en') && (thirdSelectedLanguage !== 'en') ? '/en' : '')
+    const fallbackLanguages = (secondSelectedLanguage !== undefined ? '/' + secondSelectedLanguage : '') + (thirdSelectedLanguage !== undefined ? '/' + thirdSelectedLanguage : '')
+    const postLanguage = event.target.value + fallbackLanguages.replace('/' + event.target.value, '') + addEn;
+    postLanguageId(postLanguage);
+  };
+
+  const handleSecondChangeLanguage = (event) => {
+    const addEn = ((firstSelectedLanguage !== 'en') && (event.target.value !== 'en') && (thirdSelectedLanguage !== 'en') ? '/en' : '')
+    const fallbackLanguages = (thirdSelectedLanguage !== undefined ? '/' + thirdSelectedLanguage : '')
+    const postLanguage = firstSelectedLanguage + '/' + event.target.value + fallbackLanguages.replace('/' + event.target.value, '') + addEn;
+    postLanguageId(postLanguage);
+  };
+
+  const handleThirdChangeLanguage = (event) => {
+    const addEn = ((firstSelectedLanguage !== 'en') && (secondSelectedLanguage !== 'en') && (event.target.value !== 'en') ? '/en' : '')
+    const second = (secondSelectedLanguage !== undefined ? '/' + secondSelectedLanguage : '')
+    const postLanguage = firstSelectedLanguage + second + '/' + event.target.value + addEn;
+    postLanguageId(postLanguage);
+  };
+
+  const handleRemoveFirstLanguage = (event) => {
+    const postLanguage = secondSelectedLanguage + (thirdSelectedLanguage !== undefined ? '/' + thirdSelectedLanguage : '') + (fourthSelectedLanguage !== undefined ? '/' + fourthSelectedLanguage : '')
+    postLanguageId(postLanguage);
+  };
+
+  const handleRemoveSecondLanguage = (event) => {
+    const postLanguage = firstSelectedLanguage + (thirdSelectedLanguage !== undefined ? '/' + thirdSelectedLanguage : '') + (fourthSelectedLanguage !== undefined ? '/' + fourthSelectedLanguage : '')
+    postLanguageId(postLanguage);
+  };
+
+  const handleRemoveThirdLanguage = (event) => {
+    const postLanguage = firstSelectedLanguage + '/' + secondSelectedLanguage + (fourthSelectedLanguage !== undefined ? '/' + fourthSelectedLanguage : '')
+    postLanguageId(postLanguage);
+  };
+
+  const postLanguageId = async (iD) => { 
+    await postEmptyJson('/settings/languages/' + iD);
     window.location.reload(false);
   };
 
@@ -229,12 +284,25 @@ export default function LanguageSelection() {
             <LanguageMenuItem language={language}/>
         </MenuItem>
   ));
+  const SecondUsedEndonyms =
+  secondUsedEndonyms.map((language, index) => (
+      <MenuItem key={index} value={language.id} dense>
+          <LanguageMenuItem language={language}/>
+      </MenuItem>
+  ));
+  const ThirdUsedEndonyms =
+  thirdUsedEndonyms.map((language, index) => (
+      <MenuItem key={index} value={language.id} dense>
+          <LanguageMenuItem language={language}/>
+      </MenuItem>
+  ));
 
   return (
     <Grid2 container spacing={2}>
       <Grid2 size={12} sx={{ borderTop: 1, borderColor: 'purple' }}>
         <div item style={{padding: "1.25em 0 0 0"}}>
             <Box>
+              <Stack direction="row">
                 <FormControl size="small">
                     <InputLabel id="select-language-label" htmlFor="select-language" sx={sx.inputLabel}>
                       {doI18n("pages:core-settings:language", i18n)}
@@ -246,17 +314,79 @@ export default function LanguageSelection() {
                         inputProps={{
                             id: "select-language",
                         }}
-                        value={selectedLanguage}
+                        value={firstSelectedLanguage}
                         label={doI18n("pages:core-settings:language", i18n)}
-                        onChange={handleChangeLanguage}
+                        onChange={handleFirstChangeLanguage}
                         sx={sx.select}
                     >
                       {UsedEndonyms}
                     </Select>
                 </FormControl>
+                {firstSelectedLanguage !== 'en' && <RemoveCircleIcon style={{ color: "purple" }} onClick={handleRemoveFirstLanguage}  />}
+              </Stack>
             </Box>
         </div>
       </Grid2>
+      {secondSelectedLanguage !== undefined &&
+        <Grid2 size={12} sx={{ borderTop: 1, borderColor: 'purple' }}>
+          <div item style={{padding: "1.25em 0 0 0"}}>
+              <Box>
+                <Stack direction="row">
+                  <FormControl size="small">
+                      <InputLabel id="select-language-label" htmlFor="select-language" sx={sx.inputLabel}>
+                        {doI18n("pages:core-settings:language", i18n)}
+                      </InputLabel>
+                      <Select
+                          variant="outlined"
+                          labelId="select-language-label"
+                          name="select-language"
+                          inputProps={{
+                              id: "select-language",
+                          }}
+                          value={secondSelectedLanguage}
+                          label={doI18n("pages:core-settings:language", i18n)}
+                          onChange={handleSecondChangeLanguage}
+                          sx={sx.select}
+                      >
+                        {SecondUsedEndonyms}
+                      </Select>
+                  </FormControl>
+                  {secondSelectedLanguage !== 'en' && <RemoveCircleIcon style={{ color: "purple" }} onClick={handleRemoveSecondLanguage}  />}
+                </Stack>
+              </Box>
+          </div>
+        </Grid2>
+      }
+      {thirdSelectedLanguage !== undefined &&
+        <Grid2 size={12} sx={{ borderTop: 1, borderColor: 'purple' }}>
+          <div item style={{padding: "1.25em 0 0 0"}}>
+              <Box>
+                <Stack direction="row">
+                  <FormControl size="small">
+                      <InputLabel id="select-language-label" htmlFor="select-language" sx={sx.inputLabel}>
+                        {doI18n("pages:core-settings:language", i18n)}
+                      </InputLabel>
+                      <Select
+                          variant="outlined"
+                          labelId="select-language-label"
+                          name="select-language"
+                          inputProps={{
+                              id: "select-language",
+                          }}
+                          value={thirdSelectedLanguage}
+                          label={doI18n("pages:core-settings:language", i18n)}
+                          onChange={handleThirdChangeLanguage}
+                          sx={sx.select}
+                      >
+                        {ThirdUsedEndonyms}
+                      </Select>
+                  </FormControl>
+                  {thirdSelectedLanguage !== 'en' && <RemoveCircleIcon style={{ color: "purple" }} onClick={handleRemoveThirdLanguage} />}
+                </Stack>
+              </Box>
+          </div>
+        </Grid2>
+      }
     </Grid2>
   );
 }

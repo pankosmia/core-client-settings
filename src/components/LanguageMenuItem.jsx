@@ -32,6 +32,6 @@ export default function LanguageMenuItem(languageMenuItemProps) {
 
 LanguageMenuItem.propTypes = {
   languageId: PropTypes.shape({
-    index: PropTypes.string,
+    index: PropTypes.objectOf(PropTypes.string),
   }),
 };

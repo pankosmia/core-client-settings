@@ -8,59 +8,80 @@
   "i18n": {
     "title": {
       "en": "Settings",
-      "fr": "Paramètres"
+      "fr": "Paramètres",
+      "id": "Pengaturan"
     },
     "summary": {
       "en": "Settings for languages, debugging, data sources...",
-      "fr": "Configuration (langues, déboguage, sources de données...)"
+      "fr": "Configuration (langues, déboguage, sources de données...)",
+      "id": "Pengaturan untuk bahasa, menemukan kesalahan program, sumber data, dll."
     },
     "debug_prompt": {
       "en": "Debug?",
-      "fr": "Débogage ?"
+      "fr": "Débogage ?",
+      "id": "Debug?",
+      "grc": "Ἐκβάλλειν τὰ ἔντομα;"
     },
     "fonts": {
       "en": "Fonts",
-      "fr": "Polices"
+      "fr": "Polices",
+      "id": "Fon-fon",
+      "grc": "Γράμματα"
     },
     "language": {
       "en": "Language",
-      "fr": "Langue"
+      "fr": "Langue",
+      "id": "Bahasa",
+      "grc": "Γλῶσσα"
     },
     "select_hebrewscriptfont": {
       "en": "Hebrew Script Font",
-      "fr": "Police pour Hébreu"
+      "fr": "Police pour Hébreu",
+      "id": "Fon Aksara Ibrani",
+      "grc": "Ἑβραϊκὰ γράμματα"
     },
     "select_greekscriptfont": {
       "en": "Greek Script Font",
-      "fr": "Police pour Grec"
+      "fr": "Police pour Grec",
+      "id": "Fon Aksara Yunani",
+      "grc": "Ἑλληνικὰ γράμματα"
     },
     "select_myanmarscriptfont": {
       "en": "Myanmar / Kayah Li Script Font",
-      "fr": "Police pour Myanmar / Kayah Li"
+      "fr": "Police pour Myanmar / Kayah Li",
+      "id": "Fon Aksara Myanmar / Kayah Li"
     },
     "select_arabicurduscriptfont": {
       "en": "Arabic/Urdu Script Font",
-      "fr": "Police pour Arabe / Ourdou"
+      "fr": "Police pour Arabe / Ourdou",
+      "id": "Fon Aksara Arab / Urdu",
+      "grc": "Ἀραϐικὰ γράμματα"
     },
     "select_otherscriptfont": {
       "en": "Other Script Font",
-      "fr": "Police supplémentaire"
+      "fr": "Police supplémentaire",
+      "id": "Fon Aksara Lain"
     },
     "select_fallbackscriptfont": {
       "en": "Base Script Font",
-      "fr": "Police de base"
+      "fr": "Police de base",
+      "id": "Fon Aksara Dasar"
     },
     "other-fallback": {
       "en": "Other/Fallback",
-      "fr": "Autre / Police de base"
+      "fr": "Autre / Police de base",
+      "id": "Lainnya / Terakhir",
+      "grc": "Ἁλλὰ γράμματα"
     },
     "fallback": {
       "en": "Fallback",
-      "fr": "Police de base"
+      "fr": "Police de base",
+      "id": "Terakhir"
     },
     "replaceawamiifnotfirefox": {
       "en": "* Noto Nastaliq Urdu 4.000 if browser is not Firefox",
-      "fr": "* Noto Nastaliq Urdu 4.000 si navigateur n'est pas Firefox"
+      "fr": "* Noto Nastaliq Urdu 4.000 si navigateur n'est pas Firefox",
+      "id": "* Noto Nastaliq Urdu 4.000 ketika peramban web bukan Firefox"
     }
   }
 }
