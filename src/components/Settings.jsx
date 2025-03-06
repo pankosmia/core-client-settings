@@ -37,7 +37,7 @@ const a11yProps = (index) => {
 export default function Settings() {
   const [value, setValue] = useState(0);
   const {debugRef} = useContext(debugContext);
-  const i18n = useContext(i18nContext);
+  const { i18nRef } = useContext(i18nContext);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -53,9 +53,9 @@ export default function Settings() {
           indicatorColor="secondary"        
           aria-label="basic tabs example"
         >
-          <Tab label={doI18n("pages:core-settings:language", i18n)} {...a11yProps(0)} />
-          <Tab label={doI18n("pages:core-settings:fonts", i18n)} {...a11yProps(1)} />
-          <Tab label={doI18n("pages:core-settings:debug_prompt", i18n)} {...a11yProps(2)} />
+          <Tab label={doI18n("pages:core-settings:language", i18nRef.current)} {...a11yProps(0)} />
+          <Tab label={doI18n("pages:core-settings:fonts", i18nRef.current)} {...a11yProps(1)} />
+          <Tab label={doI18n("pages:core-settings:debug_prompt", i18nRef.current)} {...a11yProps(2)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
@@ -67,7 +67,7 @@ export default function Settings() {
       <CustomTabPanel value={value} index={2}>
       <Grid2 container>
         <Grid2 item size={1}>
-          <b>{doI18n("pages:core-settings:debug_prompt", i18n)}</b>
+          <b>{doI18n("pages:core-settings:debug_prompt", i18nRef.current)}</b>
         </Grid2>
           <Grid2 item size={11}>
             <Switch

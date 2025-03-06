@@ -16,7 +16,7 @@ import FontFeaturesOther from "./FontFeaturesOther";
 import FontFeaturesFallback from "./FontFeaturesFallback";
 
 export default function BlendedFontSelection(blendedFontSelectionProps) {
-  const i18n = useContext(I18nContext);
+  const { i18nRef } = useContext(I18nContext);
   const {
     activeFontClass,
     setSelectedFontClass,
@@ -161,7 +161,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
         { display_name: 'Galatia SIL 2.1', id: 'Pankosmia-GalatiaSIL', name: 'Pankosmia-Galatia SIL', settings_id: '' },
       ]);
     }
-  },[i18n, webFontsGreek.length]);
+  },[webFontsGreek.length]);
   useEffect(() => {
     if (!webFontsMyanmar.length) {
       setWebFontsMyanmar([
@@ -169,7 +169,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
         { display_name: 'Padauk Book 5.100', id: 'Pankosmia-PadaukBook', name: 'Pankosmia-Padauk Book', settings_id: 'Padauk' },
       ]);
     }
-  },[i18n, webFontsMyanmar.length]);
+  },[webFontsMyanmar.length]);
   useEffect(() => {
     if (!webFontsArabicUrdu.length) {
       setWebFontsArabicUrdu([
@@ -180,7 +180,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
         { display_name: 'Noto Naskh Arabic 2.018', id: 'Pankosmia-NotoNaskhArabic', name: 'Pankosmia-Noto Naskh Arabic', settings_id: '' },
       ]);
     }
-  },[i18n, webFontsArabicUrdu.length]);
+  },[webFontsArabicUrdu.length]);
   useEffect(() => {
     if (!webFontsOther.length) {
       setWebFontsOther([
@@ -194,7 +194,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
         { display_name: 'Roboto Thin 2.137', id: 'Pankosmia-RobotoThin', name: 'Pankosmia-Roboto Thin', settings_id: '' },
       ]);
     }
-  },[i18n, webFontsOther.length]);
+  },[webFontsOther.length]);
   useEffect(() => {
     if (!webFontsFallback.length) {
       setWebFontsFallback([
@@ -205,7 +205,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
   },[webFontsFallback.length]);
 
   /** Add not-applicable options to script-specific arrays above. */
-  const otherFallbackFont = doI18n("pages:core-settings:other-fallback", i18n);
+  const otherFallbackFont = doI18n("pages:core-settings:other-fallback", i18nRef.current);
   useEffect(() => {
     if (otherFallbackFont !== 'pages:core-settings:other-fallback') {
       setWebFontsHebrew(previous => [...previous, { display_name: '- ' + otherFallbackFont + ' -', id: '', name: '', settings_id: '' },])
@@ -216,7 +216,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
   },[otherFallbackFont]);
 
   /** Add not-applicable options to the "Other" array above. */
-  const fallbackFont = doI18n("pages:core-settings:fallback", i18n);
+  const fallbackFont = doI18n("pages:core-settings:fallback", i18nRef.current);
   useEffect(() => {
     if (fallbackFont !== 'pages:core-settings:fallback') {
       setWebFontsOther(previous => [...previous, { display_name: '- ' + fallbackFont + ' -', id: '', name: '', settings_id: '' },])
@@ -775,13 +775,13 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
   return (
     <Grid2 container spacing={2}>
       <Grid2 size={12} sx={{ borderTop: 1, borderColor: 'purple' }}>
-        <h1>{doI18n("pages:core-settings:select_hebrewscriptfont", i18n)}</h1>
+        <h1>{doI18n("pages:core-settings:select_hebrewscriptfont", i18nRef.current)}</h1>
         <div item style={{maxWidth: 350, padding: "1.25em 0 0 0"}}>
             <Box sx={{minWidth: 350}}>
               <Stack direction="row">
                 <FormControl fullWidth style={{maxWidth: 325}} size="small">
                     <InputLabel id="select-hebrew-font-label" htmlFor="select-hebrew-font-id" sx={sx.inputLabel}>
-                      {doI18n("pages:core-settings:select_hebrewscriptfont", i18n)}
+                      {doI18n("pages:core-settings:select_hebrewscriptfont", i18nRef.current)}
                     </InputLabel>
                     <Select
                         variant="outlined"
@@ -791,7 +791,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                             id: "select-hebrew-font-id",
                         }}
                         value={isActiveLoaded && hebrewClassSubstr}
-                        label={doI18n("pages:core-settings:select_hebrewscriptfont", i18n)}
+                        label={doI18n("pages:core-settings:select_hebrewscriptfont", i18nRef.current)}
                         onChange={handleChangeHebrew}
                         sx={sx.select}
                     >
@@ -830,13 +830,13 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
         </Box>
       </Grid2>
       <Grid2  size={12}>
-        <h1>{doI18n("pages:core-settings:select_greekscriptfont", i18n)}</h1>
+        <h1>{doI18n("pages:core-settings:select_greekscriptfont", i18nRef.current)}</h1>
         <div item style={{maxWidth: 350, padding: "1.25em 0 0 0"}}>
             <Box sx={{minWidth: 350}}>
               <Stack direction="row">
                   <FormControl fullWidth style={{maxWidth: 325}} size="small">
                       <InputLabel id="select-greek-font-label" htmlFor="select-greek-font-id" sx={sx.inputLabel}>
-                        {doI18n("pages:core-settings:select_greekscriptfont", i18n)}
+                        {doI18n("pages:core-settings:select_greekscriptfont", i18nRef.current)}
                       </InputLabel>
                       <Select
                           variant="outlined"
@@ -846,7 +846,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                               id: "select-greek-font-id",
                           }}
                           value={isActiveLoaded && greekClassSubstr}
-                          label={doI18n("pages:core-settings:select_greekscriptfont", i18n)}
+                          label={doI18n("pages:core-settings:select_greekscriptfont", i18nRef.current)}
                           onChange={handleChangeGreek}
                           sx={sx.select}
                       >
@@ -886,13 +886,13 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
         </Box>
       </Grid2>
       <Grid2  size={12}>
-        <h1>{doI18n("pages:core-settings:select_myanmarscriptfont", i18n)}</h1>
+        <h1>{doI18n("pages:core-settings:select_myanmarscriptfont", i18nRef.current)}</h1>
         <div item style={{maxWidth: 350, padding: "1.25em 0 0 0"}}>
             <Box sx={{minWidth: 350}}>
               <Stack direction="row">
                 <FormControl fullWidth style={{maxWidth: 325}} size="small">
                     <InputLabel id="select-myanmar-font-label" htmlFor="select-myanmar-font-id" sx={sx.inputLabel}>
-                      {doI18n("pages:core-settings:select_myanmarscriptfont", i18n)}
+                      {doI18n("pages:core-settings:select_myanmarscriptfont", i18nRef.current)}
                     </InputLabel>
                     <Select
                         variant="outlined"
@@ -902,7 +902,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                             id: "select-myanmar-font-id",
                         }}
                         value={isActiveLoaded && myanmarClassSubstr}
-                        label={doI18n("pages:core-settings:select_myanmarscriptfont", i18n)}
+                        label={doI18n("pages:core-settings:select_myanmarscriptfont", i18nRef.current)}
                         onChange={handleChangeMyanmar}
                         sx={sx.select}
                     >
@@ -941,13 +941,13 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
         </Box>
       </Grid2>
       <Grid2  size={12}>
-        <h1>{doI18n("pages:core-settings:select_arabicurduscriptfont", i18n)}</h1>
+        <h1>{doI18n("pages:core-settings:select_arabicurduscriptfont", i18nRef.current)}</h1>
         <div item style={{maxWidth: 350, padding: "1.25em 0 0 0"}}>
             <Box sx={{minWidth: 350}}>
               <Stack direction="row">
                 <FormControl fullWidth style={{maxWidth: 325}} size="small">
                     <InputLabel id="select-arabic-urdu-font-label" htmlFor="select-arabic-urdu-font-id" sx={sx.inputLabel}>
-                      {doI18n("pages:core-settings:select_arabicurduscriptfont", i18n)}
+                      {doI18n("pages:core-settings:select_arabicurduscriptfont", i18nRef.current)}
                     </InputLabel>
                     <Select
                         variant="outlined"
@@ -957,13 +957,13 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                             id: "select-arabic-urdu-font-id",
                         }}
                         value={isActiveLoaded && arabicUrduClassSubstr}
-                        label={doI18n("pages:core-settings:select_arabicurduscriptfont", i18n)}
+                        label={doI18n("pages:core-settings:select_arabicurduscriptfont", i18nRef.current)}
                         onChange={handleChangeArabicUrdu}
                         sx={sx.select}
                     >
                       {WebFontsSelectableArabicUrdu}
                     </Select>
-                    <FormHelperText>{arabicUrduClassSubstr.includes('AwamiNastaliq') && doI18n("pages:core-settings:replaceawamiifnotfirefox", i18n)}</FormHelperText>
+                    <FormHelperText>{arabicUrduClassSubstr.includes('AwamiNastaliq') && doI18n("pages:core-settings:replaceawamiifnotfirefox", i18nRef.current)}</FormHelperText>
                 </FormControl>
                 {showArabicUrduFeatures && <FontFeaturesArabicUrdu {...fontFeaturesArabicUrduProps} />}
               </Stack>
@@ -997,14 +997,14 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
         </Box>
       </Grid2>
       <Grid2 size={12}>
-        <h1>{doI18n("pages:core-settings:select_otherscriptfont", i18n)} / {doI18n("pages:core-settings:select_fallbackscriptfont", i18n)}</h1>
+        <h1>{doI18n("pages:core-settings:select_otherscriptfont", i18nRef.current)} / {doI18n("pages:core-settings:select_fallbackscriptfont", i18nRef.current)}</h1>
         <Stack>
           <div item style={{maxWidth: 350, padding: "1.25em 0 0"}}>
               <Box sx={{minWidth: 350}}>
                 <Stack direction="row">
                   <FormControl fullWidth style={{maxWidth: 325}} size="small">
                       <InputLabel id="select-other-font-label" htmlFor="select-other-font-id" sx={sx.inputLabel}>
-                        {doI18n("pages:core-settings:select_otherscriptfont", i18n)}
+                        {doI18n("pages:core-settings:select_otherscriptfont", i18nRef.current)}
                       </InputLabel>
                       <Select
                           variant="outlined"
@@ -1014,7 +1014,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                               id: "select-other-font-id",
                           }}
                           value={isActiveLoaded && otherClassSubstr}
-                          label={doI18n("pages:core-settings:select_otherscriptfont", i18n)}
+                          label={doI18n("pages:core-settings:select_otherscriptfont", i18nRef.current)}
                           onChange={handleChangeOther}
                           sx={sx.select}
                       >
@@ -1030,7 +1030,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                 <Stack direction="row">
                   <FormControl fullWidth style={{maxWidth: 325}} size="small">
                       <InputLabel id="select-fallback-font-label" htmlFor="select-fallback-font-id" sx={sx.inputLabel}>
-                        {doI18n("pages:core-settings:select_fallbackscriptfont", i18n)}
+                        {doI18n("pages:core-settings:select_fallbackscriptfont", i18nRef.current)}
                       </InputLabel>
                       <Select
                           variant="outlined"
@@ -1040,7 +1040,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                               id: "select-fallback-font-id",
                           }}
                           value={isActiveLoaded && fallbackClassSubstr}
-                          label={doI18n("pages:core-settings:select_fallbackscriptfont", i18n)}
+                          label={doI18n("pages:core-settings:select_fallbackscriptfont", i18nRef.current)}
                           onChange={handleChangeFallback}
                           sx={sx.select}
                       >
