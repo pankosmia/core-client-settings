@@ -8,7 +8,7 @@ import LanguageMenuItem from "./LanguageMenuItem";
 
 export default function LanguageSelection() {
 
-  const i18n = useContext(i18nContext);
+  const { i18nRef } = useContext(i18nContext);
   const [usedEndonyms, setUsedEndonyms] = useState([]);
   const [secondUsedEndonyms, setSecondUsedEndonyms] = useState([]);
   const [thirdUsedEndonyms, setThirdUsedEndonyms] = useState([]);
@@ -274,7 +274,10 @@ export default function LanguageSelection() {
 
   const postLanguageId = async (iD) => { 
     await postEmptyJson('/settings/languages/' + iD);
-    window.location.reload(false);
+    await getAndSetJson({
+      url: "/settings/languages",
+      setter: setSelectedLanguages
+    })
   };
 
   /** Build dropdown menus */
@@ -305,7 +308,7 @@ export default function LanguageSelection() {
               <Stack direction="row">
                 <FormControl size="small">
                     <InputLabel id="select-language-label" htmlFor="select-language" sx={sx.inputLabel}>
-                      {doI18n("pages:core-settings:language", i18n)}
+                      {doI18n("pages:core-settings:language", i18nRef.current)}
                     </InputLabel>
                     <Select
                         variant="outlined"
@@ -315,7 +318,7 @@ export default function LanguageSelection() {
                             id: "select-language",
                         }}
                         value={firstSelectedLanguage}
-                        label={doI18n("pages:core-settings:language", i18n)}
+                        label={doI18n("pages:core-settings:language", i18nRef.current)}
                         onChange={handleFirstChangeLanguage}
                         sx={sx.select}
                     >
@@ -334,7 +337,7 @@ export default function LanguageSelection() {
                 <Stack direction="row">
                   <FormControl size="small">
                       <InputLabel id="select-language-label" htmlFor="select-language" sx={sx.inputLabel}>
-                        {doI18n("pages:core-settings:language", i18n)}
+                        {doI18n("pages:core-settings:language", i18nRef.current)}
                       </InputLabel>
                       <Select
                           variant="outlined"
@@ -344,7 +347,7 @@ export default function LanguageSelection() {
                               id: "select-language",
                           }}
                           value={secondSelectedLanguage}
-                          label={doI18n("pages:core-settings:language", i18n)}
+                          label={doI18n("pages:core-settings:language", i18nRef.current)}
                           onChange={handleSecondChangeLanguage}
                           sx={sx.select}
                       >
@@ -364,7 +367,7 @@ export default function LanguageSelection() {
                 <Stack direction="row">
                   <FormControl size="small">
                       <InputLabel id="select-language-label" htmlFor="select-language" sx={sx.inputLabel}>
-                        {doI18n("pages:core-settings:language", i18n)}
+                        {doI18n("pages:core-settings:language", i18nRef.current)}
                       </InputLabel>
                       <Select
                           variant="outlined"
@@ -374,7 +377,7 @@ export default function LanguageSelection() {
                               id: "select-language",
                           }}
                           value={thirdSelectedLanguage}
-                          label={doI18n("pages:core-settings:language", i18n)}
+                          label={doI18n("pages:core-settings:language", i18nRef.current)}
                           onChange={handleThirdChangeLanguage}
                           sx={sx.select}
                       >
