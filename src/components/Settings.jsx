@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useState, useRef } from "react"
 import PropTypes from 'prop-types';
 import { Tabs, Tab, Box, Grid2, Switch } from "@mui/material";
 import { debugContext, i18nContext, doI18n, getJson } from "pithekos-lib";
@@ -39,7 +39,6 @@ export default function Settings() {
   const [value, setValue] = useState(0);
   const {debugRef} = useContext(debugContext);
   const { i18nRef } = useContext(i18nContext);
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };

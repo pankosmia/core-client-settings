@@ -72,21 +72,23 @@ const doChange = (allLanguages, choice, langN, setLanguageChoices) => {
             }
             newLanguages.push(choice);
             if (choice ===  "en") {
-                break;
+                // break; // No options after English
+                continue
             }
             continue;
         }
         if (lang === "en") {
             newLanguages.push("en");
-            break;
+            // break; // No options after English
         }
         if (newLanguages.includes(lang)) {
             continue;
         }
         newLanguages.push(lang);
     }
-    if (newLanguages[newLanguages.length - 1] !== "en") {
-        newLanguages.push("en");
+    // if (newLanguages[newLanguages.length - 1] !== "en") { // Always have English last
+    if (!newLanguages.includes("en")) { // English must appear somewhere
+         newLanguages.push("en");
     }
     const languageString = newLanguages.join('/');
     postEmptyJson(`/settings/languages/${languageString}`).then();
