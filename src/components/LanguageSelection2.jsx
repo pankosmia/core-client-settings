@@ -42,7 +42,7 @@ const LangSelectors = ({usedLanguages, languageChoices, setLanguageChoices, doCh
             {
                 n,
                 selectedLanguage: lang,
-                usedLanguages: usedLanguages.filter(l => !usedHereLanguages.has(l))
+                usedLanguages: usedLanguages
             }
         );
         usedHereLanguages.add(lang);
@@ -63,7 +63,13 @@ const LangSelectors = ({usedLanguages, languageChoices, setLanguageChoices, doCh
 const doChange = (allLanguages, choice, langN, setLanguageChoices) => {
     let newLanguages = [];
     for (const [n, lang] of allLanguages.entries()) {
+        if (newLanguages.includes(lang)) {
+            continue;
+        }
         if (n === langN) {
+            if (newLanguages.includes(choice)) {
+                continue;
+            }
             newLanguages.push(choice);
             if (choice ===  "en") {
                 break;

@@ -1,20 +1,20 @@
 {
-  "id": "core-settings",
+  "id": "my-settings",
   "require": {
     "net": false
   },
-  "exclude_from_menu": true,
+  "exclude_from_menu": false,
   "exclude_from_dashboard": true,
   "i18n": {
     "title": {
-      "en": "Settings",
-      "fr": "Paramètres",
-      "id": "Pengaturan"
+      "en": "MARK Settings",
+      "fr": "MARC Paramètres",
+      "id": "MARK Pengaturan"
     },
     "summary": {
-      "en": "Settings for languages, debugging, data sources...",
-      "fr": "Configuration (langues, déboguage, sources de données...)",
-      "id": "Pengaturan untuk bahasa, menemukan kesalahan program, sumber data, dll."
+      "en": "MARK Settings for languages, debugging, data sources...",
+      "fr": "MARC Configuration (langues, déboguage, sources de données...)",
+      "id": "MARK Pengaturan untuk bahasa, menemukan kesalahan program, sumber data, dll."
     },
     "debug_prompt": {
       "en": "Debug?",
