@@ -34,7 +34,8 @@ const LanguageSelector = ({usedLanguages, languageChoices, setLanguageChoices, l
     </Stack>
 }
 
-const LangSelectors = ({usedLanguages, languageChoices, setLanguageChoices, doChange}) => {
+const LangSelectors = ({languageChoices, setLanguageChoices, usedLanguages, doChange}) => {
+
     let selectorSpecs = [];
     let usedHereLanguages = new Set([]);
     for (const [n, lang] of languageChoices.entries()) {
@@ -47,7 +48,7 @@ const LangSelectors = ({usedLanguages, languageChoices, setLanguageChoices, doCh
         );
         usedHereLanguages.add(lang);
     }
-    return <>
+    return <div>
         {selectorSpecs.map((s, n) => <LanguageSelector
             key={n}
             langN={n}
@@ -57,7 +58,7 @@ const LangSelectors = ({usedLanguages, languageChoices, setLanguageChoices, doCh
             setLanguageChoices={setLanguageChoices}
             doChange={doChange}/>)
         }
-    </>
+    </div>
 }
 
 const doChange = (allLanguages, choice, langN, setLanguageChoices) => {
@@ -115,12 +116,11 @@ export default function LanguageSelection2() {
             }).then(),
         []
     );
-
     return <Stack>
         <LangSelectors
-            usedLanguages={usedLanguages}
             languageChoices={languageChoices}
             setLanguageChoices={setLanguageChoices}
+            usedLanguages={usedLanguages}
             doChange={doChange}
         />
     </Stack>;

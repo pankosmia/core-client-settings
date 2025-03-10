@@ -1,63 +1,77 @@
-import { useContext, useState, useRef } from "react"
+import {useContext, useState, useRef} from "react"
 import PropTypes from 'prop-types';
-import { Tabs, Tab, Box, Grid2, Switch } from "@mui/material";
-import { debugContext, i18nContext, doI18n, getJson } from "pithekos-lib";
+import {Tabs, Tab, Box, Grid2, Switch} from "@mui/material";
+import {debugContext, i18nContext, doI18n, getJson} from "pithekos-lib";
 import BlendedFontsPage from "./BlendedFontsPage";
 import LanguageSelection from "./LanguageSelection";
 import LanguageSelection2 from "./LanguageSelection2";
 
 const CustomTabPanel = (props) => {
-  const { children, value, index, ...other } = props;
+    const {children, value, index, ...other} = props;
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </div>
-  );
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && <Box sx={{p: 3}}>{children}</Box>}
+        </div>
+    );
 }
 
 CustomTabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
 };
 
 const a11yProps = (index) => {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
 }
 
 export default function Settings() {
-  const [value, setValue] = useState(0);
-  const {debugRef} = useContext(debugContext);
-  const { i18nRef } = useContext(i18nContext);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+    const [value, setValue] = useState(0);
+    const {debugRef} = useContext(debugContext);
+    const {i18nRef} = useContext(i18nContext);
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
-  return (
-    <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          textColor="secondary"
-          indicatorColor="secondary"        
-          aria-label="basic tabs example"
-        >
-          <Tab label={doI18n("pages:core-settings:language", i18nRef.current)} {...a11yProps(0)} />
-          <Tab label={doI18n("pages:core-settings:fonts", i18nRef.current)} {...a11yProps(1)} />
-          <Tab label={doI18n("pages:core-settings:debug_prompt", i18nRef.current)} {...a11yProps(2)} />
-        </Tabs>
-      </Box>
+    return (
+        <Box sx={{width: '100%'}}>
+            <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
+                <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    textColor="secondary"
+                    indicatorColor="secondary"
+                    aria-label="basic tabs example"
+                >
+                    <Tab label={doI18n("pages:core-settings:language", i18nRef.current)} {...a11yProps(0)} />
+                    <Tab label={doI18n("pages:core-settings:fonts", i18nRef.current)} {...a11yProps(1)} />
+                    <Tab label={doI18n("pages:core-settings:debug_prompt", i18nRef.current)} {...a11yProps(2)} />
+                </Tabs>
+            </Box>
+            <CustomTabPanel value={value} index={0}>
+                <LanguageSelection2/>
+            </CustomTabPanel>
+            <CustomTabPanel value={value} index={1}>
+                foo
+            </CustomTabPanel>
+            <CustomTabPanel value={value} index={2}>
+                baa
+            </CustomTabPanel>
+        </Box>
+    );
+}
+
+/*
       <CustomTabPanel value={value} index={0}>
         <LanguageSelection2 />
       </CustomTabPanel>
@@ -82,6 +96,4 @@ export default function Settings() {
               </Grid2>
           </Grid2>
       </CustomTabPanel>
-    </Box>
-  );
-}
+ */
