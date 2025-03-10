@@ -96,26 +96,8 @@ const doChange = (allLanguages, choice, langN, setLanguageChoices) => {
     setLanguageChoices(newLanguages);
 }
 
-export default function LanguageSelection2() {
+export default function LanguageSelection2({languageChoices, setLanguageChoices, usedLanguages}) {
 
-    const [languageChoices, setLanguageChoices] = useState(['en']);
-    const [usedLanguages, setUsedLanguages] = useState(['en']);
-
-    useEffect(() =>
-            getAndSetJson({
-                url: "/settings/languages",
-                setter: setLanguageChoices
-            }).then(),
-        []
-    );
-
-    useEffect(() =>
-            getAndSetJson({
-                url: "/i18n/used-languages",
-                setter: setUsedLanguages
-            }).then(),
-        []
-    );
     return <Stack>
         <LangSelectors
             languageChoices={languageChoices}

@@ -1,7 +1,7 @@
-import {useContext, useState, useRef} from "react"
+import {useContext, useState, useRef, useEffect} from "react"
 import PropTypes from 'prop-types';
 import {Tabs, Tab, Box, Grid2, Switch} from "@mui/material";
-import {debugContext, i18nContext, doI18n, getJson} from "pithekos-lib";
+import {debugContext, i18nContext, doI18n, getJson, getAndSetJson} from "pithekos-lib";
 import BlendedFontsPage from "./BlendedFontsPage";
 import LanguageSelection from "./LanguageSelection";
 import LanguageSelection2 from "./LanguageSelection2";
@@ -39,6 +39,25 @@ export default function Settings() {
     const [value, setValue] = useState(0);
     const {debugRef} = useContext(debugContext);
     const {i18nRef} = useContext(i18nContext);
+
+    const [languageChoices, setLanguageChoices] = useState(['en']);
+    const [usedLanguages, setUsedLanguages] = useState(['en']);
+
+    useEffect(() =>
+            getAndSetJson({
+                url: "/settings/languages",
+                setter: setLanguageChoices
+            }).then(),
+        []
+    );
+
+    useEffect(() =>
+            getAndSetJson({
+                url: "/i18n/used-languages",
+                setter: setUsedLanguages
+            }).then(),
+        []
+    );
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -59,41 +78,33 @@ export default function Settings() {
                 </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
-                <LanguageSelection2/>
+                <LanguageSelection2
+                    languageChoices={languageChoices}
+                    setLanguageChoices={setLanguageChoices}
+                    usedLanguages={usedLanguages}
+                />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-                foo
+                <BlendedFontsPage />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
-                baa
+                <Grid2 container>
+                    <Grid2 item size={1}>
+                        <b>{doI18n("pages:core-settings:debug_prompt", i18nRef.current)}</b>
+                    </Grid2>
+                    <Grid2 item size={11}>
+                        <Switch
+                            checked={debugRef.current}
+                            color="secondary"
+                            onChange={() =>
+                                debugRef.current ?
+                                    getJson("/debug/disable", debugRef.current) :
+                                    getJson("/debug/enable", debugRef.current)
+                            }
+                        />
+                    </Grid2>
+                </Grid2>
             </CustomTabPanel>
         </Box>
     );
 }
-
-/*
-      <CustomTabPanel value={value} index={0}>
-        <LanguageSelection2 />
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
-        <BlendedFontsPage />
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
-          <Grid2 container>
-              <Grid2 item size={1}>
-                  <b>{doI18n("pages:core-settings:debug_prompt", i18nRef.current)}</b>
-              </Grid2>
-              <Grid2 item size={11}>
-                  <Switch
-                      checked={debugRef.current}
-                      color="secondary"
-                      onChange={() =>
-                          debugRef.current ?
-                              getJson("/debug/disable", debugRef.current) :
-                              getJson("/debug/enable", debugRef.current)
-                      }
-                  />
-              </Grid2>
-          </Grid2>
-      </CustomTabPanel>
- */
