@@ -65,22 +65,22 @@ export default function Settings() {
         <BlendedFontsPage />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-      <Grid2 container>
-        <Grid2 item size={1}>
-          <b>{doI18n("pages:core-settings:debug_prompt", i18nRef.current)}</b>
-        </Grid2>
-          <Grid2 item size={11}>
-            <Switch
-              checked={debugRef.current}
-              color="secondary"
-              onChange={() =>
-                  debugRef.current ?
-                      getJson("/debug/disable", debugRef.current) :
-                      getJson("/debug/enable", debugRef.current)
-              }
-            />
+          <Grid2 container>
+              <Grid2 item size={1}>
+                  <b>{doI18n("pages:core-settings:debug_prompt", i18nRef.current)}</b>
+              </Grid2>
+              <Grid2 item size={11}>
+                  <Switch
+                      checked={debugRef.current}
+                      color="secondary"
+                      onChange={() =>
+                          debugRef.current ?
+                              getJson("/debug/disable", debugRef.current) :
+                              getJson("/debug/enable", debugRef.current)
+                      }
+                  />
+              </Grid2>
           </Grid2>
-        </Grid2>
       </CustomTabPanel>
     </Box>
   );
