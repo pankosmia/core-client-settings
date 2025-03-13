@@ -252,9 +252,6 @@ export default function Settings() {
   
   },[usedLanguages]);
 
-  console.log(languageChoices);
-  console.log(languageChoices.some(item => (item === 'en')));
-
   useEffect(() => {
     if (!languageChoices.some(item => (item === 'en'))) {
       const languageString = languageChoices.join('/') + '/en';
