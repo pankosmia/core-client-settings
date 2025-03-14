@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { Toolbar, Box } from "@mui/material";
-import { getAndSetJson } from "pithekos-lib";
+import { getAndSetJson, postEmptyJson, typographyContext } from "pithekos-lib";
 import BlendedFontSelection from "./BlendedFontSelection";
 
 export default function BlendedFontsPage() {
+  const { typographyRef } = useContext(typographyContext);
+  console.log(typographyRef.current.font_set);
 
   // Font Class Substrings
   const [selectedHebrewFontClassSubstr, setSelectedHebrewFontClassSubstr] = useState('');
@@ -34,6 +36,14 @@ export default function BlendedFontsPage() {
   useEffect( () => {
     setSelectedFontClass(fontClass.font_set);
   },[fontClass.font_set]);
+
+  useEffect( () => {
+    if (selectedFontClass !== undefined && fontClass.font_set !== selectedFontClass) {
+      //#[post("/typography/<font_set>/<size>/<direction>")]
+      const typographyStr = selectedFontClass + '/medium/ltr';
+      postEmptyJson(`/settings/typography/${typographyStr}`).then();
+    }
+  },[fontClass.font_set, selectedFontClass]);
 
   const activeFontClass = fontClass.font_set;
 
@@ -70,25 +80,17 @@ export default function BlendedFontsPage() {
     <div key="toolbar" style={{ width: '100%' }} >
       <Toolbar sx={{ justifyContent: "space-between" }}>
         <Box sx={{ borderTop: 1 }}>
+          <BlendedFontSelection {...blendedFontSelectionProps} />
           <h1>font_set</h1>
-          <b>Active font_set:</b> {fontClass.font_set}<br/><br/>
-          {fontClass.font_set !== selectedFontClass &&
-            <Box>
-              <b>Change font_set Instructions:</b>
-              <ol>
-                <li>Change font_set in <em>~/pankosmia_working/user_settings.json</em>
-                  <ul>
-                    <li><b>from:</b> "font_set": "{fontClass.font_set}",</li>
-                    <li><b>to:{"   "}</b> "font_set": "{selectedFontClass}",</li>
-                  </ul>
-                </li>
-                <li>Save <em>~/pankosmia_working/user_settings.json.</em></li>
-                <li>Restart the Pithekos web server.</li>
-                <li>Reopen <em>http://localhost:8000</em> in Firefox.</li>
-              </ol>
-            </Box>
-          }
-          <BlendedFontSelection {...blendedFontSelectionProps} />  
+          <Box>
+            <b>If you have made font changes that you want to use every time you start pithekos, then:</b>
+            <ol>
+              <li>Change font_set in <em>~/pankosmia_working/user_settings.json to:</em> "font_set": "{selectedFontClass}",</li>
+              <li>Save <em>~/pankosmia_working/user_settings.json.</em></li>
+              <li>Restart the Pithekos web server.</li>
+              <li>Reopen <em>http://localhost:8000</em> in Firefox.</li>
+            </ol>
+          </Box>
         </Box>
       </Toolbar>
     </div>
