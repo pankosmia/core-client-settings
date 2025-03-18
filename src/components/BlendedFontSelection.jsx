@@ -18,7 +18,7 @@ import FontFeaturesFallback from "./FontFeaturesFallback";
 export default function BlendedFontSelection(blendedFontSelectionProps) {
   const { i18nRef } = useContext(I18nContext);
   const {
-    activeFontClass,
+    selectedFontClass,
     setSelectedFontClass,
     selectedHebrewFontClassSubstr,
     setSelectedHebrewFontClassSubstr,
@@ -49,14 +49,6 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
   // An array of id's extracted from the font_set string in user_settings.json
   const [fontClassIdsArr, setFontClassIdsArr] = useState([]);
 
-  // Font classname substrings extracted from the font_set string in user_settings.json
-  const [activeHebrewFontClassSubstr, setActiveHebrewFontClassSubstr] = useState('');
-  const [activeGreekFontClassSubstr, setActiveGreekFontClassSubstr] = useState('');
-  const [activeMyanmarFontClassSubstr, setActiveMyanmarFontClassSubstr] = useState('');
-  const [activeArabicUrduFontClassSubstr, setActiveArabicUrduFontClassSubstr] = useState('');
-  const [activeOtherFontClassSubstr, setActiveOtherFontClassSubstr] = useState('');
-  const [activeFallbackFontClassSubstr, setActiveFallbackFontClassSubstr] = useState('');
-  
   // Font Display Name
   const [hebrewFontDisplayName, setHebrewFontDisplayName] = useState([]);
   const [greekFontDisplayName, setGreekFontDisplayName] = useState([]);
@@ -64,14 +56,6 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
   const [arabicUrduFontDisplayName, setArabicUrduFontDisplayName] = useState([]);
   const [otherFontDisplayName, setOtherFontDisplayName] = useState([]);
   const [fallbackFontDisplayName, setFallbackFontDisplayName] = useState([]);
-
-  // Is à change selected?
-  const [isHebrewSelected, setIsHebrewSelected] = useState(false);
-  const [isGreekSelected, setIsGreekSelected] = useState(false);
-  const [isMyanmarSelected, setIsMyanmarSelected] = useState(false);
-  const [isArabicUrduSelected, setIsArabicUrduSelected] = useState(false);
-  const [isOtherSelected, setIsOtherSelected] = useState(false);
-  const [isFallbackSelected, setIsFallbackSelected] = useState(false);
 
   /** There is not a possibility of Hebrew script or Greek script font-feature-settings the time of programming this page.
    *  However, this is set up such that if they were added they would work.
@@ -134,12 +118,12 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
     }
   },[isGraphiteAssumed, ffsArr.length]);
   
-  /** Create an array of active font_class substrings */
+  /** Create an array of font_class substrings */
   useEffect(() => {
     if (!fontClassIdsArr.length) {
-      setFontClassIdsArr(activeFontClass !== undefined ? activeFontClass.replace(/Pankosmia-/g,'~Pankosmia-').split('~') : []);
+      setFontClassIdsArr(selectedFontClass !== '' ? selectedFontClass.replace(/Pankosmia-/g,'~Pankosmia-').split('~') : []);
     }
-  },[activeFontClass, fontClassIdsArr.length])
+  },[selectedFontClass, fontClassIdsArr.length])
 
   /** 
    * Arrays of Fonts by script type:
@@ -223,7 +207,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
     }
   },[fallbackFont])
   
-  /** For each script type, set ACTIVE...
+  /** For each script type, set...
    *    - font class name substrings
    *    - font display name
    *    - font name
@@ -233,96 +217,88 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
    */
   useEffect(() => {
     // Hebrew
-      const activeHebrewId = webFontsHebrew.filter(item => fontClassIdsArr.includes(item.id)).map((font, index) => (font.id));
-      setActiveHebrewFontClassSubstr(activeHebrewId);
-      const activeHebrewSettingsId = webFontsHebrew.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.settings_id));
-      setHebrewFfsId(activeHebrewSettingsId);
-      const activeHebrewSettingsArr = ffsArr.filter(item => activeHebrewSettingsId.includes(item.name));
-      setHebrewFfsArr(activeHebrewSettingsArr);
+      const selectedHebrewId = webFontsHebrew.filter(item => fontClassIdsArr.includes(item.id)).map((font, index) => (font.id));
+      setSelectedHebrewFontClassSubstr(selectedHebrewId);
+      const selectedHebrewSettingsId = webFontsHebrew.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.settings_id));
+      setHebrewFfsId(selectedHebrewSettingsId);
+      const selectedHebrewSettingsArr = ffsArr.filter(item => selectedHebrewSettingsId.includes(item.name));
+      setHebrewFfsArr(selectedHebrewSettingsArr);
       const hebrewDisplayName = webFontsHebrew.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.display_name));
       setHebrewFontDisplayName(hebrewDisplayName);
       const hebrewName = webFontsHebrew.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.name));
       setHebrewFontName(hebrewName);
     // Greek
-      const activeGreekId = webFontsGreek.filter(item => fontClassIdsArr.includes(item.id)).map((font, index) => (font.id));
-      setActiveGreekFontClassSubstr(activeGreekId);
-      const activeGreekSettingsId = webFontsGreek.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.settings_id));
-      setGreekFfsId(activeGreekSettingsId);
-      const activeGreekSettingsArr = ffsArr.filter(item => activeGreekSettingsId.includes(item.name));
-      setGreekFfsArr(activeGreekSettingsArr);
+      const selectedGreekId = webFontsGreek.filter(item => fontClassIdsArr.includes(item.id)).map((font, index) => (font.id));
+      setSelectedGreekFontClassSubstr(selectedGreekId);
+      const selectedGreekSettingsId = webFontsGreek.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.settings_id));
+      setGreekFfsId(selectedGreekSettingsId);
+      const selectedGreekSettingsArr = ffsArr.filter(item => selectedGreekSettingsId.includes(item.name));
+      setGreekFfsArr(selectedGreekSettingsArr);
       const greekDisplayName = webFontsGreek.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.display_name));
       setGreekFontDisplayName(greekDisplayName);
       const greekName = webFontsGreek.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.name));
       setGreekFontName(greekName);
     // Myanmar
-      const activeMyanmarId = webFontsMyanmar.filter(item => fontClassIdsArr.includes(item.id)).map((font, index) => (font.id));
-      setActiveMyanmarFontClassSubstr(activeMyanmarId);
-      const activeMyanmarSettingsId = webFontsMyanmar.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.settings_id));
-      setMyanmarFfsId(activeMyanmarSettingsId);
-      const activeMyanmarSettingsArr = ffsArr.filter(item => activeMyanmarSettingsId.includes(item.name));
-      setMyanmarFfsArr(activeMyanmarSettingsArr);
+      const selectedMyanmarId = webFontsMyanmar.filter(item => fontClassIdsArr.includes(item.id)).map((font, index) => (font.id));
+      setSelectedMyanmarFontClassSubstr(selectedMyanmarId);
+      const selectedMyanmarSettingsId = webFontsMyanmar.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.settings_id));
+      setMyanmarFfsId(selectedMyanmarSettingsId);
+      const selectedMyanmarSettingsArr = ffsArr.filter(item => selectedMyanmarSettingsId.includes(item.name));
+      setMyanmarFfsArr(selectedMyanmarSettingsArr);
       const myanmarDisplayName = webFontsMyanmar.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.display_name));
       setMyanmarFontDisplayName(myanmarDisplayName);
       const myanmarName = webFontsMyanmar.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.name));
       setMyanmarFontName(myanmarName);
     // Arabic/Urdu (*** Pattern differs because Awami Nastaliq requires Graphite ***)
-      const activeArabicUrduIds = webFontsArabicUrdu.map((font, index) => (font.id));
+      const selectedArabicUrduIds = webFontsArabicUrdu.map((font, index) => (font.id));
       const fontClassAwamiToAdj = fontClassIdsArr.filter(item => item.includes('AwamiNastaliq'));
-      const activeArabicUrduIdAdj = (fontClassAwamiToAdj !== '' ? fontClassAwamiToAdj + 'Pankosmia-NotoNastaliqUrdu' : fontClassIdsArr.filter(item => activeArabicUrduIds.includes(item)));
-      const activeArabicUrduAdjId = (activeArabicUrduIdAdj === 'Pankosmia-NotoNastaliqUrdu' ? '' : activeArabicUrduIdAdj);
-      setActiveArabicUrduFontClassSubstr(activeArabicUrduAdjId);
-      const activeArabicUrduSettingsId = webFontsArabicUrdu.filter((font) => font.id === activeArabicUrduAdjId)?.map((font, index) => (font.settings_id));
-      setArabicUrduFfsId(activeArabicUrduSettingsId);
-      const activeArabicUrduSettingsArr = ffsArr.filter(item => activeArabicUrduSettingsId.includes(item.name));
-      setArabicUrduFfsArr(activeArabicUrduSettingsArr);
-      const arabicUrduDisplayName = webFontsArabicUrdu.filter((font) => font.id === activeArabicUrduAdjId)?.map((font, index) => (font.display_name));
+      const selectedArabicUrduIdAdj = (fontClassAwamiToAdj !== '' ? fontClassAwamiToAdj + 'Pankosmia-NotoNastaliqUrdu' : fontClassIdsArr.filter(item => selectedArabicUrduIds.includes(item)));
+      const selectedArabicUrduAdjId = (selectedArabicUrduIdAdj === 'Pankosmia-NotoNastaliqUrdu' ? '' : selectedArabicUrduIdAdj);
+      setSelectedArabicUrduFontClassSubstr(selectedArabicUrduAdjId);
+      const selectedArabicUrduSettingsId = webFontsArabicUrdu.filter((font) => font.id === selectedArabicUrduAdjId)?.map((font, index) => (font.settings_id));
+      setArabicUrduFfsId(selectedArabicUrduSettingsId);
+      const selectedArabicUrduSettingsArr = ffsArr.filter(item => selectedArabicUrduSettingsId.includes(item.name));
+      setArabicUrduFfsArr(selectedArabicUrduSettingsArr);
+      const arabicUrduDisplayName = webFontsArabicUrdu.filter((font) => font.id === selectedArabicUrduAdjId)?.map((font, index) => (font.display_name));
       setArabicUrduFontDisplayName(arabicUrduDisplayName);
-      const arabicUrduName = webFontsArabicUrdu.filter((font) => font.id === activeArabicUrduAdjId)?.map((font, index) => (font.name));
+      const arabicUrduName = webFontsArabicUrdu.filter((font) => font.id === selectedArabicUrduAdjId)?.map((font, index) => (font.name));
       setArabicUrduFontName(arabicUrduName);
     // Other
-      const activeOtherId = webFontsOther.filter(item => fontClassIdsArr.includes(item.id)).map((font, index) => (font.id));
-      setActiveOtherFontClassSubstr(activeOtherId);
-      const activeOtherSettingsId = webFontsOther.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.settings_id));
-      setOtherFfsId(activeOtherSettingsId);
-      const activeOtherSettingsArr = ffsArr.filter(item => activeOtherSettingsId.includes(item.name));
-      setOtherFfsArr(activeOtherSettingsArr);
+      const selectedOtherId = webFontsOther.filter(item => fontClassIdsArr.includes(item.id)).map((font, index) => (font.id));
+      setSelectedOtherFontClassSubstr(selectedOtherId);
+      const selectedOtherSettingsId = webFontsOther.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.settings_id));
+      setOtherFfsId(selectedOtherSettingsId);
+      const selectedOtherSettingsArr = ffsArr.filter(item => selectedOtherSettingsId.includes(item.name));
+      setOtherFfsArr(selectedOtherSettingsArr);
       const otherDisplayName = webFontsOther.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.display_name));
       setOtherFontDisplayName(otherDisplayName);
       const otherName = webFontsOther.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.name));
     setOtherFontName(otherName);
     // Fallback
-      const activeFallbackId = webFontsFallback.filter(item => fontClassIdsArr.includes(item.id)).map((font, index) => (font.id));
-      setActiveFallbackFontClassSubstr(activeFallbackId);
-      const activeFallbackSettingsId = webFontsFallback.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.settings_id));
-      setFallbackFfsId(activeFallbackSettingsId);
-      const activeFallbackSettingsArr = ffsArr.filter(item => activeFallbackSettingsId.includes(item.name));
-      setFallbackFfsArr(activeFallbackSettingsArr);
+      const selectedFallbackId = webFontsFallback.filter(item => fontClassIdsArr.includes(item.id)).map((font, index) => (font.id));
+      setSelectedFallbackFontClassSubstr(selectedFallbackId);
+      const selectedFallbackSettingsId = webFontsFallback.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.settings_id));
+      setFallbackFfsId(selectedFallbackSettingsId);
+      const selectedFallbackSettingsArr = ffsArr.filter(item => selectedFallbackSettingsId.includes(item.name));
+      setFallbackFfsArr(selectedFallbackSettingsArr);
       const fallbackDisplayName = webFontsFallback.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.display_name));
       setFallbackFontDisplayName(fallbackDisplayName);
       const fallbackName = webFontsFallback.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.name));
       setFallbackFontName(fallbackName);
-  },[ffsArr, fontClassIdsArr, setArabicUrduFontName, setFallbackFontName, setGreekFontName, setHebrewFontName, setMyanmarFontName, setOtherFontName, webFontsArabicUrdu, webFontsFallback, webFontsGreek, webFontsHebrew, webFontsMyanmar, webFontsOther]);
+  },[ffsArr, fontClassIdsArr, setArabicUrduFontName, setFallbackFontName, setGreekFontName, setHebrewFontName, setMyanmarFontName, setOtherFontName, setSelectedArabicUrduFontClassSubstr, setSelectedFallbackFontClassSubstr, setSelectedGreekFontClassSubstr, setSelectedHebrewFontClassSubstr, setSelectedMyanmarFontClassSubstr, setSelectedOtherFontClassSubstr, webFontsArabicUrdu, webFontsFallback, webFontsGreek, webFontsHebrew, webFontsMyanmar, webFontsOther]);
 
-  const isOtherOn = activeOtherFontClassSubstr !== '' && selectedOtherFontClassSubstr !== '';
-
-  /** Set new selections while maintaining an active set that match font_set */
-  const hebrewClassSubstr = isHebrewSelected ? selectedHebrewFontClassSubstr : activeHebrewFontClassSubstr;
-  const greekClassSubstr = isGreekSelected ? selectedGreekFontClassSubstr : activeGreekFontClassSubstr;
-  const myanmarClassSubstr = isMyanmarSelected ? selectedMyanmarFontClassSubstr : activeMyanmarFontClassSubstr;
-  const arabicUrduClassSubstr = isArabicUrduSelected ? selectedArabicUrduFontClassSubstr : activeArabicUrduFontClassSubstr;
-  const otherClassSubstr = isOtherSelected ? selectedOtherFontClassSubstr : activeOtherFontClassSubstr;
-  const fallbackClassSubstr = isFallbackSelected ? selectedFallbackFontClassSubstr : activeFallbackFontClassSubstr;
-
-  const reAssembled2ActiveFontClass = `fonts-${greekClassSubstr}${hebrewClassSubstr}${myanmarClassSubstr}${arabicUrduClassSubstr}${otherClassSubstr}${fallbackClassSubstr}`
+  const reAssembledSelectedFontClass = `fonts-${selectedGreekFontClassSubstr}${selectedHebrewFontClassSubstr}${selectedMyanmarFontClassSubstr}${selectedArabicUrduFontClassSubstr}${selectedOtherFontClassSubstr}${selectedFallbackFontClassSubstr}`
   const [ranOnce, setRanOnce] = useState(false);
-  const [isActiveLoaded, setIsActiveLoaded] = useState(false);
+  const [areSubstrsLoaded, setAreSubstrsLoaded] = useState(false);
 
   useEffect (() => {
-    if (!ranOnce && activeFontClass === reAssembled2ActiveFontClass) {
-        setIsActiveLoaded(true);
+    if (!ranOnce && selectedFontClass === reAssembledSelectedFontClass) {
+        setAreSubstrsLoaded(true);
         setRanOnce(true);
       }
-  },[activeFontClass, ranOnce, reAssembled2ActiveFontClass])
+  },[selectedFontClass, ranOnce, reAssembledSelectedFontClass])
+
+  const isOtherOn = areSubstrsLoaded && selectedOtherFontClassSubstr !== '';
 
   /** For each script type, set SELECTED..
    *    - font class
@@ -335,9 +311,8 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
    */
   // Hebrew
     const handleChangeHebrew = (event) => {
-      setIsHebrewSelected(true);
       setSelectedHebrewFontClassSubstr(event.target.value);
-      setSelectedFontClass('fonts-' + greekClassSubstr + event.target.value + myanmarClassSubstr + arabicUrduClassSubstr + otherClassSubstr + fallbackClassSubstr);
+      setSelectedFontClass('fonts-' + selectedGreekFontClassSubstr + event.target.value + selectedMyanmarFontClassSubstr + selectedArabicUrduFontClassSubstr + selectedOtherFontClassSubstr + selectedFallbackFontClassSubstr);
       const selectedHebrewSettingId = webFontsHebrew.filter((font) => font.id === event.target.value).map((font, index) => (font.settings_id));
       setHebrewFfsId(selectedHebrewSettingId);
       const selectedHebrewSettingsId = ffsArr.filter(item => selectedHebrewSettingId.includes(item.name));
@@ -349,9 +324,8 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
     };
   // Greek
     const handleChangeGreek = (event) => {
-      setIsGreekSelected(true);
       setSelectedGreekFontClassSubstr(event.target.value);
-      setSelectedFontClass('fonts-' + event.target.value + hebrewClassSubstr + myanmarClassSubstr + arabicUrduClassSubstr + otherClassSubstr + fallbackClassSubstr);
+      setSelectedFontClass('fonts-' + event.target.value + selectedHebrewFontClassSubstr + selectedMyanmarFontClassSubstr + selectedArabicUrduFontClassSubstr + selectedOtherFontClassSubstr + selectedFallbackFontClassSubstr);
       const selectedGreekSettingId = webFontsGreek.filter((font) => font.id === event.target.value).map((font, index) => (font.settings_id));
       setGreekFfsId(selectedGreekSettingId);
       const selectedGreekSettingsId = ffsArr.filter(item => selectedGreekSettingId.includes(item.name));
@@ -363,9 +337,8 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
     };
   // Myanmar
     const handleChangeMyanmar = (event) => {
-      setIsMyanmarSelected(true);
       setSelectedMyanmarFontClassSubstr(event.target.value);
-      setSelectedFontClass('fonts-' + greekClassSubstr + hebrewClassSubstr + event.target.value + arabicUrduClassSubstr + otherClassSubstr + fallbackClassSubstr);
+      setSelectedFontClass('fonts-' + selectedGreekFontClassSubstr + selectedHebrewFontClassSubstr + event.target.value + selectedArabicUrduFontClassSubstr + selectedOtherFontClassSubstr + selectedFallbackFontClassSubstr);
       const selectedMyanmarSettingId = webFontsMyanmar.filter((font) => font.id === event.target.value).map((font, index) => (font.settings_id));
       setMyanmarFfsId(selectedMyanmarSettingId);
       const selectedMyanmarSettingsId = ffsArr.filter(item => selectedMyanmarSettingId.includes(item.name));
@@ -377,9 +350,8 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
     };
   // Arabic/Urdu (*** Pattern differs because Awami Nastaliq requires Graphite ***)
     const handleChangeArabicUrdu = (event) => {
-      setIsArabicUrduSelected(true);
       setSelectedArabicUrduFontClassSubstr(event.target.value);
-      setSelectedFontClass('fonts-' + greekClassSubstr + hebrewClassSubstr + myanmarClassSubstr + event.target.value + otherClassSubstr + fallbackClassSubstr);
+      setSelectedFontClass('fonts-' + selectedGreekFontClassSubstr + selectedHebrewFontClassSubstr + selectedMyanmarFontClassSubstr + event.target.value + selectedOtherFontClassSubstr + selectedFallbackFontClassSubstr);
       const selectedArabicUrduSettingId = webFontsArabicUrdu.filter((font) => font.id === event.target.value).map((font, index) => (font.settings_id));
       setArabicUrduFfsId(selectedArabicUrduSettingId);
       const selectedArabicUrduSettingsId = ffsArr.filter(item => selectedArabicUrduSettingId.includes(item.name));
@@ -391,9 +363,8 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
     };
   // Other
     const handleChangeOther = (event) => {
-      setIsOtherSelected(true);
       setSelectedOtherFontClassSubstr(event.target.value);
-      setSelectedFontClass('fonts-' + greekClassSubstr + hebrewClassSubstr + myanmarClassSubstr + arabicUrduClassSubstr + event.target.value + fallbackClassSubstr);
+      setSelectedFontClass('fonts-' + selectedGreekFontClassSubstr + selectedHebrewFontClassSubstr + selectedMyanmarFontClassSubstr + selectedArabicUrduFontClassSubstr + event.target.value + selectedFallbackFontClassSubstr);
       const selectedOtherSettingId = webFontsOther.filter((font) => font.id === event.target.value).map((font, index) => (font.settings_id));
       setOtherFfsId(selectedOtherSettingId);
       const selectedOtherSettingsId = ffsArr.filter(item => selectedOtherSettingId.includes(item.name));
@@ -405,9 +376,8 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
     };
   // Fallback
     const handleChangeFallback = (event) => {
-      setIsFallbackSelected(true);
       setSelectedFallbackFontClassSubstr(event.target.value);
-      setSelectedFontClass('fonts-' + greekClassSubstr + hebrewClassSubstr + myanmarClassSubstr + arabicUrduClassSubstr + otherClassSubstr + event.target.value);
+      setSelectedFontClass('fonts-' + selectedGreekFontClassSubstr + selectedHebrewFontClassSubstr + selectedMyanmarFontClassSubstr + selectedArabicUrduFontClassSubstr + selectedOtherFontClassSubstr + event.target.value);
       const selectedFallbackSettingId = webFontsFallback.filter((font) => font.id === event.target.value).map((font, index) => (font.settings_id));
       setFallbackFfsId(selectedFallbackSettingId);
       const selectedFallbackSettingsId = ffsArr.filter(item => selectedFallbackSettingId.includes(item.name));
@@ -549,10 +519,10 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
     { name: 'Other', id: 'other', unicode_range: '' },
     { name: 'Fallback', id: 'fallback', unicode_range: '' },
   ];
-  const unicodeRangeHebrew = hebrewClassSubstr === '' ? '' : unicodeRanges.filter(item => (item.name === 'Hebrew')).map((script, index) => (script.unicode_range));
-  const unicodeRangeGreek = greekClassSubstr === '' ? '' : unicodeRanges.filter(item => (item.name === 'Greek')).map((script, index) => (script.unicode_range));
-  const unicodeRangeMyanmar = myanmarClassSubstr === '' ? '' : unicodeRanges.filter(item => (item.name === 'Myanmar')).map((script, index) => (script.unicode_range));
-  const unicodeRangeArabicUrdu = arabicUrduClassSubstr === '' ? '' : unicodeRanges.filter(item => (item.name === 'Arabic/Urdu')).map((script, index) => (script.unicode_range));
+  const unicodeRangeHebrew = selectedHebrewFontClassSubstr === '' ? '' : unicodeRanges.filter(item => (item.name === 'Hebrew')).map((script, index) => (script.unicode_range));
+  const unicodeRangeGreek = selectedGreekFontClassSubstr === '' ? '' : unicodeRanges.filter(item => (item.name === 'Greek')).map((script, index) => (script.unicode_range));
+  const unicodeRangeMyanmar = selectedMyanmarFontClassSubstr === '' ? '' : unicodeRanges.filter(item => (item.name === 'Myanmar')).map((script, index) => (script.unicode_range));
+  const unicodeRangeArabicUrdu = selectedArabicUrduFontClassSubstr === '' ? '' : unicodeRanges.filter(item => (item.name === 'Arabic/Urdu')).map((script, index) => (script.unicode_range));
 
   const neutralScope = ' ';
 
@@ -747,30 +717,30 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
     </div>
   );
 
-  const showHebrewFeatures = isActiveLoaded && hebrewFfsArr.length > 0;
-  const showHebrewTextArea = isActiveLoaded && hebrewClassSubstr !== '';
-  const showHebrewCss = isActiveLoaded && hebrewFfsCss !== '' && hebrewClassSubstr !== '';
+  const showHebrewFeatures = areSubstrsLoaded && hebrewFfsArr.length > 0;
+  const showHebrewTextArea = areSubstrsLoaded && selectedHebrewFontClassSubstr !== '';
+  const showHebrewCss = areSubstrsLoaded && hebrewFfsCss !== '' && selectedHebrewFontClassSubstr !== '';
 
-  const showGreekFeatures = isActiveLoaded && greekFfsArr.length > 0;
-  const showGreekTextArea = isActiveLoaded && greekClassSubstr !== '';
-  const showGreekCss = isActiveLoaded && greekFontSettings.length > 0 && greekClassSubstr !== '';
+  const showGreekFeatures = areSubstrsLoaded && greekFfsArr.length > 0;
+  const showGreekTextArea = areSubstrsLoaded && selectedGreekFontClassSubstr !== '';
+  const showGreekCss = areSubstrsLoaded && greekFontSettings.length > 0 && selectedGreekFontClassSubstr !== '';
 
-  const showMyanmarFeatures = isActiveLoaded && myanmarFfsArr.length > 0;
-  const showMyanmarTextArea = isActiveLoaded && myanmarClassSubstr !== '';
-  const showMyanmarCss = isActiveLoaded && myanmarFontSettings.length > 0 && myanmarClassSubstr !== '';
+  const showMyanmarFeatures = areSubstrsLoaded && myanmarFfsArr.length > 0;
+  const showMyanmarTextArea = areSubstrsLoaded && selectedMyanmarFontClassSubstr !== '';
+  const showMyanmarCss = areSubstrsLoaded && myanmarFontSettings.length > 0 && selectedMyanmarFontClassSubstr !== '';
 
-  const showArabicUrduFeatures = isActiveLoaded && arabicUrduFfsArr.length > 0;
-  const showArabicUrduTextArea = isActiveLoaded && arabicUrduClassSubstr !== '';
-  const showArabicUrduCss = isActiveLoaded && arabicUrduFontSettings.length > 0 && arabicUrduClassSubstr !== '';
+  const showArabicUrduFeatures = areSubstrsLoaded && arabicUrduFfsArr.length > 0;
+  const showArabicUrduTextArea = areSubstrsLoaded && selectedArabicUrduFontClassSubstr !== '';
+  const showArabicUrduCss = areSubstrsLoaded && arabicUrduFontSettings.length > 0 && selectedArabicUrduFontClassSubstr !== '';
 
-  const showOtherFeatures = isActiveLoaded && otherFfsArr.length > 0;
-  const showOtherCss = isActiveLoaded && otherFontSettings.length > 0 && otherClassSubstr !== '';
+  const showOtherFeatures = areSubstrsLoaded && otherFfsArr.length > 0;
+  const showOtherCss = areSubstrsLoaded && otherFontSettings.length > 0 && selectedOtherFontClassSubstr !== '';
 
   const otherFallbackExampleFontName = isOtherOn ? `${otherFontName}, ${fallbackFontName}` : fallbackFontName;
   const otherFallbackExampleCss = isOtherOn ? otherFfsCss : fallbackFfsCss;
 
-  const showFallbackFeatures = isActiveLoaded && fallbackFfsArr.length > 0;
-  const showFallbackCss = isActiveLoaded && fallbackFfsArr.length > 0;
+  const showFallbackFeatures = areSubstrsLoaded && fallbackFfsArr.length > 0;
+  const showFallbackCss = areSubstrsLoaded && fallbackFfsArr.length > 0;
 
   return (
     <Grid2 container spacing={2}>
@@ -790,7 +760,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                         inputProps={{
                             id: "select-hebrew-font-id",
                         }}
-                        value={isActiveLoaded && hebrewClassSubstr}
+                        value={areSubstrsLoaded && selectedHebrewFontClassSubstr}
                         label={doI18n("pages:core-settings:select_hebrewscriptfont", i18nRef.current)}
                         onChange={handleChangeHebrew}
                         sx={sx.select}
@@ -813,7 +783,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
               onChange={handleExampleHebrew}
               name="exampleHebrew"
               style= {{
-                fontFamily: isActiveLoaded && hebrewFontName,
+                fontFamily: areSubstrsLoaded && hebrewFontName,
                 fontSize: hebrewFontSize,
                 lineHeight: hebrewLineHeight,
                 width: '50%',
@@ -845,7 +815,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                           inputProps={{
                               id: "select-greek-font-id",
                           }}
-                          value={isActiveLoaded && greekClassSubstr}
+                          value={areSubstrsLoaded && selectedGreekFontClassSubstr}
                           label={doI18n("pages:core-settings:select_greekscriptfont", i18nRef.current)}
                           onChange={handleChangeGreek}
                           sx={sx.select}
@@ -868,7 +838,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
               onChange={handleExampleGreek}
               name="exampleGreek"
               style= {{
-                fontFamily: isActiveLoaded && greekFontName,
+                fontFamily: areSubstrsLoaded && greekFontName,
                 fontSize: greekFontSize,
                 lineHeight: greekLineHeight,
                 padding: '10pt 3pt',
@@ -901,7 +871,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                         inputProps={{
                             id: "select-myanmar-font-id",
                         }}
-                        value={isActiveLoaded && myanmarClassSubstr}
+                        value={areSubstrsLoaded && selectedMyanmarFontClassSubstr}
                         label={doI18n("pages:core-settings:select_myanmarscriptfont", i18nRef.current)}
                         onChange={handleChangeMyanmar}
                         sx={sx.select}
@@ -924,7 +894,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
               onChange={handleExampleMyanmar}
               name="exampleMyanmar"
               style= {{
-                fontFamily: isActiveLoaded && myanmarFontName,
+                fontFamily: areSubstrsLoaded && myanmarFontName,
                 fontSize: myanmarFontSize,
                 lineHeight: myanmarLineHeight,
                 width: '50%',
@@ -956,14 +926,14 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                         inputProps={{
                             id: "select-arabic-urdu-font-id",
                         }}
-                        value={isActiveLoaded && arabicUrduClassSubstr}
+                        value={areSubstrsLoaded && selectedArabicUrduFontClassSubstr}
                         label={doI18n("pages:core-settings:select_arabicurduscriptfont", i18nRef.current)}
                         onChange={handleChangeArabicUrdu}
                         sx={sx.select}
                     >
                       {WebFontsSelectableArabicUrdu}
                     </Select>
-                    <FormHelperText>{arabicUrduClassSubstr.includes('AwamiNastaliq') && doI18n("pages:core-settings:replaceawamiifnotfirefox", i18nRef.current)}</FormHelperText>
+                    <FormHelperText>{selectedArabicUrduFontClassSubstr.includes('AwamiNastaliq') && doI18n("pages:core-settings:replaceawamiifnotfirefox", i18nRef.current)}</FormHelperText>
                 </FormControl>
                 {showArabicUrduFeatures && <FontFeaturesArabicUrdu {...fontFeaturesArabicUrduProps} />}
               </Stack>
@@ -980,7 +950,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
               onChange={handleExampleArabicUrdu}
               name="exampleArabicUrdu"
               style= {{
-                fontFamily: isActiveLoaded && `${arabicUrduFontName}, 'Pankosmia-Noto Nastaliq Urdu'`,
+                fontFamily: areSubstrsLoaded && `${arabicUrduFontName}, 'Pankosmia-Noto Nastaliq Urdu'`,
                 fontSize: arabicUrduFontSize,
                 lineHeight: arabicUrduLineHeight,
                 width: '50%',
@@ -1013,7 +983,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                           inputProps={{
                               id: "select-other-font-id",
                           }}
-                          value={isActiveLoaded && otherClassSubstr}
+                          value={areSubstrsLoaded && selectedOtherFontClassSubstr}
                           label={doI18n("pages:core-settings:select_otherscriptfont", i18nRef.current)}
                           onChange={handleChangeOther}
                           sx={sx.select}
@@ -1039,7 +1009,7 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
                           inputProps={{
                               id: "select-fallback-font-id",
                           }}
-                          value={isActiveLoaded && fallbackClassSubstr}
+                          value={areSubstrsLoaded && selectedFallbackFontClassSubstr}
                           label={doI18n("pages:core-settings:select_fallbackscriptfont", i18nRef.current)}
                           onChange={handleChangeFallback}
                           sx={sx.select}
@@ -1061,17 +1031,17 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
               onChange={handleExampleOtherFallback}
               name="exampleOtherFallback"
               style= {{
-                fontFamily: isActiveLoaded && otherFallbackExampleFontName,
+                fontFamily: areSubstrsLoaded && otherFallbackExampleFontName,
                 fontSize: fallbackFontSize,
                 lineHeight: fallbackLineHeight,
                 width: '50%',
                 borderColor: "purple",
                 direction: exampleOtherFallbackDir,
-                fontFeatureSettings:  isActiveLoaded && otherFallbackExampleCss,
-                MozFontFeatureSettings: isActiveLoaded && otherFallbackExampleCss,
-                WebkitFontFeatureSettings: isActiveLoaded && otherFallbackExampleCss,
+                fontFeatureSettings:  areSubstrsLoaded && otherFallbackExampleCss,
+                MozFontFeatureSettings: areSubstrsLoaded && otherFallbackExampleCss,
+                WebkitFontFeatureSettings: areSubstrsLoaded && otherFallbackExampleCss,
                 }}
-              value={isActiveLoaded && exampleOtherFallback}
+              value={areSubstrsLoaded && exampleOtherFallback}
               />
             {showOtherCss && otherCss}
             {showFallbackCss && fallbackCss}
@@ -1084,8 +1054,8 @@ export default function BlendedFontSelection(blendedFontSelectionProps) {
 }
 
 BlendedFontSelection.propTypes = {
-    /** Active Font Class */
-    activeFontClass: PropTypes.string,
+    /** Selected Font Class */
+    selectedFontClass: PropTypes.string,
     /** Set Selected Font Set CSS Name */
     setSelectedFontClass: PropTypes.func.isRequired,
     /** Selected Hebrew Font Class Substring */
