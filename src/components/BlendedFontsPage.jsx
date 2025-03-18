@@ -1,11 +1,10 @@
 import { useState, useEffect, useContext } from "react"
 import { Toolbar, Box } from "@mui/material";
-import { getAndSetJson, postEmptyJson, typographyContext } from "pithekos-lib";
+import { postEmptyJson, typographyContext } from "pithekos-lib";
 import BlendedFontSelection from "./BlendedFontSelection";
 
 export default function BlendedFontsPage() {
   const { typographyRef } = useContext(typographyContext);
-  console.log(typographyRef.current.font_set);
 
   // Font Class Substrings
   const [selectedHebrewFontClassSubstr, setSelectedHebrewFontClassSubstr] = useState('');
@@ -24,31 +23,20 @@ export default function BlendedFontsPage() {
   const [otherFontName, setOtherFontName] = useState([]);
   const [fallbackFontName, setFallbackFontName] = useState([]);
 
-  const [fontClass, setFontClass] = useState([]);
-  useEffect(
-    () => {
-        getAndSetJson({
-            url: "/settings/typography",
-            setter: setFontClass
-        }).then()},
-    []
-  );
   useEffect( () => {
-    setSelectedFontClass(fontClass.font_set);
-  },[fontClass.font_set]);
+    setSelectedFontClass(typographyRef.current.font_set);
+  },[typographyRef]);
 
   useEffect( () => {
-    if (selectedFontClass !== undefined && fontClass.font_set !== selectedFontClass) {
+    if (selectedFontClass !== undefined && selectedFontClass !== '' && typographyRef.current.font_set !== selectedFontClass) {
       //#[post("/typography/<font_set>/<size>/<direction>")]
       const typographyStr = selectedFontClass + '/medium/ltr';
       postEmptyJson(`/settings/typography/${typographyStr}`).then();
     }
-  },[fontClass.font_set, selectedFontClass]);
-
-  const activeFontClass = fontClass.font_set;
+  },[selectedFontClass, typographyRef]);
 
   const blendedFontSelectionProps = {
-    activeFontClass,
+    selectedFontClass,
     setSelectedFontClass,
     selectedHebrewFontClassSubstr,
     setSelectedHebrewFontClassSubstr,
