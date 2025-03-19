@@ -104,25 +104,28 @@ export default function BlendedFontsPage() {
       setWebFontsHebrew([
         { display_name: 'Ezra SIL 2.51', id: 'Pankosmia-EzraSIL', name: 'Pankosmia-Ezra SIL', settings_id: '' },
         { display_name: 'Ezra SIL SR 2.51', id: 'Pankosmia-EzraSILSR',name: 'Pankosmia-Ezra SIL SR', settings_id: '' },
+        { display_name: '- ' + doI18n("pages:core-settings:other-fallback", i18nRef.current) + ' -', id: '', name: '', settings_id: '' },
       ]);
     }
-  },[webFontsHebrew.length]);
+  },[i18nRef, webFontsHebrew.length]);
   useEffect(() => {
     if (!webFontsGreek.length) {
       setWebFontsGreek([
         { display_name: 'Cardo 1.0451', id: 'Pankosmia-Cardo', name: 'Pankosmia-Cardo', settings_id: '' },
         { display_name: 'Galatia SIL 2.1', id: 'Pankosmia-GalatiaSIL', name: 'Pankosmia-Galatia SIL', settings_id: '' },
+        { display_name: '- ' + doI18n("pages:core-settings:other-fallback", i18nRef.current) + ' -', id: '', name: '', settings_id: '' },
       ]);
     }
-  },[webFontsGreek.length]);
+  },[i18nRef, webFontsGreek.length]);
   useEffect(() => {
     if (!webFontsMyanmar.length) {
       setWebFontsMyanmar([
         { display_name: 'Padauk 5.100', id: 'Pankosmia-Padauk', name: 'Pankosmia-Padauk', settings_id: 'Padauk' },
         { display_name: 'Padauk Book 5.100', id: 'Pankosmia-PadaukBook', name: 'Pankosmia-Padauk Book', settings_id: 'Padauk' },
+        { display_name: '- ' + doI18n("pages:core-settings:other-fallback", i18nRef.current) + ' -', id: '', name: '', settings_id: '' },
       ]);
     }
-  },[webFontsMyanmar.length]);
+  },[i18nRef, webFontsMyanmar.length]);
   useEffect(() => {
     if (!webFontsArabicUrdu.length) {
       setWebFontsArabicUrdu([
@@ -131,9 +134,10 @@ export default function BlendedFontsPage() {
         { display_name: 'Awami Nastaliq Semi Bold 3.300*', id: 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Semi Bold', settings_id: 'Awami Nastaliq' },
         { display_name: 'Awami Nastaliq Extra Bold 3.300*', id: 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Extra Bold', settings_id: 'Awami Nastaliq' },
         { display_name: 'Noto Naskh Arabic 2.018', id: 'Pankosmia-NotoNaskhArabic', name: 'Pankosmia-Noto Naskh Arabic', settings_id: '' },
+        { display_name: '- ' + doI18n("pages:core-settings:other-fallback", i18nRef.current) + ' -', id: '', name: '', settings_id: '' },
       ]);
     }
-  },[webFontsArabicUrdu.length]);
+  },[i18nRef, webFontsArabicUrdu.length]);
   useEffect(() => {
     if (!webFontsOther.length) {
       setWebFontsOther([
@@ -145,9 +149,10 @@ export default function BlendedFontsPage() {
         { display_name: 'Roboto Light 2.137', id: 'Pankosmia-RobotoLight', name: 'Pankosmia-Roboto Light', settings_id: '' },
         { display_name: 'Roboto Medium 2.137', id: 'Pankosmia-RobotoMedium', name: 'Pankosmia-Roboto Medium', settings_id: '' },
         { display_name: 'Roboto Thin 2.137', id: 'Pankosmia-RobotoThin', name: 'Pankosmia-Roboto Thin', settings_id: '' },
+        { display_name: '- ' + doI18n("pages:core-settings:fallback", i18nRef.current) + ' -', id: '', name: '', settings_id: '' },
       ]);
     }
-  },[webFontsOther.length]);
+  },[i18nRef, webFontsOther.length]);
   useEffect(() => {
     if (!webFontsFallback.length) {
       setWebFontsFallback([
@@ -156,25 +161,6 @@ export default function BlendedFontsPage() {
       ]);
     }
   },[webFontsFallback.length]);
-
-  /** Add not-applicable options to script-specific arrays above. */
-  const otherFallbackFont = doI18n("pages:core-settings:other-fallback", i18nRef.current);
-  useEffect(() => {
-    if (otherFallbackFont !== 'pages:core-settings:other-fallback') {
-      setWebFontsHebrew(previous => [...previous, { display_name: '- ' + otherFallbackFont + ' -', id: '', name: '', settings_id: '' },])
-      setWebFontsGreek(previous => [...previous, { display_name: '- ' + otherFallbackFont + ' -', id: '', name: '', settings_id: '' },])
-      setWebFontsMyanmar(previous => [...previous, { display_name: '- ' + otherFallbackFont + ' -', id: '', name: '', settings_id: '' },])
-      setWebFontsArabicUrdu(previous => [...previous, { display_name: '- ' + otherFallbackFont + ' -', id: '', name: '', settings_id: '' },])
-    }
-  },[otherFallbackFont]);
-
-  /** Add not-applicable options to the "Other" array above. */
-  const fallbackFont = doI18n("pages:core-settings:fallback", i18nRef.current);
-  useEffect(() => {
-    if (fallbackFont !== 'pages:core-settings:fallback') {
-      setWebFontsOther(previous => [...previous, { display_name: '- ' + fallbackFont + ' -', id: '', name: fallbackFont, settings_id: '' },])
-    }
-  },[fallbackFont])
 
   const fontSetStr = 'fonts-' + selectedGreekFontClassSubstr + selectedHebrewFontClassSubstr + selectedMyanmarFontClassSubstr + selectedArabicUrduFontClassSubstr + selectedOtherFontClassSubstr + selectedFallbackFontClassSubstr;
 
