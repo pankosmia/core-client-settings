@@ -110,7 +110,7 @@ export default function BlendedFontsPage() {
   useEffect(() => {
     if (!webFontsGreek.length) {
       setWebFontsGreek([
-        { display_name: 'Cardo 2011', id: 'Pankosmia-Cardo', name: 'Pankosmia-Cardo', settings_id: '' },
+        { display_name: 'Cardo 1.0451', id: 'Pankosmia-Cardo', name: 'Pankosmia-Cardo', settings_id: '' },
         { display_name: 'Galatia SIL 2.1', id: 'Pankosmia-GalatiaSIL', name: 'Pankosmia-Galatia SIL', settings_id: '' },
       ]);
     }
