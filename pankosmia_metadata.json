@@ -34,6 +34,38 @@
       "id": "Bahasa",
       "grc": "Γλῶσσα"
     },
+    "select_presets": {
+      "en": "Presets",
+      "id": "Pengaturan Pintas"
+    },
+    "select_hebrewscript": {
+      "en": "Hebrew Script",
+      "fr": "Police pour Hébreu",
+      "id": "Aksara Ibrani",
+      "grc": "Ἑβραϊκὰ γράμματα"
+    },
+    "select_greekscript": {
+      "en": "Greek Script Font",
+      "fr": "Police pour Grec",
+      "id": "Aksara Yunani",
+      "grc": "Ἑλληνικὰ γράμματα"
+    },
+    "select_myanmarscript": {
+      "en": "Myanmar / Kayah Li Script",
+      "fr": "Police pour Myanmar / Kayah Li",
+      "id": "Aksara Myanmar / Kayah Li"
+    },
+    "select_arabicurduscript": {
+      "en": "Arabic / Urdu Script",
+      "fr": "Police pour Arabe / Ourdou",
+      "id": "Aksara Arab / Urdu",
+      "grc": "Ἀραϐικὰ γράμματα"
+    },
+    "select_otherscripts": {
+      "en": "Other Scripts",
+      "fr": "Police supplémentaire",
+      "id": "Aksara-aksara Lain"
+    },
     "select_hebrewscriptfont": {
       "en": "Hebrew Script Font",
       "fr": "Police pour Hébreu",
@@ -52,7 +84,7 @@
       "id": "Fon Aksara Myanmar / Kayah Li"
     },
     "select_arabicurduscriptfont": {
-      "en": "Arabic/Urdu Script Font",
+      "en": "Arabic / Urdu Script Font",
       "fr": "Police pour Arabe / Ourdou",
       "id": "Fon Aksara Arab / Urdu",
       "grc": "Ἀραϐικὰ γράμματα"
@@ -68,15 +100,15 @@
       "id": "Fon Aksara Dasar"
     },
     "other-fallback": {
-      "en": "Other/Fallback",
+      "en": "Other / Base font",
       "fr": "Autre / Police de base",
-      "id": "Lainnya / Terakhir",
+      "id": "Fon Lainnya / Dasar",
       "grc": "Ἁλλὰ γράμματα"
     },
     "fallback": {
-      "en": "Fallback",
+      "en": "Base font",
       "fr": "Police de base",
-      "id": "Terakhir"
+      "id": "Fon Dasar"
     },
     "replaceawamiifnotfirefox": {
       "en": "* Noto Nastaliq Urdu 4.000 if browser is not Firefox",
