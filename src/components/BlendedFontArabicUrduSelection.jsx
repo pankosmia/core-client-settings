@@ -19,12 +19,11 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
     arabicUrduFontName,
     setArabicUrduFontName,
     webFontsArabicUrdu,
+    arabicUrduFontDisplayName,
+    setArabicUrduFontDisplayName,
     ffsArr,
     unicodeRanges,
   } = blendedFontArabicUrduSelectionProps;
-
-  // Font Display Name
-  const [arabicUrduFontDisplayName, setArabicUrduFontDisplayName] = useState([]);
 
   // Available font font-feature-setting (Ffs) by selection
   const [arabicUrduFfsArr, setArabicUrduFfsArr] = useState([]);
@@ -54,8 +53,6 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
       setArabicUrduFfsId(selectedArabicUrduSettingsId);
       const selectedArabicUrduSettingsArr = ffsArr.filter(item => selectedArabicUrduSettingsId.includes(item.name));
       setArabicUrduFfsArr(selectedArabicUrduSettingsArr);
-      const arabicUrduDisplayName = webFontsArabicUrdu.filter(font => font.id === selectedArabicUrduFontClassSubstr)?.map((font, index) => (font.display_name));
-      setArabicUrduFontDisplayName(arabicUrduDisplayName);
       const arabicUrduName = webFontsArabicUrdu.filter(font => font.id === selectedArabicUrduFontClassSubstr)?.map((font, index) => (font.name));
       setArabicUrduFontName(arabicUrduName);
   },[ffsArr, selectedArabicUrduFontClassSubstr, setArabicUrduFontName, webFontsArabicUrdu]);
@@ -223,6 +220,10 @@ BlendedFontArabicUrduSelection.propTypes = {
   setArabicUrduFontName: PropTypes.func.isRequired,
   /** Available Arabic / Urdu Fonts */
   webFontsArabicUrdu: PropTypes.array.isRequired,
+  /** Font Display Name for font-feature-settings heading */
+  arabicUrduFontDisplayName: PropTypes.array.isRequired,
+  /** Set Font Display Name for font-feature-settings heading and presets */
+  setArabicUrduFontDisplayName: PropTypes.func.isRequired,
   /** Font Feature Settings Array (Options)*/
   ffsArr: PropTypes.array.isRequired, // Current unicode ranges always result in 'punc 2' (Latin); Removing that option for now (awamiFfsLessPunc)
   /** Unicode ranges for RegEx by script type for editable examples */

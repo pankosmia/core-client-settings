@@ -354,7 +354,7 @@ BlendedFontOtherFallbackSelection.propTypes = {
   setOtherFontDisplayName: PropTypes.func.isRequired,
   /** Font Display Name for font-feature-settings heading */
   fallbackFontDisplayName: PropTypes.array.isRequired,
-  /** Set Font Display Name for font-feature-settings heading */
+  /** Set Font Display Name for font-feature-settings heading and presets */
   setFallbackFontDisplayName: PropTypes.func.isRequired,
   /** Font Feature Settings Array (Options)*/
   ffsArr: PropTypes.array.isRequired, // Current unicode ranges always result in 'punc 2' (Latin); Removing that option for now (awamiFfsLessPunc)

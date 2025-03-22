@@ -212,7 +212,7 @@ BlendedFontMyanmarSelection.propTypes = {
   setMyanmarFfsId: PropTypes.func.isRequired,
   /** Font Display Name for font-feature-settings heading */
   myanmarFontDisplayName: PropTypes.array.isRequired,
-  /** Set Font Display Name for font-feature-settings heading */
+  /** Set Font Display Name for font-feature-settings heading and presets */
   setMyanmarFontDisplayName: PropTypes.func.isRequired,
   /** Font Feature Settings Array (Options)*/
   ffsArr: PropTypes.array.isRequired, // Current unicode ranges always result in 'punc 2' (Latin); Removing that option for now (awamiFfsLessPunc)
