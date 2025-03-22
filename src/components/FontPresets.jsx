@@ -93,6 +93,10 @@ export default function FontPresets(fontPresetsProps) {
     isHebrewOn && rangedSet.push(isHebrewOn && doI18n("pages:core-settings:select_hebrewscript", i18nRef.current) +': ' + hebrewFontDisplayName);
   }
   const rangedSetString = rangedSet.join('; ');
+
+  const isArabicUrduSetDiff = selectedArabicUrduFontClassSubstr.toString() !== '' && webFontsArabicUrduPresets.filter(item => item.id.includes(selectedArabicUrduFontClassSubstr)).length === 0;
+  const isOtherSetDiff = selectedOtherFontClassSubstr.toString() !== '' && webFontsOtherPresets.filter(item => item.id.includes(selectedOtherFontClassSubstr)).length === 0;
+
   
   const handleOnArabicUrduChange = (event) => {
     setSelectedArabicUrduFontClassSubstr(event.target.value);
@@ -161,16 +165,16 @@ export default function FontPresets(fontPresetsProps) {
           <FontPresetsCheckboxItem font={font} {...fontPresetsCheckboxItemProps}/>
       </div>
   ));
-  const none = 
+  const none = (label) => 
     (<div>
       <FormControlLabel
         sx={{marginRight: radioRightMargin, marginLeft: radioLeftMargin}} 
         value={''}
         style={{}}
         control={<Radio sx={{alignSelf: 'flex-start', padding: '1px 9px'}} />}
-        label=<div className={selectedFontClass} style={{ fontSize: '100%'}}>None</div>
+        label=<div className={selectedFontClass} style={{ fontSize: '100%'}}>{label}</div>
       />
-      </div>);
+    </div>);
 
   return (
     <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
@@ -193,7 +197,7 @@ export default function FontPresets(fontPresetsProps) {
                 label={<Typography sx={labelStyle}>
                   <div className={selectedFontClass} style={{ fontSize: '100%'}}>
                     Current Settings:
-                    <div style={{margin: '0px 26px 6px 26px'}}>
+                    <div style={{margin: '0px 9px 6px 9px'}}>
                       {rangedSetString}
                       {isRangedOn && <br />}
                       {doI18n("pages:core-settings:select_otherscripts", i18nRef.current)}: {isOtherOn ? otherFontDisplayName + ', ' : ''}{fallbackFontDisplayName}
@@ -209,7 +213,7 @@ export default function FontPresets(fontPresetsProps) {
                 label={<Typography sx={labelStyle}>
                   <div className={selectedFontClass} style={{ fontSize: '100%'}}>
                   {isCurrentDefault ? 'Current Settings (Pankosmia Default)' : 'Pankosmia Default'}:
-                    <div style={{margin: '0px 26px 6px 26px'}}>
+                    <div style={{margin: '0px 9px 6px 9px'}}>
                       {doI18n("pages:core-settings:select_arabicurduscript", i18nRef.current)}: Awami Nastaliq 3.300*; {doI18n("pages:core-settings:select_myanmarscript", i18nRef.current)}: Padauk 5.100; {doI18n("pages:core-settings:select_greekscript", i18nRef.current)}: Cardo 1.0451; {doI18n("pages:core-settings:select_hebrewscript", i18nRef.current)}: Ezra SIL 2.51<br />
                       {doI18n("pages:core-settings:select_otherscripts", i18nRef.current)}: Gentium Plus 6.200
                     </div>
@@ -217,11 +221,17 @@ export default function FontPresets(fontPresetsProps) {
                 </Typography>}
               />
             </RadioGroup>
+            <br />
+            <Divider />
             <div className={selectedFontClass} style={{ fontSize: '100%'}}>
-              <h2 style={{marginBottom: '0px'}}>Quick Set</h2>
               <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{padding: '0px 26px', fontWeight: 'bold'}}>
-                  {doI18n("pages:core-settings:select_arabicurduscript", i18nRef.current)}:
+                <div style={{display: 'flex', flexDirection: 'row', padding: '0px 9px'}}>
+                  <div style={{fontWeight: 'bold'}}>
+                    {doI18n("pages:core-settings:select_arabicurduscript", i18nRef.current)}
+                  </div>
+                  <div style={{padding: '0px 2px', fontWeight: 'normal'}}>
+                  {isArabicUrduSetDiff && `(${arabicUrduFontDisplayName}):`}
+                  </div>
                 </div>
                 <RadioGroup
                   row={true}
@@ -232,12 +242,12 @@ export default function FontPresets(fontPresetsProps) {
                   sx={radioColor}
                 >
                   {WebFontsArabicUrduPresets}
-                  {none}
+                  {none(doI18n("pages:core-settings:other-fallback", i18nRef.current))}
                 </RadioGroup>
               </div>
               <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{padding: '0px 26px', fontWeight: 'bold'}}>
-                  {doI18n("pages:core-settings:select_myanmarscript", i18nRef.current)}:
+                <div style={{padding: '0px 9px', fontWeight: 'bold'}}>
+                  {doI18n("pages:core-settings:select_myanmarscript", i18nRef.current)}
                 </div>
                 <RadioGroup
                   row={true}
@@ -249,12 +259,12 @@ export default function FontPresets(fontPresetsProps) {
                   sx={radioColor}
                 >
                   {WebFontsMyanmarPresets}
-                  {none}
+                  {none(doI18n("pages:core-settings:other-fallback", i18nRef.current))}
                 </RadioGroup>
               </div>
               <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{padding: '0px 26px', fontWeight: 'bold'}}>
-                  {doI18n("pages:core-settings:select_greekscript", i18nRef.current)}:
+                <div style={{padding: '0px 9px', fontWeight: 'bold'}}>
+                  {doI18n("pages:core-settings:select_greekscript", i18nRef.current)}
                 </div>
                 <RadioGroup
                   row={true}
@@ -266,12 +276,12 @@ export default function FontPresets(fontPresetsProps) {
                   sx={radioColor}
                 >
                   {WebFontsGreekPresets}
-                  {none}
+                  {none(doI18n("pages:core-settings:other-fallback", i18nRef.current))}
                 </RadioGroup>
               </div>
               <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{padding: '0px 26px', fontWeight: 'bold'}}>
-                  {doI18n("pages:core-settings:select_hebrewscript", i18nRef.current)}:
+                <div style={{padding: '0px 9px', fontWeight: 'bold'}}>
+                  {doI18n("pages:core-settings:select_hebrewscript", i18nRef.current)}
                 </div>
                 <RadioGroup
                   row={true}
@@ -283,12 +293,17 @@ export default function FontPresets(fontPresetsProps) {
                   sx={radioColor}
                 >
                   {WebFontsHebrewPresets}
-                  {none}
+                  {none(doI18n("pages:core-settings:other-fallback", i18nRef.current))}
                 </RadioGroup>
               </div>
               <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{padding: '0px 26px', fontWeight: 'bold'}}>
-                  {doI18n("pages:core-settings:select_otherscripts", i18nRef.current)}:
+                <div style={{display: 'flex', flexDirection: 'row', padding: '0px 9px'}}>
+                  <div style={{fontWeight: 'bold'}}>
+                    {doI18n("pages:core-settings:select_otherscripts", i18nRef.current)}
+                  </div>
+                  <div style={{padding: '0px 2px', fontWeight: 'normal'}}>
+                    {isOtherSetDiff && `(${otherFontDisplayName}):`}
+                  </div>
                 </div>
                 <RadioGroup
                   row={true}
@@ -300,12 +315,12 @@ export default function FontPresets(fontPresetsProps) {
                   sx={radioColor}
                 >
                   {WebFontsOtherPresets}
-                  {none}
+                  {none(doI18n("pages:core-settings:fallback", i18nRef.current))}
                 </RadioGroup>
               </div>
               <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{padding: '0px 26px', fontWeight: 'bold'}}>
-                  {doI18n("pages:core-settings:select_fallbackscriptfont", i18nRef.current)}:
+                <div style={{padding: '0px 9px', fontWeight: 'bold'}}>
+                  {doI18n("pages:core-settings:select_fallbackscriptfont", i18nRef.current)}
                 </div>
                 <RadioGroup
                   row={true}
