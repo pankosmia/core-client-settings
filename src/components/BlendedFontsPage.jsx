@@ -5,6 +5,7 @@ import { Tabs, Tab, Toolbar, Box } from "@mui/material";
 import { fontFeatureSettings, useAssumeGraphite } from "font-detect-rhl";
 import { postEmptyJson, typographyContext, i18nContext as I18nContext, doI18n } from "pithekos-lib";
 
+import FontPresets from "./FontPresets";
 import BlendedFontArabicUrduSelection from "./BlendedFontArabicUrduSelection";
 import BlendedFontMyanmarSelection from "./BlendedFontMyanmarSelection";
 import BlendedFontGreekSelection from "./BlendedFontGreekSelection";
@@ -78,11 +79,11 @@ export default function BlendedFontsPage() {
   const [otherFfsId, setOtherFfsId] = useState([]);
   const [fallbackFfsId, setFallbackFfsId] = useState([]);
 
-  // Font Display Name for font-feature-settings heading, where applicable
+  // Font Display Name for presets and for font-feature-settings heading where applicable
   const [myanmarFontDisplayName, setMyanmarFontDisplayName] = useState([]);
-  // const [arabicUrduFontDisplayName, setArabicUrduFontDisplayName] = useState([]); // in Child
-  // const [hebrewFontDisplayName, setHebrewFontDisplayName] = useState([]); // Not currently applicable
-  // const [greekFontDisplayName, setGreekFontDisplayName] = useState([]); // Not currently applicable
+  const [arabicUrduFontDisplayName, setArabicUrduFontDisplayName] = useState([]); // in Child
+  const [hebrewFontDisplayName, setHebrewFontDisplayName] = useState([]); // Not currently applicable
+  const [greekFontDisplayName, setGreekFontDisplayName] = useState([]); // Not currently applicable
   const [otherFontDisplayName, setOtherFontDisplayName] = useState([]);
   const [fallbackFontDisplayName, setFallbackFontDisplayName] = useState([]);
 
@@ -102,62 +103,62 @@ export default function BlendedFontsPage() {
   useEffect(() => {
     if (!webFontsHebrew.length) {
       setWebFontsHebrew([
-        { display_name: 'Ezra SIL 2.51', id: 'Pankosmia-EzraSIL', name: 'Pankosmia-Ezra SIL', settings_id: '' },
-        { display_name: 'Ezra SIL SR 2.51', id: 'Pankosmia-EzraSILSR',name: 'Pankosmia-Ezra SIL SR', settings_id: '' },
-        { display_name: '- ' + doI18n("pages:core-settings:other-fallback", i18nRef.current) + ' -', id: '', name: '', settings_id: '' },
+        { display_name: 'Ezra SIL 2.51', id: 'Pankosmia-EzraSIL', name: 'Pankosmia-Ezra SIL', settings_id: '', preset: true },
+        { display_name: 'Ezra SIL SR 2.51', id: 'Pankosmia-EzraSILSR',name: 'Pankosmia-Ezra SIL SR', settings_id: '', preset: true },
+        { display_name: '- ' + doI18n("pages:core-settings:other-fallback", i18nRef.current) + ' -', id: '', name: '', settings_id: '', preset: false },
       ]);
     }
   },[i18nRef, webFontsHebrew.length]);
   useEffect(() => {
     if (!webFontsGreek.length) {
       setWebFontsGreek([
-        { display_name: 'Cardo 1.0451', id: 'Pankosmia-Cardo', name: 'Pankosmia-Cardo', settings_id: '' },
-        { display_name: 'Galatia SIL 2.1', id: 'Pankosmia-GalatiaSIL', name: 'Pankosmia-Galatia SIL', settings_id: '' },
-        { display_name: '- ' + doI18n("pages:core-settings:other-fallback", i18nRef.current) + ' -', id: '', name: '', settings_id: '' },
+        { display_name: 'Cardo 1.0451', id: 'Pankosmia-Cardo', name: 'Pankosmia-Cardo', settings_id: '', preset: true },
+        { display_name: 'Galatia SIL 2.1', id: 'Pankosmia-GalatiaSIL', name: 'Pankosmia-Galatia SIL', settings_id: '', preset: true },
+        { display_name: '- ' + doI18n("pages:core-settings:other-fallback", i18nRef.current) + ' -', id: '', name: '', settings_id: '', preset: false },
       ]);
     }
   },[i18nRef, webFontsGreek.length]);
   useEffect(() => {
     if (!webFontsMyanmar.length) {
       setWebFontsMyanmar([
-        { display_name: 'Padauk 5.100', id: 'Pankosmia-Padauk', name: 'Pankosmia-Padauk', settings_id: 'Padauk' },
-        { display_name: 'Padauk Book 5.100', id: 'Pankosmia-PadaukBook', name: 'Pankosmia-Padauk Book', settings_id: 'Padauk' },
-        { display_name: '- ' + doI18n("pages:core-settings:other-fallback", i18nRef.current) + ' -', id: '', name: '', settings_id: '' },
+        { display_name: 'Padauk 5.100', id: 'Pankosmia-Padauk', name: 'Pankosmia-Padauk', settings_id: 'Padauk', preset: true },
+        { display_name: 'Padauk Book 5.100', id: 'Pankosmia-PadaukBook', name: 'Pankosmia-Padauk Book', settings_id: 'Padauk', preset: true },
+        { display_name: '- ' + doI18n("pages:core-settings:other-fallback", i18nRef.current) + ' -', id: '', name: '', settings_id: '', preset: false },
       ]);
     }
   },[i18nRef, webFontsMyanmar.length]);
   useEffect(() => {
     if (!webFontsArabicUrdu.length) {
       setWebFontsArabicUrdu([
-        { display_name: 'Awami Nastaliq 3.300*', id: 'Pankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq', settings_id: 'Awami Nastaliq' },
-        { display_name: 'Awami Nastaliq Medium 3.300*', id: 'Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Medium', settings_id: 'Awami Nastaliq' },
-        { display_name: 'Awami Nastaliq Semi Bold 3.300*', id: 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Semi Bold', settings_id: 'Awami Nastaliq' },
-        { display_name: 'Awami Nastaliq Extra Bold 3.300*', id: 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Extra Bold', settings_id: 'Awami Nastaliq' },
-        { display_name: 'Noto Naskh Arabic 2.018', id: 'Pankosmia-NotoNaskhArabic', name: 'Pankosmia-Noto Naskh Arabic', settings_id: '' },
-        { display_name: '- ' + doI18n("pages:core-settings:other-fallback", i18nRef.current) + ' -', id: '', name: '', settings_id: '' },
+        { display_name: 'Awami Nastaliq 3.300*', id: 'Pankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq', settings_id: 'Awami Nastaliq', preset: true },
+        { display_name: 'Awami Nastaliq Medium 3.300*', id: 'Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Medium', settings_id: 'Awami Nastaliq', preset: false },
+        { display_name: 'Awami Nastaliq Semi Bold 3.300*', id: 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Semi Bold', settings_id: 'Awami Nastaliq', preset: false },
+        { display_name: 'Awami Nastaliq Extra Bold 3.300*', id: 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Extra Bold', settings_id: 'Awami Nastaliq', preset: false },
+        { display_name: 'Noto Naskh Arabic 2.018', id: 'Pankosmia-NotoNaskhArabic', name: 'Pankosmia-Noto Naskh Arabic', settings_id: '', preset: true },
+        { display_name: '- ' + doI18n("pages:core-settings:other-fallback", i18nRef.current) + ' -', id: '', name: '', settings_id: '', preset: false },
       ]);
     }
   },[i18nRef, webFontsArabicUrdu.length]);
   useEffect(() => {
     if (!webFontsOther.length) {
       setWebFontsOther([
-        { display_name: 'Andika 6.200', id: 'Pankosmia-Andika', name: 'Pankosmia-Andika', settings_id: 'Andika' },
-        { display_name: 'Charis SIL 6.200', id: 'Pankosmia-CharisSIL', name: 'Pankosmia-Charis SIL', settings_id: 'Charis SIL' },
-        { display_name: 'Open Sans 3.003', id: 'Pankosmia-OpenSans', name: 'Pankosmia-Open Sans', settings_id: '' },
-        { display_name: 'Roboto 2.137', id: 'Pankosmia-Roboto', name: 'Pankosmia-Roboto', settings_id: '' },
-        { display_name: 'Roboto Black 2.137', id: 'Pankosmia-RobotoBlack', name: 'Pankosmia-Roboto Black', settings_id: '' },
-        { display_name: 'Roboto Light 2.137', id: 'Pankosmia-RobotoLight', name: 'Pankosmia-Roboto Light', settings_id: '' },
-        { display_name: 'Roboto Medium 2.137', id: 'Pankosmia-RobotoMedium', name: 'Pankosmia-Roboto Medium', settings_id: '' },
-        { display_name: 'Roboto Thin 2.137', id: 'Pankosmia-RobotoThin', name: 'Pankosmia-Roboto Thin', settings_id: '' },
-        { display_name: '- ' + doI18n("pages:core-settings:fallback", i18nRef.current) + ' -', id: '', name: '', settings_id: '' },
+        { display_name: 'Andika 6.200', id: 'Pankosmia-Andika', name: 'Pankosmia-Andika', settings_id: 'Andika', preset: true },
+        { display_name: 'Charis SIL 6.200', id: 'Pankosmia-CharisSIL', name: 'Pankosmia-Charis SIL', settings_id: 'Charis SIL', preset: true },
+        { display_name: 'Open Sans 3.003', id: 'Pankosmia-OpenSans', name: 'Pankosmia-Open Sans', settings_id: '', preset: true },
+        { display_name: 'Roboto 2.137', id: 'Pankosmia-Roboto', name: 'Pankosmia-Roboto', settings_id: '', preset: true },
+        { display_name: 'Roboto Black 2.137', id: 'Pankosmia-RobotoBlack', name: 'Pankosmia-Roboto Black', settings_id: '', preset: false },
+        { display_name: 'Roboto Light 2.137', id: 'Pankosmia-RobotoLight', name: 'Pankosmia-Roboto Light', settings_id: '', preset: false },
+        { display_name: 'Roboto Medium 2.137', id: 'Pankosmia-RobotoMedium', name: 'Pankosmia-Roboto Medium', settings_id: '', preset: false },
+        { display_name: 'Roboto Thin 2.137', id: 'Pankosmia-RobotoThin', name: 'Pankosmia-Roboto Thin', settings_id: '', preset: false },
+        { display_name: '- ' + doI18n("pages:core-settings:fallback", i18nRef.current) + ' -', id: '', name: '', settings_id: '', preset: false },
       ]);
     }
   },[i18nRef, webFontsOther.length]);
   useEffect(() => {
     if (!webFontsFallback.length) {
       setWebFontsFallback([
-        { display_name: 'Gentium Plus 6.200', id: 'Pankosmia-GentiumPlus', name: 'Pankosmia-Gentium Plus', settings_id: 'Gentium Plus' },
-        { display_name: 'Gentium Book Plus 6.200', id: 'Pankosmia-GentiumBookPlus', name: 'Pankosmia-Gentium Book Plus', settings_id: 'Gentium Plus' },
+        { display_name: 'Gentium Plus 6.200', id: 'Pankosmia-GentiumPlus', name: 'Pankosmia-Gentium Plus', settings_id: 'Gentium Plus', preset: true },
+        { display_name: 'Gentium Book Plus 6.200', id: 'Pankosmia-GentiumBookPlus', name: 'Pankosmia-Gentium Book Plus', settings_id: 'Gentium Plus', preset: true },
       ]);
     }
   },[webFontsFallback.length]);
@@ -177,8 +178,8 @@ export default function BlendedFontsPage() {
       setSelectedHebrewFontClassSubstr(selectedHebrewId);
       // const selectedHebrewSettingsId = webFontsHebrew.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.settings_id));
       // setHebrewFfsId(selectedHebrewSettingsId);
-      // const hebrewDisplayName = webFontsHebrew.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.display_name));
-      // setHebrewFontDisplayName(hebrewDisplayName);
+      const hebrewDisplayName = webFontsHebrew.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.display_name));
+      setHebrewFontDisplayName(hebrewDisplayName);
       const hebrewName = webFontsHebrew.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.name));
       setHebrewFontName(hebrewName);
     // Greek
@@ -186,8 +187,8 @@ export default function BlendedFontsPage() {
       setSelectedGreekFontClassSubstr(selectedGreekId);
       // const selectedGreekSettingsId = webFontsGreek.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.settings_id));
       // setGreekFfsId(selectedGreekSettingsId);
-      // const greekDisplayName = webFontsGreek.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.display_name));
-      // setGreekFontDisplayName(greekDisplayName);
+      const greekDisplayName = webFontsGreek.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.display_name));
+      setGreekFontDisplayName(greekDisplayName);
       const greekName = webFontsGreek.filter(item => fontClassIdsArr.includes(item.id))?.map((font, index) => (font.name));
       setGreekFontName(greekName);
     // Myanmar
@@ -205,6 +206,8 @@ export default function BlendedFontsPage() {
       const selectedArabicUrduIdAdj = (fontClassAwamiToAdj !== '' ? fontClassAwamiToAdj + 'Pankosmia-NotoNastaliqUrdu' : fontClassIdsArr.filter(item => selectedArabicUrduIds.includes(item)));
       const selectedArabicUrduAdjId = (selectedArabicUrduIdAdj === 'Pankosmia-NotoNastaliqUrdu' ? '' : selectedArabicUrduIdAdj);
       setSelectedArabicUrduFontClassSubstr(selectedArabicUrduAdjId);
+      const arabicUrduDisplayName = webFontsArabicUrdu.filter(font => font.id === selectedArabicUrduAdjId)?.map((font, index) => (font.display_name));
+      setArabicUrduFontDisplayName(arabicUrduDisplayName);
     // Other
       const selectedOtherId = webFontsOther.filter(item => fontClassIdsArr.includes(item.id)).map((font, index) => (font.id));
       setSelectedOtherFontClassSubstr(selectedOtherId);
@@ -270,6 +273,34 @@ export default function BlendedFontsPage() {
 
   const isOtherOn = fontSetStr !== 'fonts-' && selectedOtherFontClassSubstr.length !== 0;
 
+  const fontPresetsProps = {
+    selectedFontClass,
+    selectedOtherFontClassSubstr,
+    setSelectedOtherFontClassSubstr,
+    selectedFallbackFontClassSubstr,
+    setSelectedFallbackFontClassSubstr,
+    selectedHebrewFontClassSubstr,
+    setSelectedHebrewFontClassSubstr,
+    selectedGreekFontClassSubstr,
+    setSelectedGreekFontClassSubstr,
+    selectedMyanmarFontClassSubstr,
+    setSelectedMyanmarFontClassSubstr,
+    selectedArabicUrduFontClassSubstr,
+    setSelectedArabicUrduFontClassSubstr,
+    arabicUrduFontDisplayName,
+    myanmarFontDisplayName,
+    greekFontDisplayName,
+    hebrewFontDisplayName,
+    otherFontDisplayName,
+    fallbackFontDisplayName,
+    webFontsArabicUrduPresets: webFontsArabicUrdu.filter(font => font.preset),
+    webFontsMyanmarPresets: webFontsMyanmar.filter(font => font.preset),
+    webFontsGreekPresets: webFontsGreek.filter(font => font.preset),
+    webFontsHebrewPresets: webFontsHebrew.filter(font => font.preset),
+    webFontsOtherPresets: webFontsOther.filter(font => font.preset),
+    webFontsFallbackPresets: webFontsFallback.filter(font => font.preset),
+  };
+
   /** ArabicUrdu props patterns differ from other scripts*/
   const blendedFontArabicUrduSelectionProps = {
     isGraphiteAssumed,
@@ -278,6 +309,8 @@ export default function BlendedFontsPage() {
     arabicUrduFontName,
     setArabicUrduFontName,
     webFontsArabicUrdu,
+    arabicUrduFontDisplayName,
+    setArabicUrduFontDisplayName,
     ffsArr,
     unicodeRanges,
   };
@@ -351,17 +384,8 @@ export default function BlendedFontsPage() {
   };
   
   return (
-    <Box sx={{ width: '100%' }}>
-      <Box>
-        <Box>
-          If you have made font changes that you want to take effect every time you start pithekos, then:
-          <ol style={{ marginTop: 0 }}>
-            <li>Change font_set in <em>~/pankosmia_working/user_settings.json to:</em> "font_set": "{selectedFontClass}",</li>
-            <li>Save <em>~/pankosmia_working/user_settings.json, restart the Pithekos web server, and reopen <em>http://localhost:8000</em> in Firefox.</em></li>
-          </ol>
-        </Box>
-      </Box>
-      <Box sx={{ border: '1 0', borderColor: 'divider' }}>
+    <Box sx={{ width: '100%' }}>  
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -379,6 +403,7 @@ export default function BlendedFontsPage() {
       </Box>
       <CustomTabPanel value={value} index={0}>
         <h1>{doI18n("pages:core-settings:select_presets", i18nRef.current)}</h1>
+        {fontSetStr !== 'fonts-' && <FontPresets {...fontPresetsProps} />}
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <h1>{doI18n("pages:core-settings:select_arabicurduscript", i18nRef.current)}</h1>
