@@ -225,7 +225,7 @@ export default function FontPresets(fontPresetsProps) {
             <Divider />
             <div className={selectedFontClass} style={{ fontSize: '100%'}}>
               <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{display: 'flex', flexDirection: 'row', padding: '0px 9px'}}>
+                <div style={{display: 'flex', flexDirection: 'row', padding: '0px 9px', whiteSpace:'nowrap'}}>
                   <div style={{fontWeight: 'bold'}}>
                     {doI18n("pages:core-settings:select_arabicurduscript", i18nRef.current)}
                   </div>
@@ -297,7 +297,7 @@ export default function FontPresets(fontPresetsProps) {
                 </RadioGroup>
               </div>
               <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{display: 'flex', flexDirection: 'row', padding: '0px 9px'}}>
+                <div style={{display: 'flex', flexDirection: 'row', padding: '0px 9px', whiteSpace:'nowrap'}}>
                   <div style={{fontWeight: 'bold'}}>
                     {doI18n("pages:core-settings:select_otherscripts", i18nRef.current)}
                   </div>
