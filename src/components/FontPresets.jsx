@@ -10,10 +10,8 @@ export default function FontPresets(fontPresetsProps) {
   const { i18nRef } = useContext(I18nContext);
   const {
     selectedFontClass,
-    selectedOtherFontClassSubstr,
-    setSelectedOtherFontClassSubstr,
-    selectedFallbackFontClassSubstr,
-    setSelectedFallbackFontClassSubstr,
+    selectedBaseFontClassSubstr,
+    setSelectedBaseFontClassSubstr,
     selectedHebrewFontClassSubstr,
     setSelectedHebrewFontClassSubstr,
     selectedGreekFontClassSubstr,
@@ -26,14 +24,12 @@ export default function FontPresets(fontPresetsProps) {
     myanmarFontDisplayName,
     greekFontDisplayName,
     hebrewFontDisplayName,
-    otherFontDisplayName,
-    fallbackFontDisplayName,
+    baseFontDisplayName,
     webFontsArabicUrduPresets,
     webFontsMyanmarPresets,
     webFontsGreekPresets,
     webFontsHebrewPresets,
-    webFontsOtherPresets,
-    webFontsFallbackPresets,
+    webFontsBasePresets,
   } = fontPresetsProps;
 
   const handleChange = (event) => {
@@ -42,8 +38,7 @@ export default function FontPresets(fontPresetsProps) {
       setSelectedGreekFontClassSubstr('Pankosmia-Cardo');
       setSelectedMyanmarFontClassSubstr('Pankosmia-Padauk');
       setSelectedArabicUrduFontClassSubstr('Pankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrdu');
-      setSelectedOtherFontClassSubstr('');
-      setSelectedFallbackFontClassSubstr('Pankosmia-GentiumPlus');
+      setSelectedBaseFontClassSubstr('Pankosmia-GentiumPlus');
     }
   };
 
@@ -83,7 +78,6 @@ export default function FontPresets(fontPresetsProps) {
   const isGreekOn = selectedGreekFontClassSubstr.length !== 0;
   const isHebrewOn = selectedHebrewFontClassSubstr.length !== 0;
   const isRangedOn = selectedArabicUrduFontClassSubstr.length + selectedMyanmarFontClassSubstr.length + selectedGreekFontClassSubstr.length + selectedHebrewFontClassSubstr.length !== 0;
-  const isOtherOn = selectedOtherFontClassSubstr.length !== 0;
 
   let rangedSet = [];
   if (isRangedOn) {
@@ -95,10 +89,9 @@ export default function FontPresets(fontPresetsProps) {
   const rangedSetString = rangedSet.join('; ');
 
   const isArabicUrduSetDiff = selectedArabicUrduFontClassSubstr.toString() !== '' && webFontsArabicUrduPresets.filter(item => item.id.includes(selectedArabicUrduFontClassSubstr)).length === 0;
-  const isOtherSetDiff = selectedOtherFontClassSubstr.toString() !== '' && webFontsOtherPresets.filter(item => item.id.includes(selectedOtherFontClassSubstr)).length === 0;
+  const isBaseSetDiff = selectedBaseFontClassSubstr.toString() !== '' && webFontsBasePresets.filter(item => item.id.includes(selectedBaseFontClassSubstr)).length === 0;
 
-  
-  const handleOnArabicUrduChange = (event) => {
+    const handleOnArabicUrduChange = (event) => {
     setSelectedArabicUrduFontClassSubstr(event.target.value);
   };
   
@@ -114,14 +107,10 @@ export default function FontPresets(fontPresetsProps) {
     setSelectedGreekFontClassSubstr(event.target.value);
   };
   
-  const handleOnOtherChange = (event) => {
-    setSelectedOtherFontClassSubstr(event.target.value);
+  const handleOnBaseChange = (event) => {
+    setSelectedBaseFontClassSubstr(event.target.value);
   };
   
-  const handleOnFallbackChange = (event) => {
-    setSelectedFallbackFontClassSubstr(event.target.value);
-  };
-
   const fontPresetsCheckboxItemProps = {
     selectedFontClass,
     radioRightMargin, 
@@ -153,14 +142,8 @@ export default function FontPresets(fontPresetsProps) {
           <FontPresetsCheckboxItem font={font} {...fontPresetsCheckboxItemProps}/>
       </div>
   ));
-  const WebFontsOtherPresets =
-  webFontsOtherPresets.map((font, index) => (
-      <div key={index} value={font.id} dense>
-          <FontPresetsCheckboxItem font={font} {...fontPresetsCheckboxItemProps}/>
-      </div>
-  ));
-  const WebFontsFallbackPresets =
-  webFontsFallbackPresets.map((font, index) => (
+  const WebFontsBasePresets =
+  webFontsBasePresets.map((font, index) => (
       <div key={index} value={font.id} dense>
           <FontPresetsCheckboxItem font={font} {...fontPresetsCheckboxItemProps}/>
       </div>
@@ -182,7 +165,7 @@ export default function FontPresets(fontPresetsProps) {
         <Grid2 container sx={{}}>
           <Grid2 item>
             <RadioGroup
-              aria-labelledby='set.id'
+              aria-labelledby='baseFont-label'
               defaultValue='current'
               name='preset'
               value={isCurrentDefault ? 'default' : 'current'}
@@ -200,7 +183,7 @@ export default function FontPresets(fontPresetsProps) {
                     <div style={{margin: '0px 9px 6px 9px'}}>
                       {rangedSetString}
                       {isRangedOn && <br />}
-                      {doI18n("pages:core-settings:select_otherscripts", i18nRef.current)}: {isOtherOn ? otherFontDisplayName + ', ' : ''}{fallbackFontDisplayName}
+                      {doI18n("pages:core-settings:base_font", i18nRef.current)}: {baseFontDisplayName}
                     </div>
                   </div>
                 </Typography>}
@@ -215,7 +198,7 @@ export default function FontPresets(fontPresetsProps) {
                   {isCurrentDefault ? 'Current Settings (Pankosmia Default)' : 'Pankosmia Default'}:
                     <div style={{margin: '0px 9px 6px 9px'}}>
                       {doI18n("pages:core-settings:select_arabicurduscript", i18nRef.current)}: Awami Nastaliq 3.300*; {doI18n("pages:core-settings:select_myanmarscript", i18nRef.current)}: Padauk 5.100; {doI18n("pages:core-settings:select_greekscript", i18nRef.current)}: Cardo 1.0451; {doI18n("pages:core-settings:select_hebrewscript", i18nRef.current)}: Ezra SIL 2.51<br />
-                      {doI18n("pages:core-settings:select_otherscripts", i18nRef.current)}: Gentium Plus 6.200
+                      {doI18n("pages:core-settings:base_font", i18nRef.current)}: Gentium Plus 6.200
                     </div>
                   </div>
                 </Typography>}
@@ -224,122 +207,109 @@ export default function FontPresets(fontPresetsProps) {
             <br />
             <Divider />
             <div className={selectedFontClass} style={{ fontSize: '100%'}}>
-              <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <div style={{display: 'flex', flexDirection: 'row', padding: '0px 9px', whiteSpace:'nowrap'}}>
                   <div style={{fontWeight: 'bold'}}>
-                    {doI18n("pages:core-settings:select_arabicurduscript", i18nRef.current)}
+                    {doI18n("pages:core-settings:base_font", i18nRef.current)}
                   </div>
                   <div style={{padding: '0px 2px', fontWeight: 'normal'}}>
-                  {isArabicUrduSetDiff && `(${arabicUrduFontDisplayName}):`}
+                    {isBaseSetDiff && `(${baseFontDisplayName}):`}
                   </div>
                 </div>
                 <RadioGroup
                   row={true}
-                  defaultValue={selectedArabicUrduFontClassSubstr.toString()}
-                  value={selectedArabicUrduFontClassSubstr.toString()}
-                  name='arabicUrduScript'
-                  onChange={handleOnArabicUrduChange}
+                  aria-labelledby='baseScript-label'
+                  defaultValue={selectedBaseFontClassSubstr.toString()}
+                  value={selectedBaseFontClassSubstr.toString()}
+                  name='baseScript'
+                  onChange={handleOnBaseChange}
                   sx={radioColor}
                 >
-                  {WebFontsArabicUrduPresets}
-                  {none(doI18n("pages:core-settings:other-fallback", i18nRef.current))}
+                  {WebFontsBasePresets}
                 </RadioGroup>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{padding: '0px 9px', fontWeight: 'bold'}}>
-                  {doI18n("pages:core-settings:select_myanmarscript", i18nRef.current)}
-                </div>
-                <RadioGroup
-                  row={true}
-                  aria-labelledby='myanmarScript-label'
-                  defaultValue={selectedMyanmarFontClassSubstr.toString()}
-                  value={selectedMyanmarFontClassSubstr.toString()}
-                  name='myanmarScript'
-                  onChange={handleOnMyanmarChange}
-                  sx={radioColor}
-                >
-                  {WebFontsMyanmarPresets}
-                  {none(doI18n("pages:core-settings:other-fallback", i18nRef.current))}
-                </RadioGroup>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{padding: '0px 9px', fontWeight: 'bold'}}>
-                  {doI18n("pages:core-settings:select_greekscript", i18nRef.current)}
-                </div>
-                <RadioGroup
-                  row={true}
-                  aria-labelledby='greekScript-label'
-                  defaultValue={selectedGreekFontClassSubstr.toString()}
-                  value={selectedGreekFontClassSubstr.toString()}
-                  name='greekScript'
-                  onChange={handleOnGreekChange}
-                  sx={radioColor}
-                >
-                  {WebFontsGreekPresets}
-                  {none(doI18n("pages:core-settings:other-fallback", i18nRef.current))}
-                </RadioGroup>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{padding: '0px 9px', fontWeight: 'bold'}}>
-                  {doI18n("pages:core-settings:select_hebrewscript", i18nRef.current)}
-                </div>
-                <RadioGroup
-                  row={true}
-                  aria-labelledby='hebrewScript-label'
-                  defaultValue={selectedHebrewFontClassSubstr.toString()}
-                  value={selectedHebrewFontClassSubstr.toString()}
-                  name='hebrewScript'
-                  onChange={handleOnHebrewChange}
-                  sx={radioColor}
-                >
-                  {WebFontsHebrewPresets}
-                  {none(doI18n("pages:core-settings:other-fallback", i18nRef.current))}
-                </RadioGroup>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{display: 'flex', flexDirection: 'row', padding: '0px 9px', whiteSpace:'nowrap'}}>
-                  <div style={{fontWeight: 'bold'}}>
-                    {doI18n("pages:core-settings:select_otherscripts", i18nRef.current)}
+              <br />
+              <div style={{padding: '0px 9px'}}>
+                <Divider />
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                  <div style={{display: 'flex', flexDirection: 'row', padding: '0px 9px', whiteSpace:'nowrap'}}>
+                    <div style={{fontWeight: 'bold'}}>
+                      {doI18n("pages:core-settings:select_arabicurduscript", i18nRef.current)}
+                    </div>
+                    <div style={{padding: '0px 2px', fontWeight: 'normal'}}>
+                    {isArabicUrduSetDiff && `(${arabicUrduFontDisplayName}):`}
+                    </div>
                   </div>
-                  <div style={{padding: '0px 2px', fontWeight: 'normal'}}>
-                    {isOtherSetDiff && `(${otherFontDisplayName}):`}
+                  <RadioGroup
+                    row={true}
+                    defaultValue={selectedArabicUrduFontClassSubstr.toString()}
+                    value={selectedArabicUrduFontClassSubstr.toString()}
+                    name='arabicUrduScript'
+                    onChange={handleOnArabicUrduChange}
+                    sx={radioColor}
+                  >
+                    {WebFontsArabicUrduPresets}
+                    {none(doI18n("pages:core-settings:base_font", i18nRef.current))}
+                  </RadioGroup>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                  <div style={{padding: '0px 9px', fontWeight: 'bold'}}>
+                    {doI18n("pages:core-settings:select_myanmarscript", i18nRef.current)}
                   </div>
+                  <RadioGroup
+                    row={true}
+                    aria-labelledby='myanmarScript-label'
+                    defaultValue={selectedMyanmarFontClassSubstr.toString()}
+                    value={selectedMyanmarFontClassSubstr.toString()}
+                    name='myanmarScript'
+                    onChange={handleOnMyanmarChange}
+                    sx={radioColor}
+                  >
+                    {WebFontsMyanmarPresets}
+                    {none(doI18n("pages:core-settings:base_font", i18nRef.current))}
+                  </RadioGroup>
                 </div>
-                <RadioGroup
-                  row={true}
-                  aria-labelledby='otherScript-label'
-                  defaultValue={selectedOtherFontClassSubstr.toString()}
-                  value={selectedOtherFontClassSubstr.toString()}
-                  name='otherScript'
-                  onChange={handleOnOtherChange}
-                  sx={radioColor}
-                >
-                  {WebFontsOtherPresets}
-                  {none(doI18n("pages:core-settings:fallback", i18nRef.current))}
-                </RadioGroup>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{padding: '0px 9px', fontWeight: 'bold'}}>
-                  {doI18n("pages:core-settings:select_fallbackscriptfont", i18nRef.current)}
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                  <div style={{padding: '0px 9px', fontWeight: 'bold'}}>
+                    {doI18n("pages:core-settings:select_greekscript", i18nRef.current)}
+                  </div>
+                  <RadioGroup
+                    row={true}
+                    aria-labelledby='greekScript-label'
+                    defaultValue={selectedGreekFontClassSubstr.toString()}
+                    value={selectedGreekFontClassSubstr.toString()}
+                    name='greekScript'
+                    onChange={handleOnGreekChange}
+                    sx={radioColor}
+                  >
+                    {WebFontsGreekPresets}
+                    {none(doI18n("pages:core-settings:base_font", i18nRef.current))}
+                  </RadioGroup>
                 </div>
-                <RadioGroup
-                  row={true}
-                  aria-labelledby='fallbackScript-label'
-                  defaultValue={selectedFallbackFontClassSubstr.toString()}
-                  value={selectedFallbackFontClassSubstr.toString()}
-                  name='fallbackScript'
-                  onChange={handleOnFallbackChange}
-                  sx={radioColor}
-                >
-                  {WebFontsFallbackPresets}
-                </RadioGroup>
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                  <div style={{padding: '0px 9px', fontWeight: 'bold'}}>
+                    {doI18n("pages:core-settings:select_hebrewscript", i18nRef.current)}
+                  </div>
+                  <RadioGroup
+                    row={true}
+                    aria-labelledby='hebrewScript-label'
+                    defaultValue={selectedHebrewFontClassSubstr.toString()}
+                    value={selectedHebrewFontClassSubstr.toString()}
+                    name='hebrewScript'
+                    onChange={handleOnHebrewChange}
+                    sx={radioColor}
+                  >
+                    {WebFontsHebrewPresets}
+                    {none(doI18n("pages:core-settings:base_font", i18nRef.current))}
+                  </RadioGroup>
+                </div>
               </div>
+              <br />
+              <Divider />
+              <FormHelperText>
+                {doI18n("pages:core-settings:replaceawamiifnotfirefox", i18nRef.current)}
+              </FormHelperText>
             </div>
-            <br />
-            <Divider />
-            <FormHelperText>
-              {doI18n("pages:core-settings:replaceawamiifnotfirefox", i18nRef.current)}
-            </FormHelperText>
           </Grid2>
         </Grid2>
       </FormControl>
@@ -350,14 +320,10 @@ export default function FontPresets(fontPresetsProps) {
 FontPresets.propTypes = {
   /** Selected Font Class */
   selectedFontClass: PropTypes.string,
-  /** Selected Other Font Class Substring */
-  selectedOtherFontClassSubstr: PropTypes.string,
-  /** Set Selected Other Font Class Substring */
-  setSelectedOtherFontClassSubstr: PropTypes.func.isRequired,
-  /** Selected Fallback Font Class Substring */
-  selectedFallbackFontClassSubstr: PropTypes.string,
-  /** Set Selected Fallback Font Class Substring */
-  setSelectedFallbackFontClassSubstr: PropTypes.func.isRequired,
+  /** Selected Base Font Class Substring */
+  selectedBaseFontClassSubstr: PropTypes.string,
+  /** Set Selected Base Font Class Substring */
+  setSelectedBaseFontClassSubstr: PropTypes.func.isRequired,
   /** Selected Hebrew Font Class Substring */
   selectedHebrewFontClassSubstr: PropTypes.string,
   /** Set Selected Hebrew Font Class Substring */
@@ -382,10 +348,8 @@ FontPresets.propTypes = {
   greekFontDisplayName: PropTypes.string,
   /** Hebrew Font Display Name */
   hebrewFontDisplayName: PropTypes.string,
-  /** Other Font Display Name */
-  otherFontDisplayName: PropTypes.string,
-  /** Fallback Font Display Name */
-  fallbackFontDisplayName: PropTypes.string,
+  /** Base Font Display Name */
+  baseFontDisplayName: PropTypes.string,
   /** Arabic / Urdu Script Preset Fonts */
   webFontsArabicUrduPresets: PropTypes.array.isRequired,
   /** Myanmar Script Preset Fonts */
@@ -394,8 +358,6 @@ FontPresets.propTypes = {
   webFontsGreekPresets: PropTypes.array.isRequired,
   /** Hebrew Script Preset Fonts */
   webFontsHebrewPresets: PropTypes.array.isRequired,
-  /** Other Scripts Preset Fonts */
-  webFontsOtherPresets: PropTypes.func.isRequired,
-  /** Fallback Preset Fonts */
-  webFontsFallbackPresets: PropTypes.func.isRequired,
+  /** Base Scripts Preset Fonts */
+  webFontsBasePresets: PropTypes.func.isRequired,
 };

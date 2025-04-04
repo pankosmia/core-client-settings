@@ -61,10 +61,11 @@
       "id": "Aksara Arab / Urdu",
       "grc": "Ἀραϐικὰ γράμματα"
     },
-    "select_otherscripts": {
-      "en": "Other Scripts",
-      "fr": "Police supplémentaire",
-      "id": "Aksara-aksara Lain"
+    "base_font": {
+      "en": "Base font",
+      "fr": "Police de base",
+      "id": "Fon Dasar",
+      "grc": "Ἁλλὰ γράμματα"
     },
     "select_hebrewscriptfont": {
       "en": "Hebrew Script Font",
@@ -88,27 +89,6 @@
       "fr": "Police pour Arabe / Ourdou",
       "id": "Fon Aksara Arab / Urdu",
       "grc": "Ἀραϐικὰ γράμματα"
-    },
-    "select_otherscriptfont": {
-      "en": "Other Script Font",
-      "fr": "Police supplémentaire",
-      "id": "Fon Aksara Lain"
-    },
-    "select_fallbackscriptfont": {
-      "en": "Base Script Font",
-      "fr": "Police de base",
-      "id": "Fon Aksara Dasar"
-    },
-    "other-fallback": {
-      "en": "Other / Base font",
-      "fr": "Autre / Police de base",
-      "id": "Fon Lainnya / Dasar",
-      "grc": "Ἁλλὰ γράμματα"
-    },
-    "fallback": {
-      "en": "Base font",
-      "fr": "Police de base",
-      "id": "Fon Dasar"
     },
     "replaceawamiifnotfirefox": {
       "en": "* Noto Nastaliq Urdu 4.000 if browser is not Firefox",
