@@ -53,8 +53,6 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
       setArabicUrduFfsId(selectedArabicUrduSettingsId);
       const selectedArabicUrduSettingsArr = ffsArr.filter(item => selectedArabicUrduSettingsId.includes(item.name));
       setArabicUrduFfsArr(selectedArabicUrduSettingsArr);
-      const arabicUrduName = webFontsArabicUrdu.filter(font => font.id === selectedArabicUrduFontClassSubstr)?.map((font, index) => (font.name));
-      setArabicUrduFontName(arabicUrduName);
   },[ffsArr, selectedArabicUrduFontClassSubstr, setArabicUrduFontName, webFontsArabicUrdu]);
 
   /** For each script type, set SELECTED...
