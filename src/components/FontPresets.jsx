@@ -24,6 +24,15 @@ export default function FontPresets(fontPresetsProps) {
     myanmarFontDisplayName,
     greekFontDisplayName,
     hebrewFontDisplayName,
+    // setArabicUrduFfsId,  // in child
+    setArabicUrduFontDisplayName,
+    setArabicUrduFontName,    
+    setMyanmarFfsId,
+    setMyanmarFontDisplayName,
+    setMyanmarFontName,
+    setBaseFfsId,
+    setBaseFontDisplayName,
+    setBaseFontName,
     baseFontDisplayName,
     webFontsArabicUrduPresets,
     webFontsMyanmarPresets,
@@ -93,10 +102,22 @@ export default function FontPresets(fontPresetsProps) {
 
     const handleOnArabicUrduChange = (event) => {
     setSelectedArabicUrduFontClassSubstr(event.target.value);
+    // const selectedArabicUrduSettingId = webFontsArabicUrduPresets.filter((font) => font.id === event.target.value).map((font, index) => (font.settings_id));
+    // setArabicUrduFfsId(selectedArabicUrduSettingId);
+    const arabicUrduDisplayName = webFontsArabicUrduPresets.filter((font) => font.id === event.target.value).map((font, index) => (font.display_name));
+    setArabicUrduFontDisplayName(arabicUrduDisplayName);
+    const arabicUrduName = webFontsArabicUrduPresets.filter((font) => font.id === event.target.value).map((font, index) => (font.name));
+    setArabicUrduFontName(arabicUrduName);
   };
   
   const handleOnMyanmarChange = (event) => {
       setSelectedMyanmarFontClassSubstr(event.target.value);
+      const selectedMyanmarSettingId = webFontsMyanmarPresets.filter((font) => font.id === event.target.value).map((font, index) => (font.settings_id));
+      setMyanmarFfsId(selectedMyanmarSettingId);
+      const myanmarDisplayName = webFontsMyanmarPresets.filter((font) => font.id === event.target.value).map((font, index) => (font.display_name));
+      setMyanmarFontDisplayName(myanmarDisplayName);
+      const myanmarName = webFontsMyanmarPresets.filter((font) => font.id === event.target.value).map((font, index) => (font.name));
+      setMyanmarFontName(myanmarName);
   };
 
   const handleOnHebrewChange = (event) => {
@@ -109,8 +130,14 @@ export default function FontPresets(fontPresetsProps) {
   
   const handleOnBaseChange = (event) => {
     setSelectedBaseFontClassSubstr(event.target.value);
+    const selectedBaseSettingId = webFontsBasePresets.filter((font) => font.id === event.target.value).map((font, index) => (font.settings_id));
+    setBaseFfsId(selectedBaseSettingId);
+    const baseDisplayName = webFontsBasePresets.filter((font) => font.id === event.target.value).map((font, index) => (font.display_name));
+    setBaseFontDisplayName(baseDisplayName);
+    const baseName = webFontsBasePresets.filter((font) => font.id === event.target.value).map((font, index) => (font.name));
+    setBaseFontName(baseName);
   };
-  
+
   const fontPresetsCheckboxItemProps = {
     selectedFontClass,
     radioRightMargin, 

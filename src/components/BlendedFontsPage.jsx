@@ -205,6 +205,8 @@ export default function BlendedFontsPage() {
       setSelectedArabicUrduFontClassSubstr(selectedArabicUrduAdjId);
       const arabicUrduDisplayName = webFontsArabicUrdu.filter(font => font.id === selectedArabicUrduAdjId)?.map((font, index) => (font.display_name));
       setArabicUrduFontDisplayName(arabicUrduDisplayName);
+      const arabicUrduName = webFontsArabicUrdu.filter(font => font.id === selectedArabicUrduAdjId.toString())?.map((font, index) => (font.name));
+      setArabicUrduFontName(arabicUrduName);
     // Base (*** Pattern differs because of added fallback font except where a Gentium font is selected. ***)
       const selectedBaseGentiums = webFontsBase.filter(item => item.name.includes('Gentium')).map((font, index) => (font.id));
       const selectedBaseIds = webFontsBase.filter(item => !item.name.includes('Gentium')).map((font, index) => (font.id));
@@ -222,6 +224,8 @@ export default function BlendedFontsPage() {
       setBaseFontName(baseName);
     }
   },[fontClassIdsArr, selectedBaseFontClassSubstr, webFontsArabicUrdu, webFontsBase, webFontsGreek, webFontsHebrew, webFontsMyanmar]);
+
+  console.log(arabicUrduFontName);
 
   const fontSetStr = 'fonts-' + selectedGreekFontClassSubstr + selectedHebrewFontClassSubstr + selectedMyanmarFontClassSubstr + selectedArabicUrduFontClassSubstr + selectedBaseFontClassSubstr;
 
@@ -276,6 +280,15 @@ export default function BlendedFontsPage() {
     myanmarFontDisplayName,
     greekFontDisplayName,
     hebrewFontDisplayName,
+    // setArabicUrduFfsId, // in Child
+    setArabicUrduFontDisplayName,
+    setArabicUrduFontName,
+    setMyanmarFfsId,
+    setMyanmarFontDisplayName,
+    setMyanmarFontName,
+    setBaseFfsId,
+    setBaseFontDisplayName,
+    setBaseFontName,
     baseFontDisplayName,
     webFontsArabicUrduPresets: webFontsArabicUrdu.filter(font => font.preset),
     webFontsMyanmarPresets: webFontsMyanmar.filter(font => font.preset),
