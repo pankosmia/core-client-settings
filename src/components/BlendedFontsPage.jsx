@@ -379,7 +379,7 @@ export default function BlendedFontsPage() {
           indicatorColor="secondary"        
           aria-label="basic tabs example"
         >
-          <Tab label={doI18n("pages:core-settings:select_presets", i18nRef.current)} {...a11yProps(0)} />
+          <Tab label={doI18n("pages:core-settings:current_settings", i18nRef.current)} {...a11yProps(0)} />
           <Tab label={doI18n("pages:core-settings:base_font", i18nRef.current)} {...a11yProps(1)} />
           <Tab label={doI18n("pages:core-settings:select_arabicurduscript", i18nRef.current)} {...a11yProps(2)} />
           <Tab label={doI18n("pages:core-settings:select_myanmarscript", i18nRef.current)} {...a11yProps(3)} />
@@ -388,7 +388,7 @@ export default function BlendedFontsPage() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <h1>{doI18n("pages:core-settings:select_presets", i18nRef.current)}</h1>
+        <h1>{doI18n("pages:core-settings:current_settings", i18nRef.current)}</h1>
         {fontSetStr !== 'fonts-' && <FontPresets {...fontPresetsProps} />}
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>

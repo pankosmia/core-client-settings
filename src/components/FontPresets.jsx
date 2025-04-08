@@ -191,48 +191,6 @@ export default function FontPresets(fontPresetsProps) {
       <FormControl  component="fieldset" style={{ direction: labelDir }}>
         <Grid2 container sx={{}}>
           <Grid2 item>
-            <RadioGroup
-              aria-labelledby='baseFont-label'
-              defaultValue='current'
-              name='preset'
-              value={isCurrentDefault ? 'default' : 'current'}
-              onChange={handleChange}
-              sx={radioColor}
-            >
-              {!isCurrentDefault && <FormControlLabel
-                sx={{marginRight: radioRightMargin, marginLeft: radioLeftMargin}} 
-                value='current'
-                style={{}}
-                control={<Radio sx={{alignSelf: 'flex-start', padding: '1px 9px'}} />}
-                label={<Typography sx={labelStyle}>
-                  <div className={selectedFontClass} style={{ fontSize: '100%'}}>
-                    Current Settings:
-                    <div style={{margin: '0px 9px 6px 9px'}}>
-                      {rangedSetString}
-                      {isRangedOn && <br />}
-                      {doI18n("pages:core-settings:base_font", i18nRef.current)}: {baseFontDisplayName}
-                    </div>
-                  </div>
-                </Typography>}
-              />}
-              <FormControlLabel
-                sx={{marginRight: radioRightMargin, marginLeft: radioLeftMargin}} 
-                value='default'
-                style={{}}
-                control={<Radio sx={{alignSelf: 'flex-start', padding: '1px 9px'}} />}
-                label={<Typography sx={labelStyle}>
-                  <div className={selectedFontClass} style={{ fontSize: '100%'}}>
-                  {isCurrentDefault ? 'Current Settings (Pankosmia Default)' : 'Pankosmia Default'}:
-                    <div style={{margin: '0px 9px 6px 9px'}}>
-                      {doI18n("pages:core-settings:select_arabicurduscript", i18nRef.current)}: Awami Nastaliq 3.300*; {doI18n("pages:core-settings:select_myanmarscript", i18nRef.current)}: Padauk 5.100; {doI18n("pages:core-settings:select_greekscript", i18nRef.current)}: Cardo 1.0451; {doI18n("pages:core-settings:select_hebrewscript", i18nRef.current)}: Ezra SIL 2.51<br />
-                      {doI18n("pages:core-settings:base_font", i18nRef.current)}: Gentium Plus 6.200
-                    </div>
-                  </div>
-                </Typography>}
-              />
-            </RadioGroup>
-            <br />
-            <Divider />
             <div className={selectedFontClass} style={{ fontSize: '100%'}}>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <div style={{display: 'flex', flexDirection: 'row', padding: '0px 9px', whiteSpace:'nowrap'}}>
@@ -258,6 +216,7 @@ export default function FontPresets(fontPresetsProps) {
               <br />
               <div style={{padding: '0px 9px'}}>
                 <Divider />
+                <br />
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                   <div style={{display: 'flex', flexDirection: 'row', padding: '0px 9px', whiteSpace:'nowrap'}}>
                     <div style={{fontWeight: 'bold'}}>
@@ -276,7 +235,7 @@ export default function FontPresets(fontPresetsProps) {
                     sx={radioColor}
                   >
                     {WebFontsArabicUrduPresets}
-                    {none(doI18n("pages:core-settings:base_font", i18nRef.current))}
+                    {none(`${doI18n("pages:core-settings:base_font", i18nRef.current)} (${doI18n("pages:core-settings:currently", i18nRef.current)}: ${baseFontDisplayName})`)}
                   </RadioGroup>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
@@ -293,7 +252,7 @@ export default function FontPresets(fontPresetsProps) {
                     sx={radioColor}
                   >
                     {WebFontsMyanmarPresets}
-                    {none(doI18n("pages:core-settings:base_font", i18nRef.current))}
+                    {none(`${doI18n("pages:core-settings:base_font", i18nRef.current)} (${doI18n("pages:core-settings:currently", i18nRef.current)}: ${baseFontDisplayName})`)}
                   </RadioGroup>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
@@ -310,7 +269,7 @@ export default function FontPresets(fontPresetsProps) {
                     sx={radioColor}
                   >
                     {WebFontsGreekPresets}
-                    {none(doI18n("pages:core-settings:base_font", i18nRef.current))}
+                    {none(`${doI18n("pages:core-settings:base_font", i18nRef.current)} (${doI18n("pages:core-settings:currently", i18nRef.current)}: ${baseFontDisplayName})`)}
                   </RadioGroup>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
@@ -327,16 +286,59 @@ export default function FontPresets(fontPresetsProps) {
                     sx={radioColor}
                   >
                     {WebFontsHebrewPresets}
-                    {none(doI18n("pages:core-settings:base_font", i18nRef.current))}
+                    {none(`${doI18n("pages:core-settings:base_font", i18nRef.current)} (${doI18n("pages:core-settings:currently", i18nRef.current)}: ${baseFontDisplayName})`)}
                   </RadioGroup>
                 </div>
               </div>
-              <br />
-              <Divider />
-              <FormHelperText>
-                {doI18n("pages:core-settings:replaceawamiifnotfirefox", i18nRef.current)}
-              </FormHelperText>
             </div>
+            <br />
+            <Divider />
+            <br />
+            <RadioGroup
+              aria-labelledby='baseFont-label'
+              defaultValue='current'
+              name='preset'
+              value={isCurrentDefault ? 'default' : 'current'}
+              onChange={handleChange}
+              sx={radioColor}
+            >
+              {!isCurrentDefault && <FormControlLabel
+                sx={{marginRight: radioRightMargin, marginLeft: radioLeftMargin}} 
+                value='current'
+                style={{}}
+                control={<Radio sx={{alignSelf: 'flex-start', padding: '1px 9px'}} />}
+                label={<Typography sx={labelStyle}>
+                  <div className={selectedFontClass} style={{ fontSize: '100%'}}>
+                    Current Settings:
+                    <div style={{margin: '0px 9px 6px 9px'}}>
+                      {doI18n("pages:core-settings:base_font", i18nRef.current)}: {baseFontDisplayName}
+                      {isRangedOn && <br />}
+                      {rangedSetString}
+                    </div>
+                  </div>
+                </Typography>}
+              />}
+              <FormControlLabel
+                sx={{marginRight: radioRightMargin, marginLeft: radioLeftMargin}} 
+                value='default'
+                style={{}}
+                control={<Radio sx={{alignSelf: 'flex-start', padding: '1px 9px'}} />}
+                label={<Typography sx={labelStyle}>
+                  <div className={selectedFontClass} style={{ fontSize: '100%'}}>
+                  {isCurrentDefault ? `${doI18n("pages:core-settings:current_settings", i18nRef.current)} (${doI18n("pages:core-settings:factory_settings", i18nRef.current)})` : `${doI18n("pages:core-settings:factory_reset", i18nRef.current)}`}:
+                    <div style={{margin: '0px 9px 6px 9px'}}>
+                      {doI18n("pages:core-settings:base_font", i18nRef.current)}: Gentium Plus 6.200<br />
+                      {doI18n("pages:core-settings:select_arabicurduscript", i18nRef.current)}: Awami Nastaliq 3.300*; {doI18n("pages:core-settings:select_myanmarscript", i18nRef.current)}: Padauk 5.100; {doI18n("pages:core-settings:select_greekscript", i18nRef.current)}: Cardo 1.0451; {doI18n("pages:core-settings:select_hebrewscript", i18nRef.current)}: Ezra SIL 2.51
+                    </div>
+                  </div>
+                </Typography>}
+              />
+            </RadioGroup>
+            <br />
+            <Divider />
+            <FormHelperText>
+              {doI18n("pages:core-settings:replaceawamiifnotfirefox", i18nRef.current)}
+            </FormHelperText>
           </Grid2>
         </Grid2>
       </FormControl>

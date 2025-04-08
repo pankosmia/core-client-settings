@@ -34,10 +34,6 @@
       "id": "Bahasa",
       "grc": "Γλῶσσα"
     },
-    "select_presets": {
-      "en": "Presets",
-      "id": "Pengaturan Pintas"
-    },
     "select_hebrewscript": {
       "en": "Hebrew Script",
       "fr": "Police pour Hébreu",
@@ -94,6 +90,26 @@
       "en": "* Noto Nastaliq Urdu 4.000 if browser is not Firefox",
       "fr": "* Noto Nastaliq Urdu 4.000 si navigateur n'est pas Firefox",
       "id": "* Noto Nastaliq Urdu 4.000 ketika peramban web bukan Firefox"
+    },
+    "current_settings": {
+      "en": "Current Settings",
+      "fr": "Paramètres Actuels",
+      "id": "Pengaturan Saat Ini"
+    },
+    "factory_settings": {
+      "en": "Factory Settings",
+      "fr": "Paramètres d'usine",
+      "id": "Pengaturan Pabrik"
+    },
+    "factory_reset": {
+      "en": "Factory Reset",
+      "fr": "Réinitialisation d'usine",
+      "id": "Pengaturan Ulang Pabrik"
+    },
+    "currently": {
+      "en": "currently",
+      "fr": "actuellement",
+      "id": "saat ini"
     }
   }
 }
