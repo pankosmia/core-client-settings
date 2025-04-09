@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { Box, FormControl, Grid2, RadioGroup, Radio, FormControlLabel, Typography, FormHelperText, Divider } from "@mui/material";
 import { i18nContext as I18nContext, doI18n } from "pithekos-lib";
 
-import FontPresetsCheckboxItem from "./FontPresetsCheckboxItem";
+import FontShortlistCheckboxItem from "./FontShortlistCheckboxItem";
 
-export default function FontPresets(fontPresetsProps) {
+export default function FontShortlist(fontShortlistProps) {
   const { i18nRef } = useContext(I18nContext);
   const {
     selectedFontClass,
@@ -34,12 +34,12 @@ export default function FontPresets(fontPresetsProps) {
     setBaseFontDisplayName,
     setBaseFontName,
     baseFontDisplayName,
-    webFontsArabicUrduPresets,
-    webFontsMyanmarPresets,
-    webFontsGreekPresets,
-    webFontsHebrewPresets,
-    webFontsBasePresets,
-  } = fontPresetsProps;
+    webFontsArabicUrduShortlist,
+    webFontsMyanmarShortlist,
+    webFontsGreekShortlist,
+    webFontsHebrewShortlist,
+    webFontsBaseShortlist,
+  } = fontShortlistProps;
 
   const handleChange = (event) => {
     if (event.target.value === 'default') {
@@ -97,26 +97,26 @@ export default function FontPresets(fontPresetsProps) {
   }
   const rangedSetString = rangedSet.join('; ');
 
-  const isArabicUrduSetDiff = selectedArabicUrduFontClassSubstr.toString() !== '' && webFontsArabicUrduPresets.filter(item => item.id.includes(selectedArabicUrduFontClassSubstr)).length === 0;
-  const isBaseSetDiff = selectedBaseFontClassSubstr.toString() !== '' && webFontsBasePresets.filter(item => item.id.includes(selectedBaseFontClassSubstr)).length === 0;
+  const isArabicUrduSetDiff = selectedArabicUrduFontClassSubstr.toString() !== '' && webFontsArabicUrduShortlist.filter(item => item.id.includes(selectedArabicUrduFontClassSubstr)).length === 0;
+  const isBaseSetDiff = selectedBaseFontClassSubstr.toString() !== '' && webFontsBaseShortlist.filter(item => item.id.includes(selectedBaseFontClassSubstr)).length === 0;
 
     const handleOnArabicUrduChange = (event) => {
     setSelectedArabicUrduFontClassSubstr(event.target.value);
-    // const selectedArabicUrduSettingId = webFontsArabicUrduPresets.filter((font) => font.id === event.target.value).map((font, index) => (font.settings_id));
+    // const selectedArabicUrduSettingId = webFontsArabicUrduShortlist.filter((font) => font.id === event.target.value).map((font, index) => (font.settings_id));
     // setArabicUrduFfsId(selectedArabicUrduSettingId);
-    const arabicUrduDisplayName = webFontsArabicUrduPresets.filter((font) => font.id === event.target.value).map((font, index) => (font.display_name));
+    const arabicUrduDisplayName = webFontsArabicUrduShortlist.filter((font) => font.id === event.target.value).map((font, index) => (font.display_name));
     setArabicUrduFontDisplayName(arabicUrduDisplayName);
-    const arabicUrduName = webFontsArabicUrduPresets.filter((font) => font.id === event.target.value).map((font, index) => (font.name));
+    const arabicUrduName = webFontsArabicUrduShortlist.filter((font) => font.id === event.target.value).map((font, index) => (font.name));
     setArabicUrduFontName(arabicUrduName);
   };
   
   const handleOnMyanmarChange = (event) => {
       setSelectedMyanmarFontClassSubstr(event.target.value);
-      const selectedMyanmarSettingId = webFontsMyanmarPresets.filter((font) => font.id === event.target.value).map((font, index) => (font.settings_id));
+      const selectedMyanmarSettingId = webFontsMyanmarShortlist.filter((font) => font.id === event.target.value).map((font, index) => (font.settings_id));
       setMyanmarFfsId(selectedMyanmarSettingId);
-      const myanmarDisplayName = webFontsMyanmarPresets.filter((font) => font.id === event.target.value).map((font, index) => (font.display_name));
+      const myanmarDisplayName = webFontsMyanmarShortlist.filter((font) => font.id === event.target.value).map((font, index) => (font.display_name));
       setMyanmarFontDisplayName(myanmarDisplayName);
-      const myanmarName = webFontsMyanmarPresets.filter((font) => font.id === event.target.value).map((font, index) => (font.name));
+      const myanmarName = webFontsMyanmarShortlist.filter((font) => font.id === event.target.value).map((font, index) => (font.name));
       setMyanmarFontName(myanmarName);
   };
 
@@ -130,49 +130,49 @@ export default function FontPresets(fontPresetsProps) {
   
   const handleOnBaseChange = (event) => {
     setSelectedBaseFontClassSubstr(event.target.value);
-    const selectedBaseSettingId = webFontsBasePresets.filter((font) => font.id === event.target.value).map((font, index) => (font.settings_id));
+    const selectedBaseSettingId = webFontsBaseShortlist.filter((font) => font.id === event.target.value).map((font, index) => (font.settings_id));
     setBaseFfsId(selectedBaseSettingId);
-    const baseDisplayName = webFontsBasePresets.filter((font) => font.id === event.target.value).map((font, index) => (font.display_name));
+    const baseDisplayName = webFontsBaseShortlist.filter((font) => font.id === event.target.value).map((font, index) => (font.display_name));
     setBaseFontDisplayName(baseDisplayName);
-    const baseName = webFontsBasePresets.filter((font) => font.id === event.target.value).map((font, index) => (font.name));
+    const baseName = webFontsBaseShortlist.filter((font) => font.id === event.target.value).map((font, index) => (font.name));
     setBaseFontName(baseName);
   };
 
-  const fontPresetsCheckboxItemProps = {
+  const fontShortlistCheckboxItemProps = {
     selectedFontClass,
     radioRightMargin, 
     radioLeftMargin,
   };
   
   /** Build dropdown menus */
-  const WebFontsArabicUrduPresets =
-    webFontsArabicUrduPresets.map((font, index) => (
+  const WebFontsArabicUrduShortlist =
+    webFontsArabicUrduShortlist.map((font, index) => (
       <div key={index} value={font.id} dense>
-          <FontPresetsCheckboxItem font={font} {...fontPresetsCheckboxItemProps}/>
+          <FontShortlistCheckboxItem font={font} {...fontShortlistCheckboxItemProps}/>
       </div>
   ));
-  const WebFontsMyanmarPresets =
-    webFontsMyanmarPresets.map((font, index) => (
+  const WebFontsMyanmarShortlist =
+    webFontsMyanmarShortlist.map((font, index) => (
       <div key={index} value={font.id} dense>
-          <FontPresetsCheckboxItem font={font} {...fontPresetsCheckboxItemProps}/>
+          <FontShortlistCheckboxItem font={font} {...fontShortlistCheckboxItemProps}/>
       </div>
   ));
-  const WebFontsGreekPresets =
-  webFontsGreekPresets.map((font, index) => (
+  const WebFontsGreekShortlist =
+  webFontsGreekShortlist.map((font, index) => (
       <div key={index} value={font.id} dense>
-          <FontPresetsCheckboxItem font={font} {...fontPresetsCheckboxItemProps}/>
+          <FontShortlistCheckboxItem font={font} {...fontShortlistCheckboxItemProps}/>
       </div>
   ));
-  const WebFontsHebrewPresets =
-  webFontsHebrewPresets.map((font, index) => (
+  const WebFontsHebrewShortlist =
+  webFontsHebrewShortlist.map((font, index) => (
       <div key={index} value={font.id} dense>
-          <FontPresetsCheckboxItem font={font} {...fontPresetsCheckboxItemProps}/>
+          <FontShortlistCheckboxItem font={font} {...fontShortlistCheckboxItemProps}/>
       </div>
   ));
-  const WebFontsBasePresets =
-  webFontsBasePresets.map((font, index) => (
+  const WebFontsBaseShortlist =
+  webFontsBaseShortlist.map((font, index) => (
       <div key={index} value={font.id} dense>
-          <FontPresetsCheckboxItem font={font} {...fontPresetsCheckboxItemProps}/>
+          <FontShortlistCheckboxItem font={font} {...fontShortlistCheckboxItemProps}/>
       </div>
   ));
   const none = (label) => 
@@ -210,7 +210,7 @@ export default function FontPresets(fontPresetsProps) {
                   onChange={handleOnBaseChange}
                   sx={radioColor}
                 >
-                  {WebFontsBasePresets}
+                  {WebFontsBaseShortlist}
                 </RadioGroup>
               </div>
               <br />
@@ -234,7 +234,7 @@ export default function FontPresets(fontPresetsProps) {
                     onChange={handleOnArabicUrduChange}
                     sx={radioColor}
                   >
-                    {WebFontsArabicUrduPresets}
+                    {WebFontsArabicUrduShortlist}
                     {none(`${doI18n("pages:core-settings:base_font", i18nRef.current)} (${doI18n("pages:core-settings:currently", i18nRef.current)}: ${baseFontDisplayName})`)}
                   </RadioGroup>
                 </div>
@@ -251,7 +251,7 @@ export default function FontPresets(fontPresetsProps) {
                     onChange={handleOnMyanmarChange}
                     sx={radioColor}
                   >
-                    {WebFontsMyanmarPresets}
+                    {WebFontsMyanmarShortlist}
                     {none(`${doI18n("pages:core-settings:base_font", i18nRef.current)} (${doI18n("pages:core-settings:currently", i18nRef.current)}: ${baseFontDisplayName})`)}
                   </RadioGroup>
                 </div>
@@ -268,7 +268,7 @@ export default function FontPresets(fontPresetsProps) {
                     onChange={handleOnGreekChange}
                     sx={radioColor}
                   >
-                    {WebFontsGreekPresets}
+                    {WebFontsGreekShortlist}
                     {none(`${doI18n("pages:core-settings:base_font", i18nRef.current)} (${doI18n("pages:core-settings:currently", i18nRef.current)}: ${baseFontDisplayName})`)}
                   </RadioGroup>
                 </div>
@@ -285,7 +285,7 @@ export default function FontPresets(fontPresetsProps) {
                     onChange={handleOnHebrewChange}
                     sx={radioColor}
                   >
-                    {WebFontsHebrewPresets}
+                    {WebFontsHebrewShortlist}
                     {none(`${doI18n("pages:core-settings:base_font", i18nRef.current)} (${doI18n("pages:core-settings:currently", i18nRef.current)}: ${baseFontDisplayName})`)}
                   </RadioGroup>
                 </div>
@@ -297,7 +297,7 @@ export default function FontPresets(fontPresetsProps) {
             <RadioGroup
               aria-labelledby='baseFont-label'
               defaultValue='current'
-              name='preset'
+              name='settings'
               value={isCurrentDefault ? 'default' : 'current'}
               onChange={handleChange}
               sx={radioColor}
@@ -346,7 +346,7 @@ export default function FontPresets(fontPresetsProps) {
   )
 }
 
-FontPresets.propTypes = {
+FontShortlist.propTypes = {
   /** Selected Font Class */
   selectedFontClass: PropTypes.string,
   /** Selected Base Font Class Substring */
@@ -379,14 +379,14 @@ FontPresets.propTypes = {
   hebrewFontDisplayName: PropTypes.string,
   /** Base Font Display Name */
   baseFontDisplayName: PropTypes.string,
-  /** Arabic / Urdu Script Preset Fonts */
-  webFontsArabicUrduPresets: PropTypes.array.isRequired,
-  /** Myanmar Script Preset Fonts */
-  webFontsMyanmarPresets: PropTypes.array.isRequired,
-  /** Greek Script Preset Fonts */
-  webFontsGreekPresets: PropTypes.array.isRequired,
-  /** Hebrew Script Preset Fonts */
-  webFontsHebrewPresets: PropTypes.array.isRequired,
-  /** Base Scripts Preset Fonts */
-  webFontsBasePresets: PropTypes.func.isRequired,
+  /** Arabic / Urdu Script Shortlist Fonts */
+  webFontsArabicUrduShortlist: PropTypes.array.isRequired,
+  /** Myanmar Script Shortlist Fonts */
+  webFontsMyanmarShortlist: PropTypes.array.isRequired,
+  /** Greek Script Shortlist Fonts */
+  webFontsGreekShortlist: PropTypes.array.isRequired,
+  /** Hebrew Script Shortlist Fonts */
+  webFontsHebrewShortlist: PropTypes.array.isRequired,
+  /** Base Scripts Shortlist Fonts */
+  webFontsBaseShortlist: PropTypes.func.isRequired,
 };

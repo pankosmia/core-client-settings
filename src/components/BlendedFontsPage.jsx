@@ -5,7 +5,7 @@ import { Tabs, Tab, Toolbar, Box } from "@mui/material";
 import { fontFeatureSettings, useAssumeGraphite } from "font-detect-rhl";
 import { postEmptyJson, typographyContext, i18nContext as I18nContext, doI18n } from "pithekos-lib";
 
-import FontPresets from "./FontPresets";
+import FontShortlist from "./FontShortlist";
 import BlendedFontArabicUrduSelection from "./BlendedFontArabicUrduSelection";
 import BlendedFontMyanmarSelection from "./BlendedFontMyanmarSelection";
 import BlendedFontGreekSelection from "./BlendedFontGreekSelection";
@@ -76,7 +76,7 @@ export default function BlendedFontsPage() {
   // const [greekFfsId, setGreekFfsId] = useState([]); // Not currently applicable
   const [baseFfsId, setBaseFfsId] = useState([]);
 
-  // Font Display Name for presets and for font-feature-settings heading where applicable
+  // Font Display Name for shortlist and for font-feature-settings heading where applicable
   const [myanmarFontDisplayName, setMyanmarFontDisplayName] = useState([]);
   const [arabicUrduFontDisplayName, setArabicUrduFontDisplayName] = useState([]); // in Child
   const [hebrewFontDisplayName, setHebrewFontDisplayName] = useState([]); // Not currently applicable
@@ -98,55 +98,55 @@ export default function BlendedFontsPage() {
   useEffect(() => {
     if (!webFontsHebrew.length) {
       setWebFontsHebrew([
-        { display_name: 'Ezra SIL 2.51', id: 'Pankosmia-EzraSIL', name: 'Pankosmia-Ezra SIL', settings_id: '', preset: true },
-        { display_name: 'Ezra SIL SR 2.51', id: 'Pankosmia-EzraSILSR',name: 'Pankosmia-Ezra SIL SR', settings_id: '', preset: true },
-        { display_name: '- ' + doI18n("pages:core-settings:base_font", i18nRef.current) + ' -', id: '', name: '', settings_id: '', preset: false },
+        { display_name: 'Ezra SIL 2.51', id: 'Pankosmia-EzraSIL', name: 'Pankosmia-Ezra SIL', settings_id: '', shortlist: true },
+        { display_name: 'Ezra SIL SR 2.51', id: 'Pankosmia-EzraSILSR',name: 'Pankosmia-Ezra SIL SR', settings_id: '', shortlist: true },
+        { display_name: '- ' + doI18n("pages:core-settings:base_font", i18nRef.current) + ' -', id: '', name: '', settings_id: '', shortlist: false },
       ]);
     }
   },[i18nRef, webFontsHebrew.length]);
   useEffect(() => {
     if (!webFontsGreek.length) {
       setWebFontsGreek([
-        { display_name: 'Cardo 1.0451', id: 'Pankosmia-Cardo', name: 'Pankosmia-Cardo', settings_id: '', preset: true },
-        { display_name: 'Galatia SIL 2.1', id: 'Pankosmia-GalatiaSIL', name: 'Pankosmia-Galatia SIL', settings_id: '', preset: true },
-        { display_name: '- ' + doI18n("pages:core-settings:base_font", i18nRef.current) + ' -', id: '', name: '', settings_id: '', preset: false },
+        { display_name: 'Cardo 1.0451', id: 'Pankosmia-Cardo', name: 'Pankosmia-Cardo', settings_id: '', shortlist: true },
+        { display_name: 'Galatia SIL 2.1', id: 'Pankosmia-GalatiaSIL', name: 'Pankosmia-Galatia SIL', settings_id: '', shortlist: true },
+        { display_name: '- ' + doI18n("pages:core-settings:base_font", i18nRef.current) + ' -', id: '', name: '', settings_id: '', shortlist: false },
       ]);
     }
   },[i18nRef, webFontsGreek.length]);
   useEffect(() => {
     if (!webFontsMyanmar.length) {
       setWebFontsMyanmar([
-        { display_name: 'Padauk 5.100', id: 'Pankosmia-Padauk', name: 'Pankosmia-Padauk', settings_id: 'Padauk', preset: true },
-        { display_name: 'Padauk Book 5.100', id: 'Pankosmia-PadaukBook', name: 'Pankosmia-Padauk Book', settings_id: 'Padauk', preset: true },
-        { display_name: '- ' + doI18n("pages:core-settings:base_font", i18nRef.current) + ' -', id: '', name: '', settings_id: '', preset: false },
+        { display_name: 'Padauk 5.100', id: 'Pankosmia-Padauk', name: 'Pankosmia-Padauk', settings_id: 'Padauk', shortlist: true },
+        { display_name: 'Padauk Book 5.100', id: 'Pankosmia-PadaukBook', name: 'Pankosmia-Padauk Book', settings_id: 'Padauk', shortlist: true },
+        { display_name: '- ' + doI18n("pages:core-settings:base_font", i18nRef.current) + ' -', id: '', name: '', settings_id: '', shortlist: false },
       ]);
     }
   },[i18nRef, webFontsMyanmar.length]);
   useEffect(() => {
     if (!webFontsArabicUrdu.length) {
       setWebFontsArabicUrdu([
-        { display_name: 'Awami Nastaliq 3.300*', id: 'Pankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq', settings_id: 'Awami Nastaliq', preset: true },
-        { display_name: 'Awami Nastaliq Medium 3.300*', id: 'Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Medium', settings_id: 'Awami Nastaliq', preset: false },
-        { display_name: 'Awami Nastaliq Semi Bold 3.300*', id: 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Semi Bold', settings_id: 'Awami Nastaliq', preset: false },
-        { display_name: 'Awami Nastaliq Extra Bold 3.300*', id: 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Extra Bold', settings_id: 'Awami Nastaliq', preset: false },
-        { display_name: 'Noto Naskh Arabic 2.018', id: 'Pankosmia-NotoNaskhArabic', name: 'Pankosmia-Noto Naskh Arabic', settings_id: '', preset: true },
-        { display_name: '- ' + doI18n("pages:core-settings:base_font", i18nRef.current) + ' -', id: '', name: '', settings_id: '', preset: false },
+        { display_name: 'Awami Nastaliq 3.300*', id: 'Pankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq', settings_id: 'Awami Nastaliq', shortlist: true },
+        { display_name: 'Awami Nastaliq Medium 3.300*', id: 'Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Medium', settings_id: 'Awami Nastaliq', shortlist: false },
+        { display_name: 'Awami Nastaliq Semi Bold 3.300*', id: 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Semi Bold', settings_id: 'Awami Nastaliq', shortlist: false },
+        { display_name: 'Awami Nastaliq Extra Bold 3.300*', id: 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Extra Bold', settings_id: 'Awami Nastaliq', shortlist: false },
+        { display_name: 'Noto Naskh Arabic 2.018', id: 'Pankosmia-NotoNaskhArabic', name: 'Pankosmia-Noto Naskh Arabic', settings_id: '', shortlist: true },
+        { display_name: '- ' + doI18n("pages:core-settings:base_font", i18nRef.current) + ' -', id: '', name: '', settings_id: '', shortlist: false },
       ]);
     }
   },[i18nRef, webFontsArabicUrdu.length]);
   useEffect(() => {
     if (!webFontsBase.length) {
       setWebFontsBase([
-        { display_name: 'Andika 6.200', id: 'Pankosmia-AndikaPankosmia-GentiumPlus', name: 'Pankosmia-Andika', settings_id: 'Andika', preset: true },
-        { display_name: 'Charis SIL 6.200', id: 'Pankosmia-CharisSILPankosmia-GentiumPlus', name: 'Pankosmia-Charis SIL', settings_id: 'Charis SIL', preset: true },
-        { display_name: 'Gentium Plus 6.200', id: 'Pankosmia-GentiumPlus', name: 'Pankosmia-Gentium Plus', settings_id: 'Gentium Plus', preset: true },
-        { display_name: 'Gentium Book Plus 6.200', id: 'Pankosmia-GentiumBookPlus', name: 'Pankosmia-Gentium Book Plus', settings_id: 'Gentium Plus', preset: true },
-        { display_name: 'Open Sans 3.003', id: 'Pankosmia-OpenSansPankosmia-GentiumPlus', name: 'Pankosmia-Open Sans', settings_id: '', preset: true },
-        { display_name: 'Roboto 2.137', id: 'Pankosmia-RobotoPankosmia-GentiumPlus', name: 'Pankosmia-Roboto', settings_id: '', preset: true },
-        { display_name: 'Roboto Black 2.137', id: 'Pankosmia-RobotoBlackPankosmia-GentiumPlus', name: 'Pankosmia-Roboto Black', settings_id: '', preset: false },
-        { display_name: 'Roboto Light 2.137', id: 'Pankosmia-RobotoLightPankosmia-GentiumPlus', name: 'Pankosmia-Roboto Light', settings_id: '', preset: false },
-        { display_name: 'Roboto Medium 2.137', id: 'Pankosmia-RobotoMediumPankosmia-GentiumPlus', name: 'Pankosmia-Roboto Medium', settings_id: '', preset: false },
-        { display_name: 'Roboto Thin 2.137', id: 'Pankosmia-RobotoThinPankosmia-GentiumPlus', name: 'Pankosmia-Roboto Thin', settings_id: '', preset: false },
+        { display_name: 'Andika 6.200', id: 'Pankosmia-AndikaPankosmia-GentiumPlus', name: 'Pankosmia-Andika', settings_id: 'Andika', shortlist: true },
+        { display_name: 'Charis SIL 6.200', id: 'Pankosmia-CharisSILPankosmia-GentiumPlus', name: 'Pankosmia-Charis SIL', settings_id: 'Charis SIL', shortlist: true },
+        { display_name: 'Gentium Plus 6.200', id: 'Pankosmia-GentiumPlus', name: 'Pankosmia-Gentium Plus', settings_id: 'Gentium Plus', shortlist: true },
+        { display_name: 'Gentium Book Plus 6.200', id: 'Pankosmia-GentiumBookPlus', name: 'Pankosmia-Gentium Book Plus', settings_id: 'Gentium Plus', shortlist: true },
+        { display_name: 'Open Sans 3.003', id: 'Pankosmia-OpenSansPankosmia-GentiumPlus', name: 'Pankosmia-Open Sans', settings_id: '', shortlist: true },
+        { display_name: 'Roboto 2.137', id: 'Pankosmia-RobotoPankosmia-GentiumPlus', name: 'Pankosmia-Roboto', settings_id: '', shortlist: true },
+        { display_name: 'Roboto Black 2.137', id: 'Pankosmia-RobotoBlackPankosmia-GentiumPlus', name: 'Pankosmia-Roboto Black', settings_id: '', shortlist: false },
+        { display_name: 'Roboto Light 2.137', id: 'Pankosmia-RobotoLightPankosmia-GentiumPlus', name: 'Pankosmia-Roboto Light', settings_id: '', shortlist: false },
+        { display_name: 'Roboto Medium 2.137', id: 'Pankosmia-RobotoMediumPankosmia-GentiumPlus', name: 'Pankosmia-Roboto Medium', settings_id: '', shortlist: false },
+        { display_name: 'Roboto Thin 2.137', id: 'Pankosmia-RobotoThinPankosmia-GentiumPlus', name: 'Pankosmia-Roboto Thin', settings_id: '', shortlist: false },
       ]);
     }
   },[i18nRef, webFontsBase.length]);
@@ -264,7 +264,7 @@ export default function BlendedFontsPage() {
     { name: 'Base', id: 'base', unicode_range: '' },
   ];
 
-  const fontPresetsProps = {
+  const fontShortlistProps = {
     selectedFontClass,
     selectedBaseFontClassSubstr,
     setSelectedBaseFontClassSubstr,
@@ -290,11 +290,11 @@ export default function BlendedFontsPage() {
     setBaseFontDisplayName,
     setBaseFontName,
     baseFontDisplayName,
-    webFontsArabicUrduPresets: webFontsArabicUrdu.filter(font => font.preset),
-    webFontsMyanmarPresets: webFontsMyanmar.filter(font => font.preset),
-    webFontsGreekPresets: webFontsGreek.filter(font => font.preset),
-    webFontsHebrewPresets: webFontsHebrew.filter(font => font.preset),
-    webFontsBasePresets: webFontsBase.filter(font => font.preset),
+    webFontsArabicUrduShortlist: webFontsArabicUrdu.filter(font => font.shortlist),
+    webFontsMyanmarShortlist: webFontsMyanmar.filter(font => font.shortlist),
+    webFontsGreekShortlist: webFontsGreek.filter(font => font.shortlist),
+    webFontsHebrewShortlist: webFontsHebrew.filter(font => font.shortlist),
+    webFontsBaseShortlist: webFontsBase.filter(font => font.shortlist),
   };
 
   /** ArabicUrdu props patterns differ. */
@@ -389,7 +389,7 @@ export default function BlendedFontsPage() {
       </Box>
       <CustomTabPanel value={value} index={0}>
         <h1>{doI18n("pages:core-settings:current_settings", i18nRef.current)}</h1>
-        {fontSetStr !== 'fonts-' && <FontPresets {...fontPresetsProps} />}
+        {fontSetStr !== 'fonts-' && <FontShortlist {...fontShortlistProps} />}
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <h1>{doI18n("pages:core-settings:base_font", i18nRef.current)}</h1>

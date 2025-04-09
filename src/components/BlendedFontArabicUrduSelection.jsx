@@ -220,7 +220,7 @@ BlendedFontArabicUrduSelection.propTypes = {
   webFontsArabicUrdu: PropTypes.array.isRequired,
   /** Font Display Name for font-feature-settings heading */
   arabicUrduFontDisplayName: PropTypes.array.isRequired,
-  /** Set Font Display Name for font-feature-settings heading and presets */
+  /** Set Font Display Name for font-feature-settings heading and shortlist */
   setArabicUrduFontDisplayName: PropTypes.func.isRequired,
   /** Font Feature Settings Array (Options)*/
   ffsArr: PropTypes.array.isRequired, // Current unicode ranges always result in 'punc 2' (Latin); Removing that option for now (awamiFfsLessPunc)

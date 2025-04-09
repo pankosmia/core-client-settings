@@ -1,7 +1,7 @@
 import { PropTypes } from "prop-types";
 import { FormControlLabel, Radio } from "@mui/material";
 
-export default function FontPresetsCheckboxItem(fontCheckboxItemProps) {
+export default function FontShortlistCheckboxItem(fontCheckboxItemProps) {
   const { font, selectedFontClass, radioRightMargin, radioLeftMargin } = fontCheckboxItemProps;
 
   return (
@@ -15,7 +15,7 @@ export default function FontPresetsCheckboxItem(fontCheckboxItemProps) {
   );
 }
 
-FontPresetsCheckboxItem.propTypes = {
+FontShortlistCheckboxItem.propTypes = {
   font: PropTypes.shape({
     display_name: PropTypes.string,
     id: PropTypes.string,
