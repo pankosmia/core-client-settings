@@ -325,7 +325,7 @@ export default function FontPresets(fontPresetsProps) {
                 control={<Radio sx={{alignSelf: 'flex-start', padding: '1px 9px'}} />}
                 label={<Typography sx={labelStyle}>
                   <div className={selectedFontClass} style={{ fontSize: '100%'}}>
-                  {isCurrentDefault ? `${doI18n("pages:core-settings:current_settings", i18nRef.current)} (${doI18n("pages:core-settings:factory_settings", i18nRef.current)})` : `${doI18n("pages:core-settings:factory_reset", i18nRef.current)}`}:
+                  {isCurrentDefault ? `${doI18n("pages:core-settings:current_settings", i18nRef.current)} (${doI18n("pages:core-settings:factory_settings", i18nRef.current)})` : `${doI18n("pages:core-settings:factory_settings", i18nRef.current)}`}:
                     <div style={{margin: '0px 9px 6px 9px'}}>
                       {doI18n("pages:core-settings:base_font", i18nRef.current)}: Gentium Plus 6.200<br />
                       {doI18n("pages:core-settings:select_arabicurduscript", i18nRef.current)}: Awami Nastaliq 3.300*; {doI18n("pages:core-settings:select_myanmarscript", i18nRef.current)}: Padauk 5.100; {doI18n("pages:core-settings:select_greekscript", i18nRef.current)}: Cardo 1.0451; {doI18n("pages:core-settings:select_hebrewscript", i18nRef.current)}: Ezra SIL 2.51
