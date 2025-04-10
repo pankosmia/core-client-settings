@@ -150,7 +150,7 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
             <Box sx={{minWidth: 350}}>
               <Stack direction="row">
                 <FormControl fullWidth style={{maxWidth: 325}} size="small">
-                    <InputLabel id="select-arabic-urdu-font-label" htmlFor="select-arabic-urdu-font-id" sx={sx.inputLabel}>
+                    <InputLabel shrink={true} id="select-arabic-urdu-font-label" htmlFor="select-arabic-urdu-font-id" sx={sx.inputLabel}>
                       {doI18n("pages:core-settings:select_arabicurduscriptfont", i18nRef.current)}
                     </InputLabel>
                     <Select
@@ -160,6 +160,7 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
                         inputProps={{
                             id: "select-arabic-urdu-font-id",
                         }}
+                        displayEmpty={true}
                         value={selectedArabicUrduFontClassSubstr}
                         label={doI18n("pages:core-settings:select_arabicurduscriptfont", i18nRef.current)}
                         onChange={handleChangeArabicUrdu}

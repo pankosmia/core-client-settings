@@ -142,7 +142,7 @@ export default function BlendedFontGreekSelection(blendedFontGreekSelectionProps
             <Box sx={{minWidth: 350}}>
               <Stack direction="row">
                   <FormControl fullWidth style={{maxWidth: 325}} size="small">
-                      <InputLabel id="select-greek-font-label" htmlFor="select-greek-font-id" sx={sx.inputLabel}>
+                      <InputLabel shrink={true} id="select-greek-font-label" htmlFor="select-greek-font-id" sx={sx.inputLabel}>
                         {doI18n("pages:core-settings:select_greekscriptfont", i18nRef.current)}
                       </InputLabel>
                       <Select
@@ -152,6 +152,7 @@ export default function BlendedFontGreekSelection(blendedFontGreekSelectionProps
                           inputProps={{
                               id: "select-greek-font-id",
                           }}
+                          displayEmpty={true}
                           value={selectedGreekFontClassSubstr}
                           label={doI18n("pages:core-settings:select_greekscriptfont", i18nRef.current)}
                           onChange={handleChangeGreek}

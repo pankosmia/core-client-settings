@@ -139,7 +139,7 @@ export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionP
             <Box sx={{minWidth: 350}}>
               <Stack direction="row">
                 <FormControl fullWidth style={{maxWidth: 325}} size="small">
-                    <InputLabel id="select-myanmar-font-label" htmlFor="select-myanmar-font-id" sx={sx.inputLabel}>
+                    <InputLabel shrink={true} id="select-myanmar-font-label" htmlFor="select-myanmar-font-id" sx={sx.inputLabel}>
                       {doI18n("pages:core-settings:select_myanmarscriptfont", i18nRef.current)}
                     </InputLabel>
                     <Select
@@ -149,6 +149,7 @@ export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionP
                         inputProps={{
                             id: "select-myanmar-font-id",
                         }}
+                        displayEmpty={true}
                         value={selectedMyanmarFontClassSubstr}
                         label={doI18n("pages:core-settings:select_myanmarscriptfont", i18nRef.current)}
                         onChange={handleChangeMyanmar}

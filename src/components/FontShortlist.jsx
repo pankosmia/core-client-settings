@@ -1,10 +1,11 @@
 import { useState, useMemo, useEffect, useContext } from "react";
 
 import PropTypes from 'prop-types';
-import { Box, FormControl, Grid2, RadioGroup, Radio, FormControlLabel, Typography, FormHelperText, Divider } from "@mui/material";
+import { Box, FormControl, Grid2, RadioGroup, Radio, FormControlLabel, Typography, FormHelperText, Divider, MenuItem, Select, InputLabel, Stack } from "@mui/material";
 import { i18nContext as I18nContext, doI18n } from "pithekos-lib";
 
-import FontShortlistCheckboxItem from "./FontShortlistCheckboxItem";
+import FontShortlistMenuItem from "./FontShortlistMenuItem";
+import sx from "./Selection.styles";
 
 export default function FontShortlist(fontShortlistProps) {
   const { i18nRef } = useContext(I18nContext);
@@ -48,8 +49,17 @@ export default function FontShortlist(fontShortlistProps) {
       setSelectedMyanmarFontClassSubstr('Pankosmia-Padauk');
       setSelectedArabicUrduFontClassSubstr('Pankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrdu');
       setSelectedBaseFontClassSubstr('Pankosmia-GentiumPlus');
-    }
-  };
+      setBaseFfsId('Gentium Plus');
+      setBaseFontDisplayName('Gentium Plus 6.200');
+      setBaseFontName('Pankosmia-Gentium Plus');
+      // setArabicUrduFfsId('Awami Nastaliq');
+      setArabicUrduFontDisplayName('Awami Nastaliq 3.300*');
+      setArabicUrduFontName('Pankosmia-Awami Nastaliq');
+      setMyanmarFfsId('Padauk');
+      setMyanmarFontDisplayName('Padauk 5.100');
+      setMyanmarFontName('Pankosmia-Padauk');
+    };
+  }
 
   const [radioRightMargin, setRadioRightMargin] = useState('16px');
   const [radioLeftMargin, setRadioLeftMargin] = useState('-11px');
@@ -97,10 +107,7 @@ export default function FontShortlist(fontShortlistProps) {
   }
   const rangedSetString = rangedSet.join('; ');
 
-  const isArabicUrduSetDiff = selectedArabicUrduFontClassSubstr.toString() !== '' && webFontsArabicUrduShortlist.filter(item => item.id.includes(selectedArabicUrduFontClassSubstr)).length === 0;
-  const isBaseSetDiff = selectedBaseFontClassSubstr.toString() !== '' && webFontsBaseShortlist.filter(item => item.id.includes(selectedBaseFontClassSubstr)).length === 0;
-
-    const handleOnArabicUrduChange = (event) => {
+  const handleOnArabicUrduChange = (event) => {
     setSelectedArabicUrduFontClassSubstr(event.target.value);
     // const selectedArabicUrduSettingId = webFontsArabicUrduShortlist.filter((font) => font.id === event.target.value).map((font, index) => (font.settings_id));
     // setArabicUrduFfsId(selectedArabicUrduSettingId);
@@ -138,53 +145,41 @@ export default function FontShortlist(fontShortlistProps) {
     setBaseFontName(baseName);
   };
 
-  const fontShortlistCheckboxItemProps = {
+  const fontShortlistMenuItemProps = {
     selectedFontClass,
-    radioRightMargin, 
-    radioLeftMargin,
   };
   
   /** Build dropdown menus */
   const WebFontsArabicUrduShortlist =
     webFontsArabicUrduShortlist.map((font, index) => (
-      <div key={index} value={font.id} dense>
-          <FontShortlistCheckboxItem font={font} {...fontShortlistCheckboxItemProps}/>
-      </div>
+     <MenuItem key={index} value={font.id} dense>
+       <FontShortlistMenuItem font={font} {...fontShortlistMenuItemProps}/>
+     </MenuItem>
   ));
   const WebFontsMyanmarShortlist =
     webFontsMyanmarShortlist.map((font, index) => (
-      <div key={index} value={font.id} dense>
-          <FontShortlistCheckboxItem font={font} {...fontShortlistCheckboxItemProps}/>
-      </div>
+     <MenuItem key={index} value={font.id} dense>
+      <FontShortlistMenuItem font={font} {...fontShortlistMenuItemProps}/>
+     </MenuItem>
   ));
   const WebFontsGreekShortlist =
-  webFontsGreekShortlist.map((font, index) => (
-      <div key={index} value={font.id} dense>
-          <FontShortlistCheckboxItem font={font} {...fontShortlistCheckboxItemProps}/>
-      </div>
+    webFontsGreekShortlist.map((font, index) => (
+      <MenuItem key={index} value={font.id} dense>
+        <FontShortlistMenuItem font={font} {...fontShortlistMenuItemProps}/>
+      </MenuItem>
   ));
   const WebFontsHebrewShortlist =
-  webFontsHebrewShortlist.map((font, index) => (
-      <div key={index} value={font.id} dense>
-          <FontShortlistCheckboxItem font={font} {...fontShortlistCheckboxItemProps}/>
-      </div>
+    webFontsHebrewShortlist.map((font, index) => (
+      <MenuItem key={index} value={font.id} dense>
+        <FontShortlistMenuItem font={font} {...fontShortlistMenuItemProps}/>
+      </MenuItem>
   ));
   const WebFontsBaseShortlist =
-  webFontsBaseShortlist.map((font, index) => (
-      <div key={index} value={font.id} dense>
-          <FontShortlistCheckboxItem font={font} {...fontShortlistCheckboxItemProps}/>
-      </div>
+    webFontsBaseShortlist.map((font, index) => (
+      <MenuItem key={index} value={font.id} dense>
+        <FontShortlistMenuItem font={font} {...fontShortlistMenuItemProps}/>
+      </MenuItem>
   ));
-  const none = (label) => 
-    (<div>
-      <FormControlLabel
-        sx={{marginRight: radioRightMargin, marginLeft: radioLeftMargin}} 
-        value={''}
-        style={{}}
-        control={<Radio sx={{alignSelf: 'flex-start', padding: '1px 9px'}} />}
-        label=<div className={selectedFontClass} style={{ fontSize: '100%'}}>{label}</div>
-      />
-    </div>);
 
   return (
     <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
@@ -193,102 +188,120 @@ export default function FontShortlist(fontShortlistProps) {
           <Grid2 item>
             <div className={selectedFontClass} style={{ fontSize: '100%'}}>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{display: 'flex', flexDirection: 'row', padding: '0px 9px', whiteSpace:'nowrap'}}>
-                  <div style={{fontWeight: 'bold'}}>
+                <FormControl fullWidth style={{maxWidth: 400}} size="small">
+                  <InputLabel id="select-base-font-label" htmlFor="select-base-font-id" sx={sx.inputLabel}>
                     {doI18n("pages:core-settings:base_font", i18nRef.current)}
-                  </div>
-                  <div style={{padding: '0px 2px', fontWeight: 'normal'}}>
-                    {isBaseSetDiff && `(${baseFontDisplayName}):`}
-                  </div>
-                </div>
-                <RadioGroup
-                  row={true}
-                  aria-labelledby='baseScript-label'
-                  defaultValue={selectedBaseFontClassSubstr.toString()}
-                  value={selectedBaseFontClassSubstr.toString()}
-                  name='baseScript'
-                  onChange={handleOnBaseChange}
-                  sx={radioColor}
-                >
-                  {WebFontsBaseShortlist}
-                </RadioGroup>
+                  </InputLabel>
+                  <Select
+                      variant="outlined"
+                      labelId="select-base-font-label"
+                      name="select-base-font-name"
+                      inputProps={{
+                          id: "select-base-font-id",
+                      }}
+                      value={selectedBaseFontClassSubstr.toString()}
+                      label={doI18n("pages:core-settings:base_font", i18nRef.current)}
+                      onChange={handleOnBaseChange}
+                      sx={sx.select}
+                  >
+                    {WebFontsBaseShortlist}
+                  </Select>
+                </FormControl>
               </div>
               <br />
               <div style={{padding: '0px 9px'}}>
                 <Divider />
                 <br />
-                <div style={{ display: 'flex', flexDirection: 'row' }}>
-                  <div style={{display: 'flex', flexDirection: 'row', padding: '0px 9px', whiteSpace:'nowrap'}}>
-                    <div style={{fontWeight: 'bold'}}>
-                      {doI18n("pages:core-settings:select_arabicurduscript", i18nRef.current)}
-                    </div>
-                    <div style={{padding: '0px 2px', fontWeight: 'normal'}}>
-                    {isArabicUrduSetDiff && `(${arabicUrduFontDisplayName}):`}
-                    </div>
+                <Stack direction="column" spacing={2}>
+                  <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    <FormControl fullWidth style={{maxWidth: 400}} size="small">
+                      <InputLabel shrink={true} id="select-arabic-urdu-font-label" htmlFor="select-arabic-urdu-font-id" sx={sx.inputLabel}>
+                        {doI18n("pages:core-settings:select_arabicurduscriptfont", i18nRef.current)}
+                      </InputLabel>
+                      <Select
+                          variant="outlined"
+                          labelId="select-arabic-urdu-font-label"
+                          name="select-arabic-urdu-font-name"
+                          inputProps={{
+                              id: "select-arabic-urdu-font-id",
+                          }}
+                          displayEmpty={true}
+                          value={selectedArabicUrduFontClassSubstr.toString()}
+                          label={doI18n("pages:core-settings:select_arabicurduscriptfont", i18nRef.current)}
+                          onChange={handleOnArabicUrduChange}
+                          sx={sx.select}
+                      >
+                        {WebFontsArabicUrduShortlist}
+                      </Select>
+                    </FormControl>
                   </div>
-                  <RadioGroup
-                    row={true}
-                    defaultValue={selectedArabicUrduFontClassSubstr.toString()}
-                    value={selectedArabicUrduFontClassSubstr.toString()}
-                    name='arabicUrduScript'
-                    onChange={handleOnArabicUrduChange}
-                    sx={radioColor}
-                  >
-                    {WebFontsArabicUrduShortlist}
-                    {none(`${doI18n("pages:core-settings:base_font", i18nRef.current)} (${doI18n("pages:core-settings:currently", i18nRef.current)}: ${baseFontDisplayName})`)}
-                  </RadioGroup>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'row' }}>
-                  <div style={{padding: '0px 9px', fontWeight: 'bold'}}>
-                    {doI18n("pages:core-settings:select_myanmarscript", i18nRef.current)}
+                  <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    <FormControl fullWidth style={{maxWidth: 400}} size="small">
+                      <InputLabel shrink={true} id="select-myanmar-font-label" htmlFor="select-myanmar-font-id" sx={sx.inputLabel}>
+                        {doI18n("pages:core-settings:select_myanmarscriptfont", i18nRef.current)}
+                      </InputLabel>
+                      <Select
+                          variant="outlined"
+                          labelId="select-myanmar-font-label"
+                          name="select-myanmar-font-name"
+                          inputProps={{
+                              id: "select-myanmar-font-id",
+                          }}
+                          displayEmpty={true}
+                          value={selectedMyanmarFontClassSubstr.toString()}
+                          label={doI18n("pages:core-settings:select_myanmarscriptfont", i18nRef.current)}
+                          onChange={handleOnMyanmarChange}
+                          sx={sx.select}
+                      >
+                        {WebFontsMyanmarShortlist}
+                      </Select>
+                    </FormControl>
                   </div>
-                  <RadioGroup
-                    row={true}
-                    aria-labelledby='myanmarScript-label'
-                    defaultValue={selectedMyanmarFontClassSubstr.toString()}
-                    value={selectedMyanmarFontClassSubstr.toString()}
-                    name='myanmarScript'
-                    onChange={handleOnMyanmarChange}
-                    sx={radioColor}
-                  >
-                    {WebFontsMyanmarShortlist}
-                    {none(`${doI18n("pages:core-settings:base_font", i18nRef.current)} (${doI18n("pages:core-settings:currently", i18nRef.current)}: ${baseFontDisplayName})`)}
-                  </RadioGroup>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'row' }}>
-                  <div style={{padding: '0px 9px', fontWeight: 'bold'}}>
-                    {doI18n("pages:core-settings:select_greekscript", i18nRef.current)}
+                  <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    <FormControl fullWidth style={{maxWidth: 400}} size="small">
+                      <InputLabel shrink={true} id="select-greek-font-label" htmlFor="select-greek-font-id" sx={sx.inputLabel}>
+                        {doI18n("pages:core-settings:select_greekscriptfont", i18nRef.current)}
+                      </InputLabel>
+                      <Select
+                          variant="outlined"
+                          labelId="select-greek-font-label"
+                          name="select-greek-font-name"
+                          inputProps={{
+                              id: "select-greek-font-id",
+                          }}
+                          displayEmpty={true}
+                          value={selectedGreekFontClassSubstr.toString()}
+                          label={doI18n("pages:core-settings:select_greekscriptfont", i18nRef.current)}
+                          onChange={handleOnGreekChange}
+                          sx={sx.select}
+                      >
+                        {WebFontsGreekShortlist}
+                      </Select>
+                    </FormControl>
                   </div>
-                  <RadioGroup
-                    row={true}
-                    aria-labelledby='greekScript-label'
-                    defaultValue={selectedGreekFontClassSubstr.toString()}
-                    value={selectedGreekFontClassSubstr.toString()}
-                    name='greekScript'
-                    onChange={handleOnGreekChange}
-                    sx={radioColor}
-                  >
-                    {WebFontsGreekShortlist}
-                    {none(`${doI18n("pages:core-settings:base_font", i18nRef.current)} (${doI18n("pages:core-settings:currently", i18nRef.current)}: ${baseFontDisplayName})`)}
-                  </RadioGroup>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'row' }}>
-                  <div style={{padding: '0px 9px', fontWeight: 'bold'}}>
-                    {doI18n("pages:core-settings:select_hebrewscript", i18nRef.current)}
+                  <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    <FormControl fullWidth style={{maxWidth: 400}} size="small">
+                      <InputLabel shrink={true} id="select-hebrew-font-label" htmlFor="select-hebrew-font-id" sx={sx.inputLabel}>
+                        {doI18n("pages:core-settings:select_hebrewscriptfont", i18nRef.current)}
+                      </InputLabel>
+                      <Select
+                          variant="outlined"
+                          labelId="select-hebrew-font-label"
+                          name="select-hebrew-font-name"
+                          inputProps={{
+                              id: "select-hebrew-font-id",
+                          }}
+                          displayEmpty={true}
+                          value={selectedHebrewFontClassSubstr.toString()}
+                          label={doI18n("pages:core-settings:select_hebrewscriptfont", i18nRef.current)}
+                          onChange={handleOnHebrewChange}
+                          sx={sx.select}
+                      >
+                        {WebFontsHebrewShortlist}
+                      </Select>
+                    </FormControl>
                   </div>
-                  <RadioGroup
-                    row={true}
-                    aria-labelledby='hebrewScript-label'
-                    defaultValue={selectedHebrewFontClassSubstr.toString()}
-                    value={selectedHebrewFontClassSubstr.toString()}
-                    name='hebrewScript'
-                    onChange={handleOnHebrewChange}
-                    sx={radioColor}
-                  >
-                    {WebFontsHebrewShortlist}
-                    {none(`${doI18n("pages:core-settings:base_font", i18nRef.current)} (${doI18n("pages:core-settings:currently", i18nRef.current)}: ${baseFontDisplayName})`)}
-                  </RadioGroup>
-                </div>
+                </Stack>
               </div>
             </div>
             <br />

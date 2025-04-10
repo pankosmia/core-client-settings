@@ -145,7 +145,7 @@ export default function BlendedFontHebrewSelection(blendedFontHebrewSelectionPro
             <Box sx={{minWidth: 350}}>
               <Stack direction="row">
                 <FormControl fullWidth style={{maxWidth: 325}} size="small">
-                    <InputLabel id="select-hebrew-font-label" htmlFor="select-hebrew-font-id" sx={sx.inputLabel}>
+                    <InputLabel shrink={true} id="select-hebrew-font-label" htmlFor="select-hebrew-font-id" sx={sx.inputLabel}>
                       {doI18n("pages:core-settings:select_hebrewscriptfont", i18nRef.current)}
                     </InputLabel>
                     <Select
@@ -155,6 +155,7 @@ export default function BlendedFontHebrewSelection(blendedFontHebrewSelectionPro
                         inputProps={{
                             id: "select-hebrew-font-id",
                         }}
+                        displayEmpty={true}
                         value={selectedHebrewFontClassSubstr}
                         label={doI18n("pages:core-settings:select_hebrewscriptfont", i18nRef.current)}
                         onChange={handleChangeHebrew}

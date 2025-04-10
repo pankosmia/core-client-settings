@@ -139,7 +139,7 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
   const showBaseFeatures = baseFfsArr.length > 0;
   const showBaseCss = baseFontSettings.length > 0 && selectedBaseFontClassSubstr.length !== 0;
 
-  // Add Gentium Plus if "baseFontName" is not 'Panksomia-Gentium Plus' or 'Pankosmia-Gentium Book Plus'.
+  // Add Gentium Plus if "baseFontName" is not 'Pankosmia-Gentium Plus' or 'Pankosmia-Gentium Book Plus'.
   const baseExampleFontName = baseFontName.toString().includes('Pankosmia-Gentium') ? baseFontName : `${baseFontName}, 'Pankosmia-Gentium Plus'`;
 
   return (
