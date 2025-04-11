@@ -2,9 +2,11 @@ import { useContext, Fragment } from "react";
 
 import PropTypes from 'prop-types';
 import { Box, FormControl, Grid2, MenuItem, Select, InputLabel, Stack, Tooltip } from "@mui/material";
+import InfoIcon from '@mui/icons-material/Info';
+import WarningSharpIcon from '@mui/icons-material/WarningSharp';
 import RestoreIcon from '@mui/icons-material/Restore';
-import EmergencyIcon from '@mui/icons-material/Emergency';
 import { i18nContext as I18nContext, doI18n } from "pithekos-lib";
+import { useAssumeGraphite } from "font-detect-rhl";
 
 import FontShortlistMenuItem from "./FontShortlistMenuItem";
 import sx from "./Selection.styles";
@@ -58,7 +60,7 @@ export default function FontShortlist(fontShortlistProps) {
   const handleClickArabicUrdu = () => {
     setSelectedArabicUrduFontClassSubstr('Pankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrdu');
     // setArabicUrduFfsId('Awami Nastaliq');
-    setArabicUrduFontDisplayName('Awami Nastaliq 3.300*');
+    setArabicUrduFontDisplayName('Awami Nastaliq 3.300');
     setArabicUrduFontName('Pankosmia-Awami Nastaliq');
   };
 
@@ -122,6 +124,9 @@ export default function FontShortlist(fontShortlistProps) {
   const isMyanmarDefault = selectedMyanmarFontClassSubstr.toString() === "Pankosmia-Padauk";
 
   const isAwami = selectedArabicUrduFontClassSubstr.toString() !== '' && selectedArabicUrduFontClassSubstr.toString() !== 'Pankosmia-NotoNaskhArabic';
+
+  /** Awami Nastaliq requires Graphite, and Padauk has some Graphite-only features. */
+  const isGraphiteAssumed = useAssumeGraphite({}); // Tests for Firefox; A different test can show if Graphite is enabled.
 
   const fontShortlistMenuItemProps = {
     selectedFontClass,
@@ -192,7 +197,7 @@ export default function FontShortlist(fontShortlistProps) {
                       placement="right"
                       arrow
                     >
-                      <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto' }} onClick={handleClickBase} />
+                      <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickBase} />
                     </Tooltip>}
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
@@ -222,7 +227,7 @@ export default function FontShortlist(fontShortlistProps) {
                       placement="right"
                       arrow
                     >
-                      <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto' }} onClick={handleClickGreek} />
+                      <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickGreek} />
                     </Tooltip>}
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
@@ -252,7 +257,7 @@ export default function FontShortlist(fontShortlistProps) {
                       placement="right"
                       arrow
                     >
-                      <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto' }} onClick={handleClickHebrew} />
+                      <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickHebrew} />
                     </Tooltip>}
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
@@ -278,11 +283,11 @@ export default function FontShortlist(fontShortlistProps) {
                   </FormControl>
                   {!isArabicUrduDefault &&  
                     <Tooltip 
-                      title="Awami Nastaliq 3.300*"
+                      title="Awami Nastaliq 3.300"
                       placement="right"
                       arrow
                     >
-                      <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto' }} onClick={handleClickArabicUrdu} />
+                      <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickArabicUrdu} />
                     </Tooltip>
                   }
                   {isAwami &&
@@ -290,9 +295,14 @@ export default function FontShortlist(fontShortlistProps) {
                       title={doI18n("pages:core-settings:replaceawamiifnotfirefox", i18nRef.current)}
                       placement="right"
                     >
-                      <EmergencyIcon sx={{ fontSize: 10 }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} />
+                      { isGraphiteAssumed ?
+                        <InfoIcon style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} />
+                        :
+                        <WarningSharpIcon style={{ color: 'yellow', background: 'black', margin: 'auto 9px' }} />
+                      }
                     </Tooltip>
                   }
+                  {isAwami && !isGraphiteAssumed && <div className={selectedFontClass} style={{margin: 'auto 0',fontSize: '100%' }}>{doI18n("pages:core-settings:best_with", i18nRef.current)}</div>}
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                   <FormControl fullWidth style={{maxWidth: 400, minWidth: 400}} size="small">
@@ -321,7 +331,7 @@ export default function FontShortlist(fontShortlistProps) {
                       placement="right"
                       arrow
                     >
-                      <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto' }} onClick={handleClickMyanmar} />
+                      <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickMyanmar} />
                     </Tooltip>}
                 </div>
                 <div className={selectedFontClass} style={{ display: 'flex', flexDirection: 'row', fontSize: '100%' }}>
@@ -332,7 +342,7 @@ export default function FontShortlist(fontShortlistProps) {
                             {doI18n("pages:core-settings:base_font", i18nRef.current)}: Gentium Plus 6.200<br /><br />
                             {doI18n("pages:core-settings:select_greekscript", i18nRef.current)}: Cardo 1.0451<br /><br />
                             {doI18n("pages:core-settings:select_hebrewscript", i18nRef.current)}: Ezra SIL 2.51<br /><br />
-                            {doI18n("pages:core-settings:select_arabicurduscript", i18nRef.current)}: Awami Nastaliq 3.300*<br /><br />
+                            {doI18n("pages:core-settings:select_arabicurduscript", i18nRef.current)}: Awami Nastaliq 3.300<br /><br />
                             {doI18n("pages:core-settings:select_myanmarscript", i18nRef.current)}: Padauk 5.100
                         </Fragment>
                       }

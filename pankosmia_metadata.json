@@ -100,6 +100,11 @@
       "en": "Factory Settings",
       "fr": "Paramètres d'usine",
       "id": "Pengaturan Pabrik"
+    },
+    "best_with": {
+      "en": "Best viewed with Firefox.",
+      "fr": "Mieux vu avec Firefox.",
+      "id": "Terbaik dengan Firefox."
     }
   }
 }

@@ -129,10 +129,10 @@ export default function BlendedFontsPage() {
   useEffect(() => {
     if (!webFontsArabicUrdu.length || !baseFontDisplayName.length || prevBaseFontDisplayName !== baseFontDisplayName|| !arabicUrduFontDisplayName.length || prevArabicUrduFontDisplayName !== arabicUrduFontDisplayName) {
       setWebFontsArabicUrdu([
-        { display_name: 'Awami Nastaliq 3.300*', id: 'Pankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq', settings_id: 'Awami Nastaliq', shortlist: true, example: 'مثال'},
-        { display_name: 'Awami Nastaliq Medium 3.300*', id: 'Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Medium', settings_id: 'Awami Nastaliq', shortlist: arabicUrduFontDisplayName.toString() === 'Awami Nastaliq Medium 3.300*', example: 'مثال' },
-        { display_name: 'Awami Nastaliq Semi Bold 3.300*', id: 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Semi Bold', settings_id: 'Awami Nastaliq', shortlist: arabicUrduFontDisplayName.toString() === 'Awami Nastaliq Semi Bold 3.300*', example: 'مثال' },
-        { display_name: 'Awami Nastaliq Extra Bold 3.300*', id: 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Extra Bold', settings_id: 'Awami Nastaliq', shortlist: arabicUrduFontDisplayName.toString() === 'Awami Nastaliq Extra Bold 3.300*', example: 'مثال' },
+        { display_name: 'Awami Nastaliq 3.300', id: 'Pankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq', settings_id: 'Awami Nastaliq', shortlist: true, example: 'مثال'},
+        { display_name: 'Awami Nastaliq Medium 3.300', id: 'Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Medium', settings_id: 'Awami Nastaliq', shortlist: arabicUrduFontDisplayName.toString() === 'Awami Nastaliq Medium 3.300', example: 'مثال' },
+        { display_name: 'Awami Nastaliq Semi Bold 3.300', id: 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Semi Bold', settings_id: 'Awami Nastaliq', shortlist: arabicUrduFontDisplayName.toString() === 'Awami Nastaliq Semi Bold 3.300', example: 'مثال' },
+        { display_name: 'Awami Nastaliq Extra Bold 3.300', id: 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Extra Bold', settings_id: 'Awami Nastaliq', shortlist: arabicUrduFontDisplayName.toString() === 'Awami Nastaliq Extra Bold 3.300', example: 'مثال' },
         { display_name: 'Noto Naskh Arabic 2.018', id: 'Pankosmia-NotoNaskhArabic', name: 'Pankosmia-Noto Naskh Arabic', settings_id: '', shortlist: true, example: 'مثال' },
         { display_name: `${doI18n("pages:core-settings:base_font", i18nRef.current)} (${baseFontDisplayName})`, id: '', name: '', settings_id: '', shortlist: true, example: 'مثال' },
       ]);
