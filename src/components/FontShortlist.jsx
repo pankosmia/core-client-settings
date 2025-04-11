@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect, useContext } from "react";
 
 import PropTypes from 'prop-types';
-import { Box, FormControl, Grid2, RadioGroup, Radio, FormControlLabel, Typography, FormHelperText, Divider, MenuItem, Select, InputLabel, Stack } from "@mui/material";
+import { Box, FormControl, Grid2, RadioGroup, Radio, FormControlLabel, Typography, FormHelperText, MenuItem, Select, InputLabel, Stack } from "@mui/material";
 import { i18nContext as I18nContext, doI18n } from "pithekos-lib";
 
 import FontShortlistMenuItem from "./FontShortlistMenuItem";
@@ -187,126 +187,118 @@ export default function FontShortlist(fontShortlistProps) {
         <Grid2 container sx={{}}>
           <Grid2 item>
             <div className={selectedFontClass} style={{ fontSize: '100%'}}>
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <FormControl fullWidth style={{maxWidth: 400}} size="small">
-                  <InputLabel id="select-base-font-label" htmlFor="select-base-font-id" sx={sx.inputLabel}>
-                    {doI18n("pages:core-settings:base_font", i18nRef.current)}
-                  </InputLabel>
-                  <Select
-                      variant="outlined"
-                      labelId="select-base-font-label"
-                      name="select-base-font-name"
-                      inputProps={{
-                          id: "select-base-font-id",
-                      }}
-                      value={selectedBaseFontClassSubstr.toString()}
-                      label={doI18n("pages:core-settings:base_font", i18nRef.current)}
-                      onChange={handleOnBaseChange}
-                      sx={sx.select}
-                  >
-                    {WebFontsBaseShortlist}
-                  </Select>
-                </FormControl>
-              </div>
-              <br />
-              <div style={{padding: '0px 9px'}}>
-                <Divider />
-                <br />
-                <Stack direction="column" spacing={2}>
-                  <div style={{ display: 'flex', flexDirection: 'row' }}>
-                    <FormControl fullWidth style={{maxWidth: 400}} size="small">
-                      <InputLabel shrink={true} id="select-arabic-urdu-font-label" htmlFor="select-arabic-urdu-font-id" sx={sx.inputLabel}>
-                        {doI18n("pages:core-settings:select_arabicurduscriptfont", i18nRef.current)}
-                      </InputLabel>
-                      <Select
-                          variant="outlined"
-                          labelId="select-arabic-urdu-font-label"
-                          name="select-arabic-urdu-font-name"
-                          inputProps={{
-                              id: "select-arabic-urdu-font-id",
-                          }}
-                          displayEmpty={true}
-                          value={selectedArabicUrduFontClassSubstr.toString()}
-                          label={doI18n("pages:core-settings:select_arabicurduscriptfont", i18nRef.current)}
-                          onChange={handleOnArabicUrduChange}
-                          sx={sx.select}
-                      >
-                        {WebFontsArabicUrduShortlist}
-                      </Select>
-                    </FormControl>
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'row' }}>
-                    <FormControl fullWidth style={{maxWidth: 400}} size="small">
-                      <InputLabel shrink={true} id="select-myanmar-font-label" htmlFor="select-myanmar-font-id" sx={sx.inputLabel}>
-                        {doI18n("pages:core-settings:select_myanmarscriptfont", i18nRef.current)}
-                      </InputLabel>
-                      <Select
-                          variant="outlined"
-                          labelId="select-myanmar-font-label"
-                          name="select-myanmar-font-name"
-                          inputProps={{
-                              id: "select-myanmar-font-id",
-                          }}
-                          displayEmpty={true}
-                          value={selectedMyanmarFontClassSubstr.toString()}
-                          label={doI18n("pages:core-settings:select_myanmarscriptfont", i18nRef.current)}
-                          onChange={handleOnMyanmarChange}
-                          sx={sx.select}
-                      >
-                        {WebFontsMyanmarShortlist}
-                      </Select>
-                    </FormControl>
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'row' }}>
-                    <FormControl fullWidth style={{maxWidth: 400}} size="small">
-                      <InputLabel shrink={true} id="select-greek-font-label" htmlFor="select-greek-font-id" sx={sx.inputLabel}>
-                        {doI18n("pages:core-settings:select_greekscriptfont", i18nRef.current)}
-                      </InputLabel>
-                      <Select
-                          variant="outlined"
-                          labelId="select-greek-font-label"
-                          name="select-greek-font-name"
-                          inputProps={{
-                              id: "select-greek-font-id",
-                          }}
-                          displayEmpty={true}
-                          value={selectedGreekFontClassSubstr.toString()}
-                          label={doI18n("pages:core-settings:select_greekscriptfont", i18nRef.current)}
-                          onChange={handleOnGreekChange}
-                          sx={sx.select}
-                      >
-                        {WebFontsGreekShortlist}
-                      </Select>
-                    </FormControl>
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'row' }}>
-                    <FormControl fullWidth style={{maxWidth: 400}} size="small">
-                      <InputLabel shrink={true} id="select-hebrew-font-label" htmlFor="select-hebrew-font-id" sx={sx.inputLabel}>
-                        {doI18n("pages:core-settings:select_hebrewscriptfont", i18nRef.current)}
-                      </InputLabel>
-                      <Select
-                          variant="outlined"
-                          labelId="select-hebrew-font-label"
-                          name="select-hebrew-font-name"
-                          inputProps={{
-                              id: "select-hebrew-font-id",
-                          }}
-                          displayEmpty={true}
-                          value={selectedHebrewFontClassSubstr.toString()}
-                          label={doI18n("pages:core-settings:select_hebrewscriptfont", i18nRef.current)}
-                          onChange={handleOnHebrewChange}
-                          sx={sx.select}
-                      >
-                        {WebFontsHebrewShortlist}
-                      </Select>
-                    </FormControl>
-                  </div>
-                </Stack>
-              </div>
+              <Stack direction="column" spacing={2}>
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                  <FormControl fullWidth style={{maxWidth: 400}} size="small">
+                    <InputLabel id="select-base-font-label" htmlFor="select-base-font-id" sx={sx.inputLabel}>
+                      {doI18n("pages:core-settings:base_font", i18nRef.current)}
+                    </InputLabel>
+                    <Select
+                        variant="outlined"
+                        labelId="select-base-font-label"
+                        name="select-base-font-name"
+                        inputProps={{
+                            id: "select-base-font-id",
+                        }}
+                        value={selectedBaseFontClassSubstr.toString()}
+                        label={doI18n("pages:core-settings:base_font", i18nRef.current)}
+                        onChange={handleOnBaseChange}
+                        sx={sx.select}
+                    >
+                      {WebFontsBaseShortlist}
+                    </Select>
+                  </FormControl>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                  <FormControl fullWidth style={{maxWidth: 400}} size="small">
+                    <InputLabel shrink={true} id="select-greek-font-label" htmlFor="select-greek-font-id" sx={sx.inputLabel}>
+                      {doI18n("pages:core-settings:select_greekscriptfont", i18nRef.current)}
+                    </InputLabel>
+                    <Select
+                        variant="outlined"
+                        labelId="select-greek-font-label"
+                        name="select-greek-font-name"
+                        inputProps={{
+                            id: "select-greek-font-id",
+                        }}
+                        displayEmpty={true}
+                        value={selectedGreekFontClassSubstr.toString()}
+                        label={doI18n("pages:core-settings:select_greekscriptfont", i18nRef.current)}
+                        onChange={handleOnGreekChange}
+                        sx={sx.select}
+                    >
+                      {WebFontsGreekShortlist}
+                    </Select>
+                  </FormControl>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                  <FormControl fullWidth style={{maxWidth: 400}} size="small">
+                    <InputLabel shrink={true} id="select-hebrew-font-label" htmlFor="select-hebrew-font-id" sx={sx.inputLabel}>
+                      {doI18n("pages:core-settings:select_hebrewscriptfont", i18nRef.current)}
+                    </InputLabel>
+                    <Select
+                        variant="outlined"
+                        labelId="select-hebrew-font-label"
+                        name="select-hebrew-font-name"
+                        inputProps={{
+                            id: "select-hebrew-font-id",
+                        }}
+                        displayEmpty={true}
+                        value={selectedHebrewFontClassSubstr.toString()}
+                        label={doI18n("pages:core-settings:select_hebrewscriptfont", i18nRef.current)}
+                        onChange={handleOnHebrewChange}
+                        sx={sx.select}
+                    >
+                      {WebFontsHebrewShortlist}
+                    </Select>
+                  </FormControl>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                  <FormControl fullWidth style={{maxWidth: 400}} size="small">
+                    <InputLabel shrink={true} id="select-arabic-urdu-font-label" htmlFor="select-arabic-urdu-font-id" sx={sx.inputLabel}>
+                      {doI18n("pages:core-settings:select_arabicurduscriptfont", i18nRef.current)}
+                    </InputLabel>
+                    <Select
+                        variant="outlined"
+                        labelId="select-arabic-urdu-font-label"
+                        name="select-arabic-urdu-font-name"
+                        inputProps={{
+                            id: "select-arabic-urdu-font-id",
+                        }}
+                        displayEmpty={true}
+                        value={selectedArabicUrduFontClassSubstr.toString()}
+                        label={doI18n("pages:core-settings:select_arabicurduscriptfont", i18nRef.current)}
+                        onChange={handleOnArabicUrduChange}
+                        sx={sx.select}
+                    >
+                      {WebFontsArabicUrduShortlist}
+                    </Select>
+                  </FormControl>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                  <FormControl fullWidth style={{maxWidth: 400}} size="small">
+                    <InputLabel shrink={true} id="select-myanmar-font-label" htmlFor="select-myanmar-font-id" sx={sx.inputLabel}>
+                      {doI18n("pages:core-settings:select_myanmarscriptfont", i18nRef.current)}
+                    </InputLabel>
+                    <Select
+                        variant="outlined"
+                        labelId="select-myanmar-font-label"
+                        name="select-myanmar-font-name"
+                        inputProps={{
+                            id: "select-myanmar-font-id",
+                        }}
+                        displayEmpty={true}
+                        value={selectedMyanmarFontClassSubstr.toString()}
+                        label={doI18n("pages:core-settings:select_myanmarscriptfont", i18nRef.current)}
+                        onChange={handleOnMyanmarChange}
+                        sx={sx.select}
+                    >
+                      {WebFontsMyanmarShortlist}
+                    </Select>
+                  </FormControl>
+                </div>
+              </Stack>
             </div>
-            <br />
-            <Divider />
-            <br />
             <RadioGroup
               aria-labelledby='baseFont-label'
               defaultValue='current'
@@ -347,8 +339,6 @@ export default function FontShortlist(fontShortlistProps) {
                 </Typography>}
               />
             </RadioGroup>
-            <br />
-            <Divider />
             <FormHelperText>
               {doI18n("pages:core-settings:replaceawamiifnotfirefox", i18nRef.current)}
             </FormHelperText>
