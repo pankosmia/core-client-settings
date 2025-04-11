@@ -266,6 +266,8 @@ export default function BlendedFontsPage() {
     { name: 'Base', id: 'base', unicode_range: '' },
   ];
 
+  const isCurrentDefault = selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrduPankosmia-GentiumPlus";
+
   const fontShortlistProps = {
     selectedFontClass,
     selectedBaseFontClassSubstr,
@@ -297,6 +299,7 @@ export default function BlendedFontsPage() {
     webFontsGreekShortlist: webFontsGreek.filter(font => font.shortlist),
     webFontsHebrewShortlist: webFontsHebrew.filter(font => font.shortlist),
     webFontsBaseShortlist: webFontsBase.filter(font => font.shortlist),
+    isCurrentDefault,
   };
 
   /** ArabicUrdu props patterns differ. */
@@ -390,7 +393,7 @@ export default function BlendedFontsPage() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <h1>{doI18n("pages:core-settings:current_settings", i18nRef.current)}</h1>
+        <h1>{doI18n("pages:core-settings:current_settings", i18nRef.current)}{isCurrentDefault && ` (${doI18n("pages:core-settings:factory_settings", i18nRef.current)})`}</h1>
         {fontSetStr !== 'fonts-' && <FontShortlist {...fontShortlistProps} />}
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
