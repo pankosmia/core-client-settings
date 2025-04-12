@@ -168,7 +168,7 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
                     >
                       {WebFontsSelectableArabicUrdu}
                     </Select>
-                    <FormHelperText>{selectedArabicUrduFontClassSubstr.includes('AwamiNastaliq') && doI18n("pages:core-settings:replaceawamiifnotfirefox", i18nRef.current)}</FormHelperText>
+                    <FormHelperText>{selectedArabicUrduFontClassSubstr.includes('AwamiNastaliq') && doI18n("pages:core-settings:replace_awami", i18nRef.current)}</FormHelperText>
                 </FormControl>
                 {showArabicUrduFeatures && <FontFeaturesArabicUrdu {...fontFeaturesArabicUrduProps} />}
               </Stack>

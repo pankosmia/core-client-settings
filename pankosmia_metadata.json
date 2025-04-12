@@ -86,10 +86,15 @@
       "id": "Fon Aksara Arab / Urdu",
       "grc": "Ἀραϐικὰ γράμματα"
     },
-    "replaceawamiifnotfirefox": {
-      "en": "* Noto Nastaliq Urdu 4.000 if browser is not Firefox",
-      "fr": "* Noto Nastaliq Urdu 4.000 si navigateur n'est pas Firefox",
-      "id": "* Noto Nastaliq Urdu 4.000 ketika peramban web bukan Firefox"
+    "replace_awami": {
+      "en": "Noto Nastaliq Urdu if your browser is not Firefox",
+      "fr": "Noto Nastaliq Urdu si votre navigateur n'est pas Firefox",
+      "id": "Noto Nastaliq Urdu jika peramban web anda bukan Firefox"
+    },
+    "replace_noto": {
+      "en": "Replaced with Awami Nastaliq in Firefox",
+      "fr": "Remplacé par Awami Nastaliq dans Firefox",
+      "id": "Diganti dengan Awami Nastaliq di Firefox"
     },
     "current_settings": {
       "en": "Current Settings",
@@ -105,6 +110,11 @@
       "en": "Best viewed with Firefox.",
       "fr": "Mieux vu avec Firefox.",
       "id": "Terbaik dengan Firefox."
+    },
+    "if_not_firefox": {
+      "en": "Noto Nastaliq if not Firefox",
+      "fr": "Noto Nastaliq sinon Firefox",
+      "id": "Noto Nastaliq jika bukan Firefox"
     }
   }
 }

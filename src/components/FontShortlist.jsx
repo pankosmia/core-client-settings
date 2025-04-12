@@ -164,6 +164,8 @@ export default function FontShortlist(fontShortlistProps) {
       </MenuItem>
   ));
 
+  console.log(selectedArabicUrduFontClassSubstr.toString());
+
   return (
     <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
       <FormControl  component="fieldset">
@@ -193,7 +195,7 @@ export default function FontShortlist(fontShortlistProps) {
                   </FormControl>
                   {!isBaseDefault &&  
                     <Tooltip
-                      title="Gentium Plus 6.200"
+                      title="Gentium Plus"
                       placement="right"
                       arrow
                     >
@@ -223,7 +225,7 @@ export default function FontShortlist(fontShortlistProps) {
                   </FormControl>
                   {!isGreekDefault &&  
                     <Tooltip 
-                      title="Cardo 1.0451"
+                      title="Cardo"
                       placement="right"
                       arrow
                     >
@@ -253,7 +255,7 @@ export default function FontShortlist(fontShortlistProps) {
                   </FormControl>
                   {!isHebrewDefault &&  
                     <Tooltip 
-                      title="Ezra SIL 2.51"
+                      title="Ezra SIL"
                       placement="right"
                       arrow
                     >
@@ -283,7 +285,7 @@ export default function FontShortlist(fontShortlistProps) {
                   </FormControl>
                   {!isArabicUrduDefault &&  
                     <Tooltip 
-                      title="Awami Nastaliq 3.300"
+                      title={`Awami Nastaliq (${doI18n("pages:core-settings:if_not_firefox", i18nRef.current)})`}
                       placement="right"
                       arrow
                     >
@@ -292,7 +294,7 @@ export default function FontShortlist(fontShortlistProps) {
                   }
                   {isAwami &&
                     <Tooltip
-                      title={doI18n("pages:core-settings:replaceawamiifnotfirefox", i18nRef.current)}
+                      title={isGraphiteAssumed ? doI18n("pages:core-settings:replace_awami", i18nRef.current) : doI18n("pages:core-settings:replace_noto", i18nRef.current)}
                       placement="right"
                     >
                       { isGraphiteAssumed ?
@@ -327,7 +329,7 @@ export default function FontShortlist(fontShortlistProps) {
                   </FormControl>
                   {!isMyanmarDefault &&  
                     <Tooltip 
-                      title="Padauk 5.100"
+                      title="Padauk"
                       placement="right"
                       arrow
                     >
@@ -339,11 +341,11 @@ export default function FontShortlist(fontShortlistProps) {
                     <Tooltip 
                       title={
                         <Fragment>
-                            {doI18n("pages:core-settings:base_font", i18nRef.current)}: Gentium Plus 6.200<br /><br />
-                            {doI18n("pages:core-settings:select_greekscript", i18nRef.current)}: Cardo 1.0451<br /><br />
-                            {doI18n("pages:core-settings:select_hebrewscript", i18nRef.current)}: Ezra SIL 2.51<br /><br />
-                            {doI18n("pages:core-settings:select_arabicurduscript", i18nRef.current)}: Awami Nastaliq 3.300<br /><br />
-                            {doI18n("pages:core-settings:select_myanmarscript", i18nRef.current)}: Padauk 5.100
+                            {doI18n("pages:core-settings:base_font", i18nRef.current)}: Gentium Plus<br /><br />
+                            {doI18n("pages:core-settings:select_greekscript", i18nRef.current)}: Cardo<br /><br />
+                            {doI18n("pages:core-settings:select_hebrewscript", i18nRef.current)}: Ezra SIL<br /><br />
+                            {doI18n("pages:core-settings:select_arabicurduscript", i18nRef.current)}: {`Awami Nastaliq (${doI18n("pages:core-settings:if_not_firefox", i18nRef.current)})`}<br /><br />
+                            {doI18n("pages:core-settings:select_myanmarscript", i18nRef.current)}: Padauk
                         </Fragment>
                       }
                       placement="right"

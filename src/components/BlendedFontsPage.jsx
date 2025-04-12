@@ -126,18 +126,19 @@ export default function BlendedFontsPage() {
       ]);
     }
   },[baseFontDisplayName, i18nRef, prevBaseFontDisplayName, webFontsMyanmar.length]);
+  const isGraphiteAssumed = useAssumeGraphite({}); // Tests for Firefox; A different test can show if Graphite is enabled.
   useEffect(() => {
     if (!webFontsArabicUrdu.length || !baseFontDisplayName.length || prevBaseFontDisplayName !== baseFontDisplayName|| !arabicUrduFontDisplayName.length || prevArabicUrduFontDisplayName !== arabicUrduFontDisplayName) {
       setWebFontsArabicUrdu([
-        { display_name: 'Awami Nastaliq 3.300', id: 'Pankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq', settings_id: 'Awami Nastaliq', shortlist: true, example: 'مثال'},
-        { display_name: 'Awami Nastaliq Medium 3.300', id: 'Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Medium', settings_id: 'Awami Nastaliq', shortlist: arabicUrduFontDisplayName.toString() === 'Awami Nastaliq Medium 3.300', example: 'مثال' },
-        { display_name: 'Awami Nastaliq Semi Bold 3.300', id: 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Semi Bold', settings_id: 'Awami Nastaliq', shortlist: arabicUrduFontDisplayName.toString() === 'Awami Nastaliq Semi Bold 3.300', example: 'مثال' },
-        { display_name: 'Awami Nastaliq Extra Bold 3.300', id: 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Extra Bold', settings_id: 'Awami Nastaliq', shortlist: arabicUrduFontDisplayName.toString() === 'Awami Nastaliq Extra Bold 3.300', example: 'مثال' },
+        { display_name: isGraphiteAssumed ? 'Awami Nastaliq 3.300' : 'Noto Nastaliq Urdu 4.000', id: 'Pankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq', settings_id: 'Awami Nastaliq', shortlist: isGraphiteAssumed || ( !isGraphiteAssumed && selectedArabicUrduFontClassSubstr.toString() !== 'Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu' && selectedArabicUrduFontClassSubstr.toString() !== 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu' && selectedArabicUrduFontClassSubstr.toString() !== 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu' ), example: 'مثال'},
+        { display_name: isGraphiteAssumed ? 'Awami Nastaliq Medium 3.300' : 'Noto Nastaliq Urdu 4.000', id: 'Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Medium', settings_id: 'Awami Nastaliq', shortlist: selectedArabicUrduFontClassSubstr.toString() === 'Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu', example: 'مثال' },
+        { display_name: isGraphiteAssumed ? 'Awami Nastaliq Semi Bold 3.300' : 'Noto Nastaliq Urdu 4.000', id: 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Semi Bold', settings_id: 'Awami Nastaliq', shortlist: selectedArabicUrduFontClassSubstr.toString() === 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu', example: 'مثال' },
+        { display_name: isGraphiteAssumed ? 'Awami Nastaliq Extra Bold 3.300' : 'Noto Nastaliq Urdu 4.000', id: 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Extra Bold', settings_id: 'Awami Nastaliq', shortlist: selectedArabicUrduFontClassSubstr.toString() === 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu', example: 'مثال' },
         { display_name: 'Noto Naskh Arabic 2.018', id: 'Pankosmia-NotoNaskhArabic', name: 'Pankosmia-Noto Naskh Arabic', settings_id: '', shortlist: true, example: 'مثال' },
         { display_name: `${doI18n("pages:core-settings:base_font", i18nRef.current)} (${baseFontDisplayName})`, id: '', name: '', settings_id: '', shortlist: true, example: 'مثال' },
       ]);
     }
-  },[arabicUrduFontDisplayName, baseFontDisplayName, i18nRef, prevArabicUrduFontDisplayName, prevBaseFontDisplayName, webFontsArabicUrdu.length]);
+  },[arabicUrduFontDisplayName, baseFontDisplayName, i18nRef, isGraphiteAssumed, prevArabicUrduFontDisplayName, prevBaseFontDisplayName, selectedArabicUrduFontClassSubstr, webFontsArabicUrdu.length]);
   useEffect(() => {
     if (!webFontsBase.length || !baseFontDisplayName.length || prevBaseFontDisplayName !== baseFontDisplayName) {
       setWebFontsBase([
@@ -250,7 +251,6 @@ export default function BlendedFontsPage() {
   const [ffsArr, setFfsArr] = useState([]);
 
   /** Awami Nastaliq requires Graphite, and Padauk has some Graphite-only features. */
-  const isGraphiteAssumed = useAssumeGraphite({}); // Tests for Firefox; A different test can show if Graphite is enabled.
   useEffect(() => {
     if (!ffsArr.length) {
       setFfsArr(isGraphiteAssumed ? fontFeatureSettings : fontFeatureSettings.filter((name) => name.name !== 'Awami Nastaliq'));
