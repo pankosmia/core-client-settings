@@ -266,7 +266,7 @@ export default function BlendedFontsPage() {
     { name: 'Base', id: 'base', unicode_range: '' },
   ];
 
-  const isCurrentDefault = selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrduPankosmia-GentiumPlus";
+  const isCurrentDefault = selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrduPankosmia-GentiumPlus"  || ( !isGraphiteAssumed && (selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrduPankosmia-GentiumPlus" || selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrduPankosmia-GentiumPlus" || selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrduPankosmia-GentiumPlus" ));
 
   const fontShortlistProps = {
     selectedFontClass,

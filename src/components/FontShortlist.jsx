@@ -117,16 +117,16 @@ export default function FontShortlist(fontShortlistProps) {
     setBaseFontName(baseName);
   };
 
+  /** Awami Nastaliq requires Graphite, and Padauk has some Graphite-only features. */
+  const isGraphiteAssumed = useAssumeGraphite({}); // Tests for Firefox; A different test can show if Graphite is enabled.
+
   const isBaseDefault = selectedBaseFontClassSubstr.toString() === "Pankosmia-GentiumPlus";
   const isGreekDefault = selectedGreekFontClassSubstr.toString() === "Pankosmia-Cardo";
   const isHebrewDefault = selectedHebrewFontClassSubstr.toString() === "Pankosmia-EzraSIL";
-  const isArabicUrduDefault = selectedArabicUrduFontClassSubstr.toString() === "Pankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrdu";
+  const isArabicUrduDefault = selectedArabicUrduFontClassSubstr.toString() === "Pankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrdu" || ( !isGraphiteAssumed && (selectedArabicUrduFontClassSubstr.toString() === 'Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu' || selectedArabicUrduFontClassSubstr.toString() === 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu' || selectedArabicUrduFontClassSubstr.toString() === 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu' ));
   const isMyanmarDefault = selectedMyanmarFontClassSubstr.toString() === "Pankosmia-Padauk";
 
   const isAwami = selectedArabicUrduFontClassSubstr.toString() !== '' && selectedArabicUrduFontClassSubstr.toString() !== 'Pankosmia-NotoNaskhArabic';
-
-  /** Awami Nastaliq requires Graphite, and Padauk has some Graphite-only features. */
-  const isGraphiteAssumed = useAssumeGraphite({}); // Tests for Firefox; A different test can show if Graphite is enabled.
 
   const fontShortlistMenuItemProps = {
     selectedFontClass,
