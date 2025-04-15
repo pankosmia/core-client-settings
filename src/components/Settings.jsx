@@ -43,6 +43,8 @@ export default function Settings() {
   const [usedLanguages, setUsedLanguages] = useState(['en']);
   const [usedEndonyms, setUsedEndonyms] = useState([]);
 
+  const [fontMenu, setFontMenu] = useState('shortlist');
+
   useEffect(() =>
       getAndSetJson({
           url: "/settings/languages",
@@ -264,6 +266,15 @@ export default function Settings() {
     setValue(newValue);
   };
 
+  const blendedFontsPageProps = {
+    fontMenu,
+    setFontMenu,
+  };
+
+  const onClickFontMenu = (event) => {
+    setFontMenu('shortlist');
+  };
+
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -275,7 +286,7 @@ export default function Settings() {
           aria-label="basic tabs example"
         >
           <Tab label={doI18n("pages:core-settings:language", i18nRef.current)} {...a11yProps(0)} />
-          <Tab label={doI18n("pages:core-settings:fonts", i18nRef.current)} {...a11yProps(1)} />
+          <Tab onClick={onClickFontMenu} label={doI18n("pages:core-settings:fonts", i18nRef.current)} {...a11yProps(1)} />
           <Tab label={doI18n("pages:core-settings:debug_prompt", i18nRef.current)} {...a11yProps(2)} />
         </Tabs>
       </Box>
@@ -287,7 +298,7 @@ export default function Settings() {
         />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <BlendedFontsPage />
+        <BlendedFontsPage {...blendedFontsPageProps} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
       <Grid2 container>
