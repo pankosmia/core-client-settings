@@ -1,7 +1,8 @@
 import { useEffect, useContext, useState } from "react";
 
 import PropTypes from 'prop-types';
-import { Grid2, Box, InputLabel, MenuItem, FormControl, Select, Stack, TextareaAutosize } from "@mui/material";
+import { Grid2, Box, InputLabel, MenuItem, FormControl, Select, Stack, TextareaAutosize, Tooltip } from "@mui/material";
+import RestoreIcon from '@mui/icons-material/Restore';
 import { i18nContext as I18nContext, doI18n } from "pithekos-lib";
 import { useDetectDir } from "font-detect-rhl";
 import { renderToString } from 'react-dom/server';
@@ -25,6 +26,9 @@ export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionP
     setMyanmarFontDisplayName,
     ffsArr,
     unicodeRanges,
+    selectedFontClass,
+    isMyanmarDefault,
+    handleClickMyanmar,
   } = blendedFontMyanmarSelectionProps;
 
   // Available font font-feature-setting (Ffs) by selection
@@ -65,11 +69,15 @@ export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionP
       setMyanmarFontName(myanmarName);
     };
 
+  const fontMenuItemProps = {
+    selectedFontClass,
+  };
+
   /** Build dropdown menus */
   const WebFontsSelectableMyanmar =
     webFontsMyanmar.map((font, index) => (
         <MenuItem key={index} value={font.id} dense>
-            <FontMenuItem font={font}/>
+            <FontMenuItem font={font} {...fontMenuItemProps} />
         </MenuItem>
     ));
   
@@ -135,32 +143,39 @@ export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionP
   return (
     <Grid2 container spacing={2}>
       <Grid2  size={12}>
-        <div item style={{maxWidth: 350, padding: "1.25em 0 0 0"}}>
-            <Box sx={{minWidth: 350}}>
-              <Stack direction="row">
-                <FormControl fullWidth style={{maxWidth: 325}} size="small">
-                    <InputLabel shrink={true} id="select-myanmar-font-label" htmlFor="select-myanmar-font-id" sx={sx.inputLabel}>
-                      {doI18n("pages:core-settings:select_myanmarscriptfont", i18nRef.current)}
-                    </InputLabel>
-                    <Select
-                        variant="outlined"
-                        labelId="select-myanmar-font-label"
-                        name="select-myanmar-font-name"
-                        inputProps={{
-                            id: "select-myanmar-font-id",
-                        }}
-                        displayEmpty={true}
-                        value={selectedMyanmarFontClassSubstr}
-                        label={doI18n("pages:core-settings:select_myanmarscriptfont", i18nRef.current)}
-                        onChange={handleChangeMyanmar}
-                        sx={sx.select}
-                    >
-                      {WebFontsSelectableMyanmar}
-                    </Select>
-                </FormControl>
-                {showMyanmarFeatures && <FontFeaturesMyanmar {...fontFeaturesMyanmarProps} />}
-              </Stack>
-            </Box>
+        <div className={selectedFontClass} style={{ fontSize: '100%'}}>
+          <Stack direction="row">
+            <FormControl fullWidth style={{maxWidth: 400, minWidth: 400}} size="small">
+                <InputLabel shrink={true} id="select-myanmar-font-label" htmlFor="select-myanmar-font-id" sx={sx.inputLabel}>
+                  {doI18n("pages:core-settings:select_myanmarscriptfont", i18nRef.current)}
+                </InputLabel>
+                <Select
+                    variant="outlined"
+                    labelId="select-myanmar-font-label"
+                    name="select-myanmar-font-name"
+                    inputProps={{
+                        id: "select-myanmar-font-id",
+                    }}
+                    displayEmpty={true}
+                    value={selectedMyanmarFontClassSubstr.toString()}
+                    label={doI18n("pages:core-settings:select_myanmarscriptfont", i18nRef.current)}
+                    onChange={handleChangeMyanmar}
+                    sx={sx.select}
+                >
+                  {WebFontsSelectableMyanmar}
+                </Select>
+            </FormControl>
+            {!isMyanmarDefault &&  
+              <Tooltip 
+                title="Padauk"
+                placement="right"
+                arrow
+              >
+                <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickMyanmar} />
+              </Tooltip>
+            }
+            {showMyanmarFeatures && <FontFeaturesMyanmar {...fontFeaturesMyanmarProps} />}
+          </Stack>
         </div>
       </Grid2>
       <Grid2 size={12}>

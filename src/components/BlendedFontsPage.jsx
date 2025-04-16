@@ -11,7 +11,7 @@ import { fontFeatureSettings, useAssumeGraphite } from "font-detect-rhl";
 import { postEmptyJson, typographyContext, i18nContext as I18nContext, doI18n } from "pithekos-lib";
 
 import UsePrevious from "./helpers/UsePrevious";
-import FontShortlistMenuItem from "./FontShortlistMenuItem";
+import FontMenuItem from "./FontMenuItem";
 import sx from "./Selection.styles";
 import BlendedFontArabicUrduSelection from "./BlendedFontArabicUrduSelection";
 import BlendedFontMyanmarSelection from "./BlendedFontMyanmarSelection";
@@ -294,7 +294,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
       setMyanmarFontName(myanmarName);
   };
 
-  const fontShortlistMenuItemProps = {
+  const fontMenuItemProps = {
     selectedFontClass,
   };
 
@@ -302,31 +302,31 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
   const WebFontsArabicUrduShortlist =
     webFontsArabicUrduShortlist.map((font, index) => (
       <MenuItem key={index} value={font.id} dense>
-        <FontShortlistMenuItem font={font} {...fontShortlistMenuItemProps}/>
+        <FontMenuItem font={font} {...fontMenuItemProps}/>
       </MenuItem>
   ));
   const WebFontsMyanmarShortlist =
     webFontsMyanmarShortlist.map((font, index) => (
       <MenuItem key={index} value={font.id} dense>
-      <FontShortlistMenuItem font={font} {...fontShortlistMenuItemProps}/>
+      <FontMenuItem font={font} {...fontMenuItemProps}/>
       </MenuItem>
   ));
   const WebFontsGreekShortlist =
     webFontsGreekShortlist.map((font, index) => (
       <MenuItem key={index} value={font.id} dense>
-        <FontShortlistMenuItem font={font} {...fontShortlistMenuItemProps}/>
+        <FontMenuItem font={font} {...fontMenuItemProps}/>
       </MenuItem>
   ));
   const WebFontsHebrewShortlist =
     webFontsHebrewShortlist.map((font, index) => (
       <MenuItem key={index} value={font.id} dense>
-        <FontShortlistMenuItem font={font} {...fontShortlistMenuItemProps}/>
+        <FontMenuItem font={font} {...fontMenuItemProps}/>
       </MenuItem>
   ));
   const WebFontsBaseShortlist =
     webFontsBaseShortlist.map((font, index) => (
       <MenuItem key={index} value={font.id} dense>
-        <FontShortlistMenuItem font={font} {...fontShortlistMenuItemProps}/>
+        <FontMenuItem font={font} {...fontMenuItemProps}/>
       </MenuItem>
   ));
 
@@ -407,6 +407,10 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
     setArabicUrduFontDisplayName,
     ffsArr,
     unicodeRanges,
+    selectedFontClass,
+    isArabicUrduDefault,
+    isAwami,
+    handleClickArabicUrdu,
   };
   const blendedFontMyanmarSelectionProps = {
     isGraphiteAssumed,
@@ -421,6 +425,9 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
     setMyanmarFontDisplayName,
     ffsArr,
     unicodeRanges,
+    selectedFontClass,
+    isMyanmarDefault,
+    handleClickMyanmar,
   };
   const blendedFontGreekSelectionProps = {
     selectedGreekFontClassSubstr,
@@ -434,6 +441,9 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
     // setGreekFontDisplayName,
     // ffsArr,
     unicodeRanges,
+    selectedFontClass,
+    isGreekDefault,
+    handleClickGreek,
   };
   const blendedFontHebrewSelectionProps = {
     selectedHebrewFontClassSubstr,
@@ -447,6 +457,9 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
     // setHebrewFontDisplayName,
     // ffsArr,
     unicodeRanges,
+    selectedFontClass,
+    isHebrewDefault,
+    handleClickHebrew,
   };
   const blendedFontBaseSelectionProps = {
     isGraphiteAssumed,
@@ -465,6 +478,9 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
     setBaseFontDisplayName,
     ffsArr,
     unicodeRanges,
+    selectedFontClass,
+    isBaseDefault,
+    handleClickBase,
   };
   
   return (

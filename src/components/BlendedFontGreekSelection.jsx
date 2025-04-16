@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
 
 import PropTypes from 'prop-types';
-import { Grid2, Box, InputLabel, MenuItem, FormControl, Select, Stack, TextareaAutosize } from "@mui/material";
+import { Grid2, Box, InputLabel, MenuItem, FormControl, Select, Stack, TextareaAutosize, Tooltip } from "@mui/material";
+import RestoreIcon from '@mui/icons-material/Restore';
 import { i18nContext as I18nContext, doI18n } from "pithekos-lib";
 import { useDetectDir } from "font-detect-rhl";
 
@@ -22,6 +23,9 @@ export default function BlendedFontGreekSelection(blendedFontGreekSelectionProps
     // setGreekFontDisplayName,
     // ffsArr,
     unicodeRanges,
+    selectedFontClass,
+    isGreekDefault,
+    handleClickGreek,
   } = blendedFontGreekSelectionProps;
 
   /** There is not a possibility of Hebrew script or Greek script font-feature-settings the time of programming this page. */
@@ -65,11 +69,15 @@ export default function BlendedFontGreekSelection(blendedFontGreekSelectionProps
     setGreekFontName(greekName);
   };
 
+  const fontMenuItemProps = {
+    selectedFontClass,
+  };
+  
   const WebFontsSelectableGreek =
   webFontsGreek.map((font, index) => (
-      <MenuItem key={index} value={font.id} dense>
-          <FontMenuItem font={font}/>
-      </MenuItem>
+    <MenuItem key={index} value={font.id} dense>
+      <FontMenuItem font={font} {...fontMenuItemProps} />
+    </MenuItem>
   ));
   
   /** Not yet applicable to Greek.
@@ -138,32 +146,39 @@ export default function BlendedFontGreekSelection(blendedFontGreekSelectionProps
   return (
     <Grid2 container spacing={2}>
       <Grid2  size={12}>
-        <div item style={{maxWidth: 350, padding: "1.25em 0 0 0"}}>
-            <Box sx={{minWidth: 350}}>
-              <Stack direction="row">
-                  <FormControl fullWidth style={{maxWidth: 325}} size="small">
-                      <InputLabel shrink={true} id="select-greek-font-label" htmlFor="select-greek-font-id" sx={sx.inputLabel}>
-                        {doI18n("pages:core-settings:select_greekscriptfont", i18nRef.current)}
-                      </InputLabel>
-                      <Select
-                          variant="outlined"
-                          labelId="select-greek-font-label"
-                          name="select-greek-font-name"
-                          inputProps={{
-                              id: "select-greek-font-id",
-                          }}
-                          displayEmpty={true}
-                          value={selectedGreekFontClassSubstr}
-                          label={doI18n("pages:core-settings:select_greekscriptfont", i18nRef.current)}
-                          onChange={handleChangeGreek}
-                          sx={sx.select}
-                      >
-                        {WebFontsSelectableGreek}
-                      </Select>
-                  </FormControl>
-                {/** showGreekFeatures && <FontFeaturesGreek {...fontFeaturesGreekProps} /> */}
-              </Stack>
-            </Box>
+        <div className={selectedFontClass} style={{ fontSize: '100%'}}>
+          <Stack direction="row">
+            <FormControl fullWidth style={{maxWidth: 400, minWidth: 400}} size="small">
+                <InputLabel shrink={true} id="select-greek-font-label" htmlFor="select-greek-font-id" sx={sx.inputLabel}>
+                  {doI18n("pages:core-settings:select_greekscriptfont", i18nRef.current)}
+                </InputLabel>
+                <Select
+                    variant="outlined"
+                    labelId="select-greek-font-label"
+                    name="select-greek-font-name"
+                    inputProps={{
+                        id: "select-greek-font-id",
+                    }}
+                    displayEmpty={true}
+                    value={selectedGreekFontClassSubstr}
+                    label={doI18n("pages:core-settings:select_greekscriptfont", i18nRef.current)}
+                    onChange={handleChangeGreek}
+                    sx={sx.select}
+                >
+                  {WebFontsSelectableGreek}
+                </Select>
+            </FormControl>
+            {!isGreekDefault &&  
+              <Tooltip 
+                title="Cardo"
+                placement="right"
+                arrow
+              >
+                <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickGreek} />
+              </Tooltip>
+            }
+            {/** showGreekFeatures && <FontFeaturesGreek {...fontFeaturesGreekProps} /> */}
+          </Stack>
         </div>
       </Grid2>
       <Grid2 size={12}>

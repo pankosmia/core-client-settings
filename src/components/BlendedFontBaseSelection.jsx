@@ -1,7 +1,8 @@
 import { useEffect, useContext, useState } from "react";
 
 import PropTypes from 'prop-types';
-import { Grid2, Box, InputLabel, MenuItem, FormControl, Select, Stack, TextareaAutosize } from "@mui/material";
+import { Grid2, Box, InputLabel, MenuItem, FormControl, Select, Stack, TextareaAutosize, Tooltip } from "@mui/material";
+import RestoreIcon from '@mui/icons-material/Restore';
 import { i18nContext as I18nContext, doI18n } from "pithekos-lib";
 import { useDetectDir } from "font-detect-rhl";
 import { renderToString } from 'react-dom/server';
@@ -29,6 +30,9 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
     setBaseFontDisplayName,
     ffsArr,
     unicodeRanges,
+    selectedFontClass,
+    isBaseDefault,
+    handleClickBase,
   } = blendedFontBaseSelectionProps;
 
   // Available font font-feature-setting (Ffs) by selection
@@ -145,31 +149,38 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
   return (
     <Grid2 container spacing={2}>
       <Grid2 size={12}>
-        <div item style={{maxWidth: 350, padding: "1.25em 0 0"}}>
-            <Box sx={{minWidth: 350}}>
-              <Stack direction="row">
-                <FormControl fullWidth style={{maxWidth: 325}} size="small">
-                    <InputLabel id="select-base-font-label" htmlFor="select-base-font-id" sx={sx.inputLabel}>
-                      {doI18n("pages:core-settings:base_font", i18nRef.current)}
-                    </InputLabel>
-                    <Select
-                        variant="outlined"
-                        labelId="select-base-font-label"
-                        name="select-base-font-name"
-                        inputProps={{
-                            id: "select-base-font-id",
-                        }}
-                        value={selectedBaseFontClassSubstr}
-                        label={doI18n("pages:core-settings:base_font", i18nRef.current)}
-                        onChange={handleChangeBase}
-                        sx={sx.select}
-                    >
-                      {WebFontsSelectableBase}
-                    </Select>
-                </FormControl>
-                {showBaseFeatures && <FontFeaturesBase {...fontFeaturesBaseProps} />}
-              </Stack>
-            </Box>
+        <div className={selectedFontClass} style={{ fontSize: '100%'}}>
+          <Stack direction="row">
+            <FormControl fullWidth style={{maxWidth: 400, minWidth: 400}} size="small">
+                <InputLabel id="select-base-font-label" htmlFor="select-base-font-id" sx={sx.inputLabel}>
+                  {doI18n("pages:core-settings:base_font", i18nRef.current)}
+                </InputLabel>
+                <Select
+                    variant="outlined"
+                    labelId="select-base-font-label"
+                    name="select-base-font-name"
+                    inputProps={{
+                        id: "select-base-font-id",
+                    }}
+                    value={selectedBaseFontClassSubstr}
+                    label={doI18n("pages:core-settings:base_font", i18nRef.current)}
+                    onChange={handleChangeBase}
+                    sx={sx.select}
+                >
+                  {WebFontsSelectableBase}
+                </Select>
+            </FormControl>
+            {!isBaseDefault &&  
+              <Tooltip
+                title="Gentium Plus"
+                placement="right"
+                arrow
+              >
+                <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickBase} />
+              </Tooltip>
+            }
+            {showBaseFeatures && <FontFeaturesBase {...fontFeaturesBaseProps} />}
+          </Stack>
         </div>
       <Grid2 size={12}>
         <Box sx={{ padding: '10pt 0 5pt 20pt' }}>

@@ -1,7 +1,10 @@
 import { useEffect, useContext, useState } from "react";
 
 import PropTypes from 'prop-types';
-import { Grid2, FormHelperText, Box, InputLabel, MenuItem, FormControl, Select, Stack, TextareaAutosize } from "@mui/material";
+import { Grid2, Box, InputLabel, MenuItem, FormControl, Select, Stack, TextareaAutosize, Tooltip } from "@mui/material";
+import InfoIcon from '@mui/icons-material/Info';
+import WarningSharpIcon from '@mui/icons-material/WarningSharp';
+import RestoreIcon from '@mui/icons-material/Restore';
 import { i18nContext as I18nContext, doI18n } from "pithekos-lib";
 import { useDetectDir } from "font-detect-rhl";
 import { renderToString } from 'react-dom/server';
@@ -23,6 +26,10 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
     setArabicUrduFontDisplayName,
     ffsArr,
     unicodeRanges,
+    selectedFontClass,
+    isArabicUrduDefault,
+    isAwami,
+    handleClickArabicUrdu,
   } = blendedFontArabicUrduSelectionProps;
 
   // Available font font-feature-setting (Ffs) by selection
@@ -76,12 +83,16 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
       setArabicUrduFontName(arabicUrduName);
     };
 
+  const fontMenuItemProps = {
+    selectedFontClass,
+  };
+  
   /** Build dropdown menus */
   const WebFontsSelectableArabicUrdu =
     webFontsArabicUrdu.map((font, index) => (
-        <MenuItem key={index} value={font.id} dense>
-            <FontMenuItem font={font}/>
-        </MenuItem>
+      <MenuItem key={index} value={font.id} dense>
+        <FontMenuItem font={font} {...fontMenuItemProps} />
+      </MenuItem>
     ));
   
   useEffect(() => {
@@ -146,33 +157,52 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
   return (
     <Grid2 container spacing={2}>
       <Grid2  size={12}>
-        <div item style={{maxWidth: 350, padding: "1.25em 0 0 0"}}>
-            <Box sx={{minWidth: 350}}>
-              <Stack direction="row">
-                <FormControl fullWidth style={{maxWidth: 325}} size="small">
-                    <InputLabel shrink={true} id="select-arabic-urdu-font-label" htmlFor="select-arabic-urdu-font-id" sx={sx.inputLabel}>
-                      {doI18n("pages:core-settings:select_arabicurduscriptfont", i18nRef.current)}
-                    </InputLabel>
-                    <Select
-                        variant="outlined"
-                        labelId="select-arabic-urdu-font-label"
-                        name="select-arabic-urdu-font-name"
-                        inputProps={{
-                            id: "select-arabic-urdu-font-id",
-                        }}
-                        displayEmpty={true}
-                        value={selectedArabicUrduFontClassSubstr}
-                        label={doI18n("pages:core-settings:select_arabicurduscriptfont", i18nRef.current)}
-                        onChange={handleChangeArabicUrdu}
-                        sx={sx.select}
-                    >
-                      {WebFontsSelectableArabicUrdu}
-                    </Select>
-                    <FormHelperText>{selectedArabicUrduFontClassSubstr.includes('AwamiNastaliq') && doI18n("pages:core-settings:replace_awami", i18nRef.current)}</FormHelperText>
-                </FormControl>
-                {showArabicUrduFeatures && <FontFeaturesArabicUrdu {...fontFeaturesArabicUrduProps} />}
-              </Stack>
-            </Box>
+        <div className={selectedFontClass} style={{ fontSize: '100%'}}>
+          <Stack direction="row">
+            <FormControl fullWidth style={{maxWidth: 400, minWidth: 400}} size="small">
+                <InputLabel shrink={true} id="select-arabic-urdu-font-label" htmlFor="select-arabic-urdu-font-id" sx={sx.inputLabel}>
+                  {doI18n("pages:core-settings:select_arabicurduscriptfont", i18nRef.current)}
+                </InputLabel>
+                <Select
+                    variant="outlined"
+                    labelId="select-arabic-urdu-font-label"
+                    name="select-arabic-urdu-font-name"
+                    inputProps={{
+                        id: "select-arabic-urdu-font-id",
+                    }}
+                    displayEmpty={true}
+                    value={selectedArabicUrduFontClassSubstr}
+                    label={doI18n("pages:core-settings:select_arabicurduscriptfont", i18nRef.current)}
+                    onChange={handleChangeArabicUrdu}
+                    sx={sx.select}
+                >
+                  {WebFontsSelectableArabicUrdu}
+                </Select>
+            </FormControl>
+            {!isArabicUrduDefault &&  
+              <Tooltip 
+                title={`Awami Nastaliq (${doI18n("pages:core-settings:if_not_firefox", i18nRef.current)})`}
+                placement="right"
+                arrow
+              >
+                <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickArabicUrdu} />
+              </Tooltip>
+            }
+            {isAwami &&
+              <Tooltip
+                title={isGraphiteAssumed ? doI18n("pages:core-settings:replace_awami", i18nRef.current) : doI18n("pages:core-settings:replace_noto", i18nRef.current)}
+                placement="right"
+              >
+                { isGraphiteAssumed ?
+                  <InfoIcon style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} />
+                  :
+                  <WarningSharpIcon style={{ color: 'yellow', background: 'black', margin: 'auto 9px' }} />
+                }
+              </Tooltip>
+            }
+            {isAwami && !isGraphiteAssumed && <div className={selectedFontClass} style={{margin: 'auto 0',fontSize: '100%' }}>{doI18n("pages:core-settings:best_with", i18nRef.current)}</div>}
+            {showArabicUrduFeatures && <FontFeaturesArabicUrdu {...fontFeaturesArabicUrduProps} />}
+          </Stack>
         </div>
       </Grid2>
       <Grid2 size={12}>

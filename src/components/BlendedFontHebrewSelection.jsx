@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
 
 import PropTypes from 'prop-types';
-import { Grid2, Box, InputLabel, MenuItem, FormControl, Select, Stack, TextareaAutosize } from "@mui/material";
+import { Grid2, Box, InputLabel, MenuItem, FormControl, Select, Stack, TextareaAutosize, Tooltip } from "@mui/material";
+import RestoreIcon from '@mui/icons-material/Restore';
 import { i18nContext as I18nContext, doI18n } from "pithekos-lib";
 import { useDetectDir } from "font-detect-rhl";
 
@@ -22,6 +23,9 @@ export default function BlendedFontHebrewSelection(blendedFontHebrewSelectionPro
     // setHebrewFontDisplayName,
     // ffsArr,
     unicodeRanges,
+    selectedFontClass,
+    isHebrewDefault,
+    handleClickHebrew,
   } = blendedFontHebrewSelectionProps;
 
   /** There is not a possibility of Hebrew script or Greek script font-feature-settings the time of programming this page.
@@ -66,12 +70,16 @@ export default function BlendedFontHebrewSelection(blendedFontHebrewSelectionPro
       setHebrewFontName(hebrewName);
     };
 
+  const fontMenuItemProps = {
+    selectedFontClass,
+  };
+
   /** Build dropdown menus */
   const WebFontsSelectableHebrew =
     webFontsHebrew.map((font, index) => (
-        <MenuItem key={index} value={font.id} dense>
-            <FontMenuItem font={font}/>
-        </MenuItem>
+      <MenuItem key={index} value={font.id} dense>
+        <FontMenuItem font={font} {...fontMenuItemProps} />
+      </MenuItem>
     ));
   
   /** Not yet applicable to Hebrew.
@@ -141,32 +149,39 @@ export default function BlendedFontHebrewSelection(blendedFontHebrewSelectionPro
   return (
     <Grid2 container spacing={2}>
       <Grid2 size={12} sx={{ borderTop: 1, borderColor: 'purple' }}>
-        <div item style={{maxWidth: 350, padding: "1.25em 0 0 0"}}>
-            <Box sx={{minWidth: 350}}>
-              <Stack direction="row">
-                <FormControl fullWidth style={{maxWidth: 325}} size="small">
-                    <InputLabel shrink={true} id="select-hebrew-font-label" htmlFor="select-hebrew-font-id" sx={sx.inputLabel}>
-                      {doI18n("pages:core-settings:select_hebrewscriptfont", i18nRef.current)}
-                    </InputLabel>
-                    <Select
-                        variant="outlined"
-                        labelId="select-hebrew-font-label"
-                        name="select-hebrew-font-name"
-                        inputProps={{
-                            id: "select-hebrew-font-id",
-                        }}
-                        displayEmpty={true}
-                        value={selectedHebrewFontClassSubstr}
-                        label={doI18n("pages:core-settings:select_hebrewscriptfont", i18nRef.current)}
-                        onChange={handleChangeHebrew}
-                        sx={sx.select}
-                    >
-                      {WebFontsSelectableHebrew}
-                    </Select>
-                </FormControl>
-                {/** showHebrewFeatures && <FontFeaturesHebrew {...fontFeaturesHebrewProps} /> */}
-              </Stack>
-            </Box>
+        <div className={selectedFontClass} style={{ fontSize: '100%'}}>
+          <Stack direction="row">
+            <FormControl fullWidth style={{maxWidth: 400, minWidth: 400}} size="small">
+                <InputLabel shrink={true} id="select-hebrew-font-label" htmlFor="select-hebrew-font-id" sx={sx.inputLabel}>
+                  {doI18n("pages:core-settings:select_hebrewscriptfont", i18nRef.current)}
+                </InputLabel>
+                <Select
+                    variant="outlined"
+                    labelId="select-hebrew-font-label"
+                    name="select-hebrew-font-name"
+                    inputProps={{
+                        id: "select-hebrew-font-id",
+                    }}
+                    displayEmpty={true}
+                    value={selectedHebrewFontClassSubstr}
+                    label={doI18n("pages:core-settings:select_hebrewscriptfont", i18nRef.current)}
+                    onChange={handleChangeHebrew}
+                    sx={sx.select}
+                >
+                  {WebFontsSelectableHebrew}
+                </Select>
+            </FormControl>
+            {!isHebrewDefault &&  
+              <Tooltip 
+                title="Ezra SIL"
+                placement="right"
+                arrow
+              >
+                <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickHebrew} />
+              </Tooltip>
+            }
+            {/** showHebrewFeatures && <FontFeaturesHebrew {...fontFeaturesHebrewProps} /> */}
+          </Stack>
         </div>
       </Grid2>
       <Grid2 size={12}>
