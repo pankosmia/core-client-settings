@@ -150,6 +150,8 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
     </div>
   );
 
+  const adjHeight = arabicUrduFontDisplayName.toString().includes("Awami Nastaliq") ? '1.75' : '';
+
   const showArabicUrduFeatures = arabicUrduFfsArr.length > 0;
   const showArabicUrduTextArea = selectedArabicUrduFontClassSubstr.length !== 0;
   const showArabicUrduCss = arabicUrduFontSettings.length > 0 && selectedArabicUrduFontClassSubstr.length !== 0;
@@ -157,7 +159,7 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
   return (
     <Grid2 container spacing={2}>
       <Grid2  size={12}>
-        <div className={selectedFontClass} style={{ fontSize: '100%'}}>
+        <div className={selectedFontClass} style={{ fontSize: '100%' }}>
           <Stack direction="row">
             <FormControl fullWidth style={{maxWidth: 400, minWidth: 400}} size="small">
                 <InputLabel shrink={true} id="select-arabic-urdu-font-label" htmlFor="select-arabic-urdu-font-id" sx={sx.inputLabel}>
@@ -175,6 +177,7 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
                     label={doI18n("pages:core-settings:select_arabicurduscriptfont", i18nRef.current)}
                     onChange={handleChangeArabicUrdu}
                     sx={sx.select}
+                    style={{lineheight: adjHeight}}
                 >
                   {WebFontsSelectableArabicUrdu}
                 </Select>

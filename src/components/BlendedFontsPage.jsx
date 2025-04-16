@@ -394,6 +394,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
   }
 
   const isAwami = selectedArabicUrduFontClassSubstr.toString() !== '' && selectedArabicUrduFontClassSubstr.toString() !== 'Pankosmia-NotoNaskhArabic';
+  const adjHeight = arabicUrduFontDisplayName.toString().includes("Awami Nastaliq") ? '1.75' : '';
 
   /** ArabicUrdu props patterns differ. */
   const blendedFontArabicUrduSelectionProps = {
@@ -606,6 +607,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                               label={doI18n("pages:core-settings:select_arabicurduscriptfont", i18nRef.current)}
                               onChange={handleOnArabicUrduChange}
                               sx={sx.select}
+                              style={{lineheight: adjHeight}}
                           >
                             {WebFontsArabicUrduShortlist}
                           </Select>
