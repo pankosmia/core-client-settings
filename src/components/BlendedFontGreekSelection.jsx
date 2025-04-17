@@ -234,4 +234,10 @@ BlendedFontGreekSelection.propTypes = {
   // ffsArr: PropTypes.array.isRequired,
   /** Unicode ranges for RegEx by script type for editable examples */
   unicodeRanges: PropTypes.array.isRequired,
+  /** Selected Font Class */
+  selectedFontClass: PropTypes.string.isRequired,
+  /** Is Greek set to Default? */
+  isGreekDefault: PropTypes.bool.isRequired,
+  /** Handle Click Greek Reset to Default */
+  handleClickGreek:  PropTypes.func.isRequired,
 };

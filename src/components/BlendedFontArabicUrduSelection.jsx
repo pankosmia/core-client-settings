@@ -260,4 +260,12 @@ BlendedFontArabicUrduSelection.propTypes = {
   ffsArr: PropTypes.array.isRequired, // Current unicode ranges always result in 'punc 2' (Latin); Removing that option for now (awamiFfsLessPunc)
   /** Unicode ranges for RegEx by script type for editable examples */
   unicodeRanges: PropTypes.array.isRequired,
+  /** Selected Font Class */
+  selectedFontClass: PropTypes.string.isRequired,
+  /** Is ArabicUrdu set to Default? */
+  isArabicUrduDefault: PropTypes.bool.isRequired,
+  /** Is an Awami Nastaliq Font Selected? */
+  isAwami: PropTypes.bool.isRequired,
+  /** Handle Click Arabic Urdu Reset to Default */
+  handleClickArabicUrdu:  PropTypes.func.isRequired,
 };

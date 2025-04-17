@@ -247,4 +247,10 @@ BlendedFontBaseSelection.propTypes = {
   unicodeRanges: PropTypes.array.isRequired,
   /** Is a font set for Base? */
   isBaseOn: PropTypes.bool.isRequired,
+  /** Selected Font Class */
+  selectedFontClass: PropTypes.string.isRequired,
+  /** Is Base Font set to Default? */
+  isBaseDefault: PropTypes.bool.isRequired,
+  /** Handle Click Base Font Reset to Default */
+  handleClickBase:  PropTypes.func.isRequired,
 };

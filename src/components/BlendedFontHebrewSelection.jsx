@@ -238,4 +238,10 @@ BlendedFontHebrewSelection.propTypes = {
   // ffsArr: PropTypes.array.isRequired,
   /** Unicode ranges for RegEx by script type for editable examples */
   unicodeRanges: PropTypes.array.isRequired,
+  /** Selected Font Class */
+  selectedFontClass: PropTypes.string.isRequired,
+  /** Is Hebrew set to Default? */
+  isHebrewDefault: PropTypes.bool.isRequired,
+  /** Handle Click Hebrew Reset to Default */
+  handleClickHebrew:  PropTypes.func.isRequired,
 };

@@ -234,4 +234,10 @@ BlendedFontMyanmarSelection.propTypes = {
   ffsArr: PropTypes.array.isRequired, // Current unicode ranges always result in 'punc 2' (Latin); Removing that option for now (awamiFfsLessPunc)
   /** Unicode ranges for RegEx by script type for editable examples */
   unicodeRanges: PropTypes.array.isRequired,
+  /** Selected Font Class */
+  selectedFontClass: PropTypes.string.isRequired,
+  /** Is Myanmar set to Default? */
+  isMyanmarDefault: PropTypes.bool.isRequired,
+  /** Handle Click Myanmar Reset to Default */
+  handleClickMyanmar:  PropTypes.func.isRequired,
 };
