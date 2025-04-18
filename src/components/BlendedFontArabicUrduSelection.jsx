@@ -5,7 +5,7 @@ import { Grid2, Box, InputLabel, MenuItem, FormControl, Select, Stack, TextareaA
 import InfoIcon from '@mui/icons-material/Info';
 import WarningSharpIcon from '@mui/icons-material/WarningSharp';
 import RestoreIcon from '@mui/icons-material/Restore';
-import { i18nContext as I18nContext, doI18n } from "pithekos-lib";
+import { i18nContext as I18nContext, doI18n, postEmptyJson } from "pithekos-lib";
 import { useDetectDir } from "font-detect-rhl";
 import { renderToString } from 'react-dom/server';
 
@@ -94,6 +94,8 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
         <FontMenuItem font={font} {...fontMenuItemProps} />
       </MenuItem>
     ));
+
+  const ffsArabicUrduFontName = arabicUrduFontName.toString().replace('Pankosmia-','').replace(' ', '_');
   
   useEffect(() => {
     if (arabicUrduFontSettings.length !== 0) {
@@ -103,11 +105,22 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
       // convert jsx return to string and remove html tags and attributes (e.g., div's)
       const arabicUrduFfsStr = renderToString(arabicUrduFfsJsx).replace(/(<([^>]+)>)/ig, '').replace(/~/gm, '"');
       // remove the last comma, change ~ to "
-      setArabicUrduFfsCss(arabicUrduFfsStr.substring(0, arabicUrduFfsStr.length - 1).replace(/~/gm, '"'));
+      const arabicUrduFfsCssStrNext = arabicUrduFfsStr.substring(0, arabicUrduFfsStr.length - 1).replace(/~/gm, '"');
+      const nextArabicUrduFfsCssArr = arabicUrduFfsCssStrNext.split(',');
+      if (arabicUrduFfsCss !== '') {
+        const prevArabicUrduFfsCssArr = arabicUrduFfsCss.split(',');
+        for (let i = 0; i < prevArabicUrduFfsCssArr.length; i++) {
+          if (nextArabicUrduFfsCssArr[i] !== prevArabicUrduFfsCssArr[i]) {
+            const ffsStr = renderToString(nextArabicUrduFfsCssArr[i]).replace(' &quot;','').replace('&quot; ','/')
+            postEmptyJson(`/settings/typography-feature/${ffsArabicUrduFontName}/${ffsStr}`).then();
+          }
+        }
+      }
+      setArabicUrduFfsCss(arabicUrduFfsCssStrNext);
     } else {
       setArabicUrduFfsCss("");
     }
-  },[arabicUrduFontSettings, setArabicUrduFfsCss])
+  },[arabicUrduFfsCss, arabicUrduFontSettings, ffsArabicUrduFontName])
 
   const unicodeRangeArabicUrdu = selectedArabicUrduFontClassSubstr === '' ? '' : unicodeRanges.filter(item => (item.name === 'Arabic/Urdu')).map((script, index) => (script.unicode_range));
   const neutralScope = ' ';

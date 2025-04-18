@@ -3,7 +3,7 @@ import { useEffect, useContext, useState } from "react";
 import PropTypes from 'prop-types';
 import { Grid2, Box, InputLabel, MenuItem, FormControl, Select, Stack, TextareaAutosize, Tooltip } from "@mui/material";
 import RestoreIcon from '@mui/icons-material/Restore';
-import { i18nContext as I18nContext, doI18n } from "pithekos-lib";
+import { i18nContext as I18nContext, doI18n, postEmptyJson } from "pithekos-lib";
 import { useDetectDir } from "font-detect-rhl";
 import { renderToString } from 'react-dom/server';
 
@@ -81,6 +81,8 @@ export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionP
         </MenuItem>
     ));
   
+  const ffsMyanmarFontName = myanmarFontName.toString().replace('Pankosmia-','').replace(' ', '_');
+
   useEffect(() => {
     if (myanmarFontSettings.length !== 0) {
       const myanmarFfsJsx = myanmarFontSettings.map((obj, index) => (
@@ -89,11 +91,22 @@ export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionP
       // convert jsx return to string and remove html tags and attributes (e.g., div's)
       const myanmarFfsStr = renderToString(myanmarFfsJsx).replace(/(<([^>]+)>)/ig, '').replace(/~/gm, '"');
       // remove the last comma, change ~ to "
-      setMyanmarFfsCss(myanmarFfsStr.substring(0, myanmarFfsStr.length - 1).replace(/~/gm, '"'));
+      const myanmarFfsCssStrNext = myanmarFfsStr.substring(0, myanmarFfsStr.length - 1).replace(/~/gm, '"');
+      const nextMyanmarFfsCssArr = myanmarFfsCssStrNext.split(',');
+      if (myanmarFfsCss !== '') {
+        const prevMyanmarFfsCssArr = myanmarFfsCss.split(',');
+        for (let i = 0; i < prevMyanmarFfsCssArr.length; i++) {
+          if (nextMyanmarFfsCssArr[i] !== prevMyanmarFfsCssArr[i]) {
+            const ffsStr = renderToString(nextMyanmarFfsCssArr[i]).replace(' &quot;','').replace('&quot; ','/')
+            postEmptyJson(`/settings/typography-feature/${ffsMyanmarFontName}/${ffsStr}`).then();
+          }
+        }
+      }
+      setMyanmarFfsCss(myanmarFfsCssStrNext);
     } else {
       setMyanmarFfsCss("");
     }
-  },[myanmarFontSettings, setMyanmarFfsCss])
+  },[ffsMyanmarFontName, myanmarFfsCss, myanmarFontSettings])
  
   const unicodeRangeMyanmar = selectedMyanmarFontClassSubstr === '' ? '' : unicodeRanges.filter(item => (item.name === 'Myanmar')).map((script, index) => (script.unicode_range));
   const neutralScope = ' ';

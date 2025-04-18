@@ -7,7 +7,6 @@ import { i18nContext as I18nContext, doI18n, postEmptyJson } from "pithekos-lib"
 import { useDetectDir } from "font-detect-rhl";
 import { renderToString } from 'react-dom/server';
 
-import UsePrevious from "./helpers/UsePrevious";
 import FontMenuItem from "./FontMenuItem";
 import sx from "./Selection.styles";
 import FontFeaturesBase from "./FontFeaturesBase";
@@ -83,7 +82,6 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
         </MenuItem>
     ));
   
-  const prevBaseFfsCss = UsePrevious(baseFfsCss);
   const ffsBaseFontName = baseFontName.toString().replace('Pankosmia-','').replace(' ', '_');
 
   useEffect(() => {
@@ -94,27 +92,22 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
       // convert jsx return to string and remove html tags and attributes (e.g., div's)
       const baseFfsStr = renderToString(baseFfsJsx).replace(/(<([^>]+)>)/ig, '').replace(/~/gm, '"');
       // remove the last comma, change ~ to "
-      setBaseFfsCss(baseFfsStr.substring(0, baseFfsStr.length - 1).replace(/~/gm, '"'));
+      const baseFfsCssStrNext = baseFfsStr.substring(0, baseFfsStr.length - 1).replace(/~/gm, '"');
+      const nextBaseFfsCssArr = baseFfsCssStrNext.split(',');
+      if (baseFfsCss !== '') {
+        const prevBaseFfsCssArr = baseFfsCss.split(',');
+        for (let i = 0; i < prevBaseFfsCssArr.length; i++) {
+          if (nextBaseFfsCssArr[i] !== prevBaseFfsCssArr[i]) {
+            const ffsStr = renderToString(nextBaseFfsCssArr[i]).replace(' &quot;','').replace('&quot; ','/')
+            postEmptyJson(`/settings/typography-feature/${ffsBaseFontName}/${ffsStr}`).then();
+          }
+        }
+      }
+      setBaseFfsCss(baseFfsCssStrNext);
     } else {
       setBaseFfsCss("");
     }
-
-    const baseFfsCssArr = baseFfsCss.split(',')
-
-    if (prevBaseFfsCss !== undefined && prevBaseFfsCss !== '') {
-      const prevBaseFfsCssArr = prevBaseFfsCss.split(',');
-      for (let i = 0; i < baseFfsCssArr.length; i++) {
-        if (baseFfsCssArr[i] !== prevBaseFfsCssArr[i]) {
-          const ffsStr = renderToString(baseFfsCssArr[i]).replace(' &quot;','').replace('&quot; ','/')
-          postEmptyJson(`/settings/typography-feature/${ffsBaseFontName}/${ffsStr}`).then();
-        }
-      }
-    }
-  },[baseFfsCss, baseFontName, baseFontSettings, ffsBaseFontName, prevBaseFfsCss, setBaseFfsCss])
-
-  // Get "settings" from typography.
-  // Keep default for a "return to default"
-  // Only change the ones that change...
+  },[baseFfsCss, baseFontSettings, ffsBaseFontName])
 
   const unicodeRangeHebrew = selectedHebrewFontClassSubstr === '' ? '' : unicodeRanges.filter(item => (item.name === 'Hebrew')).map((script, index) => (script.unicode_range));
   const unicodeRangeGreek = selectedGreekFontClassSubstr === '' ? '' : unicodeRanges.filter(item => (item.name === 'Greek')).map((script, index) => (script.unicode_range));
