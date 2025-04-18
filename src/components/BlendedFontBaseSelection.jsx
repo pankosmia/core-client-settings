@@ -3,10 +3,11 @@ import { useEffect, useContext, useState } from "react";
 import PropTypes from 'prop-types';
 import { Grid2, Box, InputLabel, MenuItem, FormControl, Select, Stack, TextareaAutosize, Tooltip } from "@mui/material";
 import RestoreIcon from '@mui/icons-material/Restore';
-import { i18nContext as I18nContext, doI18n } from "pithekos-lib";
+import { i18nContext as I18nContext, doI18n, postEmptyJson } from "pithekos-lib";
 import { useDetectDir } from "font-detect-rhl";
 import { renderToString } from 'react-dom/server';
 
+import UsePrevious from "./helpers/UsePrevious";
 import FontMenuItem from "./FontMenuItem";
 import sx from "./Selection.styles";
 import FontFeaturesBase from "./FontFeaturesBase";
@@ -82,6 +83,9 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
         </MenuItem>
     ));
   
+  const prevBaseFfsCss = UsePrevious(baseFfsCss);
+  const ffsBaseFontName = baseFontName.toString().replace('Pankosmia-','').replace(' ', '_');
+
   useEffect(() => {
     if (baseFontSettings.length !== 0) {
       const baseFfsJsx = baseFontSettings.map((obj, index) => (
@@ -94,7 +98,23 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
     } else {
       setBaseFfsCss("");
     }
-  },[baseFontSettings, setBaseFfsCss])
+
+    const baseFfsCssArr = baseFfsCss.split(',')
+
+    if (prevBaseFfsCss !== undefined && prevBaseFfsCss !== '') {
+      const prevBaseFfsCssArr = prevBaseFfsCss.split(',');
+      for (let i = 0; i < baseFfsCssArr.length; i++) {
+        if (baseFfsCssArr[i] !== prevBaseFfsCssArr[i]) {
+          const ffsStr = renderToString(baseFfsCssArr[i]).replace(' &quot;','').replace('&quot; ','/')
+          postEmptyJson(`/settings/typography-feature/${ffsBaseFontName}/${ffsStr}`).then();
+        }
+      }
+    }
+  },[baseFfsCss, baseFontName, baseFontSettings, ffsBaseFontName, prevBaseFfsCss, setBaseFfsCss])
+
+  // Get "settings" from typography.
+  // Keep default for a "return to default"
+  // Only change the ones that change...
 
   const unicodeRangeHebrew = selectedHebrewFontClassSubstr === '' ? '' : unicodeRanges.filter(item => (item.name === 'Hebrew')).map((script, index) => (script.unicode_range));
   const unicodeRangeGreek = selectedGreekFontClassSubstr === '' ? '' : unicodeRanges.filter(item => (item.name === 'Greek')).map((script, index) => (script.unicode_range));
