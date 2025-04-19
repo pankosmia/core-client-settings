@@ -34,6 +34,35 @@
       "id": "Bahasa",
       "grc": "Γλῶσσα"
     },
+    "select_hebrewscript": {
+      "en": "Hebrew Script",
+      "fr": "Police pour Hébreu",
+      "id": "Aksara Ibrani",
+      "grc": "Ἑβραϊκὰ γράμματα"
+    },
+    "select_greekscript": {
+      "en": "Greek Script Font",
+      "fr": "Police pour Grec",
+      "id": "Aksara Yunani",
+      "grc": "Ἑλληνικὰ γράμματα"
+    },
+    "select_myanmarscript": {
+      "en": "Myanmar / Kayah Li Script",
+      "fr": "Police pour Myanmar / Kayah Li",
+      "id": "Aksara Myanmar / Kayah Li"
+    },
+    "select_arabicurduscript": {
+      "en": "Arabic / Urdu Script",
+      "fr": "Police pour Arabe / Ourdou",
+      "id": "Aksara Arab / Urdu",
+      "grc": "Ἀραϐικὰ γράμματα"
+    },
+    "base_font": {
+      "en": "Base Font",
+      "fr": "Police de base",
+      "id": "Fon Dasar",
+      "grc": "Ἁλλὰ γράμματα"
+    },
     "select_hebrewscriptfont": {
       "en": "Hebrew Script Font",
       "fr": "Police pour Hébreu",
@@ -52,36 +81,40 @@
       "id": "Fon Aksara Myanmar / Kayah Li"
     },
     "select_arabicurduscriptfont": {
-      "en": "Arabic/Urdu Script Font",
+      "en": "Arabic / Urdu Script Font",
       "fr": "Police pour Arabe / Ourdou",
       "id": "Fon Aksara Arab / Urdu",
       "grc": "Ἀραϐικὰ γράμματα"
     },
-    "select_otherscriptfont": {
-      "en": "Other Script Font",
-      "fr": "Police supplémentaire",
-      "id": "Fon Aksara Lain"
+    "replace_awami": {
+      "en": "Noto Nastaliq Urdu if your browser is not Firefox",
+      "fr": "Noto Nastaliq Urdu si votre navigateur n'est pas Firefox",
+      "id": "Noto Nastaliq Urdu jika peramban web anda bukan Firefox"
     },
-    "select_fallbackscriptfont": {
-      "en": "Base Script Font",
-      "fr": "Police de base",
-      "id": "Fon Aksara Dasar"
+    "replace_noto": {
+      "en": "Replaced with Awami Nastaliq in Firefox",
+      "fr": "Remplacé par Awami Nastaliq dans Firefox",
+      "id": "Diganti dengan Awami Nastaliq di Firefox"
     },
-    "other-fallback": {
-      "en": "Other/Fallback",
-      "fr": "Autre / Police de base",
-      "id": "Lainnya / Terakhir",
-      "grc": "Ἁλλὰ γράμματα"
+    "current_settings": {
+      "en": "Current Settings",
+      "fr": "Paramètres Actuels",
+      "id": "Pengaturan Saat Ini"
     },
-    "fallback": {
-      "en": "Fallback",
-      "fr": "Police de base",
-      "id": "Terakhir"
+    "factory_settings": {
+      "en": "Factory Settings",
+      "fr": "Paramètres d'usine",
+      "id": "Pengaturan Pabrik"
     },
-    "replaceawamiifnotfirefox": {
-      "en": "* Noto Nastaliq Urdu 4.000 if browser is not Firefox",
-      "fr": "* Noto Nastaliq Urdu 4.000 si navigateur n'est pas Firefox",
-      "id": "* Noto Nastaliq Urdu 4.000 ketika peramban web bukan Firefox"
+    "best_with": {
+      "en": "Best viewed with Firefox.",
+      "fr": "Mieux vu avec Firefox.",
+      "id": "Terbaik dengan Firefox."
+    },
+    "if_not_firefox": {
+      "en": "Noto Nastaliq if not Firefox",
+      "fr": "Noto Nastaliq sinon Firefox",
+      "id": "Noto Nastaliq jika bukan Firefox"
     }
   }
 }

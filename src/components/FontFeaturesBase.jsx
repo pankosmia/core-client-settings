@@ -10,10 +10,10 @@ import FontFeatureDefaults from "./helpers/FontFeatureDefaults";
 import RadioLabelText from "./helpers/RadioLabelText";
 import FontFeatureSettings from "./helpers/FontFeatureSettings";
 
-export default function FontFeaturesFallback(fontFeaturesFallbackProps) {
+export default function FontFeaturesBase(fontFeaturesBaseProps) {
   const {
-    fallbackFontSettings, // Selected options (initially default)
-    setFallbackFontSettings,
+    baseFontSettings, // Selected options (initially default)
+    setBaseFontSettings,
     ffsId,
     fontName,
     fontDisplayName,
@@ -22,9 +22,8 @@ export default function FontFeaturesFallback(fontFeaturesFallbackProps) {
     isGraphiteAssumed,
     ffsArr, // Options
     exampleRegex,
-    setExampleOtherFallback, // Example text
-    isOtherOn,
-  } = fontFeaturesFallbackProps;
+    setExampleBase, // Example text
+  } = fontFeaturesBaseProps;
 
   const [open, setOpen] = useState(false);
 
@@ -79,7 +78,7 @@ export default function FontFeaturesFallback(fontFeaturesFallbackProps) {
 
   useEffect(() => {
     if (fontSettingsArr.length !== 0) {
-      setFallbackFontSettings(fontSettingsArr);
+      setBaseFontSettings(fontSettingsArr);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[ffsId]);
@@ -96,21 +95,21 @@ export default function FontFeaturesFallback(fontFeaturesFallbackProps) {
     if (fontSettingsArr.length !== 0) {
       // eslint-disable-next-line no-control-regex
       const exampleStr = 'Au commencement... / In the beginning... ' + labelStr.replace(exampleRegex, '').replace('(all letters with capital equivalents)', '').replace('(all capitals)', '').replace('                                                                    ', '');
-      setExampleOtherFallback(exampleStr);
+      setExampleBase(exampleStr);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[ffsId]);
 
   const handleChange = useMemo(() => (event) => {
-    const newState = fallbackFontSettings.map(obj => {
+    const newState = baseFontSettings.map(obj => {
       if (obj.name === event.target.name) {
         return {...obj, value: +event.target.value};
       }
       // otherwise return the object as is
       return obj;
     });
-      setFallbackFontSettings(newState);
-  },[fallbackFontSettings, setFallbackFontSettings]);
+      setBaseFontSettings(newState);
+  },[baseFontSettings, setBaseFontSettings]);
   const [placementDir, setPlacementDir] = useState('left');
   const [radioRightMargin, setRadioRightMargin] = useState('16px');
   const [radioLeftMargin, setRadioLeftMargin] = useState('-11px');
@@ -165,7 +164,7 @@ export default function FontFeaturesFallback(fontFeaturesFallbackProps) {
 
   const fontFeatureSettingsProps = {
     fontDisplayName,
-    fontSettings: fallbackFontSettings,
+    fontSettings: baseFontSettings,
     handleChange,
     placementDir,
     radioRightMargin,
@@ -192,7 +191,7 @@ export default function FontFeaturesFallback(fontFeaturesFallbackProps) {
     <>
       <ClickAwayListener onClickAway={handleClickAway}>
         <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-          <AddCircleIcon style={{ color: isOtherOn ? "grey" : "purple" }} onClick={handleClick} />
+          <AddCircleIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClick} />
           {open ? (
             <ThemeProvider theme={theme}>
               <div dir={labelDir} style={{textAlign:placementDir}}>
@@ -208,11 +207,11 @@ export default function FontFeaturesFallback(fontFeaturesFallbackProps) {
   )
 }
 
-FontFeaturesFallback.propTypes = {
-  /** Fallback Font Settings (initially default) */
-  fallbackFontSettings: PropTypes.array,
-  /** Set Fallback Font Settings */
-  setFallbackFontSettings: PropTypes.func.isRequired,
+FontFeaturesBase.propTypes = {
+  /** Base Font Settings (initially default) */
+  baseFontSettings: PropTypes.array,
+  /** Set Base Font Settings */
+  setBaseFontSettings: PropTypes.func.isRequired,
   /** Font Feature Settings ID  */
   ffsId: PropTypes.string,
   /** Font Name */
@@ -229,8 +228,6 @@ FontFeaturesFallback.propTypes = {
   ffsArr: PropTypes.array.isRequired,
   /** Example Regular Expression */
   exampleRegex: PropTypes.func.isRequired,
-  /** Set Example Fallback Text */
-  setExampleFallback: PropTypes.func.isRequired,
-  /** Is Other On? */
-  isOtherOn: PropTypes.bool.isRequired,
+  /** Set Example Base Text */
+  setExampleBase: PropTypes.func.isRequired,
 };
