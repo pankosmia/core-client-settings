@@ -17,54 +17,21 @@ export default function BlendedFontGreekSelection(blendedFontGreekSelectionProps
     greekFontName,
     setGreekFontName,
     webFontsGreek,
-    // greekFfsId,
-    // setGreekFfsId,
-    // greekFontDisplayName,
-    // setGreekFontDisplayName,
-    // ffsArr,
     unicodeRanges,
     selectedFontClass,
     isGreekDefault,
     handleClickGreek,
   } = blendedFontGreekSelectionProps;
 
-  /** There is not a possibility of Hebrew script or Greek script font-feature-settings the time of programming this page. */
-  // Available font font-feature-setting (Ffs) by selection
-  // const [greekFfsArr, setGreekFfsArr] = useState([]);
-  
-  // Default settings (ideally the user's last settings, eventually, maybe...)
-  // const [greekFontSettings, setGreekFontSettings] = useState([]);
-
-  // Font-feature-settings CSS (string for application in css)
-  // const [greekFfsCss, setGreekFfsCss] = useState('');
-
   // Example text
   const [exampleGreek, setExampleGreek] = useState('Ἐν ἀρχῇ ἦν ὁ λόγος, καὶ ὁ λόγος ἦν πρὸς τὸν θεόν, καὶ θεὸς ἦν ὁ λόγος.');
   
-  /** Set INITIAL options array (FfsArr), where applicable. */
-  /** Not yet applicable to Greek.
-   * useEffect(() => {
-   *    const selectedGreekSettingsArr = ffsArr.filter(item => greekFfsId.includes(item.name));
-   *    setGreekFfsArr(selectedGreekSettingsArr);
-   *  },[ffsArr, greekFfsId]);
-   */
-
   /** Set SELECTED:
    *    - font class name substrings
-   *    - font display name (Not yet applicable to Greek.)
    *    - font name
-   *    - and where applicable (Not yet applicable to Greek.):
-   *        - font-feature-settings id (FfsId)
-   *        - options array (FfsArr)
    */
   const handleChangeGreek = (event) => {
     setSelectedGreekFontClassSubstr(event.target.value);
-    // const selectedGreekSettingId = webFontsGreek.filter(font => font.id === event.target.value).map((font, index) => (font.settings_id));
-    // setGreekFfsId(selectedGreekSettingId);
-    // const selectedGreekSettingsId = ffsArr.filter(item => selectedGreekSettingId.includes(item.name));
-    // setGreekFfsArr(selectedGreekSettingsId);
-    // const greekDisplayName = webFontsGreek.filter(font => font.id === event.target.value).map((font, index) => (font.display_name));
-    // setGreekFontDisplayName(greekDisplayName);
     const greekName = webFontsGreek.filter(font => font.id === event.target.value).map((font, index) => (font.name));
     setGreekFontName(greekName);
   };
@@ -80,22 +47,6 @@ export default function BlendedFontGreekSelection(blendedFontGreekSelectionProps
     </MenuItem>
   ));
   
-  /** Not yet applicable to Greek.
-   * useEffect(() => {
-   *  if (greekFontSettings.length !== 0) {
-   *     const greekFfsJsx = greekFontSettings.map((obj, index) => (
-   *       <div key={index}> ~{obj.name}~ {obj.value},</div>
-   *     ));
-   *     // convert jsx return to string and remove html tags and attributes (e.g., div's)
-   *     const greekFfsStr = renderToString(greekFfsJsx).replace(/(<([^>]+)>)/ig, '').replace(/~/gm, '"');
-   *     // remove the last comma, change ~ to "
-   *     setGreekFfsCss(greekFfsStr.substring(0, greekFfsStr.length - 1).replace(/~/gm, '"'));
-   *   } else {
-   *     setGreekFfsCss("");
-   *   }
-   * },[greekFontSettings, setGreekFfsCss])
-   */
- 
   const unicodeRangeGreek = selectedGreekFontClassSubstr === '' ? '' : unicodeRanges.filter(item => (item.name === 'Greek')).map((script, index) => (script.unicode_range));
   const neutralScope = ' ';
   const regexGreek = RegExp(`[^(${unicodeRangeGreek}||${neutralScope})]`, 'ugm');
@@ -108,40 +59,9 @@ export default function BlendedFontGreekSelection(blendedFontGreekSelectionProps
   const greekFontSize = '200%';
   const greekLineHeight = '1.3';
 
-  /** Not yet applicable to Greek.
-   * const fontFeaturesGreekProps = {
-   *  greekFontSettings, // [] then default then selected
-   *  setGreekFontSettings,
-   *  ffsId: greekFfsId,
-   *  fontName: greekFontName,
-   *  fontDisplayName: greekFontDisplayName,
-   *  fontSize: greekFontSize,
-   *  lineHeight: greekLineHeight,
-   *  isGraphiteAssumed,
-   *  ffsArr: greekFfsArr,  // Options
-   *  exampleRegex: regexGreek,
-   *  setExampleGreek,
-   * };
-   *
-   * // Generate assumed filenames
-   * const greekFfsCssFilename = greekFontName.toString().replace(/^P/, 'p');
-   *
-   * const greekCss = (
-   *   <div>
-   *     <br />
-   *     <b><em>To update <em>{greekFontDisplayName}</em> font-feature-settings, set all instances of font-features-settings, -moz-font-feature-settings, and -webkit-font-feature-setting...:</em></b>
-   *     <ul>
-   *       <li> <b>in: </b><em>~/pankosmia_working/{greekFfsCssFilename}.css</em>' <b>to:</b> {greekFfsCss};</li>
-   *     </ul>
-   *   </div>
-   * );
-   */
-
   const exampleGreekDir = useDetectDir({ text: exampleGreek, isMarkup: false, ratioThreshold: .51 });
 
-  // const showGreekFeatures = greekFfsArr.length > 0;
   const showGreekTextArea = selectedGreekFontClassSubstr.length !== 0;
-  // const showGreekCss = greekFontSettings.length > 0 && selectedGreekFontClassSubstr.length !== 0;
 
   return (
     <Grid2 container spacing={2}>
@@ -177,7 +97,6 @@ export default function BlendedFontGreekSelection(blendedFontGreekSelectionProps
                 <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickGreek} />
               </Tooltip>
             }
-            {/** showGreekFeatures && <FontFeaturesGreek {...fontFeaturesGreekProps} /> */}
           </Stack>
         </div>
       </Grid2>
@@ -198,14 +117,10 @@ export default function BlendedFontGreekSelection(blendedFontGreekSelectionProps
                 width: '50%',
                 borderColor: "purple",
                 direction: exampleGreekDir,
-                /** fontFeatureSettings: greekFfsCss !== '' && greekFfsCss,
-                MozFontFeatureSettings: greekFfsCss !== '' && greekFfsCss,
-                WebkitFontFeatureSettings: greekFfsCss !== '' && greekFfsCss, */
                 }}
               value={showGreekTextArea && exampleGreek}
             />
           }
-          {/** showGreekCss ? greekCss : (<div><br /></div>) */}
         </Box>
       </Grid2>
       <br />
@@ -222,16 +137,6 @@ BlendedFontGreekSelection.propTypes = {
   greekFontName: PropTypes.string,
   /** Set Greek Font Name */
   setGreekFontName: PropTypes.func.isRequired,
-  /** Font-feature-settings (Ffs) id for settings lookup */
-  // greekFfsId: PropTypes.array.isRequired,
-  /** Set Font-feature-settings (Ffs) id for settings lookup */
-  // setGreekFfsId: PropTypes.func.isRequired,
-  /** Font Display Name for font-feature-settings heading */
-  // greekFontDisplayName: PropTypes.array.isRequired,
-  /** Set Font Display Name for font-feature-settings heading and shortlist */
-  // setGreekFontDisplayName: PropTypes.func.isRequired,
-  /** Font Feature Settings Array (Options)*/
-  // ffsArr: PropTypes.array.isRequired,
   /** Unicode ranges for RegEx by script type for editable examples */
   unicodeRanges: PropTypes.array.isRequired,
   /** Selected Font Class */

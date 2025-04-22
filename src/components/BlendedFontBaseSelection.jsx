@@ -138,23 +138,9 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
     setExampleBase,
   };
 
-  /** Generate assumed filenames */
-  const baseFfsCssFilename = baseFontName.toString().replace(/^P/, 'p');
-
   const exampleBaseDir = useDetectDir({ text: exampleBase, isMarkup: false, ratioThreshold: .51 });
 
-  const baseCss = (
-    <div>
-      <br />
-      <b><em>To update <em>{baseFontDisplayName}</em> font-feature-settings, set all instances of font-features-settings, -moz-font-feature-settings, and -webkit-font-feature-setting...:</em></b>
-      <ul>
-        <li> <b>in: </b><em>~/pankosmia_working/{baseFfsCssFilename}.css</em>' <b>to:</b> {baseFfsCss};</li>
-      </ul>
-    </div>
-  );
-
   const showBaseFeatures = baseFfsArr.length > 0;
-  const showBaseCss = baseFontSettings.length > 0 && selectedBaseFontClassSubstr.length !== 0;
 
   // Add Gentium Plus if "baseFontName" is not 'Pankosmia-Gentium Plus' or 'Pankosmia-Gentium Book Plus'.
   const baseExampleFontName = baseFontName.toString().includes('Pankosmia-Gentium') ? baseFontName : `${baseFontName}, 'Pankosmia-Gentium Plus'`;
@@ -216,7 +202,6 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
                 }}
               value={exampleBase}
               />
-            {showBaseCss && baseCss}
           </Box>
         </Grid2>
       </Grid2>
