@@ -51,6 +51,7 @@ export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionP
 
   /** Set SELECTED..
    *    - font class name substrings
+   *    - reset font settings array and css string
    *    - font display name for font-feature-settings heading
    *    - font name
    *    - and where applicable:
@@ -59,6 +60,8 @@ export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionP
    */
     const handleChangeMyanmar = (event) => {
       setSelectedMyanmarFontClassSubstr(event.target.value);
+      setMyanmarFontSettings([]);
+      setMyanmarFfsCss('');
       const selectedMyanmarSettingId = webFontsMyanmar.filter(font => font.id === event.target.value).map((font, index) => (font.settings_id));
       setMyanmarFfsId(selectedMyanmarSettingId);
       const selectedMyanmarSettingsId = ffsArr.filter(item => selectedMyanmarSettingId.includes(item.name));
@@ -81,7 +84,7 @@ export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionP
         </MenuItem>
     ));
   
-  const ffsMyanmarFontName = myanmarFontName.toString().replace('Pankosmia-','').replace(' ', '_');
+  const ffsMyanmarFontName = myanmarFontName.toString().replace('Pankosmia-','').replace(/ /g, '_');
 
   useEffect(() => {
     if (myanmarFontSettings.length !== 0) {
@@ -103,8 +106,6 @@ export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionP
         }
       }
       setMyanmarFfsCss(myanmarFfsCssStrNext);
-    } else {
-      setMyanmarFfsCss("");
     }
   },[ffsMyanmarFontName, myanmarFfsCss, myanmarFontSettings])
  

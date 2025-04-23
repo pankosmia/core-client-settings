@@ -55,6 +55,7 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
 
   /** Set SELECTED:
    *    - font class name substrings
+   *    - reset font settings array and css string
    *    - font display name for font-feature-settings heading
    *    - font name
    *    - and where applicable:
@@ -64,6 +65,8 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
   // Base
     const handleChangeBase = (event) => {
       setSelectedBaseFontClassSubstr(event.target.value);
+      setBaseFontSettings([]);
+      setBaseFfsCss('');
       const selectedBaseSettingId = webFontsBase.filter((font) => font.id === event.target.value).map((font, index) => (font.settings_id));
       setBaseFfsId(selectedBaseSettingId);
       const selectedBaseSettingsId = ffsArr.filter(item => selectedBaseSettingId.includes(item.name));
@@ -82,7 +85,7 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
         </MenuItem>
     ));
   
-  const ffsBaseFontName = baseFontName.toString().replace('Pankosmia-','').replace(' ', '_');
+  const ffsBaseFontName = baseFontName.toString().replace('Pankosmia-','').replace(/ /g, '_');
 
   useEffect(() => {
     if (baseFontSettings.length !== 0) {
@@ -104,8 +107,6 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
         }
       }
       setBaseFfsCss(baseFfsCssStrNext);
-    } else {
-      setBaseFfsCss("");
     }
   },[baseFfsCss, baseFontSettings, ffsBaseFontName])
 
