@@ -134,24 +134,10 @@ export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionP
     setExampleMyanmar,
   };
 
-  /** Generate assumed filenames */
-  const myanmarFfsCssFilename = myanmarFontName.toString().replace(/^P/, 'p');
-
   const exampleMyanmarDir = useDetectDir({ text: exampleMyanmar, isMarkup: false, ratioThreshold: .51 });
-
-  const myanmarCss = (
-    <div>
-      <br />
-      <b><em>To update <em>{myanmarFontDisplayName}</em> font-feature-settings, set all instances of font-features-settings, -moz-font-feature-settings, and -webkit-font-feature-setting...:</em></b>
-      <ul>
-        <li> <b>in: </b><em>~/pankosmia_working/{myanmarFfsCssFilename}.css</em>' <b>to:</b> {myanmarFfsCss};</li>
-      </ul>
-    </div>
-  );
 
   const showMyanmarFeatures = myanmarFfsArr.length > 0;
   const showMyanmarTextArea = selectedMyanmarFontClassSubstr.length !== 0;
-  const showMyanmarCss = myanmarFontSettings.length > 0 && selectedMyanmarFontClassSubstr.length !== 0;
 
   return (
     <Grid2 container spacing={2}>
@@ -214,7 +200,6 @@ export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionP
               value={showMyanmarTextArea && exampleMyanmar}
             />
           }
-          {showMyanmarCss ? myanmarCss : (<div><br /></div>)}
         </Box>
       </Grid2>
       <br />

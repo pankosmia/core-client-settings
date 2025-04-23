@@ -148,26 +148,12 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
     setExampleArabicUrdu,
   };
 
-  /** Generate assumed filenames */
-  const arabicUrduFfsCssFilename = arabicUrduFontName.toString().replace(/^P/, 'p');
-
   const exampleArabicUrduDir = useDetectDir({ text: exampleArabicUrdu, isMarkup: false, ratioThreshold: .51 });
-
-  const arabicUrduCss = (
-    <div>
-      <br />
-      <b><em>To update <em>{arabicUrduFontDisplayName}</em> font-feature-settings, set all instances of font-features-settings, -moz-font-feature-settings, and -webkit-font-feature-setting...:</em></b>
-      <ul>
-        <li> <b>in: </b><em>~/pankosmia_working/{arabicUrduFfsCssFilename}.css</em>' <b>to:</b> {arabicUrduFfsCss};</li>
-      </ul>
-    </div>
-  );
 
   const adjHeight = arabicUrduFontDisplayName.toString().includes("Awami Nastaliq") ? '1.75' : '';
 
   const showArabicUrduFeatures = arabicUrduFfsArr.length > 0;
   const showArabicUrduTextArea = selectedArabicUrduFontClassSubstr.length !== 0;
-  const showArabicUrduCss = arabicUrduFontSettings.length > 0 && selectedArabicUrduFontClassSubstr.length !== 0;
 
   return (
     <Grid2 container spacing={2}>
@@ -244,7 +230,6 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
               value={showArabicUrduTextArea && exampleArabicUrdu}
             />
           }
-          {showArabicUrduCss ? arabicUrduCss : (<div><br /></div>)}
         </Box>
       </Grid2>
       <br />
