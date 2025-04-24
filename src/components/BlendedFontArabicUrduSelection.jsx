@@ -64,6 +64,7 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
 
   /** For each script type, set SELECTED...
    *    - font class name substrings
+   *    - reset font settings array and css string
    *    - font display name
    *    - font name
    *    - and where applicable:
@@ -73,6 +74,8 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
   // Arabic/Urdu
     const handleChangeArabicUrdu = (event) => {
       setSelectedArabicUrduFontClassSubstr(event.target.value);
+      setArabicUrduFontSettings([]);
+      setArabicUrduFfsCss('');
       const selectedArabicUrduSettingId = webFontsArabicUrdu.filter((font) => font.id === event.target.value).map((font, index) => (font.settings_id));
       setArabicUrduFfsId(selectedArabicUrduSettingId);
       const selectedArabicUrduSettingsId = ffsArr.filter(item => selectedArabicUrduSettingId.includes(item.name));
@@ -95,7 +98,8 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
       </MenuItem>
     ));
 
-  const ffsArabicUrduFontName = arabicUrduFontName.toString().replace('Pankosmia-','').replace(' ', '_');
+  const ffsArabicUrduFontName = arabicUrduFontName.toString().replace('Pankosmia-','').replace(/ /g, '_');
+  console.log(ffsArabicUrduFontName);
   
   useEffect(() => {
     if (arabicUrduFontSettings.length !== 0) {
@@ -113,12 +117,12 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
           if (nextArabicUrduFfsCssArr[i] !== prevArabicUrduFfsCssArr[i]) {
             const ffsStr = renderToString(nextArabicUrduFfsCssArr[i]).replace(' &quot;','').replace('&quot; ','/')
             postEmptyJson(`/settings/typography-feature/${ffsArabicUrduFontName}/${ffsStr}`).then();
+            console.log(ffsArabicUrduFontName);
+            console.log(`/settings/typography-feature/${ffsArabicUrduFontName}/${ffsStr}`);
           }
         }
       }
       setArabicUrduFfsCss(arabicUrduFfsCssStrNext);
-    } else {
-      setArabicUrduFfsCss("");
     }
   },[arabicUrduFfsCss, arabicUrduFontSettings, ffsArabicUrduFontName])
 
