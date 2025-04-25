@@ -138,39 +138,6 @@
               {
                 "set": [
                     {
-                    "title": "Word spacing",
-                    "name": "wdsp",
-                    "id": "word-spacing-label",
-                    "default": "2",
-                    "label": "کیوں جو انسانی حقوق کنوں",
-                    "options": [
-                      {
-                        "tip": "Extra tight",
-                        "value": "0"
-                      },
-                      {
-                        "tip": "Tight",
-                        "value": "1"
-                      },
-                      {
-                        "tip": "Medium",
-                        "value": "2"
-                      },
-                      {
-                        "tip": "Wide",
-                        "value": "3"
-                      },
-                      {
-                        "tip": "Extra wide",
-                        "value": "4"
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "set": [
-                    {
                     "title": "Collision avoidance",
                     "name": "agca",
                     "id": "collision-avoidance-label",
