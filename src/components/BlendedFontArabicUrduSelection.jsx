@@ -99,8 +99,7 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
     ));
 
   const ffsArabicUrduFontName = arabicUrduFontName.toString().replace('Pankosmia-','').replace(/ /g, '_');
-  console.log(ffsArabicUrduFontName);
-  
+
   useEffect(() => {
     if (arabicUrduFontSettings.length !== 0) {
       const arabicUrduFfsJsx = arabicUrduFontSettings.map((obj, index) => (
@@ -117,8 +116,6 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
           if (nextArabicUrduFfsCssArr[i] !== prevArabicUrduFfsCssArr[i]) {
             const ffsStr = renderToString(nextArabicUrduFfsCssArr[i]).replace(' &quot;','').replace('&quot; ','/')
             postEmptyJson(`/settings/typography-feature/${ffsArabicUrduFontName}/${ffsStr}`).then();
-            console.log(ffsArabicUrduFontName);
-            console.log(`/settings/typography-feature/${ffsArabicUrduFontName}/${ffsStr}`);
           }
         }
       }
@@ -147,7 +144,7 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
     fontSize: arabicUrduFontSize,
     lineHeight: arabicUrduLineHeight,
     isGraphiteAssumed,
-    // ffsArr: arabicUrduFfsArr, // All possible options, removed because current unicode ranges always result in 'punc 2' (Latin); Removing that option for now an directly using awamiFfsLessPunc.
+    // ffsArr: arabicUrduFfsArr, // Removing wdsp and punc for now by using awamiFfsLessPuncAndSpacing.
     exampleRegex: regexArabicUrdu,
     setExampleArabicUrdu,
   };
@@ -259,7 +256,7 @@ BlendedFontArabicUrduSelection.propTypes = {
   /** Set Font Display Name for font-feature-settings heading and shortlist */
   setArabicUrduFontDisplayName: PropTypes.func.isRequired,
   /** Font Feature Settings Array (Options)*/
-  ffsArr: PropTypes.array.isRequired, // Current unicode ranges always result in 'punc 2' (Latin); Removing that option for now (awamiFfsLessPunc)
+  ffsArr: PropTypes.array.isRequired, // Removing wdsp and punc for now by using awamiFfsLessPuncAndSpacing.
   /** Unicode ranges for RegEx by script type for editable examples */
   unicodeRanges: PropTypes.array.isRequired,
   /** Selected Font Class */

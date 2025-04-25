@@ -223,7 +223,6 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
     }
   },[fontSetStr, typographyRef])
 
-
   // All available font-feature-setting (Ffs)
   const [ffsArr, setFfsArr] = useState([]);
 
