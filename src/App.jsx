@@ -4,9 +4,9 @@ import Settings from "./components/Settings";
 
 
 function App() {
-  const [maxWindowHeight, setMaxWindowHeight] = useState(window.innerHeight - 48);
+  const [maxWindowHeight, setMaxWindowHeight] = useState(window.innerHeight - 80);
   const handleWindowResize = useCallback(event => {
-    setMaxWindowHeight(window.innerHeight - 48);
+    setMaxWindowHeight(window.innerHeight - 80);
   }, []);
 
   useEffect(() => {
