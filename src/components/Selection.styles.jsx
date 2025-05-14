@@ -8,7 +8,7 @@ export const sx = {
     color: 'DimGray',
     fontWeight: 400,
     fontSize: '0.875rem',
-    "&.Mui-focused": {color: "purple"},
+    "&.Mui-focused": {color: "secondary"},
   },
 }
 

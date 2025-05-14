@@ -37,7 +37,7 @@ const LanguageSelector = ({usedLanguages, languageChoices, setLanguageChoices, l
                   </Select>
               </FormControl>
               <div style={{margin: '8px auto auto 4px'}}>
-                {selectedLanguage !== 'en' && <RemoveCircleIcon style={{ color: "purple" }} onClick={ev => doChange(languageChoices, selectedLanguage, langN, setLanguageChoices, langN)}  />}
+                {selectedLanguage !== 'en' && <RemoveCircleIcon color="secondary" onClick={ev => doChange(languageChoices, selectedLanguage, langN, setLanguageChoices, langN)}  />}
               </div>
             </Stack>
           </Box>

@@ -520,10 +520,10 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                             placement="right"
                             arrow
                           >
-                            <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickBase} />
+                            <RestoreIcon color="secondary" sx={{ cursor: 'pointer' }} style={{paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickBase} />
                           </Tooltip>
                         }
-                        <MoreHorizIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickBaseMore} />
+                        <MoreHorizIcon color="secondary" sx={{ cursor: 'pointer' }} style={{paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickBaseMore} />
                       </div>
                       <div style={{ display: 'flex', flexDirection: 'row' }}>
                         <FormControl fullWidth style={{maxWidth: 400, minWidth: 400}} size="small">
@@ -552,10 +552,10 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                             placement="right"
                             arrow
                           >
-                            <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickGreek} />
+                            <RestoreIcon color="secondary" sx={{ cursor: 'pointer' }} style={{ paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickGreek} />
                           </Tooltip>
                         }
-                        <MoreHorizIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickGreekMore} />
+                        <MoreHorizIcon color="secondary" sx={{ cursor: 'pointer' }} style={{paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickGreekMore} />
                       </div>
                       <div style={{ display: 'flex', flexDirection: 'row' }}>
                         <FormControl fullWidth style={{maxWidth: 400, minWidth: 400}} size="small">
@@ -584,10 +584,10 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                             placement="right"
                             arrow
                           >
-                            <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickHebrew} />
+                            <RestoreIcon color="secondary" sx={{ cursor: 'pointer' }} style={{paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickHebrew} />
                           </Tooltip>
                         }
-                        <MoreHorizIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickHebrewMore} />
+                        <MoreHorizIcon color="secondary" sx={{ cursor: 'pointer' }} style={{paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickHebrewMore} />
                       </div>
                       <div style={{ display: 'flex', flexDirection: 'row' }}>
                         <FormControl fullWidth style={{maxWidth: 400, minWidth: 400}} size="small">
@@ -617,17 +617,17 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                             placement="right"
                             arrow
                           >
-                            <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickArabicUrdu} />
+                            <RestoreIcon color="secondary" sx={{ cursor: 'pointer' }} style={{paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickArabicUrdu} />
                           </Tooltip>
                         }
-                        <MoreHorizIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickArabicUrduMore} />
+                        <MoreHorizIcon color="secondary" sx={{ cursor: 'pointer' }} style={{paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickArabicUrduMore} />
                         {isAwami &&
                           <Tooltip
                             title={isGraphiteAssumed ? doI18n("pages:core-settings:replace_awami", i18nRef.current) : doI18n("pages:core-settings:replace_noto", i18nRef.current)}
                             placement="right"
                           >
                             { isGraphiteAssumed ?
-                              <InfoIcon style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} />
+                              <InfoIcon color="secondary" style={{ paddingLeft: '9px', margin: 'auto 0' }} />
                               :
                               <WarningSharpIcon style={{ color: 'yellow', background: 'black', margin: 'auto 9px' }} />
                             }
@@ -662,10 +662,10 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                             placement="right"
                             arrow
                           >
-                            <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickMyanmar} />
+                            <RestoreIcon color="secondary" sx={{ cursor: 'pointer' }} style={{paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickMyanmar} />
                           </Tooltip>
                         }
-                        <MoreHorizIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickMyanmarMore} />
+                        <MoreHorizIcon color="secondary" sx={{ cursor: 'pointer' }} style={{paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickMyanmarMore} />
                       </div>
                       <div className={selectedFontClass} style={{ display: 'flex', flexDirection: 'row', fontSize: '100%' }}>
                         {!isCurrentDefault &&  
@@ -682,7 +682,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                             placement="right"
                             arrow
                           >
-                            <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", padding: '0px 9px', margin: 'auto 0' }} onClick={handleClickAll} />
+                            <RestoreIcon color="secondary" sx={{ cursor: 'pointer' }} style={{padding: '0px 9px', margin: 'auto 0' }} onClick={handleClickAll} />
                           </Tooltip>}
                         {!isCurrentDefault && <div style={{margin: 'auto 0'}}>{doI18n("pages:core-settings:factory_settings", i18nRef.current)}</div>}
                       </div>

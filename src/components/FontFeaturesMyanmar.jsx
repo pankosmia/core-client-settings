@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo, useEffect } from "react";
 
 import PropTypes from 'prop-types';
-import { Box, ClickAwayListener, FormControl, createTheme, ThemeProvider, Grid2 } from "@mui/material";
+import { Box, ClickAwayListener, FormControl, createTheme, ThemeProvider, Grid2, colors } from "@mui/material";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { renderToString } from 'react-dom/server';
 import { useDetectDir } from "font-detect-rhl";
@@ -55,7 +55,8 @@ export default function FontFeaturesMyanmar(fontFeaturesMyanmarProps) {
     top: 49,
     right: 250,
     zIndex: 1,
-    border: '1px solid purple',
+    border: '1px solid secondary',
+    color:"secondary",
     p: 1,
     bgcolor: 'background.paper',
     backgroundColor: "whitesmoke",
@@ -67,7 +68,7 @@ export default function FontFeaturesMyanmar(fontFeaturesMyanmarProps) {
 
   // The diffStyle constant is for emphasis in Awami Nastliq labels.
   // eslint-disable-next-line no-unused-vars
-  const diffStyle = "color: purple;";
+  const diffStyle = "color: secondary;";
 
   const fontSettingsArrProps = {
     ffsArr, 
@@ -141,13 +142,13 @@ export default function FontFeaturesMyanmar(fontFeaturesMyanmarProps) {
         styleOverrides: {
           tooltip: {
             fontSize: ".85em",
-            color: "purple",
+            color: "secondary",
             backgroundColor: "#dcdcdc",
             border: '1px solid black', 
             fontFamily: 'sans-serif',
             "& .MuiTooltip-arrow": {
               "&::before": {
-                backgroundColor: "purple",
+                backgroundColor: "secondary",
               },
             },
           }
@@ -191,7 +192,7 @@ export default function FontFeaturesMyanmar(fontFeaturesMyanmarProps) {
     <>
       <ClickAwayListener onClickAway={handleClickAway}>
         <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-          <AddCircleIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClick} />
+          <AddCircleIcon color="secondary" sx={{ cursor: 'pointer' }} style={{paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClick} />
           {open ? (
             <ThemeProvider theme={theme}>
               <div dir={labelDir} style={{textAlign:placementDir}}>
