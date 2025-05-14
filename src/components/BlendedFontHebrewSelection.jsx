@@ -66,7 +66,7 @@ export default function BlendedFontHebrewSelection(blendedFontHebrewSelectionPro
 
   return (
     <Grid2 container spacing={2}>
-      <Grid2 size={12} sx={{ borderTop: 1, borderColor: 'purple' }}>
+      <Grid2 size={12} color="secondary" sx={{ borderTop: 1}}>
         <div className={selectedFontClass} style={{ fontSize: '100%'}}>
           <Stack direction="row">
             <FormControl fullWidth style={{maxWidth: 400, minWidth: 400}} size="small">
@@ -95,7 +95,7 @@ export default function BlendedFontHebrewSelection(blendedFontHebrewSelectionPro
                 placement="right"
                 arrow
               >
-                <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickHebrew} />
+                <RestoreIcon color="secondary" sx={{ cursor: 'pointer' }} style={{paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickHebrew} />
               </Tooltip>
             }
           </Stack>
@@ -110,12 +110,12 @@ export default function BlendedFontHebrewSelection(blendedFontHebrewSelectionPro
               type="text"
               onChange={handleExampleHebrew}
               name="exampleHebrew"
+              color="secondary"
               style= {{
                 fontFamily: hebrewFontName,
                 fontSize: hebrewFontSize,
                 lineHeight: hebrewLineHeight,
                 width: '50%',
-                borderColor: "purple",
                 direction: exampleHebrewDir,
                 }}
               value={showHebrewTextArea && exampleHebrew}

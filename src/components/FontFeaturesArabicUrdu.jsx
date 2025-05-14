@@ -192,7 +192,7 @@ export default function FontFeaturesArabicUrdu(fontFeaturesArabicUrduProps) {
     <>
       <ClickAwayListener onClickAway={handleClickAway}>
         <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-          <AddCircleIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClick} />
+          <AddCircleIcon color="secondary" sx={{ cursor: 'pointer' }} style={{paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClick} />
           {open ? (
             <ThemeProvider theme={theme}>
               <div dir={labelDir} style={{textAlign:placementDir}}>

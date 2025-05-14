@@ -171,7 +171,7 @@ export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionP
                 placement="right"
                 arrow
               >
-                <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickMyanmar} />
+                <RestoreIcon color="secondary" sx={{ cursor: 'pointer' }} style={{ paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickMyanmar} />
               </Tooltip>
             }
             {showMyanmarFeatures && <FontFeaturesMyanmar {...fontFeaturesMyanmarProps} />}
@@ -187,12 +187,12 @@ export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionP
               type="text"
               onChange={handleExampleMyanmar}
               name="exampleMyanmar"
+              color="secondary"
               style= {{
                 fontFamily: myanmarFontName,
                 fontSize: myanmarFontSize,
                 lineHeight: myanmarLineHeight,
                 width: '50%',
-                borderColor: "purple",
                 direction: exampleMyanmarDir,
                 fontFeatureSettings: myanmarFfsCss !== '' && myanmarFfsCss,
                 MozFontFeatureSettings: myanmarFfsCss !== '' && myanmarFfsCss,

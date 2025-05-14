@@ -188,7 +188,7 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
                 placement="right"
                 arrow
               >
-                <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickArabicUrdu} />
+                <RestoreIcon color="secondary" sx={{ cursor: 'pointer' }} style={{ paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickArabicUrdu} />
               </Tooltip>
             }
             {isAwami &&
@@ -197,7 +197,7 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
                 placement="right"
               >
                 { isGraphiteAssumed ?
-                  <InfoIcon style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} />
+                  <InfoIcon color="secondary "style={{paddingLeft: '9px', margin: 'auto 0' }} />
                   :
                   <WarningSharpIcon style={{ color: 'yellow', background: 'black', margin: 'auto 9px' }} />
                 }
@@ -217,12 +217,12 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
               type="text"
               onChange={handleExampleArabicUrdu}
               name="exampleArabicUrdu"
+              color="primary"
               style= {{
                 fontFamily: `${arabicUrduFontName}, 'Pankosmia-Noto Nastaliq Urdu'`,
                 fontSize: arabicUrduFontSize,
                 lineHeight: arabicUrduLineHeight,
                 width: '50%',
-                borderColor: "purple",
                 direction: exampleArabicUrduDir,
                 fontFeatureSettings: arabicUrduFfsCss !== '' && arabicUrduFfsCss,
                 MozFontFeatureSettings: arabicUrduFfsCss !== '' && arabicUrduFfsCss,

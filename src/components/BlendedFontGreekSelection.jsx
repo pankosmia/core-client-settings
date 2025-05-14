@@ -94,7 +94,7 @@ export default function BlendedFontGreekSelection(blendedFontGreekSelectionProps
                 placement="right"
                 arrow
               >
-                <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickGreek} />
+                <RestoreIcon color="secondary" sx={{ cursor: 'pointer' }} style={{paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickGreek} />
               </Tooltip>
             }
           </Stack>
@@ -109,13 +109,13 @@ export default function BlendedFontGreekSelection(blendedFontGreekSelectionProps
               type="text"
               onChange={handleExampleGreek}
               name="exampleGreek"
+              color="secondary"
               style= {{
                 fontFamily: greekFontName,
                 fontSize: greekFontSize,
                 lineHeight: greekLineHeight,
                 padding: '10pt 3pt',
                 width: '50%',
-                borderColor: "purple",
                 direction: exampleGreekDir,
                 }}
               value={showGreekTextArea && exampleGreek}

@@ -176,7 +176,7 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
                 placement="right"
                 arrow
               >
-                <RestoreIcon sx={{ cursor: 'pointer' }} style={{ color: "purple", paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickBase} />
+                <RestoreIcon color="secondary" sx={{ cursor: 'pointer' }} style={{paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickBase} />
               </Tooltip>
             }
             {showBaseFeatures && <FontFeaturesBase {...fontFeaturesBaseProps} />}
@@ -190,12 +190,12 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
               type="text"
               onChange={handleExampleBase}
               name="exampleBase"
+              color="secondary"
               style= {{
                 fontFamily: baseExampleFontName,
                 fontSize: baseFontSize,
                 lineHeight: baseLineHeight,
                 width: '50%',
-                borderColor: "purple",
                 direction: exampleBaseDir,
                 fontFeatureSettings:  baseFfsCss,
                 MozFontFeatureSettings: baseFfsCss,
