@@ -56,8 +56,7 @@ export default function FontFeaturesArabicUrdu(fontFeaturesArabicUrduProps) {
     top: 49,
     right: 250,
     zIndex: 1,
-    border: '1px solid',
-    color:"secondary",
+    border: '1px solid purple',
     p: 1,
     bgcolor: 'background.paper',
     backgroundColor: "whitesmoke",
@@ -69,7 +68,7 @@ export default function FontFeaturesArabicUrdu(fontFeaturesArabicUrduProps) {
 
   // The diffStyle constant is for emphasis in Awami Nastliq labels.
   // eslint-disable-next-line no-unused-vars
-  const diffStyle = "color: secondary;";
+  const diffStyle = "color: purple;";
 
   const fontSettingsArrProps = {
     ffsArr: awamiFfsLessPuncAndSpacing, // Removing wdsp and punc for now by using awamiFfsLessPuncAndSpacing.
@@ -143,13 +142,13 @@ export default function FontFeaturesArabicUrdu(fontFeaturesArabicUrduProps) {
         styleOverrides: {
           tooltip: {
             fontSize: ".85em",
-            color: "secondary",
+            color: "purple",
             backgroundColor: "#dcdcdc",
             border: '1px solid black', 
             fontFamily: 'sans-serif',
             "& .MuiTooltip-arrow": {
               "&::before": {
-                backgroundColor: "secondary",
+                backgroundColor: "purple",
               },
             },
           }

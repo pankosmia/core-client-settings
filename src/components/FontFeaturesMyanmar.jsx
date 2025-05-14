@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo, useEffect } from "react";
 
 import PropTypes from 'prop-types';
-import { Box, ClickAwayListener, FormControl, createTheme, ThemeProvider, Grid2, colors } from "@mui/material";
+import { Box, ClickAwayListener, FormControl, createTheme, ThemeProvider, Grid2 } from "@mui/material";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { renderToString } from 'react-dom/server';
 import { useDetectDir } from "font-detect-rhl";
@@ -55,8 +55,7 @@ export default function FontFeaturesMyanmar(fontFeaturesMyanmarProps) {
     top: 49,
     right: 250,
     zIndex: 1,
-    border: '1px solid secondary',
-    color:"secondary",
+    border: '1px solid purple',
     p: 1,
     bgcolor: 'background.paper',
     backgroundColor: "whitesmoke",
@@ -68,7 +67,7 @@ export default function FontFeaturesMyanmar(fontFeaturesMyanmarProps) {
 
   // The diffStyle constant is for emphasis in Awami Nastliq labels.
   // eslint-disable-next-line no-unused-vars
-  const diffStyle = "color: secondary;";
+  const diffStyle = "color: purple;";
 
   const fontSettingsArrProps = {
     ffsArr, 
@@ -142,13 +141,13 @@ export default function FontFeaturesMyanmar(fontFeaturesMyanmarProps) {
         styleOverrides: {
           tooltip: {
             fontSize: ".85em",
-            color: "secondary",
+            color: "purple",
             backgroundColor: "#dcdcdc",
             border: '1px solid black', 
             fontFamily: 'sans-serif',
             "& .MuiTooltip-arrow": {
               "&::before": {
-                backgroundColor: "secondary",
+                backgroundColor: "purple",
               },
             },
           }
