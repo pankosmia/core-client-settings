@@ -3,6 +3,7 @@ import { useEffect, useContext, useState } from "react";
 import PropTypes from 'prop-types';
 import { Grid2, Box, InputLabel, MenuItem, FormControl, Select, Stack, TextareaAutosize, Tooltip } from "@mui/material";
 import RestoreIcon from '@mui/icons-material/Restore';
+import InfoIcon from '@mui/icons-material/Info';
 import { i18nContext as I18nContext, doI18n, postEmptyJson } from "pithekos-lib";
 import { useDetectDir } from "font-detect-rhl";
 import { renderToString } from 'react-dom/server';
@@ -14,7 +15,8 @@ import FontFeaturesMyanmar from "./FontFeaturesMyanmar";
 export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionProps) {
   const { i18nRef } = useContext(I18nContext);
   const {
-    isGraphiteAssumed,
+    isGraphite,
+    isFirefox,
     selectedMyanmarFontClassSubstr,
     setSelectedMyanmarFontClassSubstr,
     myanmarFontName,
@@ -26,8 +28,9 @@ export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionP
     setMyanmarFontDisplayName,
     ffsArr,
     unicodeRanges,
-    selectedFontClass,
+    adjSelectedFontClass,
     isMyanmarDefault,
+    isPadauk,
     handleClickMyanmar,
   } = blendedFontMyanmarSelectionProps;
 
@@ -73,7 +76,7 @@ export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionP
     };
 
   const fontMenuItemProps = {
-    selectedFontClass,
+    adjSelectedFontClass,
   };
 
   /** Build dropdown menus */
@@ -129,7 +132,7 @@ export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionP
     fontDisplayName: myanmarFontDisplayName,
     fontSize: myanmarFontSize,
     lineHeight: myanmarLineHeight,
-    isGraphiteAssumed,
+    isGraphite,
     ffsArr: myanmarFfsArr,  // Options
     exampleRegex: regexMyanmar,
     setExampleMyanmar,
@@ -143,7 +146,7 @@ export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionP
   return (
     <Grid2 container spacing={2}>
       <Grid2  size={12}>
-        <div className={selectedFontClass} style={{ fontSize: '100%'}}>
+        <div className={adjSelectedFontClass} style={{ fontSize: '100%'}}>
           <Stack direction="row">
             <FormControl fullWidth style={{maxWidth: 400, minWidth: 400}} size="small">
                 <InputLabel shrink={true} id="select-myanmar-font-label" htmlFor="select-myanmar-font-id" sx={sx.inputLabel}>
@@ -172,6 +175,14 @@ export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionP
                 arrow
               >
                 <RestoreIcon color="secondary" sx={{ cursor: 'pointer' }} style={{ paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickMyanmar} />
+              </Tooltip>
+            }
+            {!isGraphite && isPadauk &&
+              <Tooltip
+                title={doI18n("pages:core-settings:padauk_tip", i18nRef.current) + " " + (isFirefox ? doI18n("pages:core-settings:graphite_is_off", i18nRef.current) : doI18n("pages:core-settings:graphite_support", i18nRef.current))}
+                placement="right"
+              >
+                <InfoIcon color="secondary" style={{ paddingLeft: '9px', margin: 'auto 0' }} />
               </Tooltip>
             }
             {showMyanmarFeatures && <FontFeaturesMyanmar {...fontFeaturesMyanmarProps} />}
@@ -209,8 +220,10 @@ export default function BlendedFontMyanmarSelection(blendedFontMyanmarSelectionP
 }
 
 BlendedFontMyanmarSelection.propTypes = {
-  /** Is Graphite Assumed? */
-  isGraphiteAssumed: PropTypes.bool.isRequired,
+  /** Is Rendering in Graphite? */
+  isGraphite: PropTypes.bool.isRequired,
+  /** Is the Browser Firefox? */
+  isFirefox: PropTypes.bool.isRequired,
   /** Selected Myanmar Font Class Substring */
   selectedMyanmarFontClassSubstr: PropTypes.string,
   /** Set Selected Myanmar Font Class Substring */
@@ -234,9 +247,11 @@ BlendedFontMyanmarSelection.propTypes = {
   /** Unicode ranges for RegEx by script type for editable examples */
   unicodeRanges: PropTypes.array.isRequired,
   /** Selected Font Class */
-  selectedFontClass: PropTypes.string.isRequired,
+  adjSelectedFontClass: PropTypes.string.isRequired,
   /** Is Myanmar set to Default? */
   isMyanmarDefault: PropTypes.bool.isRequired,
+  /** Is a Padaul Font Selected? */
+  isPadauk: PropTypes.bool.isRequired,
   /** Handle Click Myanmar Reset to Default */
   handleClickMyanmar:  PropTypes.func.isRequired,
 };

@@ -14,7 +14,7 @@ import FontFeaturesBase from "./FontFeaturesBase";
 export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) {
   const { i18nRef } = useContext(I18nContext);
   const {
-    isGraphiteAssumed,
+    isGraphite,
     selectedBaseFontClassSubstr,
     setSelectedBaseFontClassSubstr,
     selectedHebrewFontClassSubstr,
@@ -30,7 +30,7 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
     setBaseFontDisplayName,
     ffsArr,
     unicodeRanges,
-    selectedFontClass,
+    adjSelectedFontClass,
     isBaseDefault,
     handleClickBase,
   } = blendedFontBaseSelectionProps;
@@ -77,11 +77,15 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
       setBaseFontName(baseName);
     };
 
+  const fontMenuItemProps = {
+    adjSelectedFontClass,
+  };
+
   /** Build dropdown menus */
   const WebFontsSelectableBase =
     webFontsBase.map((font, index) => (
         <MenuItem key={index} value={font.id} dense>
-            <FontMenuItem font={font}/>
+            <FontMenuItem font={font} {...fontMenuItemProps} />
         </MenuItem>
     ));
   
@@ -133,7 +137,7 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
     fontDisplayName: baseFontDisplayName,
     fontSize: baseFontSize,
     lineHeight: baseLineHeight,
-    isGraphiteAssumed,
+    isGraphite,
     ffsArr: baseFfsArr, // Options
     exampleRegex: regexBase,
     setExampleBase,
@@ -149,7 +153,7 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
   return (
     <Grid2 container spacing={2}>
       <Grid2 size={12}>
-        <div className={selectedFontClass} style={{ fontSize: '100%'}}>
+        <div className={adjSelectedFontClass} style={{ fontSize: '100%'}}>
           <Stack direction="row">
             <FormControl fullWidth style={{maxWidth: 400, minWidth: 400}} size="small">
                 <InputLabel id="select-base-font-label" htmlFor="select-base-font-id" sx={sx.inputLabel}>
@@ -212,8 +216,8 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
 }
 
 BlendedFontBaseSelection.propTypes = {
-  /** Is Graphite Assumed? */
-  isGraphiteAssumed: PropTypes.bool.isRequired,
+  /** Is Rendering in Graphite? */
+  isGraphite: PropTypes.bool.isRequired,
   /** Selected Base Font Class Substring */
   selectedBaseFontClassSubstr: PropTypes.string,
   /** Set Selected Base Font Class Substring */
@@ -247,7 +251,7 @@ BlendedFontBaseSelection.propTypes = {
   /** Is a font set for Base? */
   isBaseOn: PropTypes.bool.isRequired,
   /** Selected Font Class */
-  selectedFontClass: PropTypes.string.isRequired,
+  adjSelectedFontClass: PropTypes.string.isRequired,
   /** Is Base Font set to Default? */
   isBaseDefault: PropTypes.bool.isRequired,
   /** Handle Click Base Font Reset to Default */

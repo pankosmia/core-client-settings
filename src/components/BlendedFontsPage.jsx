@@ -25,9 +25,10 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
   const {
     fontMenu,
     setFontMenu,
+    isGraphite,
   } = blendedFontsPageProps;
 
-  // Font Class Substrings
+    // Font Class Substrings
   const [selectedHebrewFontClassSubstr, setSelectedHebrewFontClassSubstr] = useState('');
   const [selectedGreekFontClassSubstr, setSelectedGreekFontClassSubstr] = useState('');
   const [selectedMyanmarFontClassSubstr, setSelectedMyanmarFontClassSubstr] = useState('');
@@ -103,19 +104,21 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
       ]);
     }
   },[baseFontDisplayName, i18nRef, prevBaseFontDisplayName, webFontsMyanmar.length]);
-  const isGraphiteAssumed = useAssumeGraphite({}); // Tests for Firefox; A different test can show if Graphite is enabled.
+  
+  const isFirefox = useAssumeGraphite({});
+
   useEffect(() => {
     if (!webFontsArabicUrdu.length || !baseFontDisplayName.length || prevBaseFontDisplayName !== baseFontDisplayName|| !arabicUrduFontDisplayName.length || prevArabicUrduFontDisplayName !== arabicUrduFontDisplayName) {
       setWebFontsArabicUrdu([
-        { display_name: isGraphiteAssumed ? 'Awami Nastaliq 3.300' : 'Noto Nastaliq Urdu 4.000', id: 'Pankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq', settings_id: 'Awami Nastaliq', shortlist: isGraphiteAssumed || ( !isGraphiteAssumed && selectedArabicUrduFontClassSubstr.toString() !== 'Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu' && selectedArabicUrduFontClassSubstr.toString() !== 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu' && selectedArabicUrduFontClassSubstr.toString() !== 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu' ), example: 'مثال'},
-        { display_name: isGraphiteAssumed ? 'Awami Nastaliq Medium 3.300' : 'Noto Nastaliq Urdu 4.000', id: 'Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Medium', settings_id: 'Awami Nastaliq', shortlist: selectedArabicUrduFontClassSubstr.toString() === 'Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu', example: 'مثال' },
-        { display_name: isGraphiteAssumed ? 'Awami Nastaliq Semi Bold 3.300' : 'Noto Nastaliq Urdu 4.000', id: 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Semi Bold', settings_id: 'Awami Nastaliq', shortlist: selectedArabicUrduFontClassSubstr.toString() === 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu', example: 'مثال' },
-        { display_name: isGraphiteAssumed ? 'Awami Nastaliq Extra Bold 3.300' : 'Noto Nastaliq Urdu 4.000', id: 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Extra Bold', settings_id: 'Awami Nastaliq', shortlist: selectedArabicUrduFontClassSubstr.toString() === 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu', example: 'مثال' },
+        { display_name: isGraphite ? 'Awami Nastaliq 3.300' : 'Noto Nastaliq Urdu 4.000', id: 'Pankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq', settings_id: 'Awami Nastaliq', shortlist: isGraphite || ( !isGraphite && selectedArabicUrduFontClassSubstr.toString() !== 'Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu' && selectedArabicUrduFontClassSubstr.toString() !== 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu' && selectedArabicUrduFontClassSubstr.toString() !== 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu' ), example: 'مثال'},
+        { display_name: isGraphite ? 'Awami Nastaliq Medium 3.300' : 'Noto Nastaliq Urdu 4.000', id: 'Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Medium', settings_id: 'Awami Nastaliq', shortlist: selectedArabicUrduFontClassSubstr.toString() === 'Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu', example: 'مثال' },
+        { display_name: isGraphite ? 'Awami Nastaliq Semi Bold 3.300' : 'Noto Nastaliq Urdu 4.000', id: 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Semi Bold', settings_id: 'Awami Nastaliq', shortlist: selectedArabicUrduFontClassSubstr.toString() === 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu', example: 'مثال' },
+        { display_name: isGraphite ? 'Awami Nastaliq Extra Bold 3.300' : 'Noto Nastaliq Urdu 4.000', id: 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu', name: 'Pankosmia-Awami Nastaliq Extra Bold', settings_id: 'Awami Nastaliq', shortlist: selectedArabicUrduFontClassSubstr.toString() === 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu', example: 'مثال' },
         { display_name: 'Noto Naskh Arabic 2.018', id: 'Pankosmia-NotoNaskhArabic', name: 'Pankosmia-Noto Naskh Arabic', settings_id: '', shortlist: true, example: 'مثال' },
         { display_name: `${doI18n("pages:core-settings:base_font", i18nRef.current)} (${baseFontDisplayName})`, id: '', name: '', settings_id: '', shortlist: true, example: 'مثال' },
       ]);
     }
-  },[arabicUrduFontDisplayName, baseFontDisplayName, i18nRef, isGraphiteAssumed, prevArabicUrduFontDisplayName, prevBaseFontDisplayName, selectedArabicUrduFontClassSubstr, webFontsArabicUrdu.length]);
+  },[arabicUrduFontDisplayName, baseFontDisplayName, i18nRef, isGraphite, prevArabicUrduFontDisplayName, prevBaseFontDisplayName, selectedArabicUrduFontClassSubstr, webFontsArabicUrdu.length]);
   useEffect(() => {
     if (!webFontsBase.length || !baseFontDisplayName.length || prevBaseFontDisplayName !== baseFontDisplayName) {
       setWebFontsBase([
@@ -213,6 +216,12 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
     setSelectedFontClass(typographyRef.current.font_set);
   },[typographyRef]);
 
+  /**
+   * selectedFontClass is needed for isCurrentDefault and to set fontClassIdsArr without adjustment.
+   * adjSelectedFontClass is reshaped for the presence or absence of Graphite.
+   */
+  const adjSelectedFontClass = isGraphite ? typographyRef.current.font_set : typographyRef.current.font_set.replace(/Pankosmia-AwamiNastaliq(.*)Pankosmia-NotoNastaliqUrdu/ig, 'Pankosmia-NotoNastaliqUrdu');
+
   // Font Settings Changes
   useEffect( () => {
     if(fontSetStr !== 'fonts-' && typographyRef.current.font_set !== fontSetStr) {
@@ -229,9 +238,9 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
   /** Awami Nastaliq requires Graphite, and Padauk has some Graphite-only features. */
   useEffect(() => {
     if (!ffsArr.length) {
-      setFfsArr(isGraphiteAssumed ? fontFeatureSettings : fontFeatureSettings.filter((name) => name.name !== 'Awami Nastaliq'));
+      setFfsArr(isGraphite ? fontFeatureSettings : fontFeatureSettings.filter((name) => name.name !== 'Awami Nastaliq'));
     }
-  },[isGraphiteAssumed, ffsArr.length]);
+  },[isGraphite, ffsArr.length]);
 
   /** Unicode ranges for RegEx by script type for editable examples */
   const unicodeRanges = [
@@ -242,7 +251,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
     { name: 'Base', id: 'base', unicode_range: '' },
   ];
 
-  const isCurrentDefault = selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrduPankosmia-GentiumPlus"  || ( !isGraphiteAssumed && (selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrduPankosmia-GentiumPlus" || selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrduPankosmia-GentiumPlus" || selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrduPankosmia-GentiumPlus" ));
+  const isCurrentDefault = selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrduPankosmia-GentiumPlus"  || ( !isGraphite && (selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrduPankosmia-GentiumPlus" || selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrduPankosmia-GentiumPlus" || selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrduPankosmia-GentiumPlus" ));
 
   const webFontsBaseShortlist = webFontsBase.filter(font => font.shortlist);
   const webFontsArabicUrduShortlist = webFontsArabicUrdu.filter(font => font.shortlist);
@@ -294,7 +303,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
   };
 
   const fontMenuItemProps = {
-    selectedFontClass,
+    adjSelectedFontClass,
   };
 
   /** Build dropdown menus */
@@ -332,7 +341,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
   const isBaseDefault = selectedBaseFontClassSubstr.toString() === "Pankosmia-GentiumPlus";
   const isGreekDefault = selectedGreekFontClassSubstr.toString() === "Pankosmia-Cardo";
   const isHebrewDefault = selectedHebrewFontClassSubstr.toString() === "Pankosmia-EzraSIL";
-  const isArabicUrduDefault = selectedArabicUrduFontClassSubstr.toString() === "Pankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrdu" || ( !isGraphiteAssumed && (selectedArabicUrduFontClassSubstr.toString() === 'Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu' || selectedArabicUrduFontClassSubstr.toString() === 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu' || selectedArabicUrduFontClassSubstr.toString() === 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu' ));
+  const isArabicUrduDefault = selectedArabicUrduFontClassSubstr.toString() === "Pankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrdu" || ( !isGraphite && (selectedArabicUrduFontClassSubstr.toString() === 'Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu' || selectedArabicUrduFontClassSubstr.toString() === 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu' || selectedArabicUrduFontClassSubstr.toString() === 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu' ));
   const isMyanmarDefault = selectedMyanmarFontClassSubstr.toString() === "Pankosmia-Padauk";
 
   const handleClickBase = () => {
@@ -395,9 +404,12 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
   const isAwami = selectedArabicUrduFontClassSubstr.toString() !== '' && selectedArabicUrduFontClassSubstr.toString() !== 'Pankosmia-NotoNaskhArabic';
   const adjHeight = arabicUrduFontDisplayName.toString().includes("Awami Nastaliq") ? '1.75' : '';
 
+  const isPadauk = selectedMyanmarFontClassSubstr.toString() !== '';
+
   /** ArabicUrdu props patterns differ. */
   const blendedFontArabicUrduSelectionProps = {
-    isGraphiteAssumed,
+    isGraphite,
+    isFirefox,
     selectedArabicUrduFontClassSubstr,
     setSelectedArabicUrduFontClassSubstr,
     arabicUrduFontName,
@@ -407,13 +419,14 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
     setArabicUrduFontDisplayName,
     ffsArr,
     unicodeRanges,
-    selectedFontClass,
+    adjSelectedFontClass,
     isArabicUrduDefault,
     isAwami,
     handleClickArabicUrdu,
   };
   const blendedFontMyanmarSelectionProps = {
-    isGraphiteAssumed,
+    isGraphite,
+    isFirefox,
     selectedMyanmarFontClassSubstr,
     setSelectedMyanmarFontClassSubstr,
     myanmarFontName,
@@ -425,8 +438,9 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
     setMyanmarFontDisplayName,
     ffsArr,
     unicodeRanges,
-    selectedFontClass,
+    adjSelectedFontClass,
     isMyanmarDefault,
+    isPadauk,
     handleClickMyanmar,
   };
   const blendedFontGreekSelectionProps = {
@@ -441,7 +455,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
     // setGreekFontDisplayName,
     // ffsArr,
     unicodeRanges,
-    selectedFontClass,
+    adjSelectedFontClass,
     isGreekDefault,
     handleClickGreek,
   };
@@ -457,12 +471,12 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
     // setHebrewFontDisplayName,
     // ffsArr,
     unicodeRanges,
-    selectedFontClass,
+    adjSelectedFontClass,
     isHebrewDefault,
     handleClickHebrew,
   };
   const blendedFontBaseSelectionProps = {
-    isGraphiteAssumed,
+    isGraphite,
     selectedBaseFontClassSubstr,
     setSelectedBaseFontClassSubstr,
     selectedHebrewFontClassSubstr,
@@ -478,7 +492,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
     setBaseFontDisplayName,
     ffsArr,
     unicodeRanges,
-    selectedFontClass,
+    adjSelectedFontClass,
     isBaseDefault,
     handleClickBase,
   };
@@ -492,7 +506,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
             <FormControl  component="fieldset">
               <Grid2 container sx={{}}>
                 <Grid2 item>
-                  <div className={selectedFontClass} style={{ fontSize: '100%'}}>
+                  <div className={adjSelectedFontClass} style={{ fontSize: '100%'}}>
                     <Stack direction="column" spacing={2}>
                       <div style={{ display: 'flex', flexDirection: 'row' }}>
                         <FormControl fullWidth style={{maxWidth: 400, minWidth: 400}} size="small">
@@ -613,7 +627,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                         </FormControl>
                         {!isArabicUrduDefault &&  
                           <Tooltip 
-                            title={`Awami Nastaliq (${doI18n("pages:core-settings:if_not_firefox", i18nRef.current)})`}
+                            title={`Awami Nastaliq (${doI18n("pages:core-settings:replace_awami", i18nRef.current)})`}
                             placement="right"
                             arrow
                           >
@@ -623,17 +637,17 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                         <MoreHorizIcon color="secondary" sx={{ cursor: 'pointer' }} style={{paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickArabicUrduMore} />
                         {isAwami &&
                           <Tooltip
-                            title={isGraphiteAssumed ? doI18n("pages:core-settings:replace_awami", i18nRef.current) : doI18n("pages:core-settings:replace_noto", i18nRef.current)}
+                            title={(isGraphite ? doI18n("pages:core-settings:replace_awami", i18nRef.current) : doI18n("pages:core-settings:replace_noto", i18nRef.current)) + " " + (!isGraphite && isFirefox ? doI18n("pages:core-settings:graphite_is_off", i18nRef.current) : doI18n("pages:core-settings:graphite_support", i18nRef.current))}
                             placement="right"
                           >
-                            { isGraphiteAssumed ?
+                            { isGraphite ?
                               <InfoIcon color="secondary" style={{ paddingLeft: '9px', margin: 'auto 0' }} />
                               :
                               <WarningSharpIcon style={{ color: 'yellow', background: 'black', margin: 'auto 9px' }} />
                             }
                           </Tooltip>
                         }
-                        {isAwami && !isGraphiteAssumed && <div className={selectedFontClass} style={{margin: 'auto 0',fontSize: '100%' }}>{doI18n("pages:core-settings:best_with", i18nRef.current)}</div>}
+                        {isAwami && !isGraphite && <div className={adjSelectedFontClass} style={{margin: 'auto 0',fontSize: '100%' }}>{doI18n("pages:core-settings:best_with", i18nRef.current)} {isFirefox ? doI18n("pages:core-settings:graphite_is_off", i18nRef.current) : doI18n("pages:core-settings:graphite_support", i18nRef.current)}</div>}
                       </div>
                       <div style={{ display: 'flex', flexDirection: 'row' }}>
                         <FormControl fullWidth style={{maxWidth: 400, minWidth: 400}} size="small">
@@ -666,8 +680,16 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                           </Tooltip>
                         }
                         <MoreHorizIcon color="secondary" sx={{ cursor: 'pointer' }} style={{paddingLeft: '9px', margin: 'auto 0' }} onClick={handleClickMyanmarMore} />
+                        {!isGraphite && isPadauk &&
+                          <Tooltip
+                            title={doI18n("pages:core-settings:padauk_tip", i18nRef.current) + " " + (isFirefox ? doI18n("pages:core-settings:graphite_is_off", i18nRef.current) : doI18n("pages:core-settings:graphite_support", i18nRef.current))}
+                            placement="right"
+                          >
+                            <InfoIcon color="secondary" style={{ paddingLeft: '9px', margin: 'auto 0' }} />
+                          </Tooltip>
+                        }
                       </div>
-                      <div className={selectedFontClass} style={{ display: 'flex', flexDirection: 'row', fontSize: '100%' }}>
+                      <div className={adjSelectedFontClass} style={{ display: 'flex', flexDirection: 'row', fontSize: '100%' }}>
                         {!isCurrentDefault &&  
                           <Tooltip 
                             title={
@@ -675,7 +697,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                                   {doI18n("pages:core-settings:base_font", i18nRef.current)}: Gentium Plus<br /><br />
                                   {doI18n("pages:core-settings:select_greekscript", i18nRef.current)}: Cardo<br /><br />
                                   {doI18n("pages:core-settings:select_hebrewscript", i18nRef.current)}: Ezra SIL<br /><br />
-                                  {doI18n("pages:core-settings:select_arabicurduscript", i18nRef.current)}: {`Awami Nastaliq (${doI18n("pages:core-settings:if_not_firefox", i18nRef.current)})`}<br /><br />
+                                  {doI18n("pages:core-settings:select_arabicurduscript", i18nRef.current)}: {`Awami Nastaliq (${doI18n("pages:core-settings:replace_awami", i18nRef.current)})`}<br /><br />
                                   {doI18n("pages:core-settings:select_myanmarscript", i18nRef.current)}: Padauk
                               </Fragment>
                             }
@@ -753,6 +775,8 @@ BlendedFontsPage.propTypes = {
   fontMenu: PropTypes.string.isRequired,
   /** Set Font Menu */
   setFontMenu: PropTypes.func.isRequired,
+  /** Is Rendering in Graphite? */
+  isGraphite: PropTypes.bool.isRequired
 }
 
 BlendedFontsPage.defaultProps = {

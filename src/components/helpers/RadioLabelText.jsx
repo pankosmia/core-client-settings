@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 export default function RadioLabelText(RadioLabelTextProps) {
   const {
     ffsArr,
-    isGraphiteAssumed,
+    isGraphite,
   } = RadioLabelTextProps;
 
   // Get radio label text
@@ -12,7 +12,7 @@ export default function RadioLabelText(RadioLabelTextProps) {
     <div key={fontIndex}>
       {font.categories.map((categories, categoriesIndex) => {
         return (<div key={categoriesIndex}>
-          {font.categories[categoriesIndex].category.filter(item => isGraphiteAssumed ? item.opentype_render_required !== true : item.graphite_render_required !== true).map((category, categoryIndex) => {
+          {font.categories[categoriesIndex].category.filter(item => isGraphite ? item.opentype_render_required !== true : item.graphite_render_required !== true).map((category, categoryIndex) => {
             return (<div key={categoryIndex}>
               {category.sets.map((sets, setsIndex) => {
                 return (<div key={setsIndex}>
@@ -29,14 +29,14 @@ export default function RadioLabelText(RadioLabelTextProps) {
       </div>)
       })}
     </div>
-  )), [isGraphiteAssumed, ffsArr]);
+  )), [isGraphite, ffsArr]);
 
   return labelJsxText;
 }
 
 RadioLabelText.propTypes = {
-  /** Is Graphite Assumed? */
-  isGraphiteAssumed: PropTypes.bool.isRequired,
+  /** Is Rendering in Graphite? */
+  isGraphite: PropTypes.bool.isRequired,
   /** Array of Font Feature Settings Options */
   ffsArr: PropTypes.array.isRequired,
 };

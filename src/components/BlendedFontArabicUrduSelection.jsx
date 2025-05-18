@@ -16,7 +16,8 @@ import FontFeaturesArabicUrdu from "./FontFeaturesArabicUrdu";
 export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSelectionProps) {
   const { i18nRef } = useContext(I18nContext);
   const {
-    isGraphiteAssumed,
+    isGraphite,
+    isFirefox,
     selectedArabicUrduFontClassSubstr,
     setSelectedArabicUrduFontClassSubstr,
     arabicUrduFontName,
@@ -26,7 +27,7 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
     setArabicUrduFontDisplayName,
     ffsArr,
     unicodeRanges,
-    selectedFontClass,
+    adjSelectedFontClass,
     isArabicUrduDefault,
     isAwami,
     handleClickArabicUrdu,
@@ -87,7 +88,7 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
     };
 
   const fontMenuItemProps = {
-    selectedFontClass,
+    adjSelectedFontClass,
   };
   
   /** Build dropdown menus */
@@ -143,7 +144,7 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
     fontDisplayName: arabicUrduFontDisplayName,
     fontSize: arabicUrduFontSize,
     lineHeight: arabicUrduLineHeight,
-    isGraphiteAssumed,
+    isGraphite,
     // ffsArr: arabicUrduFfsArr, // Removing wdsp and punc for now by using awamiFfsLessPuncAndSpacing.
     exampleRegex: regexArabicUrdu,
     setExampleArabicUrdu,
@@ -159,7 +160,7 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
   return (
     <Grid2 container spacing={2}>
       <Grid2  size={12}>
-        <div className={selectedFontClass} style={{ fontSize: '100%' }}>
+        <div className={adjSelectedFontClass} style={{ fontSize: '100%' }}>
           <Stack direction="row">
             <FormControl fullWidth style={{maxWidth: 400, minWidth: 400}} size="small">
                 <InputLabel shrink={true} id="select-arabic-urdu-font-label" htmlFor="select-arabic-urdu-font-id" sx={sx.inputLabel}>
@@ -184,7 +185,7 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
             </FormControl>
             {!isArabicUrduDefault &&  
               <Tooltip 
-                title={`Awami Nastaliq (${doI18n("pages:core-settings:if_not_firefox", i18nRef.current)})`}
+                title={`Awami Nastaliq (${doI18n("pages:core-settings:replace_awami", i18nRef.current)})`}
                 placement="right"
                 arrow
               >
@@ -193,17 +194,17 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
             }
             {isAwami &&
               <Tooltip
-                title={isGraphiteAssumed ? doI18n("pages:core-settings:replace_awami", i18nRef.current) : doI18n("pages:core-settings:replace_noto", i18nRef.current)}
+                title={(isGraphite ? doI18n("pages:core-settings:replace_awami", i18nRef.current) : doI18n("pages:core-settings:replace_noto", i18nRef.current)) + " " + (!isGraphite && isFirefox ? doI18n("pages:core-settings:graphite_is_off", i18nRef.current) : doI18n("pages:core-settings:graphite_support", i18nRef.current))}
                 placement="right"
               >
-                { isGraphiteAssumed ?
-                  <InfoIcon color="secondary "style={{paddingLeft: '9px', margin: 'auto 0' }} />
+                { isGraphite ?
+                  <InfoIcon color="secondary" style={{paddingLeft: '9px', margin: 'auto 0' }} />
                   :
                   <WarningSharpIcon style={{ color: 'yellow', background: 'black', margin: 'auto 9px' }} />
                 }
               </Tooltip>
             }
-            {isAwami && !isGraphiteAssumed && <div className={selectedFontClass} style={{margin: 'auto 0',fontSize: '100%' }}>{doI18n("pages:core-settings:best_with", i18nRef.current)}</div>}
+            {isAwami && !isGraphite && <div className={adjSelectedFontClass} style={{margin: 'auto 0',fontSize: '100%' }}>{doI18n("pages:core-settings:best_with", i18nRef.current)} {isFirefox ? doI18n("pages:core-settings:graphite_is_off", i18nRef.current) : doI18n("pages:core-settings:graphite_support", i18nRef.current)}</div>}
             {showArabicUrduFeatures && <FontFeaturesArabicUrdu {...fontFeaturesArabicUrduProps} />}
           </Stack>
         </div>
@@ -212,7 +213,7 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
         <Box sx={{ padding: '10pt 0 5pt 20pt' }}>
           {showArabicUrduTextArea &&
             <TextareaAutosize
-              minRows={isGraphiteAssumed ? 4 : 1}
+              minRows={isGraphite ? 4 : 1}
               id="exampleArabicUrdu"
               type="text"
               onChange={handleExampleArabicUrdu}
@@ -239,8 +240,10 @@ export default function BlendedFontArabicUrduSelection(blendedFontArabicUrduSele
 }
 
 BlendedFontArabicUrduSelection.propTypes = {
-  /** Is Graphite Assumed? */
-  isGraphiteAssumed: PropTypes.bool.isRequired,
+  /** Is Rendering in Graphite? */
+  isGraphite: PropTypes.bool.isRequired,
+  /** Is the Browser Firefox? */
+  isFirefox: PropTypes.bool.isRequired,
   /** Selected Arabic/Urdu Font Class Substring */
   selectedArabicUrduFontClassSubstr: PropTypes.string,
   /** Set Selected Arabic/Urdu Font Class Substring */
@@ -260,7 +263,7 @@ BlendedFontArabicUrduSelection.propTypes = {
   /** Unicode ranges for RegEx by script type for editable examples */
   unicodeRanges: PropTypes.array.isRequired,
   /** Selected Font Class */
-  selectedFontClass: PropTypes.string.isRequired,
+  adjSelectedFontClass: PropTypes.string.isRequired,
   /** Is ArabicUrdu set to Default? */
   isArabicUrduDefault: PropTypes.bool.isRequired,
   /** Is an Awami Nastaliq Font Selected? */

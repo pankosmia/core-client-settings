@@ -18,7 +18,7 @@ export default function BlendedFontHebrewSelection(blendedFontHebrewSelectionPro
     setHebrewFontName,
     webFontsHebrew,
     unicodeRanges,
-    selectedFontClass,
+    adjSelectedFontClass,
     isHebrewDefault,
     handleClickHebrew,
   } = blendedFontHebrewSelectionProps;
@@ -37,7 +37,7 @@ export default function BlendedFontHebrewSelection(blendedFontHebrewSelectionPro
     };
 
   const fontMenuItemProps = {
-    selectedFontClass,
+    adjSelectedFontClass,
   };
 
   /** Build dropdown menus */
@@ -67,7 +67,7 @@ export default function BlendedFontHebrewSelection(blendedFontHebrewSelectionPro
   return (
     <Grid2 container spacing={2}>
       <Grid2 size={12} color="secondary" sx={{ borderTop: 1}}>
-        <div className={selectedFontClass} style={{ fontSize: '100%'}}>
+        <div className={adjSelectedFontClass} style={{ fontSize: '100%'}}>
           <Stack direction="row">
             <FormControl fullWidth style={{maxWidth: 400, minWidth: 400}} size="small">
                 <InputLabel shrink={true} id="select-hebrew-font-label" htmlFor="select-hebrew-font-id" sx={sx.inputLabel}>
@@ -142,7 +142,7 @@ BlendedFontHebrewSelection.propTypes = {
   /** Unicode ranges for RegEx by script type for editable examples */
   unicodeRanges: PropTypes.array.isRequired,
   /** Selected Font Class */
-  selectedFontClass: PropTypes.string.isRequired,
+  adjSelectedFontClass: PropTypes.string.isRequired,
   /** Is Hebrew set to Default? */
   isHebrewDefault: PropTypes.bool.isRequired,
   /** Handle Click Hebrew Reset to Default */

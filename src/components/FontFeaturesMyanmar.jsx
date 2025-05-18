@@ -19,7 +19,7 @@ export default function FontFeaturesMyanmar(fontFeaturesMyanmarProps) {
     fontDisplayName,
     fontSize,
     lineHeight,
-    isGraphiteAssumed,
+    isGraphite,
     ffsArr, // Options
     exampleRegex,
     setExampleMyanmar, // Example text
@@ -71,7 +71,7 @@ export default function FontFeaturesMyanmar(fontFeaturesMyanmarProps) {
 
   const fontSettingsArrProps = {
     ffsArr, 
-    isGraphiteAssumed,
+    isGraphite,
   };
 
   const fontSettingsArr = FontFeatureDefaults(fontSettingsArrProps);
@@ -171,7 +171,7 @@ export default function FontFeaturesMyanmar(fontFeaturesMyanmarProps) {
     radioLeftMargin,
     labelStyle,
     diffStyle,
-    isGraphiteAssumed,
+    isGraphite,
     ffsArr,
   };
 
@@ -222,8 +222,8 @@ FontFeaturesMyanmar.propTypes = {
   fontSize: PropTypes.string,
   /** Line Height */
   lineHeight: PropTypes.string,
-  /** Is Graphite Assumed? */
-  isGraphiteAssumed: PropTypes.bool.isRequired,
+  /** Is Rendering in Graphite? */
+  isGraphite: PropTypes.bool.isRequired,
   /** Font Feature Settings Array (Options)*/
   ffsArr: PropTypes.array.isRequired,
   /** Example Regular Expression */

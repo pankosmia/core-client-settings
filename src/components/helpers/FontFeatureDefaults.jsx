@@ -5,7 +5,7 @@ import { renderToString } from 'react-dom/server';
 export default function FontFeatureDefaults(FontFeatureDefaultsProps) {
   const {
     ffsArr,
-    isGraphiteAssumed,
+    isGraphite,
   } = FontFeatureDefaultsProps;
 
   // This creates an array of font settings names and default values
@@ -13,11 +13,11 @@ export default function FontFeatureDefaults(FontFeatureDefaultsProps) {
     <div key={fontIndex}>
       {font.categories.map((categories, categoriesIndex) => {
         return (<div key={categoriesIndex}>
-          {font.categories[categoriesIndex].category.filter(item => isGraphiteAssumed ? item.opentype_render_required !== true : item.graphite_render_required !== true).map((category, categoryIndex) => {
+          {font.categories[categoriesIndex].category.filter(item => isGraphite ? item.opentype_render_required !== true : item.graphite_render_required !== true).map((category, categoryIndex) => {
             return (<div key={categoryIndex}>
               {category.sets.map((sets, setsIndex) => {
                 return (<div key={setsIndex}>
-                  {category.sets[setsIndex].set.filter(item => isGraphiteAssumed ? item.opentype_render_required !== true : item.graphite_render_required !== true).map((set, setIndex) => {
+                  {category.sets[setsIndex].set.filter(item => isGraphite ? item.opentype_render_required !== true : item.graphite_render_required !== true).map((set, setIndex) => {
                       return (<div key={setIndex}>
                         [~name~: ~{set.name}~, ~value~: {set.default}],
                       </div>)
@@ -29,7 +29,7 @@ export default function FontFeatureDefaults(FontFeatureDefaultsProps) {
       </div>)
       })}
     </div>
-  )), [ffsArr, isGraphiteAssumed]);
+  )), [ffsArr, isGraphite]);
   // convert jsx return to string and remove html tags and attributes (e.g., div's)
   const fontSettingsStr = renderToString(fontSettingsJsx).replace(/(<([^>]+)>)/ig, '');
   // remove the last comma, change [] to {} and ~ to " and convert string to an array of objects
@@ -39,8 +39,8 @@ export default function FontFeatureDefaults(FontFeatureDefaultsProps) {
 }
 
 FontFeatureDefaults.propTypes = {
-  /** Is Graphite Assumed? */
-  isGraphiteAssumed: PropTypes.bool.isRequired,
+  /** Is Rendering in Graphite? */
+  isGraphite: PropTypes.bool.isRequired,
   /** Array of Font Feature Settings Options */
   ffsArr: PropTypes.array.isRequired,
 };

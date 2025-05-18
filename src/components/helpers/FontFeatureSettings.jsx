@@ -13,7 +13,7 @@ export default function FontFeatureSettings(fontFeatureSettingsProps) {
     radioLeftMargin,
     labelStyle,
     diffStyle,
-    isGraphiteAssumed,
+    isGraphite,
     ffsArr, // Possible options for the ffsId from fontFeatureSettings from font-detect-rhl 
   } = fontFeatureSettingsProps;
 
@@ -54,12 +54,12 @@ export default function FontFeatureSettings(fontFeatureSettingsProps) {
     <div key={fontIndex}>
       {font.categories.map((categories, categoriesIndex) => {
         return (<div key={categoriesIndex}>
-          {font.categories[categoriesIndex].category.filter(item => isGraphiteAssumed ? item.opentype_render_required !== true : item.graphite_render_required !== true).map((category, categoryIndex) => {
+          {font.categories[categoriesIndex].category.filter(item => isGraphite ? item.opentype_render_required !== true : item.graphite_render_required !== true).map((category, categoryIndex) => {
             return (<div key={categoryIndex}>
               <h1 style={{ textAlign: 'center', color:'purple'}}>{fontDisplayName}: {category.name}</h1>
               {category.sets.map((sets, setsIndex) => {
                 return (<div key={setsIndex}>
-                  {category.sets[setsIndex].set.filter(item => isGraphiteAssumed ? item.opentype_render_required !== true : item.graphite_render_required !== true).map((set, setIndex) => {
+                  {category.sets[setsIndex].set.filter(item => isGraphite ? item.opentype_render_required !== true : item.graphite_render_required !== true).map((set, setIndex) => {
                     return (<div key={setIndex}>
                       <FormLabel id={set.id}><div style={labelDivStyle}><mark style={labelMarkStyle}><br />{set.title}</mark></div></FormLabel>
                       <RadioGroup
@@ -93,7 +93,7 @@ export default function FontFeatureSettings(fontFeatureSettingsProps) {
         </div>)
       })}
     </div>
-  )), [count, diffStyle, ffsArr, fontDisplayName, fontSettings, handleChange, isGraphiteAssumed, labelDivStyle, labelMarkStyle, labelStyle, placementDir, radioColor, radioLeftMargin, radioRightMargin, tooltipPosition]);
+  )), [count, diffStyle, ffsArr, fontDisplayName, fontSettings, handleChange, isGraphite, labelDivStyle, labelMarkStyle, labelStyle, placementDir, radioColor, radioLeftMargin, radioRightMargin, tooltipPosition]);
 
   return featureSettings;
 }
@@ -115,8 +115,8 @@ FontFeatureSettings.propTypes = {
   labelStyle: PropTypes.object,
   /** Difference Style */
   diffStyle: PropTypes.string,
-  /** Is Graphite Assumed? */
-  isGraphiteAssumed: PropTypes.bool.isRequired,
+  /** Is Rendering in Graphite? */
+  isGraphite: PropTypes.bool.isRequired,
   /** Array of Font Feature Settings Options */
   ffsArr: PropTypes.array.isRequired,
 };

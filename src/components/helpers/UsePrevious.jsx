@@ -10,8 +10,8 @@ export default function UsePrevious(value) {
 }
 
 UsePrevious.propTypes = {
-  /** Is Graphite Assumed? */
-  isGraphiteAssumed: PropTypes.bool.isRequired,
+  /** Is Rendering in Graphite? */
+  isGraphite: PropTypes.bool.isRequired,
   /** Array of Font Feature Settings Options */
   ffsArr: PropTypes.array.isRequired,
 };
