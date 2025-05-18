@@ -218,7 +218,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
 
   /**
    * selectedFontClass is needed for isCurrentDefault and to set fontClassIdsArr without adjustment.
-   * adjSelectedFontClass is reshaped for the presence or absence of Graphite.
+   * adjSelectedFontClass reshapes selectedFontClass if Graphite is absent.
    */
   const adjSelectedFontClass = isGraphite ? typographyRef.current.font_set : typographyRef.current.font_set.replace(/Pankosmia-AwamiNastaliq(.*)Pankosmia-NotoNastaliqUrdu/ig, 'Pankosmia-NotoNastaliqUrdu');
 
