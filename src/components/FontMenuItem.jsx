@@ -2,7 +2,7 @@ import { PropTypes } from "prop-types";
 import { Typography } from "@mui/material";
 
 export default function FontShortlistMenuItem(fontCheckboxItemProps) {
-  const { font, selectedFontClass } = fontCheckboxItemProps;
+  const { font, adjSelectedFontClass } = fontCheckboxItemProps;
 
   const styles = {
     hr: {
@@ -26,7 +26,7 @@ export default function FontShortlistMenuItem(fontCheckboxItemProps) {
         style={styles.menuItem}
       >
         <Typography
-          class={selectedFontClass}
+          class={adjSelectedFontClass}
           style={{ fontSize: '100%'}}
           noWrap
           variant="body2"
@@ -49,6 +49,7 @@ export default function FontShortlistMenuItem(fontCheckboxItemProps) {
 }
 
 FontShortlistMenuItem.propTypes = {
+  /** Font */
   font: PropTypes.shape({
     display_name: PropTypes.string,
     id: PropTypes.string,
@@ -56,4 +57,6 @@ FontShortlistMenuItem.propTypes = {
     settings_id: PropTypes.string,
     example: PropTypes.string,
   }),
+  /** Adjusted Selected Font Class */
+  adjSelectedFontClass: PropTypes.string,
 };

@@ -1,9 +1,10 @@
-import { useContext, useState, useEffect } from "react"
+import { useContext, useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import { Tabs, Tab, Box, Grid2, Switch } from "@mui/material";
-import {debugContext, i18nContext, doI18n, getJson, getAndSetJson, postEmptyJson} from "pithekos-lib";
+import { debugContext, i18nContext, doI18n, getJson, getAndSetJson, postEmptyJson } from "pithekos-lib";
 import BlendedFontsPage from "./BlendedFontsPage";
 import LanguageSelection from "./LanguageSelection";
+import GraphiteTest from "./GraphiteTest";
 
 const CustomTabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -265,10 +266,13 @@ export default function Settings() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  
+  const isGraphite = GraphiteTest()
 
   const blendedFontsPageProps = {
     fontMenu,
     setFontMenu,
+    isGraphite,
   };
 
   const onClickFontMenu = (event) => {

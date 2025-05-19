@@ -18,7 +18,7 @@ export default function BlendedFontGreekSelection(blendedFontGreekSelectionProps
     setGreekFontName,
     webFontsGreek,
     unicodeRanges,
-    selectedFontClass,
+    adjSelectedFontClass,
     isGreekDefault,
     handleClickGreek,
   } = blendedFontGreekSelectionProps;
@@ -37,9 +37,10 @@ export default function BlendedFontGreekSelection(blendedFontGreekSelectionProps
   };
 
   const fontMenuItemProps = {
-    selectedFontClass,
+    adjSelectedFontClass,
   };
-  
+
+  /** Build dropdown menus */
   const WebFontsSelectableGreek =
   webFontsGreek.map((font, index) => (
     <MenuItem key={index} value={font.id} dense>
@@ -66,7 +67,7 @@ export default function BlendedFontGreekSelection(blendedFontGreekSelectionProps
   return (
     <Grid2 container spacing={2}>
       <Grid2  size={12}>
-        <div className={selectedFontClass} style={{ fontSize: '100%'}}>
+        <div className={adjSelectedFontClass} style={{ fontSize: '100%'}}>
           <Stack direction="row">
             <FormControl fullWidth style={{maxWidth: 400, minWidth: 400}} size="small">
                 <InputLabel shrink={true} id="select-greek-font-label" htmlFor="select-greek-font-id" sx={sx.inputLabel}>
@@ -140,7 +141,7 @@ BlendedFontGreekSelection.propTypes = {
   /** Unicode ranges for RegEx by script type for editable examples */
   unicodeRanges: PropTypes.array.isRequired,
   /** Selected Font Class */
-  selectedFontClass: PropTypes.string.isRequired,
+  adjSelectedFontClass: PropTypes.string.isRequired,
   /** Is Greek set to Default? */
   isGreekDefault: PropTypes.bool.isRequired,
   /** Handle Click Greek Reset to Default */

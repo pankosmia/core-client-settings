@@ -87,14 +87,14 @@
       "grc": "Ἀραϐικὰ γράμματα"
     },
     "replace_awami": {
-      "en": "Noto Nastaliq Urdu if your browser is not Firefox",
-      "fr": "Noto Nastaliq Urdu si votre navigateur n'est pas Firefox",
-      "id": "Noto Nastaliq Urdu jika peramban web anda bukan Firefox"
+      "en": "Noto Nastaliq Urdu if not rendered on Graphite.",
+      "fr": "Noto Nastaliq Urdu si non rendu sur Graphite.",
+      "id": "Noto Nastaliq Urdu jika tidak ditampilkan atas Graphite."
     },
     "replace_noto": {
-      "en": "Replaced with Awami Nastaliq in Firefox",
-      "fr": "Remplacé par Awami Nastaliq dans Firefox",
-      "id": "Diganti dengan Awami Nastaliq di Firefox"
+      "en": "Replaced with Awami Nastaliq when Graphite is available.",
+      "fr": "Remplacé par Awami Nastaliq quand le Fraphite est disponible.",
+      "id": "Diganti dengan Awami Nastaliq ketika Graphite tersedia."
     },
     "current_settings": {
       "en": "Current Settings",
@@ -107,14 +107,24 @@
       "id": "Pengaturan Pabrik"
     },
     "best_with": {
-      "en": "Best viewed with Firefox.",
-      "fr": "Mieux vu avec Firefox.",
-      "id": "Terbaik dengan Firefox."
+      "en": "Best viewed with Graphite.",
+      "fr": "Mieux vu avec Graphite.",
+      "id": "Terbaik dengan Graphite."
     },
-    "if_not_firefox": {
-      "en": "Noto Nastaliq if not Firefox",
-      "fr": "Noto Nastaliq sinon Firefox",
-      "id": "Noto Nastaliq jika bukan Firefox"
+    "padauk_tip": {
+      "en": "Additional features available under Graphite.",
+      "fr": "Fonctionnalités supplémentaires disponibles sous Graphite.",
+      "id": "Fitur tambahan tersedia di bawah Graphite."
+    },
+    "graphite_support": {
+      "en": "Firefox and Electronite support Graphite.",
+      "fr": "Firefox et Electronite prennent en charge Graphite.",
+      "id": "Firefox dan Electronite mendukung Graphite."
+    },
+    "graphite_is_off": {
+      "en": "Set gfx.font_rendering.graphite.enabled to true in about:config to enable Graphite in Firefox.",
+      "id": "Atur gfx.font_rendering.graphite.enabled menjadi true di about:config untuk mengaktifkan Graphite di Firefox.",
+      "fr": "Définissez gfx.font_rendering.graphite.enabled sur true dans about:config pour activer Graphite dans Firefox."
     }
   }
 }

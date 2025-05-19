@@ -20,7 +20,7 @@ export default function FontFeaturesArabicUrdu(fontFeaturesArabicUrduProps) {
     fontDisplayName,
     fontSize,
     lineHeight,
-    isGraphiteAssumed,
+    isGraphite,
     // ffsArr, // Options
     exampleRegex,
     setExampleArabicUrdu, // Example text
@@ -72,7 +72,7 @@ export default function FontFeaturesArabicUrdu(fontFeaturesArabicUrduProps) {
 
   const fontSettingsArrProps = {
     ffsArr: awamiFfsLessPuncAndSpacing, // Removing wdsp and punc for now by using awamiFfsLessPuncAndSpacing.
-    isGraphiteAssumed,
+    isGraphite,
   };
 
   const fontSettingsArr = FontFeatureDefaults(fontSettingsArrProps);
@@ -172,7 +172,7 @@ export default function FontFeaturesArabicUrdu(fontFeaturesArabicUrduProps) {
     radioLeftMargin,
     labelStyle,
     diffStyle,
-    isGraphiteAssumed,
+    isGraphite,
     ffsArr: awamiFfsLessPuncAndSpacing, // Current unicode ranges always result in 'punc 2' (Latin); Removing that option for now.
   };
 
@@ -223,8 +223,8 @@ FontFeaturesArabicUrdu.propTypes = {
   fontSize: PropTypes.string,
   /** Line Height */
   lineHeight: PropTypes.string,
-  /** Is Graphite Assumed? */
-  isGraphiteAssumed: PropTypes.bool.isRequired,
+  /** Is Rendering in Graphite? */
+  isGraphite: PropTypes.bool.isRequired,
   /** Font Feature Settings Array (Options)*/
   // ffsArr: PropTypes.array.isRequired, : // Removing wdsp and punc for now by using awamiFfsLessPuncAndSpacing.
   /** Example Regular Expression */
