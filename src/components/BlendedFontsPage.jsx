@@ -647,7 +647,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                             }
                           </Tooltip>
                         }
-                        {isAwami && !isGraphite && <div className={adjSelectedFontClass} style={{margin: 'auto 0',fontSize: '100%' }}>{doI18n("pages:core-settings:best_with", i18nRef.current)} {isFirefox ? doI18n("pages:core-settings:graphite_is_off", i18nRef.current) : doI18n("pages:core-settings:graphite_support", i18nRef.current)}</div>}
+                        {isAwami && !isGraphite && <div className={adjSelectedFontClass} style={{margin: 'auto 0',fontSize: '100%' }}>{doI18n("pages:core-settings:best_with", i18nRef.current)} {isFirefox && doI18n("pages:core-settings:graphite_is_off", i18nRef.current)}</div>}
                       </div>
                       <div style={{ display: 'flex', flexDirection: 'row' }}>
                         <FormControl fullWidth style={{maxWidth: 400, minWidth: 400}} size="small">
