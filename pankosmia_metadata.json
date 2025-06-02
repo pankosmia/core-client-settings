@@ -107,7 +107,7 @@
       "id": "Pengaturan Pabrik"
     },
     "best_with": {
-      "en": "Best viewed with Graphite.",
+      "en": "Best with Graphite.",
       "fr": "Mieux vu avec Graphite.",
       "id": "Terbaik dengan Graphite."
     },
@@ -117,14 +117,14 @@
       "id": "Fitur tambahan tersedia di bawah Graphite."
     },
     "graphite_support": {
-      "en": "Firefox and Electronite support Graphite.",
-      "fr": "Firefox et Electronite prennent en charge Graphite.",
-      "id": "Firefox dan Electronite mendukung Graphite."
+      "en": "Firefox, Zen Browser, LibreWolf and Electronite support Graphite.",
+      "fr": "Firefox, Zen Browser, LibreWolf et Electronite prennent en charge Graphite.",
+      "id": "Firefox, Zen Browser, LibreWolf dan Electronite mendukung Graphite."
     },
     "graphite_is_off": {
-      "en": "Set gfx.font_rendering.graphite.enabled to true in about:config to enable Graphite in Firefox.",
-      "id": "Atur gfx.font_rendering.graphite.enabled menjadi true di about:config untuk mengaktifkan Graphite di Firefox.",
-      "fr": "Définissez gfx.font_rendering.graphite.enabled sur true dans about:config pour activer Graphite dans Firefox."
+      "en": "Set gfx.font_rendering.graphite.enabled to true in about:config in your browser to enable Graphite.",
+      "id": "Atur gfx.font_rendering.graphite.enabled menjadi true dalam about:config di peramban web untuk mengaktifkan Graphite.",
+      "fr": "Définissez gfx.font_rendering.graphite.enabled sur true dans about:config de votre navigateur Web pour activer Graphite."
     }
   }
 }
