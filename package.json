@@ -9,7 +9,7 @@
     "@mui/material": "^6.1.5",
     "dompurify": "^3.2.4",
     "eslint-config-react-app": "^7.0.1",
-    "font-detect-rhl": "^1.1.7",
+    "font-detect-rhl": "^1.1.8",
     "pithekos-lib": "^0.10.8",
     "prop-types": "^15.8.1",
     "react": "^17.0.0 || ^18.0.0",
