@@ -147,8 +147,8 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
 
   const showBaseFeatures = baseFfsArr.length > 0;
 
-  // Add Gentium Plus if "baseFontName" is not 'Pankosmia-Gentium Plus' or 'Pankosmia-Gentium Book Plus'.
-  const baseExampleFontName = baseFontName.toString().includes('Pankosmia-Gentium') ? baseFontName : `${baseFontName}, 'Pankosmia-Gentium Plus'`;
+  // Add Gentium if "baseFontName" is not 'Pankosmia-Gentium' or 'Pankosmia-Gentium Book'.
+  const baseExampleFontName = baseFontName.toString().includes('Pankosmia-Gentium') ? baseFontName : `${baseFontName}, 'Pankosmia-Gentium'`;
 
   return (
     <Grid2 container spacing={2}>
@@ -176,7 +176,7 @@ export default function BlendedFontBaseSelection(blendedFontBaseSelectionProps) 
             </FormControl>
             {!isBaseDefault &&  
               <Tooltip
-                title="Gentium Plus"
+                title="Gentium"
                 placement="right"
                 arrow
               >
