@@ -122,16 +122,16 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
   useEffect(() => {
     if (!webFontsBase.length || !baseFontDisplayName.length || prevBaseFontDisplayName !== baseFontDisplayName) {
       setWebFontsBase([
-        { display_name: 'Andika 6.200', id: 'Pankosmia-AndikaPankosmia-GentiumPlus', name: 'Pankosmia-Andika', settings_id: 'Andika', shortlist: true, example: 'ABCabc123' },
-        { display_name: 'Charis SIL 6.200', id: 'Pankosmia-CharisSILPankosmia-GentiumPlus', name: 'Pankosmia-Charis SIL', settings_id: 'Charis SIL', shortlist: true, example: 'ABCabc123' },
-        { display_name: 'Gentium Plus 6.200', id: 'Pankosmia-GentiumPlus', name: 'Pankosmia-Gentium Plus', settings_id: 'Gentium Plus', shortlist: true, example: 'ABCabc123' },
-        { display_name: 'Gentium Book Plus 6.200', id: 'Pankosmia-GentiumBookPlus', name: 'Pankosmia-Gentium Book Plus', settings_id: 'Gentium Plus', shortlist: true, example: 'ABCabc123' },
-        { display_name: 'Open Sans 3.003', id: 'Pankosmia-OpenSansPankosmia-GentiumPlus', name: 'Pankosmia-Open Sans', settings_id: '', shortlist: true, example: 'ABCabc123' },
-        { display_name: 'Roboto 2.137', id: 'Pankosmia-RobotoPankosmia-GentiumPlus', name: 'Pankosmia-Roboto', settings_id: '', shortlist: true, example: 'ABCabc123' },
-        { display_name: 'Roboto Black 2.137', id: 'Pankosmia-RobotoBlackPankosmia-GentiumPlus', name: 'Pankosmia-Roboto Black', settings_id: '', shortlist: baseFontDisplayName.toString() === 'Roboto Black 2.137', example: 'ABCabc123' },
-        { display_name: 'Roboto Light 2.137', id: 'Pankosmia-RobotoLightPankosmia-GentiumPlus', name: 'Pankosmia-Roboto Light', settings_id: '', shortlist: baseFontDisplayName.toString() === 'Roboto Light 2.137', example: 'ABCabc123' },
-        { display_name: 'Roboto Medium 2.137', id: 'Pankosmia-RobotoMediumPankosmia-GentiumPlus', name: 'Pankosmia-Roboto Medium', settings_id: '', shortlist: baseFontDisplayName.toString() === 'Roboto Medium 2.137', example: 'ABCabc123' },
-        { display_name: 'Roboto Thin 2.137', id: 'Pankosmia-RobotoThinPankosmia-GentiumPlus', name: 'Pankosmia-Roboto Thin', settings_id: '', shortlist: baseFontDisplayName.toString() === 'Roboto Thin 2.137', example: 'ABCabc123' },
+        { display_name: 'Andika 7.000', id: 'Pankosmia-AndikaPankosmia-Gentium', name: 'Pankosmia-Andika', settings_id: 'Andika', shortlist: true, example: 'ABCabc123' },
+        { display_name: 'Charis 7.000', id: 'Pankosmia-CharisPankosmia-Gentium', name: 'Pankosmia-Charis', settings_id: 'Charis', shortlist: true, example: 'ABCabc123' },
+        { display_name: 'Gentium 7.000', id: 'Pankosmia-Gentium', name: 'Pankosmia-Gentium', settings_id: 'Gentium', shortlist: true, example: 'ABCabc123' },
+        { display_name: 'Gentium Book 7.000', id: 'Pankosmia-GentiumBook', name: 'Pankosmia-Gentium Book', settings_id: 'Gentium', shortlist: true, example: 'ABCabc123' },
+        { display_name: 'Open Sans 3.003', id: 'Pankosmia-OpenSansPankosmia-Gentium', name: 'Pankosmia-Open Sans', settings_id: '', shortlist: true, example: 'ABCabc123' },
+        { display_name: 'Roboto 2.137', id: 'Pankosmia-RobotoPankosmia-Gentium', name: 'Pankosmia-Roboto', settings_id: '', shortlist: true, example: 'ABCabc123' },
+        { display_name: 'Roboto Black 2.137', id: 'Pankosmia-RobotoBlackPankosmia-Gentium', name: 'Pankosmia-Roboto Black', settings_id: '', shortlist: baseFontDisplayName.toString() === 'Roboto Black 2.137', example: 'ABCabc123' },
+        { display_name: 'Roboto Light 2.137', id: 'Pankosmia-RobotoLightPankosmia-Gentium', name: 'Pankosmia-Roboto Light', settings_id: '', shortlist: baseFontDisplayName.toString() === 'Roboto Light 2.137', example: 'ABCabc123' },
+        { display_name: 'Roboto Medium 2.137', id: 'Pankosmia-RobotoMediumPankosmia-Gentium', name: 'Pankosmia-Roboto Medium', settings_id: '', shortlist: baseFontDisplayName.toString() === 'Roboto Medium 2.137', example: 'ABCabc123' },
+        { display_name: 'Roboto Thin 2.137', id: 'Pankosmia-RobotoThinPankosmia-Gentium', name: 'Pankosmia-Roboto Thin', settings_id: '', shortlist: baseFontDisplayName.toString() === 'Roboto Thin 2.137', example: 'ABCabc123' },
       ]);
     }
   },[baseFontDisplayName, prevBaseFontDisplayName, webFontsBase.length]);
@@ -143,8 +143,8 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
     }
   },[selectedFontClass, fontClassIdsArr.length])
 
-  /** ASSUMPTION: Base Font Substring will always include either Pankosmia-GentiumPlus or Pankosmia-GentiumBookPlus.
-   *  If it includes Pankosmia-GentiumPlus, then an additional preceding substring could also exist but is not required.
+  /** ASSUMPTION: Base Font Substring will always include either Pankosmia-Gentium or Pankosmia-GentiumBook.
+   *  If it includes Pankosmia-Gentium, then an additional preceding substring could also exist but is not required.
    */
 
   /** For each script type, set INITIAL:
@@ -195,7 +195,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
     // Base (*** Pattern differs because of added fallback font except where a Gentium font is selected. ***)
       const selectedBaseGentiums = webFontsBase.filter(item => item.name.includes('Gentium')).map((font, index) => (font.id));
       const selectedBaseIds = webFontsBase.filter(item => !item.name.includes('Gentium')).map((font, index) => (font.id));
-      const fontClassIdsAdjStr = fontClassIdsArr.join('Pankosmia-GentiumPlus,');
+      const fontClassIdsAdjStr = fontClassIdsArr.join('Pankosmia-Gentium,');
       const fontClassIdsArrAdj = fontClassIdsAdjStr.split(',');
       const selectedBaseIdToAdj = selectedBaseIds.filter(item => fontClassIdsArrAdj.includes(item)).map((substr, index) => (substr));
       const selectedBaseGentiumId = selectedBaseGentiums.filter(item => fontClassIdsArr.includes(item)).map((substr, index) => (substr));
@@ -251,7 +251,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
     { name: 'Base', id: 'base', unicode_range: '' },
   ];
 
-  const isCurrentDefault = selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrduPankosmia-GentiumPlus"  || ( !isGraphite && (selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrduPankosmia-GentiumPlus" || selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrduPankosmia-GentiumPlus" || selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrduPankosmia-GentiumPlus" ));
+  const isCurrentDefault = selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrduPankosmia-Gentium"  || ( !isGraphite && (selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrduPankosmia-Gentium" || selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrduPankosmia-Gentium" || selectedFontClass === "fonts-Pankosmia-CardoPankosmia-EzraSILPankosmia-PadaukPankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrduPankosmia-Gentium" ));
 
   const webFontsBaseShortlist = webFontsBase.filter(font => font.shortlist);
   const webFontsArabicUrduShortlist = webFontsArabicUrdu.filter(font => font.shortlist);
@@ -338,17 +338,17 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
       </MenuItem>
   ));
 
-  const isBaseDefault = selectedBaseFontClassSubstr.toString() === "Pankosmia-GentiumPlus";
+  const isBaseDefault = selectedBaseFontClassSubstr.toString() === "Pankosmia-Gentium";
   const isGreekDefault = selectedGreekFontClassSubstr.toString() === "Pankosmia-Cardo";
   const isHebrewDefault = selectedHebrewFontClassSubstr.toString() === "Pankosmia-EzraSIL";
   const isArabicUrduDefault = selectedArabicUrduFontClassSubstr.toString() === "Pankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrdu" || ( !isGraphite && (selectedArabicUrduFontClassSubstr.toString() === 'Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu' || selectedArabicUrduFontClassSubstr.toString() === 'Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu' || selectedArabicUrduFontClassSubstr.toString() === 'Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu' ));
   const isMyanmarDefault = selectedMyanmarFontClassSubstr.toString() === "Pankosmia-Padauk";
 
   const handleClickBase = () => {
-    setSelectedBaseFontClassSubstr('Pankosmia-GentiumPlus');
-    setBaseFfsId('Gentium Plus');
-    setBaseFontDisplayName('Gentium Plus 6.200');
-    setBaseFontName('Pankosmia-Gentium Plus');
+    setSelectedBaseFontClassSubstr('Pankosmia-Gentium');
+    setBaseFfsId('Gentium');
+    setBaseFontDisplayName('Gentium 7.000');
+    setBaseFontName('Pankosmia-Gentium');
   };
 
   const handleClickGreek = () => {
@@ -530,7 +530,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                         </FormControl>
                         {!isBaseDefault &&  
                           <Tooltip
-                            title="Gentium Plus"
+                            title="Gentium"
                             placement="right"
                             arrow
                           >
@@ -694,7 +694,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                           <Tooltip 
                             title={
                               <Fragment>
-                                  {doI18n("pages:core-settings:base_font", i18nRef.current)}: Gentium Plus<br /><br />
+                                  {doI18n("pages:core-settings:base_font", i18nRef.current)}: Gentium<br /><br />
                                   {doI18n("pages:core-settings:select_greekscript", i18nRef.current)}: Cardo<br /><br />
                                   {doI18n("pages:core-settings:select_hebrewscript", i18nRef.current)}: Ezra SIL<br /><br />
                                   {doI18n("pages:core-settings:select_arabicurduscript", i18nRef.current)}: {`Awami Nastaliq (${doI18n("pages:core-settings:replace_awami", i18nRef.current)})`}<br /><br />
