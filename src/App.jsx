@@ -1,27 +1,17 @@
-import { useState, useCallback, useEffect } from "react"
-import { Grid2 } from "@mui/material";
+import { Grid2, Box } from "@mui/material";
 import Settings from "./components/Settings";
 
 
 function App() {
-  const [maxWindowHeight, setMaxWindowHeight] = useState(window.innerHeight - 80);
-  const handleWindowResize = useCallback(event => {
-    setMaxWindowHeight(window.innerHeight - 80);
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener('resize', handleWindowResize);
-    return () => {
-        window.removeEventListener('resize', handleWindowResize);
-    };
-  }, [handleWindowResize]);
 
   return (
-          <Grid2 container sx={{ maxHeight: maxWindowHeight }}>
+        <Box sx={{mb: 2, position: 'fixed', top: '64px', bottom: 0, right: 0, overflow: 'scroll', width: '100%' }}>
+          <Grid2 container sx={{ ml: 2 }}>
               <Grid2 item size={12}>
                 <Settings />
               </Grid2>
           </Grid2>
+        </Box>
   )
 }
 
