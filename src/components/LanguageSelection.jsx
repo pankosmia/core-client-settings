@@ -1,13 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
-import { Grid2, Box, InputLabel, FormControl, Select, MenuItem, Stack } from "@mui/material";
+import { Grid2, Box, InputLabel, FormControl, Select, MenuItem, Stack, Button, Typography } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { i18nContext, doI18n, postEmptyJson } from "pithekos-lib";
 import sx from "./Selection.styles";
 import LanguageMenuItem from "./LanguageMenuItem";
 
-const LanguageSelector = ({usedLanguages, languageChoices, setLanguageChoices, langN, selectedLanguage, doChange}) => {
+const LanguageSelector = ({usedLanguages, languageChoices, setLanguageChoices, langN, selectedLanguage, doChange, selectIsOpen, setSelectIsOpen}) => {
   const {i18nRef} = useContext(i18nContext);
+
   return (
         <div item style={{padding: "1.25em 0 0 0"}}>
           <Box>
@@ -19,6 +20,9 @@ const LanguageSelector = ({usedLanguages, languageChoices, setLanguageChoices, l
                   <Select
                       variant="outlined"
                       labelId="select-language-label"
+                      open={selectIsOpen}
+                      onClose={() => setSelectIsOpen(false)}
+                      onOpen={() => setSelectIsOpen(true)}
                       name="select-language"
                       inputProps={{
                           id: "select-language",
@@ -47,6 +51,8 @@ const LanguageSelector = ({usedLanguages, languageChoices, setLanguageChoices, l
 
 const LangSelectors = ({languageChoices, setLanguageChoices, usedLanguages, doChange}) => {
 
+  const {i18nRef} = useContext(i18nContext);
+  const [selectIsOpen, setSelectIsOpen] = useState(false);
   let selectorSpecs = [];
   let usedHereLanguages = new Set([]);
   for (const [n, lang] of languageChoices.entries()) {
@@ -60,6 +66,9 @@ const LangSelectors = ({languageChoices, setLanguageChoices, usedLanguages, doCh
       usedHereLanguages.add(lang);
   }
   return <div>
+      <Button variant='outlined' color='secondary' sx={{ display: 'block', mt: 2 }} onClick={() => setSelectIsOpen(true)}>
+        {doI18n("pages:core-settings:add", i18nRef.current)}
+      </Button>
       {selectorSpecs.map((s, n) => <LanguageSelector
           key={n}
           langN={n}
@@ -67,7 +76,9 @@ const LangSelectors = ({languageChoices, setLanguageChoices, usedLanguages, doCh
           usedLanguages={s.usedLanguages}
           languageChoices={languageChoices}
           setLanguageChoices={setLanguageChoices}
-          doChange={doChange}/>)
+          doChange={doChange}
+          selectIsOpen={n === selectorSpecs.length - 1 ? selectIsOpen : undefined}
+          setSelectIsOpen={n === selectorSpecs.length - 1 ? setSelectIsOpen : undefined}/>)
       }
   </div>
 }
@@ -110,6 +121,7 @@ const doChange = (allLanguages, choice, langN, setLanguageChoices, remove) => {
 }
 
 export default function LanguageSelection(languageSelectionProps) {
+  const {i18nRef} = useContext(i18nContext);
   const {
     languageChoices,
     setLanguageChoices,
@@ -117,7 +129,11 @@ export default function LanguageSelection(languageSelectionProps) {
   } = languageSelectionProps;
 
   return (
-    <Grid2 container spacing={2}>
+    <Grid2 container spacing={1.5}>
+      <Grid2 size={12}>
+        <Typography variant='h6' sx={{ fontWeight: 'bold', mb: 1 }} >{doI18n("pages:core-settings:user_interface_title", i18nRef.current)}</Typography>
+        <Typography variant='body1' >{doI18n("pages:core-settings:user_interface_desc", i18nRef.current)}</Typography>
+      </Grid2>
       <Grid2 size={12}>
         <LangSelectors
             languageChoices={languageChoices}
