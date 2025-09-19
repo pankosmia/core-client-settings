@@ -29,10 +29,11 @@
       "grc": "Γράμματα"
     },
     "language": {
-      "en": "Language",
-      "fr": "Langue",
+      "en": "Languages",
+      "fr": "Langues",
       "id": "Bahasa",
-      "grc": "Γλῶσσα"
+      "grc": "Γλώσσες",
+      "es": "Idiomas"
     },
     "select_hebrewscript": {
       "en": "Hebrew Script",
@@ -125,6 +126,20 @@
       "en": "Set gfx.font_rendering.graphite.enabled to true in about:config in your browser to enable Graphite.",
       "id": "Atur gfx.font_rendering.graphite.enabled menjadi true dalam about:config di peramban web untuk mengaktifkan Graphite.",
       "fr": "Définissez gfx.font_rendering.graphite.enabled sur true dans about:config de votre navigateur Web pour activer Graphite."
+    },
+    "add": {
+      "en": "ADD",
+      "id": "TAMBAHKAN",
+      "fr": "AJOUTER",
+      "es": "AGREGAR"
+    },
+    "user_interface_title": {
+      "en": "User interface",
+      "es": "Interfaz de usuario"
+    },
+    "user_interface_desc": {
+      "en": "Choose your preferred language or add several. If a translation is missing, the interface will fallback to the next language.",
+      "es": "Elige tu idioma preferido o agrega varios. Si falta una de las traducciones, la interfaz recurrirá al siguiente idioma."
     }
   }
 }
