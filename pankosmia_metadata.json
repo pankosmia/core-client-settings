@@ -129,17 +129,19 @@
     },
     "add": {
       "en": "ADD",
-      "id": "TAMBAHKAN",
+      "id": "TAMBAH",
       "fr": "AJOUTER",
       "es": "AGREGAR"
     },
     "user_interface_title": {
       "en": "User interface",
-      "es": "Interfaz de usuario"
+      "es": "Interfaz de usuario",
+      "id": "Antarmuka pengguna"
     },
     "user_interface_desc": {
       "en": "Choose your preferred language or add several. If a translation is missing, the interface will fallback to the next language.",
-      "es": "Elige tu idioma preferido o agrega varios. Si falta una de las traducciones, la interfaz recurrirá al siguiente idioma."
+      "es": "Elige tu idioma preferido o agrega varios. Si falta una de las traducciones, la interfaz recurrirá al siguiente idioma.",
+      "id": "Pilih bahasa atau tambah beberapa bahasa. Jika tidak ada terjemahan, antarmuka akan pakai bahasa berikutnya."
     }
   }
 }
