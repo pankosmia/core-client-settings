@@ -5,7 +5,7 @@ import Settings from "./components/Settings";
 function App() {
 
   return (
-        <Box sx={{mb: 2, position: 'fixed', top: '64px', bottom: 0, right: 0, overflow: 'scroll', width: '100%' }}>
+        <Box sx={{mb: 2, position: 'fixed', top: '64px', bottom: 0, right: 0, overflow: 'auto', width: '100%' }}>
           <Grid2 container sx={{ mx: 2 }}>
               <Grid2 item size={12}>
                 <Settings />
