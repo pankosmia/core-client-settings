@@ -94,12 +94,12 @@
     },
     "replace_noto": {
       "en": "Replaced with Awami Nastaliq when Graphite is available.",
-      "fr": "Remplacé par Awami Nastaliq quand le Fraphite est disponible.",
+      "fr": "Remplacé par Awami Nastaliq quand Graphite est disponible.",
       "id": "Diganti dengan Awami Nastaliq ketika Graphite tersedia."
     },
     "current_settings": {
       "en": "Current Settings",
-      "fr": "Paramètres Actuels",
+      "fr": "Paramètres actuels",
       "id": "Pengaturan Saat Ini"
     },
     "factory_settings": {
@@ -125,21 +125,23 @@
     "graphite_is_off": {
       "en": "Set gfx.font_rendering.graphite.enabled to true in about:config in your browser to enable Graphite.",
       "id": "Atur gfx.font_rendering.graphite.enabled menjadi true dalam about:config di peramban web untuk mengaktifkan Graphite.",
-      "fr": "Définissez gfx.font_rendering.graphite.enabled sur true dans about:config de votre navigateur Web pour activer Graphite."
+      "fr": "Réglez gfx.font_rendering.graphite.enabled sur true dans about:config dans votre navigateur web pour activer Graphite."
     },
     "add": {
-      "en": "ADD",
-      "id": "TAMBAH",
-      "fr": "AJOUTER",
-      "es": "AGREGAR"
+      "en": "Add",
+      "es": "Agregar",
+      "fr": "Ajouter",
+      "id": "Tambah"
     },
     "user_interface_title": {
       "en": "User interface",
+      "fr": "Interface utilisateur",
       "es": "Interfaz de usuario",
       "id": "Antarmuka pengguna"
     },
     "user_interface_desc": {
       "en": "Choose your preferred language or add several. If a translation is missing, the interface will fallback to the next language.",
+      "fr": "Choisissez votre langue préférée ou ajoutez-en plusieurs. Si une traduction est manquante, l'interface passera à la langue suivante.",
       "es": "Elige tu idioma preferido o agrega varios. Si falta una de las traducciones, la interfaz recurrirá al siguiente idioma.",
       "id": "Pilih bahasa atau tambah beberapa bahasa. Jika tidak ada terjemahan, antarmuka akan pakai bahasa berikutnya."
     }
