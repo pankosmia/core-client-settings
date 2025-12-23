@@ -5,6 +5,7 @@ import { i18nContext, doI18n, getAndSetJson, postEmptyJson } from "pithekos-lib"
 import BlendedFontsPage from "./BlendedFontsPage";
 import LanguageSelection from "./LanguageSelection";
 import GraphiteTest from "./GraphiteTest";
+import AboutViewServer from "./AboutViewServer";
 
 const CustomTabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -108,6 +109,7 @@ export default function Settings() {
         >
           <Tab label={doI18n("pages:core-settings:language", i18nRef.current)} {...a11yProps(0)} />
           <Tab onClick={onClickFontMenu} label={doI18n("pages:core-settings:fonts", i18nRef.current)} {...a11yProps(1)} />
+          <Tab label={doI18n("pages:core-settings:about_server", i18nRef.current)}/>
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
@@ -119,6 +121,9 @@ export default function Settings() {
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <BlendedFontsPage {...blendedFontsPageProps} />
+      </CustomTabPanel>
+        <CustomTabPanel value={value} index={2}>
+        <AboutViewServer/>
       </CustomTabPanel>
     </Box>
   );

@@ -144,6 +144,17 @@
       "fr": "Choisissez votre langue préférée ou ajoutez-en plusieurs. Si une traduction est manquante, l'interface passera à la langue suivante.",
       "es": "Elige tu idioma preferido o agrega varios. Si falta una de las traducciones, la interfaz recurrirá al siguiente idioma.",
       "id": "Pilih bahasa atau tambah beberapa bahasa. Jika tidak ada terjemahan, antarmuka akan pakai bahasa berikutnya."
+    },
+    "about_server": {
+      "en":"About",
+      "fr":"A propos"
+    },
+    "update": {
+      "en":"Updates"
+    },
+    "version": {
+      "en": "Version",
+      "fr": "Version"
     }
   }
 }
