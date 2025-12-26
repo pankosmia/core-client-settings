@@ -1,30 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext} from "react";
 import { Box, Grid2, Typography } from "@mui/material";
-import { i18nContext, doI18n, getJson, debugContext } from "pithekos-lib";
+import { i18nContext, doI18n} from "pithekos-lib";
 
 
-export default function AboutViewServer() {
+export default function AboutViewServer({dataServer}) {
   const { i18nRef } = useContext(i18nContext);
-  const [dataServer, setDataServer] = useState();
-
-  const getServerVersion = async () => {
-
-    const summariesResponse = await getJson(`/version`, debugContext.current);
-    if (summariesResponse.ok) {
-      const data = summariesResponse.json;
-      setDataServer(data);
-    } else {
-      console.error(`error fetching data`);
-    }
-  };
-
-  useEffect(
-    () => {
-      getServerVersion();
-    },
-    []
-  );
-
+  
   return (
     <Grid2 container spacing={1.5}>
       <Grid2 size={12}>
