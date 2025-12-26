@@ -1,10 +1,11 @@
 import { useContext, useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import { Tabs, Tab, Box } from "@mui/material";
-import { i18nContext, doI18n, getAndSetJson, postEmptyJson } from "pithekos-lib";
+import { i18nContext, doI18n, getAndSetJson, postEmptyJson, getJson, debugContext } from "pithekos-lib";
 import BlendedFontsPage from "./BlendedFontsPage";
 import LanguageSelection from "./LanguageSelection";
 import GraphiteTest from "./GraphiteTest";
+import AboutViewServer from "./AboutViewServer";
 
 const CustomTabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -45,23 +46,42 @@ export default function Settings() {
   const [usedEndonyms, setUsedEndonyms] = useState([]);
 
   const [fontMenu, setFontMenu] = useState('shortlist');
+  const [dataServer, setDataServer] = useState();
+  const [nameServer, setNameServer] = useState();
+  const getServerVersion = async () => {
+    const summariesResponse = await getJson(`/version`, debugContext.current);
+    if (summariesResponse.ok) {
+      const data = summariesResponse.json;
+      setDataServer(data);
+      setNameServer(data.product_name);
+    } else {
+      console.error(`error fetching data`);
+    }
+  };
 
-  useEffect(() =>
-      getAndSetJson({
-          url: "/settings/languages",
-          setter: setLanguageChoices
-      }).then(),
+  useEffect(
+    () => {
+      getServerVersion();
+    },
     []
   );
 
   useEffect(() =>
-      getAndSetJson({
-          url: "/i18n/used-languages",
-          setter: setUsedLanguages
-      }).then(),
+    getAndSetJson({
+      url: "/settings/languages",
+      setter: setLanguageChoices
+    }).then(),
     []
   );
-  
+
+  useEffect(() =>
+    getAndSetJson({
+      url: "/i18n/used-languages",
+      setter: setUsedLanguages
+    }).then(),
+    []
+  );
+
   useEffect(() => {
     fetch('/app-resources/lookups/languages.json') // ISO_639-1 plus grc
       .then(r => r.json())
@@ -70,7 +90,7 @@ export default function Settings() {
 
   useEffect(() => {
     setUsedEndonyms(languageLookup.filter(item => usedLanguages.includes(item.id)));
-  },[languageLookup, usedLanguages]);
+  }, [languageLookup, usedLanguages]);
 
   useEffect(() => {
     if (!languageChoices.some(item => (item === 'en'))) {
@@ -78,12 +98,12 @@ export default function Settings() {
       postEmptyJson(`/settings/languages/${languageString}`).then();
       setLanguageChoices(previous => [...previous, 'en',])
     }
-  },[languageChoices])
+  }, [languageChoices])
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  
+
   const isGraphite = GraphiteTest()
 
   const blendedFontsPageProps = {
@@ -103,11 +123,12 @@ export default function Settings() {
           value={value}
           onChange={handleChange}
           textColor="secondary"
-          indicatorColor="secondary"        
+          indicatorColor="secondary"
           aria-label="basic tabs example"
         >
           <Tab label={doI18n("pages:core-settings:language", i18nRef.current)} {...a11yProps(0)} />
           <Tab onClick={onClickFontMenu} label={doI18n("pages:core-settings:fonts", i18nRef.current)} {...a11yProps(1)} />
+          <Tab label={`${doI18n("pages:core-settings:about_server", i18nRef.current)} ${nameServer || null}`} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
@@ -119,6 +140,9 @@ export default function Settings() {
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <BlendedFontsPage {...blendedFontsPageProps} />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={2}>
+        <AboutViewServer dataServer={dataServer} />
       </CustomTabPanel>
     </Box>
   );
