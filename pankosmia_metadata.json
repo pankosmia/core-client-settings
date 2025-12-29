@@ -155,6 +155,9 @@
     "version": {
       "en": "Version",
       "fr": "Version"
-    }
+    },
+     "built": {
+      "en": "Built"
+    }  
   }
 }
