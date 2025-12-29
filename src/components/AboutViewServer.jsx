@@ -33,7 +33,6 @@ export default function AboutViewServer({dataServer}) {
               </Typography>
             </Box>
           ) : null}
-
         </Typography>
       </Grid2>
     </Grid2>
