@@ -5,7 +5,7 @@ import { i18nContext, doI18n} from "pithekos-lib";
 
 export default function AboutViewServer({dataServer}) {
   const { i18nRef } = useContext(i18nContext);
-  console.log('dataserver',dataServer)
+
   return (
     <Grid2 container spacing={1.5}>
       <Grid2 size={12}>
