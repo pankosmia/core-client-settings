@@ -2,7 +2,9 @@ import { useContext, useState } from "react";
 
 import { Grid2, Box, InputLabel, FormControl, Select, MenuItem, Stack, Button, Typography } from "@mui/material";
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import { i18nContext, doI18n, postEmptyJson } from "pithekos-lib";
+import { doI18n, postEmptyJson } from "pithekos-lib";
+import { i18nContext} from "pithekos-lib";
+
 import sx from "./Selection.styles";
 import LanguageMenuItem from "./LanguageMenuItem";
 
