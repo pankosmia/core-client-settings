@@ -8,7 +8,8 @@ import RestoreIcon from '@mui/icons-material/Restore';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 import { fontFeatureSettings, useAssumeGraphite } from "font-detect-rhl";
-import { postEmptyJson, typographyContext, i18nContext as I18nContext, doI18n } from "pithekos-lib";
+import { postEmptyJson,doI18n } from "pithekos-lib";
+import { i18nContext as I18nContext,typographyContext } from "pankosmia-rcl";
 
 import UsePrevious from "./helpers/UsePrevious";
 import FontMenuItem from "./FontMenuItem";

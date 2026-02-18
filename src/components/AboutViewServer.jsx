@@ -1,7 +1,7 @@
 import { useContext} from "react";
 import { Box, Grid2, Typography } from "@mui/material";
-import { i18nContext, doI18n} from "pithekos-lib";
-
+import {doI18n} from "pithekos-lib";
+import { i18nContext} from "pankosmia-rcl";
 
 export default function AboutViewServer({dataServer}) {
   const { i18nRef } = useContext(i18nContext);
