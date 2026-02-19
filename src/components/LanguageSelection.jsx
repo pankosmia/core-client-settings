@@ -7,12 +7,9 @@ import { i18nContext } from "pithekos-lib";
 import AddIcon from '@mui/icons-material/Add';
 import sx from "./Selection.styles";
 import LanguageMenuItem from "./LanguageMenuItem";
-import { Check } from "@mui/icons-material";
 
 const LanguageSelector = ({ usedLanguages, languageChoices, setLanguageChoices, doChange }) => {
   const { i18nRef } = useContext(i18nContext);
-  const [newLang, setNewLang] = useState("");
-  console.log('newLang2', newLang)
   const handleClick = (event) => {
     setSelectIsOpen(true);
   };
@@ -29,6 +26,7 @@ const LanguageSelector = ({ usedLanguages, languageChoices, setLanguageChoices, 
     );
     usedHereLanguages.add(lang);
   }
+  console.log("used",usedLanguages)
   let langN = selectorSpecs.map(s => s.langN)
   return (
     <Paper sx={{ width: 320 }}>
@@ -50,16 +48,13 @@ const LanguageSelector = ({ usedLanguages, languageChoices, setLanguageChoices, 
                 onClose={() => setSelectIsOpen(false)}
                 onChange={ev => {
                   doChange(languageChoices, ev.target.value, langN, setLanguageChoices);
-                  setNewLang(ev.target.value)
                 }
                 }
               >
                 {
-                  usedLanguages && usedLanguages.length > 1 && (
-                    usedLanguages.filter(item => !languageChoices.slice(0, langN).includes(item.id)).map((language, n) => <MenuItem key={n} value={language.id} dense>
-                      <LanguageMenuItem language={language} />
-                    </MenuItem>
-                    )
+                  usedLanguages.filter(item => !languageChoices.slice(0, langN).includes(item.id)).map((language, n) => <MenuItem key={n} value={language.id} dense>
+                    <LanguageMenuItem language={language} />
+                  </MenuItem>
                   )
                 }
               </Select>
