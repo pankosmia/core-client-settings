@@ -3,7 +3,9 @@ import { useEffect, useContext, useState } from "react";
 import PropTypes from 'prop-types';
 import { Grid2, Box, InputLabel, MenuItem, FormControl, Select, Stack, TextareaAutosize, Tooltip } from "@mui/material";
 import RestoreIcon from '@mui/icons-material/Restore';
-import { i18nContext as I18nContext, doI18n, postEmptyJson } from "pithekos-lib";
+import { doI18n, postEmptyJson } from "pithekos-lib";
+import { i18nContext as I18nContext } from "pankosmia-rcl";
+
 import { useDetectDir } from "font-detect-rhl";
 import { renderToString } from 'react-dom/server';
 
