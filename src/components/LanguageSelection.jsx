@@ -11,7 +11,8 @@ import { Check } from "@mui/icons-material";
 
 const LanguageSelector = ({ usedLanguages, languageChoices, setLanguageChoices, doChange }) => {
   const { i18nRef } = useContext(i18nContext);
-  console.log("languagesChoices", languageChoices);
+  const [newLang, setNewLang] = useState("");
+  console.log('newLang2', newLang)
   const handleClick = (event) => {
     setSelectIsOpen(true);
   };
@@ -21,7 +22,7 @@ const LanguageSelector = ({ usedLanguages, languageChoices, setLanguageChoices, 
   for (const [n, lang] of languageChoices.entries()) {
     selectorSpecs.push(
       {
-        langN :n,
+        langN: n,
         selectedLanguage: lang,
         usedLanguages: usedLanguages
       }
@@ -29,8 +30,6 @@ const LanguageSelector = ({ usedLanguages, languageChoices, setLanguageChoices, 
     usedHereLanguages.add(lang);
   }
   let langN = selectorSpecs.map(s => s.langN)
-  console.log("langN",langN);
-  console.log("usedHereLanguage",usedHereLanguages);
   return (
     <Paper sx={{ width: 320 }}>
       <MenuList dense>
@@ -49,8 +48,10 @@ const LanguageSelector = ({ usedLanguages, languageChoices, setLanguageChoices, 
               <Select
                 value={'choose your language'}
                 onClose={() => setSelectIsOpen(false)}
-                onChange={ev =>
-                  doChange(languageChoices, ev.target.value, langN, setLanguageChoices)
+                onChange={ev => {
+                  doChange(languageChoices, ev.target.value, langN, setLanguageChoices);
+                  setNewLang(ev.target.value)
+                }
                 }
               >
                 {
@@ -130,6 +131,8 @@ const LanguageSelector = ({ usedLanguages, languageChoices, setLanguageChoices, 
 
 const doChange = (allLanguages, choice, langN, setLanguageChoices, remove) => {
   let newLanguages = [];
+
+  console.log("newLang", newLanguages)
   for (const [n, lang] of allLanguages.entries()) {
     if (newLanguages.includes(lang)) {
       continue;
