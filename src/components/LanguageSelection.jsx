@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, MenuItem, Select } from "@mui/material";
+import { Box, Button, FormControl, InputLabel, MenuItem, OutlinedInput, Select } from "@mui/material";
 import { doI18n } from "pithekos-lib";
 import { i18nContext } from "pankosmia-rcl";
 
@@ -85,16 +85,12 @@ export default function LanguageSelection({ languageChoices, usedLanguages }) {
             </div>
           )}
         </Droppable>
-        <Button fullWidth onClick={handleClick} variant='outlined' color='secondary' sx={{ display: 'block', mt: 2 }}>
-          {doI18n("pages:core-settings:add", i18nRef.current)}
-        </Button>
-        {selectIsOpen && (
-          <MenuItem>
             <FormControl size="small" fullWidth>
               <Select
-                value={""}
+               label={doI18n("pages:core-settings:add", i18nRef.current)}
+               value={selectedLanguage || ""}
                 onClose={() => setSelectIsOpen(false)}
-                //onChange={setSelectedLanguage()}
+                onChange={(e) => setSelectedLanguage(e.target.value)}
               >
                 {usedLanguages
                   .filter(item => !languageChoices.includes(item.id))
@@ -106,8 +102,6 @@ export default function LanguageSelection({ languageChoices, usedLanguages }) {
                 }
               </Select>
             </FormControl>
-          </MenuItem>
-        )}
       </DragDropContext>
     </Box>
 
