@@ -127,11 +127,11 @@
       "id": "Atur gfx.font_rendering.graphite.enabled menjadi true dalam about:config di peramban web untuk mengaktifkan Graphite.",
       "fr": "Réglez gfx.font_rendering.graphite.enabled sur true dans about:config dans votre navigateur web pour activer Graphite."
     },
-    "add": {
-      "en": "Add",
-      "es": "Agregar",
-      "fr": "Ajouter",
-      "id": "Tambah"
+    "add_language": {
+      "en": "add_language Language",
+      "es": "@Agregar",
+      "fr": "Ajouter langue",
+      "id": "@Tambah"
     },
     "user_interface_title": {
       "en": "User interface",
@@ -140,7 +140,7 @@
       "id": "Antarmuka pengguna"
     },
     "user_interface_desc": {
-      "en": "Choose your preferred language or add several. If a translation is missing, the interface will fallback to the next language.",
+      "en": "Choose your preferred language or add_language several. If a translation is missing, the interface will fallback to the next language.",
       "fr": "Choisissez votre langue préférée ou ajoutez-en plusieurs. Si une traduction est manquante, l'interface passera à la langue suivante.",
       "es": "Elige tu idioma preferido o agrega varios. Si falta una de las traducciones, la interfaz recurrirá al siguiente idioma.",
       "id": "Pilih bahasa atau tambah beberapa bahasa. Jika tidak ada terjemahan, antarmuka akan pakai bahasa berikutnya."
@@ -158,6 +158,9 @@
     },
      "built": {
       "en": "Built"
-    }  
+    },
+    "tooltip_en" :{
+      "en":"This language is required you can't delete it"
+    }
   }
 }
