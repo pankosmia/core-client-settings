@@ -128,7 +128,7 @@
       "fr": "Réglez gfx.font_rendering.graphite.enabled sur true dans about:config dans votre navigateur web pour activer Graphite."
     },
     "add_language": {
-      "en": "Language",
+      "en": "Add Language",
       "es": "@Agregar",
       "fr": "Ajouter langue",
       "id": "@Tambah"
