@@ -23,7 +23,7 @@ export default function LanguageMenuItem(languageMenuItemProps) {
           variant="body2"
           component="div"
         >
-          {language.id} {language.endonym}
+          {language.endonym} ({language.id})
         </Typography>
       </div>
     </div>
