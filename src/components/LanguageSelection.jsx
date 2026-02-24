@@ -10,6 +10,8 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 export default function LanguageSelection({ languageChoices, usedLanguages, setLanguageChoices }) {
   const { i18nRef } = useContext(i18nContext)
   const [items, setItems] = useState([]);
+  const enIndex = items.findIndex(item => item.id === "en");
+
   useEffect(() => {
     const newItems = languageChoices?.map(choice => {
       const language = usedLanguages.find(lang => lang.id === choice);
@@ -98,7 +100,14 @@ export default function LanguageSelection({ languageChoices, usedLanguages, setL
                         <DragIndicator />
                       </IconButton>
                       <Tooltip title={item.id === "en" && `${doI18n("pages:core-settings:tooltip_en", i18nRef.current)}`}>
-                        <ListItemText> {item.id} {item.content}</ListItemText>
+                        <Tooltip title={index > enIndex && `${doI18n("pages:core-settings:tooltip_languages", i18nRef.current)}`}>
+                          <ListItemText
+                            style={{
+                              color: index > enIndex ? "gray" : "black"
+                            }}
+                          > {item.id} {item.content}
+                          </ListItemText>
+                        </Tooltip>
                       </Tooltip>
                     </ListItem>
                   )}
@@ -122,7 +131,7 @@ export default function LanguageSelection({ languageChoices, usedLanguages, setL
               ))
             }
           </Select>
-            <FormHelperText>{doI18n("pages:core-settings:add_language", i18nRef.current)}</FormHelperText>
+          <FormHelperText>{doI18n("pages:core-settings:add_language", i18nRef.current)}</FormHelperText>
         </FormControl>
       </DragDropContext>
     </Box>
