@@ -2,7 +2,7 @@ import { Box, FormControl, FormHelperText, IconButton, List, ListItem, ListItemT
 import { doI18n, postEmptyJson } from "pithekos-lib";
 import { i18nContext } from "pankosmia-rcl";
 import { useState, useEffect, useContext } from "react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import LanguageMenuItem from "./LanguageMenuItem";
 import { DragIndicator } from "@mui/icons-material";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
@@ -62,6 +62,7 @@ export default function LanguageSelection({ languageChoices, usedLanguages, setL
       return updated;
     });
   };
+
   return (
     <Box sx={{ width: 300 }}>
       <DragDropContext onDragEnd={onDragEnd}>
