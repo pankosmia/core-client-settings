@@ -1,4 +1,4 @@
-import { Box, FormControl, FormHelperText, IconButton, List, ListItem, ListItemText, MenuItem, Select, Tooltip } from "@mui/material";
+import { Box, FormControl, FormHelperText, IconButton, List, ListItem, ListItemText, MenuItem, Select, Tooltip, Typography } from "@mui/material";
 import { doI18n, postEmptyJson } from "pithekos-lib";
 import { i18nContext } from "pankosmia-rcl";
 import { useState, useEffect, useContext } from "react";
@@ -64,78 +64,83 @@ export default function LanguageSelection({ languageChoices, usedLanguages, setL
   };
 
   return (
-    <Box sx={{ width: 300 }}>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="droppable">
-          {(provided, snapshot) => (
-            <List
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              {items.map((item, index) => (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
-                  {(provided, snapshot) => (
-                    <ListItem
-                      secondaryAction={
-                        <IconButton disabled={item.id === "en"} edge="end" aria-label="delete" onClick={() => removeLanguage(item.id)}>
-                          <DeleteOutlineIcon />
+    <Box>
+        <Typography variant='h6' sx={{ fontWeight: 'bold', mb: 1 }} >{doI18n("pages:core-settings:user_interface_title", i18nRef.current)}</Typography>
+        <Typography variant='body1' >{doI18n("pages:core-settings:user_interface_desc", i18nRef.current)}</Typography>
+      <Box sx={{ width: 300 }}>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="droppable">
+            {(provided, snapshot) => (
+              <List
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+              >
+                {items.map((item, index) => (
+                  <Draggable key={item.id} draggableId={item.id} index={index}>
+                    {(provided, snapshot) => (
+                      <ListItem
+                        secondaryAction={
+                          <IconButton disabled={item.id === "en"} edge="end" aria-label="delete" onClick={() => removeLanguage(item.id)}>
+                            <DeleteOutlineIcon />
+                          </IconButton>
+                        }
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        sx={{
+                          transition: "background-color 0.2s ease",
+                          "&:hover": {
+                            backgroundColor: "grey.100",
+                          },
+                          "&:active": {
+                            backgroundColor: "grey.300",
+                          },
+                          ...(snapshot.isDragging && {
+                            backgroundColor: "grey.300",
+                          }),
+                        }}
+                      >
+                        <IconButton {...provided.dragHandleProps} size="small" sx={{ cursor: "grab" }}>
+                          <DragIndicator />
                         </IconButton>
-                      }
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      sx={{
-                        transition: "background-color 0.2s ease",
-                        "&:hover": {
-                          backgroundColor: "grey.100",
-                        },
-                        "&:active": {
-                          backgroundColor: "grey.300",
-                        },
-                        ...(snapshot.isDragging && {
-                          backgroundColor: "grey.300",
-                        }),
-                      }}
-                    >
-                      <IconButton {...provided.dragHandleProps} size="small" sx={{ cursor: "grab" }}>
-                        <DragIndicator />
-                      </IconButton>
-                      <Tooltip title={item.id === "en" && `${doI18n("pages:core-settings:tooltip_en", i18nRef.current)}`}>
-                        <Tooltip title={index > enIndex && `${doI18n("pages:core-settings:tooltip_languages", i18nRef.current)}`}>
-                          <ListItemText
-                            style={{
-                              color: index > enIndex ? "gray" : "black"
-                            }}
-                          > {item.id} {item.content}
-                          </ListItemText>
+                        <Tooltip title={item.id === "en" && `${doI18n("pages:core-settings:tooltip_en", i18nRef.current)}`}>
+                          <Tooltip title={index > enIndex && `${doI18n("pages:core-settings:tooltip_languages", i18nRef.current)}`}>
+                            <ListItemText
+                              style={{
+                                color: index > enIndex ? "gray" : "black"
+                              }}
+                            > {item.id} {item.content}
+                            </ListItemText>
+                          </Tooltip>
                         </Tooltip>
-                      </Tooltip>
-                    </ListItem>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </List>
-          )}
-        </Droppable>
-        <FormControl size="small" fullWidth>
-          <Select
-            onChange={(ev) => { doChange(ev.target.value) }}
-            value={''}
-          >
-            {usedLanguages
-              .filter(item => !languageChoices.includes(item.id))
-              .map((language) => (
-                <MenuItem key={language.id} value={language.id} dense>
-                  <LanguageMenuItem language={language} />
-                </MenuItem>
-              ))
-            }
-          </Select>
-          <FormHelperText>{doI18n("pages:core-settings:add_language", i18nRef.current)}</FormHelperText>
-        </FormControl>
-      </DragDropContext>
+                      </ListItem>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </List>
+            )}
+          </Droppable>
+          <FormControl size="small" fullWidth>
+            <Select
+              onChange={(ev) => { doChange(ev.target.value) }}
+              value={''}
+            >
+              {usedLanguages
+                .filter(item => !languageChoices.includes(item.id))
+                .map((language) => (
+                  <MenuItem key={language.id} value={language.id} dense>
+                    <LanguageMenuItem language={language} />
+                  </MenuItem>
+                ))
+              }
+            </Select>
+            <FormHelperText>{doI18n("pages:core-settings:add_language", i18nRef.current)}</FormHelperText>
+          </FormControl>
+        </DragDropContext>
+      </Box>
     </Box>
+
 
   );
 }
