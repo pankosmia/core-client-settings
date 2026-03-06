@@ -140,8 +140,8 @@
       "id": "Antarmuka pengguna"
     },
     "user_interface_desc": {
-      "en": "Choose your preferred language or add_language several. If a translation is missing, the interface will fallback to the next language.",
-      "fr": "Choisissez votre langue préférée ou ajoutez-en plusieurs. Si une traduction est manquante, l'interface passera à la langue suivante.",
+      "en": "Choose your preferred language or languages. If a translation is missing in your first choice, the interface will fall back to the next language in the list.",
+      "fr": "Choisissez votre langue ou langues préférée(s). Si une traduction est manquante dans votre premier choix, l'interface passera à la langue suivante.",
       "es": "Elige tu idioma preferido o agrega varios. Si falta una de las traducciones, la interfaz recurrirá al siguiente idioma.",
       "id": "Pilih bahasa atau tambah beberapa bahasa. Jika tidak ada terjemahan, antarmuka akan pakai bahasa berikutnya."
     },
