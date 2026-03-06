@@ -163,8 +163,8 @@
       "en":"This language is required you can't delete it"
     },
     "tooltip_languages" :{
-      "en":"Languages below English will be not used",
-      "fr":"Les langues classées en dessous de l’anglais ne seront pas utilisées"
+      "en":"Complete, fallback languages will not be used",
+      "fr":"Complète, les langues suivantes ne seront pas utilisées"
     }
   }
 }

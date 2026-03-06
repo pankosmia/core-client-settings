@@ -104,14 +104,13 @@ export default function LanguageSelection({ languageChoices, usedLanguages, setL
                           <DragIndicator />
                         </IconButton>
                         <Tooltip title={item.id === "en" && `${doI18n("pages:core-settings:tooltip_en", i18nRef.current)}`}>
-                          <Tooltip title={index > enIndex && `${doI18n("pages:core-settings:tooltip_languages", i18nRef.current)}`}>
                             <ListItemText
+                              secondary={item.id === "en" &&  enIndex < items.length - 1 &&`${doI18n("pages:core-settings:tooltip_languages", i18nRef.current)}`}
                               style={{
                                 color: index > enIndex ? "gray" : "black"
                               }}
-                            > {item.id} {item.content}
+                            > {item.content} ({item.id}) 
                             </ListItemText>
-                          </Tooltip>
                         </Tooltip>
                       </ListItem>
                     )}
