@@ -67,7 +67,7 @@ export default function LanguageSelection({ languageChoices, usedLanguages, setL
     <Box>
         <Typography variant='h6' sx={{ fontWeight: 'bold', mb: 1 }} >{doI18n("pages:core-settings:user_interface_title", i18nRef.current)}</Typography>
         <Typography variant='body1' >{doI18n("pages:core-settings:user_interface_desc", i18nRef.current)}</Typography>
-      <Box sx={{ width: 300 }}>
+      <Box sx={{ width: 550 }}>
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="droppable">
             {(provided, snapshot) => (
@@ -105,7 +105,7 @@ export default function LanguageSelection({ languageChoices, usedLanguages, setL
                         </IconButton>
                         <Tooltip title={item.id === "en" && `${doI18n("pages:core-settings:tooltip_en", i18nRef.current)}`}>
                             <ListItemText
-                              secondary={item.id === "en" &&  enIndex < items.length - 1 &&`${doI18n("pages:core-settings:tooltip_languages", i18nRef.current)}`}
+                              secondary={item.id === "en" &&`${doI18n("pages:core-settings:tooltip_languages", i18nRef.current)}`}
                               style={{
                                 color: index > enIndex ? "gray" : "black"
                               }}
