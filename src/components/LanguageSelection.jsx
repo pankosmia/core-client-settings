@@ -1,20 +1,36 @@
-import { Box, FormControl, FormHelperText, IconButton, List, ListItem, ListItemText, MenuItem, Select, Tooltip, Typography } from "@mui/material";
+import {
+  Box,
+  FormControl,
+  FormHelperText,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  MenuItem,
+  Select,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import { doI18n, postEmptyJson } from "pithekos-lib";
 import { i18nContext } from "pankosmia-rcl";
 import { useState, useEffect, useContext } from "react";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import LanguageMenuItem from "./LanguageMenuItem";
 import { DragIndicator } from "@mui/icons-material";
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
-export default function LanguageSelection({ languageChoices, usedLanguages, setLanguageChoices }) {
-  const { i18nRef } = useContext(i18nContext)
+export default function LanguageSelection({
+  languageChoices,
+  usedLanguages,
+  setLanguageChoices,
+}) {
+  const { i18nRef } = useContext(i18nContext);
   const [items, setItems] = useState([]);
-  const enIndex = items.findIndex(item => item.id === "en");
+  const enIndex = items.findIndex((item) => item.id === "en");
 
   useEffect(() => {
-    const newItems = languageChoices?.map(choice => {
-      const language = usedLanguages.find(lang => lang.id === choice);
+    const newItems = languageChoices?.map((choice) => {
+      const language = usedLanguages.find((lang) => lang.id === choice);
       return { id: choice, content: language?.endonym };
     });
     setItems(newItems);
@@ -31,10 +47,10 @@ export default function LanguageSelection({ languageChoices, usedLanguages, setL
     const reorderedItems = reorder(
       items,
       result.source.index,
-      result.destination.index
+      result.destination.index,
     );
     setItems(reorderedItems);
-    const newOrder = reorderedItems.map(item => item.id);
+    const newOrder = reorderedItems.map((item) => item.id);
     setLanguageChoices(newOrder);
     const languageString = newOrder.join("/");
     postEmptyJson(`/settings/languages/${languageString}`);
@@ -53,10 +69,10 @@ export default function LanguageSelection({ languageChoices, usedLanguages, setL
       postEmptyJson(`/settings/languages/${languageString}`).then();
       return updated;
     });
-  }
+  };
   const removeLanguage = (langId) => {
     setLanguageChoices((prev) => {
-      let updated = prev.filter(id => id !== langId);
+      let updated = prev.filter((id) => id !== langId);
       const languageString = updated.join("/");
       postEmptyJson(`/settings/languages/${languageString}`);
       return updated;
@@ -65,22 +81,28 @@ export default function LanguageSelection({ languageChoices, usedLanguages, setL
 
   return (
     <Box>
-        <Typography variant='h6' sx={{ fontWeight: 'bold', mb: 1 }} >{doI18n("pages:core-settings:user_interface_title", i18nRef.current)}</Typography>
-        <Typography variant='body1' >{doI18n("pages:core-settings:user_interface_desc", i18nRef.current)}</Typography>
+      <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
+        {doI18n("pages:core-settings:user_interface_title", i18nRef.current)}
+      </Typography>
+      <Typography variant="body1">
+        {doI18n("pages:core-settings:user_interface_desc", i18nRef.current)}
+      </Typography>
       <Box sx={{ width: 550 }}>
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="droppable">
             {(provided, snapshot) => (
-              <List
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-              >
+              <List {...provided.droppableProps} ref={provided.innerRef}>
                 {items.map((item, index) => (
                   <Draggable key={item.id} draggableId={item.id} index={index}>
                     {(provided, snapshot) => (
                       <ListItem
                         secondaryAction={
-                          <IconButton disabled={item.id === "en"} edge="end" aria-label="delete" onClick={() => removeLanguage(item.id)}>
+                          <IconButton
+                            disabled={item.id === "en"}
+                            edge="end"
+                            aria-label="delete"
+                            onClick={() => removeLanguage(item.id)}
+                          >
                             <DeleteOutlineIcon />
                           </IconButton>
                         }
@@ -100,17 +122,31 @@ export default function LanguageSelection({ languageChoices, usedLanguages, setL
                           }),
                         }}
                       >
-                        <IconButton {...provided.dragHandleProps} size="small" sx={{ cursor: "grab" }}>
+                        <IconButton
+                          {...provided.dragHandleProps}
+                          size="small"
+                          sx={{ cursor: "grab" }}
+                        >
                           <DragIndicator />
                         </IconButton>
-                        <Tooltip title={item.id === "en" && `${doI18n("pages:core-settings:tooltip_en", i18nRef.current)}`}>
-                            <ListItemText
-                              secondary={item.id === "en" &&`${doI18n("pages:core-settings:tooltip_languages", i18nRef.current)}`}
-                              style={{
-                                color: index > enIndex ? "gray" : "black"
-                              }}
-                            > {item.content} ({item.id}) 
-                            </ListItemText>
+                        <Tooltip
+                          title={
+                            item.id === "en" &&
+                            `${doI18n("pages:core-settings:tooltip_en", i18nRef.current)}`
+                          }
+                        >
+                          <ListItemText
+                            secondary={
+                              item.id === "en" &&
+                              `${doI18n("pages:core-settings:tooltip_languages", i18nRef.current)}`
+                            }
+                            style={{
+                              color: index > enIndex ? "gray" : "black",
+                            }}
+                          >
+                            {" "}
+                            {item.content} ({item.id})
+                          </ListItemText>
                         </Tooltip>
                       </ListItem>
                     )}
@@ -122,24 +158,25 @@ export default function LanguageSelection({ languageChoices, usedLanguages, setL
           </Droppable>
           <FormControl size="small" fullWidth>
             <Select
-              onChange={(ev) => { doChange(ev.target.value) }}
-              value={''}
+              onChange={(ev) => {
+                doChange(ev.target.value);
+              }}
+              value={""}
             >
               {usedLanguages
-                .filter(item => !languageChoices.includes(item.id))
+                .filter((item) => !languageChoices.includes(item.id))
                 .map((language) => (
                   <MenuItem key={language.id} value={language.id} dense>
                     <LanguageMenuItem language={language} />
                   </MenuItem>
-                ))
-              }
+                ))}
             </Select>
-            <FormHelperText>{doI18n("pages:core-settings:add_language", i18nRef.current)}</FormHelperText>
+            <FormHelperText>
+              {doI18n("pages:core-settings:add_language", i18nRef.current)}
+            </FormHelperText>
           </FormControl>
         </DragDropContext>
       </Box>
     </Box>
-
-
   );
 }

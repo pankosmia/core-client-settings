@@ -32,7 +32,7 @@
               },
               {
                 "set": [
-                    {
+                  {
                     "title": "Initial heh doachashmee",
                     "name": "hedo",
                     "id": "initial-heh-doachashmee-label",
@@ -53,7 +53,7 @@
               },
               {
                 "set": [
-                    {
+                  {
                     "title": "Lam with V",
                     "name": "lamv",
                     "id": "lam-with-v-label",
@@ -74,7 +74,7 @@
               },
               {
                 "set": [
-                    {
+                  {
                     "title": "Full Stop",
                     "name": "cv85",
                     "id": "full-stop-label",
@@ -95,7 +95,7 @@
               },
               {
                 "set": [
-                    {
+                  {
                     "title": "Sukun/jazm",
                     "name": "cv78",
                     "id": "sukun-jazm-label",
@@ -116,7 +116,7 @@
               },
               {
                 "set": [
-                    {
+                  {
                     "title": "Hamza",
                     "name": "hamz",
                     "id": "hamza-label",
@@ -137,7 +137,7 @@
               },
               {
                 "set": [
-                    {
+                  {
                     "title": "Collision avoidance",
                     "name": "agca",
                     "id": "collision-avoidance-label",
@@ -162,7 +162,7 @@
               },
               {
                 "set": [
-                    {
+                  {
                     "title": "Short forms",
                     "name": "shrt",
                     "id": "short-forms-label",
