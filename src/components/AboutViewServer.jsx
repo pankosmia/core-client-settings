@@ -1,9 +1,9 @@
-import { useContext} from "react";
+import { useContext } from "react";
 import { Box, Grid2, Typography } from "@mui/material";
-import {doI18n} from "pithekos-lib";
-import { i18nContext} from "pankosmia-rcl";
+import { doI18n } from "pithekos-lib";
+import { i18nContext } from "pankosmia-rcl";
 
-export default function AboutViewServer({dataServer}) {
+export default function AboutViewServer({ dataServer }) {
   const { i18nRef } = useContext(i18nContext);
 
   return (
@@ -11,25 +11,18 @@ export default function AboutViewServer({dataServer}) {
       <Grid2 size={12}>
         <Typography>
           {dataServer ? (
-            <Box >
-              <Typography
-                variant='h6'
-                sx={{ fontWeight: 'bold', mb: 1 }}
-              >
-                {dataServer.product_name} {doI18n("pages:core-settings:update", i18nRef.current)}
-
+            <Box>
+              <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
+                {dataServer.product_name}{" "}
+                {doI18n("pages:core-settings:update", i18nRef.current)}
               </Typography>
-              <Typography
-                fullWidth
-                size="small"
-              >
-                {doI18n("pages:core-settings:version", i18nRef.current)} {dataServer.product_version}
+              <Typography fullWidth size="small">
+                {doI18n("pages:core-settings:version", i18nRef.current)}{" "}
+                {dataServer.product_version}
               </Typography>
-               <Typography
-                fullWidth
-                size="small"
-              >
-                {doI18n("pages:core-settings:built", i18nRef.current)} {dataServer.product_date_time}
+              <Typography fullWidth size="small">
+                {doI18n("pages:core-settings:built", i18nRef.current)}{" "}
+                {dataServer.product_date_time}
               </Typography>
             </Box>
           ) : null}

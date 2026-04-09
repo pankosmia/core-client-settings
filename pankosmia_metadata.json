@@ -146,25 +146,25 @@
       "id": "Pilih bahasa atau tambah beberapa bahasa. Jika tidak ada terjemahan, antarmuka akan pakai bahasa berikutnya."
     },
     "about_server": {
-      "en":"About",
-      "fr":"A propos"
+      "en": "About",
+      "fr": "A propos"
     },
     "update": {
-      "en":"Updates"
+      "en": "Updates"
     },
     "version": {
       "en": "Version",
       "fr": "Version"
     },
-     "built": {
+    "built": {
       "en": "Built"
     },
-    "tooltip_en" :{
-      "en":"This language is required you can't delete it"
+    "tooltip_en": {
+      "en": "This language is required you can't delete it"
     },
-    "tooltip_languages" :{
-      "en":"Complete, fallback languages will not be used",
-      "fr":"Complète, les langues suivantes ne seront pas utilisées"
+    "tooltip_languages": {
+      "en": "Complete, fallback languages will not be used",
+      "fr": "Complète, les langues suivantes ne seront pas utilisées"
     }
   }
 }

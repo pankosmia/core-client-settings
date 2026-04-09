@@ -6,28 +6,26 @@ export default function FontShortlistMenuItem(fontCheckboxItemProps) {
 
   const styles = {
     hr: {
-      border: 'none',
-      height: '0px',
-      borderTop: '1px dotted black',
+      border: "none",
+      height: "0px",
+      borderTop: "1px dotted black",
     },
     menuItem: {
-      width: '100%',
+      width: "100%",
       display: "flex",
       justifyContent: "space-around",
-      color: 'DimGray',
+      color: "DimGray",
     },
   };
 
-  const adjHeight = font.name.includes("Awami Nastaliq") ? '1.75' : '';
+  const adjHeight = font.name.includes("Awami Nastaliq") ? "1.75" : "";
 
   return (
-    <div style={(styles.menuItem)}>
-      <div
-        style={styles.menuItem}
-      >
+    <div style={styles.menuItem}>
+      <div style={styles.menuItem}>
         <Typography
           class={adjSelectedFontClass}
-          style={{ fontSize: '100%'}}
+          style={{ fontSize: "100%" }}
           noWrap
           variant="body2"
           component="div"
@@ -36,7 +34,11 @@ export default function FontShortlistMenuItem(fontCheckboxItemProps) {
         </Typography>
         <hr style={styles.hr} />
         <Typography
-          style={{ fontSize: '100%', fontFamily: font.name, lineHeight: adjHeight}}
+          style={{
+            fontSize: "100%",
+            fontFamily: font.name,
+            lineHeight: adjHeight,
+          }}
           noWrap
           variant="body2"
           component="div"
