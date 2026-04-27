@@ -223,7 +223,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
       setWebFontsArabicUrdu([
         {
           display_name: isGraphite
-            ? "Awami Nastaliq 3.300"
+            ? "Awami Nastaliq 3.400"
             : "Noto Nastaliq Urdu 4.000",
           id: "Pankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrdu",
           name: "Pankosmia-Awami Nastaliq",
@@ -241,7 +241,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
         },
         {
           display_name: isGraphite
-            ? "Awami Nastaliq Medium 3.300"
+            ? "Awami Nastaliq Medium 3.400"
             : "Noto Nastaliq Urdu 4.000",
           id: "Pankosmia-AwamiNastaliqMediumPankosmia-NotoNastaliqUrdu",
           name: "Pankosmia-Awami Nastaliq Medium",
@@ -253,7 +253,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
         },
         {
           display_name: isGraphite
-            ? "Awami Nastaliq Semi Bold 3.300"
+            ? "Awami Nastaliq Semi Bold 3.400"
             : "Noto Nastaliq Urdu 4.000",
           id: "Pankosmia-AwamiNastaliqSemiBoldPankosmia-NotoNastaliqUrdu",
           name: "Pankosmia-Awami Nastaliq Semi Bold",
@@ -265,7 +265,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
         },
         {
           display_name: isGraphite
-            ? "Awami Nastaliq Extra Bold 3.300"
+            ? "Awami Nastaliq Extra Bold 3.400"
             : "Noto Nastaliq Urdu 4.000",
           id: "Pankosmia-AwamiNastaliqExtraBoldPankosmia-NotoNastaliqUrdu",
           name: "Pankosmia-Awami Nastaliq Extra Bold",
@@ -772,7 +772,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
       "Pankosmia-AwamiNastaliqPankosmia-NotoNastaliqUrdu",
     );
     // setArabicUrduFfsId('Awami Nastaliq');
-    setArabicUrduFontDisplayName("Awami Nastaliq 3.300");
+    setArabicUrduFontDisplayName("Awami Nastaliq 3.400");
     setArabicUrduFontName("Pankosmia-Awami Nastaliq");
   };
 
