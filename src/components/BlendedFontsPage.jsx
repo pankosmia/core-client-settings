@@ -178,7 +178,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
     ) {
       setWebFontsMyanmar([
         {
-          display_name: "Padauk 5.100",
+          display_name: "Padauk 6.000",
           id: "Pankosmia-Padauk",
           name: "Pankosmia-Padauk",
           settings_id: "Padauk",
@@ -186,11 +186,33 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
           example: "ဥပမာ",
         },
         {
-          display_name: "Padauk Book 5.100",
-          id: "Pankosmia-PadaukBook",
-          name: "Pankosmia-Padauk Book",
+          display_name: "Padauk Medium 6.000",
+          id: "Pankosmia-PadaukMedium",
+          name: "Pankosmia-Padauk Medium",
           settings_id: "Padauk",
-          shortlist: true,
+          shortlist:
+            selectedMyanmarFontClassSubstr.toString() ===
+            "Pankosmia-PadaukMedium",
+          example: "ဥပမာ",
+        },
+        {
+          display_name: "Padauk Semi Bold 6.000",
+          id: "Pankosmia-PadaukSemiBold",
+          name: "Pankosmia-Padauk Semi Bold",
+          settings_id: "Padauk",
+          shortlist:
+            selectedMyanmarFontClassSubstr.toString() ===
+            "Pankosmia-PadaukSemiBold",
+          example: "ဥပမာ",
+        },
+        {
+          display_name: "Padauk Extra Bold 6.000",
+          id: "Pankosmia-PadaukExtraBold",
+          name: "Pankosmia-Padauk Extra Bold",
+          settings_id: "Padauk",
+          shortlist:
+            selectedMyanmarFontClassSubstr.toString() ===
+            "Pankosmia-PadaukExtraBold",
           example: "ဥပမာ",
         },
         {
@@ -779,7 +801,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
   const handleClickMyanmar = () => {
     setSelectedMyanmarFontClassSubstr("Pankosmia-Padauk");
     setMyanmarFfsId("Padauk");
-    setMyanmarFontDisplayName("Padauk 5.100");
+    setMyanmarFontDisplayName("Padauk 6.000");
     setMyanmarFontName("Pankosmia-Padauk");
   };
 
@@ -1130,7 +1152,23 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                         </FormControl>
                         {!isArabicUrduDefault && (
                           <Tooltip
-                            title={`Awami Nastaliq (${doI18n("pages:core-settings:replace_awami", i18nRef.current)})`}
+                            title={[
+                              "Awami Nastaliq",
+                              !isGraphite && " -- ",
+                              !isGraphite &&
+                                doI18n(
+                                  "pages:core-settings:replace_awami",
+                                  i18nRef.current,
+                                ),
+                              !isGraphite &&
+                                isFirefox &&
+                                doI18n(
+                                  "pages:core-settings:graphite_is_off",
+                                  i18nRef.current,
+                                ),
+                            ]
+                              .filter(Boolean)
+                              .join(" ")}
                             placement="right"
                             arrow
                           >
@@ -1148,29 +1186,21 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                           style={{ paddingLeft: "9px", margin: "auto 0" }}
                           onClick={handleClickArabicUrduMore}
                         />
-                        {isAwami && (
+                        {isAwami && !isGraphite && (
                           <Tooltip
-                            title={
-                              (isGraphite
-                                ? doI18n(
-                                    "pages:core-settings:replace_awami",
-                                    i18nRef.current,
-                                  )
-                                : doI18n(
-                                    "pages:core-settings:replace_noto",
-                                    i18nRef.current,
-                                  )) +
-                              " " +
-                              (!isGraphite && isFirefox
-                                ? doI18n(
-                                    "pages:core-settings:graphite_is_off",
-                                    i18nRef.current,
-                                  )
-                                : doI18n(
-                                    "pages:core-settings:graphite_support",
-                                    i18nRef.current,
-                                  ))
-                            }
+                            title={[
+                              doI18n(
+                                "pages:core-settings:replace_noto",
+                                i18nRef.current,
+                              ),
+                              !isFirefox &&
+                                doI18n(
+                                  "pages:core-settings:graphite_support",
+                                  i18nRef.current,
+                                ),
+                            ]
+                              .filter(Boolean)
+                              .join(" ")}
                             placement="right"
                           >
                             {isGraphite ? (
@@ -1258,32 +1288,6 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                           style={{ paddingLeft: "9px", margin: "auto 0" }}
                           onClick={handleClickMyanmarMore}
                         />
-                        {!isGraphite && isPadauk && (
-                          <Tooltip
-                            title={
-                              doI18n(
-                                "pages:core-settings:padauk_tip",
-                                i18nRef.current,
-                              ) +
-                              " " +
-                              (isFirefox
-                                ? doI18n(
-                                    "pages:core-settings:graphite_is_off",
-                                    i18nRef.current,
-                                  )
-                                : doI18n(
-                                    "pages:core-settings:graphite_support",
-                                    i18nRef.current,
-                                  ))
-                            }
-                            placement="right"
-                          >
-                            <InfoIcon
-                              color="secondary"
-                              style={{ paddingLeft: "9px", margin: "auto 0" }}
-                            />
-                          </Tooltip>
-                        )}
                       </div>
                       <div
                         className={adjSelectedFontClass}
@@ -1322,8 +1326,13 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                                   "pages:core-settings:select_arabicurduscript",
                                   i18nRef.current,
                                 )}
-                                :{" "}
-                                {`Awami Nastaliq (${doI18n("pages:core-settings:replace_awami", i18nRef.current)})`}
+                                : Awami Nastaliq{" "}
+                                {!isGraphite &&
+                                  " -- " +
+                                    doI18n(
+                                      "pages:core-settings:replace_awami",
+                                      i18nRef.current,
+                                    )}
                                 <br />
                                 <br />
                                 {doI18n(

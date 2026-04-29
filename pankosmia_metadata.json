@@ -88,9 +88,9 @@
       "grc": "Ἀραϐικὰ γράμματα"
     },
     "replace_awami": {
-      "en": "Noto Nastaliq Urdu if not rendered on Graphite.",
-      "fr": "Noto Nastaliq Urdu si non rendu sur Graphite.",
-      "id": "Noto Nastaliq Urdu jika tidak ditampilkan atas Graphite."
+      "en": "Replaced with Noto Nastaliq Urdu if Graphite is not available.",
+      "fr": "Remplacé par Noto Nastaliq Urdu si Graphite non est diponible.",
+      "id": "Diganti dengan Noto Nastaliq Urdu jika Graphite tidak tersedia."
     },
     "replace_noto": {
       "en": "Replaced with Awami Nastaliq when Graphite is available.",
