@@ -244,29 +244,6 @@ export default function BlendedFontMyanmarSelection(
                 />
               </Tooltip>
             )}
-            {!isGraphite && isPadauk && (
-              <Tooltip
-                title={
-                  doI18n("pages:core-settings:padauk_tip", i18nRef.current) +
-                  " " +
-                  (isFirefox
-                    ? doI18n(
-                        "pages:core-settings:graphite_is_off",
-                        i18nRef.current,
-                      )
-                    : doI18n(
-                        "pages:core-settings:graphite_support",
-                        i18nRef.current,
-                      ))
-                }
-                placement="right"
-              >
-                <InfoIcon
-                  color="secondary"
-                  style={{ paddingLeft: "9px", margin: "auto 0" }}
-                />
-              </Tooltip>
-            )}
             {showMyanmarFeatures && (
               <FontFeaturesMyanmar {...fontFeaturesMyanmarProps} />
             )}
