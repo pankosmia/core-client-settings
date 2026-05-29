@@ -161,7 +161,7 @@ export default function BlendedFontArabicUrduSelection(
               .replace(" &quot;", "")
               .replace("&quot; ", "/");
             postEmptyJson(
-              `/settings/typography-feature/${ffsArabicUrduFontName}/${ffsStr}`,
+              `/api/settings/typography-feature/${ffsArabicUrduFontName}/${ffsStr}`,
             ).then();
           }
         }

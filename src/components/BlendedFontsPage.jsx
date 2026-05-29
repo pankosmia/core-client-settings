@@ -585,7 +585,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
       typographyRef.current.font_set !== fontSetStr
     ) {
       //#[post("/typography/<font_set>/<size>/<direction>")]
-      const typographyStr = fontSetStr + "/medium/ltr";
+      const typographyStr = fontSetStr + "/api/medium/ltr";
       postEmptyJson(`/settings/typography/${typographyStr}`).then();
       setSelectedFontClass(fontSetStr);
     }
