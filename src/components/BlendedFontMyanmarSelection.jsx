@@ -142,7 +142,7 @@ export default function BlendedFontMyanmarSelection(
               .replace(" &quot;", "")
               .replace("&quot; ", "/");
             postEmptyJson(
-              `/settings/typography-feature/${ffsMyanmarFontName}/${ffsStr}`,
+              `/api/settings/typography-feature/${ffsMyanmarFontName}/${ffsStr}`,
             ).then();
           }
         }
