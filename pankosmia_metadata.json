@@ -175,6 +175,10 @@
     },
     "license_creative_commons": {
       "en": "Creative Commons Attribution 3.O Unported License"
+    },
+    "credit": {
+      "en": "Credits",
+      "fr": "Crédits"
     }
   }
 }
