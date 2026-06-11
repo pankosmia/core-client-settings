@@ -12,7 +12,7 @@ export default function AboutViewServer({ dataServer }) {
           {dataServer ? (
             <Stack spacing={1}>
               <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
-                {doI18n("pages:core-settings:about_server", i18nRef.current)}
+                {doI18n("pages:core-settings:about", i18nRef.current)}
               </Typography>
               <Typography fullWidth size="small">
                 {doI18n("pages:core-settings:version", i18nRef.current)}{" "}
