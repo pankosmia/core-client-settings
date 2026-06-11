@@ -167,8 +167,8 @@
       "fr": "Complète, les langues suivantes ne seront pas utilisées"
     },
     "text_git": {
-      "en": "Thanks to Jason Long for the  <a href='https://git-scm.com/community/logos'> {Git Logo} </a>, licensed under the <a href=' https://creativecommons.org/licenses/by/3.0/'> {Creative Commons Attribution 3.0 Unported License} </a>.<br/>The logo was inverted (background removed and logo filled).",
-      "fr": "Merci à Jason Long pour le <a href='https://git-scm.com/community/logos'>  {Logo Git} </a>, sous <a href=' https://creativecommons.org/licenses/by/3.0/'> {licence Creative Commons Attribution 3.0 non transposé}.</a>.<br/>Le logo a été inversé (arrière-plan supprimé et logo rempli)."
+      "en": "Thanks to Jason Long for the  <a href='https://git-scm.com/community/logos'>{1}</a>, licensed under the <a href=' https://creativecommons.org/licenses/by/3.0/'>{2}</a>.<br/>The logo was inverted (background removed and logo filled).",
+      "fr": "Merci à Jason Long pour le <a href='https://git-scm.com/community/logos'>{1}</a>, sous <a href=' https://creativecommons.org/licenses/by/3.0/'>{2}</a>.<br/>Le logo a été inversé (arrière-plan supprimé et logo rempli)."
     },
     "git_logo": {
       "en": "Git logo",

@@ -37,11 +37,11 @@ export default function AboutViewServer({ dataServer }) {
             dangerouslySetInnerHTML={{
               __html: doI18n("pages:core-settings:text_git", i18nRef.current)
                 .replace(
-                  "{Git Logo}",
+                  "{1}",
                   `${doI18n("pages:core-settings:git_logo", i18nRef.current)}`,
                 )
                 .replace(
-                  "{Creative Commons Attribution 3.0 Unported License}",
+                  "{2}",
                   `${doI18n("pages:core-settings:license_creative_commons", i18nRef.current)}`,
                 ),
             }}
