@@ -101,7 +101,7 @@ export default function Settings() {
   useEffect(() => {
     if (!languageChoices.some((item) => item === "en")) {
       const languageString = languageChoices.join("/") + "/api/en";
-      postEmptyJson(`/settings/languages/${languageString}`).then();
+      postEmptyJson(`/api/settings/languages/${languageString}`).then();
       setLanguageChoices((previous) => [...previous, "en"]);
     }
   }, [languageChoices]);
