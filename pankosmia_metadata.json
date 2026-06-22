@@ -88,9 +88,9 @@
       "grc": "Ἀραϐικὰ γράμματα"
     },
     "replace_awami": {
-      "en": "Noto Nastaliq Urdu if not rendered on Graphite.",
-      "fr": "Noto Nastaliq Urdu si non rendu sur Graphite.",
-      "id": "Noto Nastaliq Urdu jika tidak ditampilkan atas Graphite."
+      "en": "Replaced with Noto Nastaliq Urdu if Graphite is not available.",
+      "fr": "Remplacé par Noto Nastaliq Urdu si Graphite non est diponible.",
+      "id": "Diganti dengan Noto Nastaliq Urdu jika Graphite tidak tersedia."
     },
     "replace_noto": {
       "en": "Replaced with Awami Nastaliq when Graphite is available.",
@@ -147,10 +147,11 @@
     },
     "about_server": {
       "en": "About",
-      "fr": "A propos"
+      "fr": "À propos de "
     },
-    "update": {
-      "en": "Updates"
+    "about": {
+      "en": "About",
+      "fr": "À propos"
     },
     "version": {
       "en": "Version",
@@ -165,6 +166,22 @@
     "tooltip_languages": {
       "en": "Complete, fallback languages will not be used",
       "fr": "Complète, les langues suivantes ne seront pas utilisées"
+    },
+    "text_git": {
+      "en": "Thanks to Jason Long for the Git logo, licensed under the {2}.The logo was inverted (background removed and logo filled).",
+      "fr": "Merci à Jason Long pour le Logo Git, sous {2}.Le logo a été inversé (arrière-plan supprimé et logo rempli)."
+    },
+    "git_logo": {
+      "en": "Git logo",
+      "fr": "Logo Git"
+    },
+    "license_creative_commons": {
+      "en": "Creative Commons Attribution 3.0 Unported License",
+      "fr": "licence Creative Commons Attribution 3.0 non transposé"
+    },
+    "credit": {
+      "en": "Credits",
+      "fr": "Crédits"
     }
   }
 }

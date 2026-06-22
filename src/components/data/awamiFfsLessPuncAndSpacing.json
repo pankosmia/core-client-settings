@@ -138,6 +138,27 @@
               {
                 "set": [
                   {
+                    "title": "High Hamza",
+                    "name": "hihm",
+                    "id": "hihm-label",
+                    "default": "0",
+                    "label": "ٴ",
+                    "options": [
+                      {
+                        "tip": "Urdu style",
+                        "value": "0"
+                      },
+                      {
+                        "tip": "Malay style",
+                        "value": "1"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "set": [
+                  {
                     "title": "Collision avoidance",
                     "name": "agca",
                     "id": "collision-avoidance-label",

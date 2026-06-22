@@ -51,7 +51,10 @@ export default function Settings() {
   const [dataServer, setDataServer] = useState();
   const [nameServer, setNameServer] = useState();
   const getServerVersion = async () => {
-    const summariesResponse = await getJson(`/version`, debugContext.current);
+    const summariesResponse = await getJson(
+      `/api/version`,
+      debugContext.current,
+    );
     if (summariesResponse.ok) {
       const data = summariesResponse.json;
       setDataServer(data);
@@ -68,7 +71,7 @@ export default function Settings() {
   useEffect(
     () =>
       getAndSetJson({
-        url: "/settings/languages",
+        url: "/api/settings/languages",
         setter: setLanguageChoices,
       }).then(),
     [],
@@ -77,14 +80,14 @@ export default function Settings() {
   useEffect(
     () =>
       getAndSetJson({
-        url: "/i18n/used-languages",
+        url: "/api/i18n/used-languages",
         setter: setUsedLanguages,
       }).then(),
     [],
   );
 
   useEffect(() => {
-    fetch("/app-resources/lookups/languages.json") // ISO_639-1 plus grc
+    fetch("/api/app-resources/lookups/languages.json") // ISO_639-1 plus grc
       .then((r) => r.json())
       .then((data) => setLanguageLookup(data));
   }, []);
@@ -97,8 +100,8 @@ export default function Settings() {
 
   useEffect(() => {
     if (!languageChoices.some((item) => item === "en")) {
-      const languageString = languageChoices.join("/") + "/en";
-      postEmptyJson(`/settings/languages/${languageString}`).then();
+      const languageString = languageChoices.join("/") + "/api/en";
+      postEmptyJson(`/api/settings/languages/${languageString}`).then();
       setLanguageChoices((previous) => [...previous, "en"]);
     }
   }, [languageChoices]);

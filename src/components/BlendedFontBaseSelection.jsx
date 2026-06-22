@@ -144,7 +144,7 @@ export default function BlendedFontBaseSelection(
               .replace(" &quot;", "")
               .replace("&quot; ", "/");
             postEmptyJson(
-              `/settings/typography-feature/${ffsBaseFontName}/${ffsStr}`,
+              `/api/settings/typography-feature/${ffsBaseFontName}/${ffsStr}`,
             ).then();
           }
         }

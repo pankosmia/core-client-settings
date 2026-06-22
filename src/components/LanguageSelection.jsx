@@ -53,7 +53,7 @@ export default function LanguageSelection({
     const newOrder = reorderedItems.map((item) => item.id);
     setLanguageChoices(newOrder);
     const languageString = newOrder.join("/");
-    postEmptyJson(`/settings/languages/${languageString}`);
+    postEmptyJson(`/api/settings/languages/${languageString}`);
   };
 
   const doChange = (selected) => {
@@ -66,7 +66,7 @@ export default function LanguageSelection({
         updated.push("en");
       }
       const languageString = updated.join("/");
-      postEmptyJson(`/settings/languages/${languageString}`).then();
+      postEmptyJson(`/api/settings/languages/${languageString}`).then();
       return updated;
     });
   };
@@ -74,7 +74,7 @@ export default function LanguageSelection({
     setLanguageChoices((prev) => {
       let updated = prev.filter((id) => id !== langId);
       const languageString = updated.join("/");
-      postEmptyJson(`/settings/languages/${languageString}`);
+      postEmptyJson(`/api/settings/languages/${languageString}`);
       return updated;
     });
   };

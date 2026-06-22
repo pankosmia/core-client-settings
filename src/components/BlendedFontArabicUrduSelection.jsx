@@ -161,7 +161,7 @@ export default function BlendedFontArabicUrduSelection(
               .replace(" &quot;", "")
               .replace("&quot; ", "/");
             postEmptyJson(
-              `/settings/typography-feature/${ffsArabicUrduFontName}/${ffsStr}`,
+              `/api/settings/typography-feature/${ffsArabicUrduFontName}/${ffsStr}`,
             ).then();
           }
         }
@@ -262,7 +262,23 @@ export default function BlendedFontArabicUrduSelection(
             </FormControl>
             {!isArabicUrduDefault && (
               <Tooltip
-                title={`Awami Nastaliq (${doI18n("pages:core-settings:replace_awami", i18nRef.current)})`}
+                title={[
+                  "Awami Nastaliq",
+                  !isGraphite && " -- ",
+                  !isGraphite &&
+                    doI18n(
+                      "pages:core-settings:replace_awami",
+                      i18nRef.current,
+                    ),
+                  !isGraphite &&
+                    isFirefox &&
+                    doI18n(
+                      "pages:core-settings:graphite_is_off",
+                      i18nRef.current,
+                    ),
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
                 placement="right"
                 arrow
               >
@@ -274,29 +290,18 @@ export default function BlendedFontArabicUrduSelection(
                 />
               </Tooltip>
             )}
-            {isAwami && (
+            {isAwami && !isGraphite && (
               <Tooltip
-                title={
-                  (isGraphite
-                    ? doI18n(
-                        "pages:core-settings:replace_awami",
-                        i18nRef.current,
-                      )
-                    : doI18n(
-                        "pages:core-settings:replace_noto",
-                        i18nRef.current,
-                      )) +
-                  " " +
-                  (!isGraphite && isFirefox
-                    ? doI18n(
-                        "pages:core-settings:graphite_is_off",
-                        i18nRef.current,
-                      )
-                    : doI18n(
-                        "pages:core-settings:graphite_support",
-                        i18nRef.current,
-                      ))
-                }
+                title={[
+                  doI18n("pages:core-settings:replace_noto", i18nRef.current),
+                  !isFirefox &&
+                    doI18n(
+                      "pages:core-settings:graphite_support",
+                      i18nRef.current,
+                    ),
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
                 placement="right"
               >
                 {isGraphite ? (
