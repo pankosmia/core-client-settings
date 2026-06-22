@@ -6,7 +6,6 @@ import { i18nContext, netContext } from "pankosmia-rcl";
 export default function AboutViewServer({ dataServer }) {
   const { i18nRef } = useContext(i18nContext);
   const { enabledRef } = useContext(netContext);
-  console.log("enabledRef", enabledRef);
 
   function interpolate(text, replacements) {
     return text.split(/(\{[^}]+\})/).map((part) => {
