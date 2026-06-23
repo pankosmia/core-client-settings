@@ -168,8 +168,8 @@
       "fr": "Complète, les langues suivantes ne seront pas utilisées"
     },
     "text_git": {
-      "en": "Thanks to Jason Long for the Git logo, licensed under the {2}.The logo was inverted (background removed and logo filled).",
-      "fr": "Merci à Jason Long pour le Logo Git, sous {2}.Le logo a été inversé (arrière-plan supprimé et logo rempli)."
+      "en": "Thanks to Jason Long for the {1}, licensed under the {2}.The logo was inverted (background removed and logo filled).",
+      "fr": "Merci à Jason Long pour le {1}, sous {2}.Le logo a été inversé (arrière-plan supprimé et logo rempli)."
     },
     "git_logo": {
       "en": "Git logo",
