@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Grid2, Stack, Typography } from "@mui/material";
-import { doI18n } from "pithekos-lib";
+import { doI18n } from "pankosmia-lib/i18n";
 import { i18nContext, netContext } from "pankosmia-rcl";
 
 export default function AboutViewServer({ dataServer }) {
