@@ -13,7 +13,7 @@ import {
   Tooltip,
 } from "@mui/material";
 import RestoreIcon from "@mui/icons-material/Restore";
-import { doI18n } from "pithekos-lib";
+import { doI18n } from "pankosmia-lib/i18n";
 import { i18nContext as I18nContext } from "pankosmia-rcl";
 
 import { useDetectDir } from "font-detect-rhl";

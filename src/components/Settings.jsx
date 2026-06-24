@@ -1,7 +1,8 @@
 import { useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Tabs, Tab, Box } from "@mui/material";
-import { doI18n, getAndSetJson, postEmptyJson, getJson } from "pithekos-lib";
+import { getAndSetJson, postEmptyJson, getJson } from "pankosmia-lib/http";
+import { doI18n } from "pankosmia-lib/i18n";
 import { i18nContext, debugContext } from "pankosmia-rcl";
 
 import BlendedFontsPage from "./BlendedFontsPage";

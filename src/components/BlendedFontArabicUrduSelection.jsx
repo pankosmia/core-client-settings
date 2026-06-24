@@ -15,7 +15,8 @@ import {
 import InfoIcon from "@mui/icons-material/Info";
 import WarningSharpIcon from "@mui/icons-material/WarningSharp";
 import RestoreIcon from "@mui/icons-material/Restore";
-import { doI18n, postEmptyJson } from "pithekos-lib";
+import { postEmptyJson } from "pankosmia-lib/http";
+import { doI18n } from "pankosmia-lib/i18n";
 import { i18nContext as I18nContext } from "pankosmia-rcl";
 
 import { useDetectDir } from "font-detect-rhl";
