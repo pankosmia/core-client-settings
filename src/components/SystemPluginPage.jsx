@@ -12,16 +12,16 @@ export default function SystemPluginPage() {
   return (
     <Stack spacing={2}>
       <Typography variant="body1">
-        Some functionalities rely on external utilities you need to install to
-        use.
+        {doI18n("pages:core-settings:system_plugins_intro", i18nRef.current)}
       </Typography>
 
       {/* FFmpeg for audio */}
       <Stack spacing={1}>
-        <Typography sx={{ fontWeight: "bold" }}>FFmpeg for audio</Typography>
+        <Typography sx={{ fontWeight: "bold" }}>
+          {doI18n("pages:core-settings:ffmpeg_title", i18nRef.current)}
+        </Typography>
         <Typography variant="body2">
-          FFmpeg is a multimedia framework. It is used for the audio editor, to
-          generate final audio files or to export Open Bible Stories videos.
+          {doI18n("pages:core-settings:ffmpeg_desc", i18nRef.current)}
         </Typography>
 
         <AssetDownloadButton asset="ffmpeg" />
@@ -30,10 +30,10 @@ export default function SystemPluginPage() {
       {/* Firefox for pdf */}
       <Stack spacing={1}>
         <Typography sx={{ fontWeight: "bold" }}>
-          Render engine for PDF
+          {doI18n("pages:core-settings:pdf_engine_title", i18nRef.current)}
         </Typography>
         <Typography variant="body2">
-          This render engine is used to generate large PDFs with complex fonts.
+          {doI18n("pages:core-settings:pdf_engine_desc", i18nRef.current)}
         </Typography>
 
         <AssetDownloadButton asset="firefox" />

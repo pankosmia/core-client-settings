@@ -1,10 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Button, LinearProgress, Typography, Stack } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckOutlined";
 import ErrorIcon from "@mui/icons-material/ErrorOutlined";
 import DownloadIcon from "@mui/icons-material/SaveAltOutlined";
+import { i18nContext } from "pankosmia-rcl";
+import { doI18n } from "pankosmia-lib/i18n";
 
 export default function AssetDownloadButton({ asset }) {
+  const { i18nRef } = useContext(i18nContext);
   const [installed, setInstalled] = useState(false);
   const [status, setStatus] = useState("checking"); // checking | idle | downloading | complete | error | unavailable
   const [progress, setProgress] = useState(null);
@@ -163,14 +166,29 @@ export default function AssetDownloadButton({ asset }) {
                 ? "error"
                 : "primary"
           }
-          title={!isElectron ? "Unavailable in web browser" : "Download"}
+          title={
+            !isElectron
+              ? doI18n(
+                  "pages:core-settings:download_unavailable_tip",
+                  i18nRef.current,
+                )
+              : doI18n("pages:core-settings:download", i18nRef.current)
+          }
         >
-          {status === "checking" && !isElectron && "Unavailable"}
-          {status === "checking" && isElectron && "Checking…"}
-          {status === "idle" && "Download"}
-          {status === "downloading" && "Downloading…"}
-          {status === "complete" && "Installed"}
-          {status === "error" && "Retry Download"}
+          {status === "checking" &&
+            !isElectron &&
+            doI18n("pages:core-settings:download_unavailable", i18nRef.current)}
+          {status === "checking" &&
+            isElectron &&
+            doI18n("pages:core-settings:download_checking", i18nRef.current)}
+          {status === "idle" &&
+            doI18n("pages:core-settings:download", i18nRef.current)}
+          {status === "downloading" &&
+            doI18n("pages:core-settings:download_downloading", i18nRef.current)}
+          {status === "complete" &&
+            doI18n("pages:core-settings:download_installed", i18nRef.current)}
+          {status === "error" &&
+            doI18n("pages:core-settings:download_retry", i18nRef.current)}
         </Button>
 
         {status === "downloading" && (
@@ -181,15 +199,19 @@ export default function AssetDownloadButton({ asset }) {
             />
             <Typography variant="body2" color="text.secondary">
               {hasProgress
-                ? `${Math.round(progress)}% complete`
-                : "Downloading…"}
+                ? `${Math.round(progress)}% ${doI18n("pages:core-settings:download_percent_complete", i18nRef.current)}`
+                : doI18n(
+                    "pages:core-settings:download_downloading",
+                    i18nRef.current,
+                  )}
             </Typography>
           </>
         )}
 
         {status === "error" && (
           <Typography variant="body2" color="error">
-            Download failed{errorMessage ? `: ${errorMessage}` : ""}.
+            {doI18n("pages:core-settings:download_failed", i18nRef.current)}
+            {errorMessage ? `: ${errorMessage}` : ""}.
           </Typography>
         )}
       </Stack>
