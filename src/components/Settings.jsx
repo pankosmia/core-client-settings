@@ -9,6 +9,7 @@ import BlendedFontsPage from "./BlendedFontsPage";
 import LanguageSelection from "./LanguageSelection";
 import GraphiteTest from "./GraphiteTest";
 import AboutViewServer from "./AboutViewServer";
+import SystemPluginPage from "./SystemPluginPage";
 
 const CustomTabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -143,6 +144,12 @@ export default function Settings() {
             {...a11yProps(1)}
           />
           <Tab
+            label={doI18n(
+              "pages:core-settings:system_plugins",
+              i18nRef.current,
+            )}
+          />
+          <Tab
             label={`${doI18n("pages:core-settings:about_server", i18nRef.current)} ${nameServer || null}`}
           />
         </Tabs>
@@ -158,6 +165,9 @@ export default function Settings() {
         <BlendedFontsPage {...blendedFontsPageProps} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
+        <SystemPluginPage />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={3}>
         <AboutViewServer dataServer={dataServer} />
       </CustomTabPanel>
     </Box>

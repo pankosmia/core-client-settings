@@ -182,6 +182,66 @@
     "credit": {
       "en": "Credits",
       "fr": "Crédits"
+    },
+    "system_plugins": {
+      "en": "System Plugins",
+      "fr": "Plugins système"
+    },
+    "system_plugins_intro": {
+      "en": "Some functionalities rely on external utilities you need to install to use.",
+      "fr": "Certaines fonctionnalités reposent sur des utilitaires externes que vous devez installer pour les utiliser."
+    },
+    "ffmpeg_title": {
+      "en": "FFmpeg for audio",
+      "fr": "FFmpeg pour l'audio"
+    },
+    "ffmpeg_desc": {
+      "en": "FFmpeg is a multimedia framework. It is used for the audio editor, to generate final audio files or to export Open Bible Stories videos.",
+      "fr": "FFmpeg est un framework multimédia. Il est utilisé pour l'éditeur audio, pour générer les fichiers audio finaux ou pour exporter les vidéos Open Bible Stories."
+    },
+    "pdf_engine_title": {
+      "en": "Render engine for PDF",
+      "fr": "Moteur de rendu pour PDF"
+    },
+    "pdf_engine_desc": {
+      "en": "This render engine is used to generate large PDFs with complex fonts.",
+      "fr": "Ce moteur de rendu est utilisé pour générer de grands PDF avec des polices complexes."
+    },
+    "download": {
+      "en": "Download",
+      "fr": "Télécharger"
+    },
+    "download_unavailable": {
+      "en": "Unavailable",
+      "fr": "Indisponible"
+    },
+    "download_unavailable_tip": {
+      "en": "Unavailable in web browser",
+      "fr": "Indisponible dans le navigateur web"
+    },
+    "download_checking": {
+      "en": "Checking…",
+      "fr": "Vérification…"
+    },
+    "download_downloading": {
+      "en": "Downloading…",
+      "fr": "Téléchargement…"
+    },
+    "download_installed": {
+      "en": "Installed",
+      "fr": "Installé"
+    },
+    "download_retry": {
+      "en": "Retry Download",
+      "fr": "Réessayer le téléchargement"
+    },
+    "download_percent_complete": {
+      "en": "complete",
+      "fr": "terminé"
+    },
+    "download_failed": {
+      "en": "Download failed",
+      "fr": "Échec du téléchargement"
     }
   }
 }
