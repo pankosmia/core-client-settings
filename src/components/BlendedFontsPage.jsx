@@ -8,8 +8,14 @@ import {
   MenuItem,
   Select,
   InputLabel,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
   Stack,
   Tooltip,
+  Typography,
+  Button,
 } from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
 import WarningSharpIcon from "@mui/icons-material/WarningSharp";
@@ -49,6 +55,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
   const [selectedBaseFontClassSubstr, setSelectedBaseFontClassSubstr] =
     useState("");
   const [selectedFontClass, setSelectedFontClass] = useState("");
+  const [selectedTab, setSelectedTab] = useState("base");
 
   // An array of id's extracted from the font_set string in user_settings.json
   const [fontClassIdsArr, setFontClassIdsArr] = useState([]);
@@ -67,16 +74,13 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
   // const [greekFfsId, setGreekFfsId] = useState([]); // Not currently applicable
   const [baseFfsId, setBaseFfsId] = useState([]);
 
-  // Font Display Name for shortlist and for font-feature-settings heading where applicable
-  const [myanmarFontDisplayName, setMyanmarFontDisplayName] = useState([]);
+  const [baseFontDisplayName, setBaseFontDisplayName] = useState([]);
+  const [greekFontDisplayName, setGreekFontDisplayName] = useState([]);
+  const [hebrewFontDisplayName, setHebrewFontDisplayName] = useState([]);
   const [arabicUrduFontDisplayName, setArabicUrduFontDisplayName] = useState(
     [],
-  ); // in Child
-  // eslint-disable-next-line no-unused-vars
-  const [hebrewFontDisplayName, setHebrewFontDisplayName] = useState([]); // Not currently applicable
-  // eslint-disable-next-line no-unused-vars
-  const [greekFontDisplayName, setGreekFontDisplayName] = useState([]); // Not currently applicable
-  const [baseFontDisplayName, setBaseFontDisplayName] = useState([]);
+  );
+  const [myanmarFontDisplayName, setMyanmarFontDisplayName] = useState([]);
 
   const prevBaseFontDisplayName = UsePrevious(baseFontDisplayName);
   const prevArabicUrduFontDisplayName = UsePrevious(arabicUrduFontDisplayName);
@@ -784,10 +788,14 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
 
   const handleClickGreek = () => {
     setSelectedGreekFontClassSubstr("Pankosmia-Cardo");
+    setGreekFontDisplayName("Cardo 1.0451");
+    setGreekFontName("Pankosmia-Cardo");
   };
 
   const handleClickHebrew = () => {
     setSelectedHebrewFontClassSubstr("Pankosmia-EzraSIL");
+    setHebrewFontDisplayName("Ezra SIL 2.51");
+    setHebrewFontName("Pankosmia-Ezra SIL");
   };
 
   const handleClickArabicUrdu = () => {
@@ -891,8 +899,8 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
     webFontsGreek,
     // greekFfsId,
     // setGreekFfsId,
-    // greekFontDisplayName,
-    // setGreekFontDisplayName,
+    greekFontDisplayName,
+    setGreekFontDisplayName,
     // ffsArr,
     unicodeRanges,
     adjSelectedFontClass,
@@ -907,8 +915,8 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
     webFontsHebrew,
     // hebrewFfsId,
     // setHebrewFfsId,
-    // hebrewFontDisplayName,
-    // setHebrewFontDisplayName,
+    hebrewFontDisplayName,
+    setHebrewFontDisplayName,
     // ffsArr,
     unicodeRanges,
     adjSelectedFontClass,
@@ -937,458 +945,161 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
     handleClickBase,
   };
 
+  const fontTabs = [
+    { id: "base", label: "pages:core-settings:base_font" },
+    { id: "greek", label: "pages:core-settings:select_greekscriptfont" },
+    { id: "hebrew", label: "pages:core-settings:select_hebrewscriptfont" },
+    {
+      id: "arabicUrdu",
+      label: "pages:core-settings:select_arabicurduscriptfont",
+    },
+    { id: "myanmar", label: "pages:core-settings:select_myanmarscriptfont" },
+  ];
+
   return (
-    <div>
-      {fontMenu === "shortlist" && (
-        <div>
-          <h1>
-            {doI18n("pages:core-settings:current_settings", i18nRef.current)}
-            {isCurrentDefault &&
-              ` (${doI18n("pages:core-settings:factory_settings", i18nRef.current)})`}
-          </h1>
-          <Box
-            sx={{ position: "relative", display: "flex", alignItems: "center" }}
+    <Box sx={{ display: "flex", mt: 2, minHeight: "500px" }}>
+      {/* Sidebar */}
+      <Box
+        sx={{
+          width: 250,
+          borderRight: 1,
+          borderColor: "divider",
+          flexShrink: 0,
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Box sx={{ p: 2 }}>
+          <Typography variant="h6" component="div" sx={{ fontWeight: "bold" }}>
+            Fonts for scripts
+          </Typography>
+          <Button
+            variant="text"
+            size="small"
+            startIcon={<RestoreIcon />}
+            onClick={handleClickAll}
+            sx={{ mt: 1, textTransform: "none" }}
           >
-            <FormControl component="fieldset">
-              <Grid2 container sx={{}}>
-                <Grid2 item>
-                  <div
-                    className={adjSelectedFontClass}
-                    style={{ fontSize: "100%" }}
+            reset all to factory settings
+          </Button>
+        </Box>
+        <List>
+          {fontTabs.map((tab) => {
+            let selectedDisplayName = "";
+            let exampleText = "";
+            let currentWebFonts = [];
+            let currentSelectedId = "";
+
+            switch (tab.id) {
+              case "base":
+                selectedDisplayName = baseFontDisplayName;
+                currentWebFonts = webFontsBase;
+                currentSelectedId = selectedBaseFontClassSubstr;
+                break;
+              case "greek":
+                selectedDisplayName = greekFontDisplayName;
+                currentWebFonts = webFontsGreek;
+                currentSelectedId = selectedGreekFontClassSubstr;
+                break;
+              case "hebrew":
+                selectedDisplayName = hebrewFontDisplayName;
+                currentWebFonts = webFontsHebrew;
+                currentSelectedId = selectedHebrewFontClassSubstr;
+                break;
+              case "arabicUrdu":
+                selectedDisplayName = arabicUrduFontDisplayName;
+                currentWebFonts = webFontsArabicUrdu;
+                currentSelectedId = selectedArabicUrduFontClassSubstr;
+                break;
+              case "myanmar":
+                selectedDisplayName = myanmarFontDisplayName;
+                currentWebFonts = webFontsMyanmar;
+                currentSelectedId = selectedMyanmarFontClassSubstr;
+                break;
+              default:
+                break;
+            }
+
+            if (currentWebFonts.length > 0 && currentSelectedId !== "") {
+              const selectedIdStr = currentSelectedId.toString();
+              const selectedFont = currentWebFonts.find(
+                (font) => font.id === selectedIdStr,
+              );
+              if (selectedFont) {
+                exampleText = selectedFont.example;
+                if (!selectedDisplayName || selectedDisplayName.length === 0) {
+                  selectedDisplayName = selectedFont.display_name;
+                }
+              }
+            }
+
+            return (
+              <ListItem key={tab.id} disablePadding>
+                <ListItemButton
+                  selected={selectedTab === tab.id}
+                  onClick={() => setSelectedTab(tab.id)}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "flex-start",
+                    py: 1,
+                  }}
+                >
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <Typography variant="body2" sx={{ fontWeight: "bold" }}>
+                      {doI18n(tab.label, i18nRef.current)}
+                    </Typography>
+                    <Typography variant="caption" color="text.secondary">
+                      {selectedDisplayName.toString()}
+                    </Typography>
+                  </Box>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      ml: 1,
+                      fontFamily: (tab.id === "base"
+                        ? baseFontName
+                        : tab.id === "greek"
+                          ? greekFontName
+                          : tab.id === "hebrew"
+                            ? hebrewFontName
+                            : tab.id === "arabicUrdu"
+                              ? arabicUrduFontName
+                              : myanmarFontName
+                      ).toString(),
+                      alignSelf: "center",
+                    }}
                   >
-                    <Stack direction="column" spacing={2}>
-                      <div style={{ display: "flex", flexDirection: "row" }}>
-                        <FormControl
-                          fullWidth
-                          style={{ maxWidth: 400, minWidth: 400 }}
-                          size="small"
-                        >
-                          <InputLabel
-                            id="select-base-font-label"
-                            htmlFor="select-base-font-id"
-                            sx={sx.inputLabel}
-                          >
-                            {doI18n(
-                              "pages:core-settings:base_font",
-                              i18nRef.current,
-                            )}
-                          </InputLabel>
-                          <Select
-                            variant="outlined"
-                            labelId="select-base-font-label"
-                            name="select-base-font-name"
-                            inputProps={{
-                              id: "select-base-font-id",
-                            }}
-                            value={selectedBaseFontClassSubstr.toString()}
-                            label={doI18n(
-                              "pages:core-settings:base_font",
-                              i18nRef.current,
-                            )}
-                            onChange={handleOnBaseChange}
-                            sx={sx.select}
-                          >
-                            {WebFontsBaseShortlist}
-                          </Select>
-                        </FormControl>
-                        {!isBaseDefault && (
-                          <Tooltip title="Gentium" placement="right" arrow>
-                            <RestoreIcon
-                              color="secondary"
-                              sx={{ cursor: "pointer" }}
-                              style={{ paddingLeft: "9px", margin: "auto 0" }}
-                              onClick={handleClickBase}
-                            />
-                          </Tooltip>
-                        )}
-                        <MoreHorizIcon
-                          color="secondary"
-                          sx={{ cursor: "pointer" }}
-                          style={{ paddingLeft: "9px", margin: "auto 0" }}
-                          onClick={handleClickBaseMore}
-                        />
-                      </div>
-                      <div style={{ display: "flex", flexDirection: "row" }}>
-                        <FormControl
-                          fullWidth
-                          style={{ maxWidth: 400, minWidth: 400 }}
-                          size="small"
-                        >
-                          <InputLabel
-                            shrink={true}
-                            id="select-greek-font-label"
-                            htmlFor="select-greek-font-id"
-                            sx={sx.inputLabel}
-                          >
-                            {doI18n(
-                              "pages:core-settings:select_greekscriptfont",
-                              i18nRef.current,
-                            )}
-                          </InputLabel>
-                          <Select
-                            variant="outlined"
-                            labelId="select-greek-font-label"
-                            name="select-greek-font-name"
-                            inputProps={{
-                              id: "select-greek-font-id",
-                            }}
-                            displayEmpty={true}
-                            value={selectedGreekFontClassSubstr.toString()}
-                            label={doI18n(
-                              "pages:core-settings:select_greekscriptfont",
-                              i18nRef.current,
-                            )}
-                            onChange={handleOnGreekChange}
-                            sx={sx.select}
-                          >
-                            {WebFontsGreekShortlist}
-                          </Select>
-                        </FormControl>
-                        {!isGreekDefault && (
-                          <Tooltip title="Cardo" placement="right" arrow>
-                            <RestoreIcon
-                              color="secondary"
-                              sx={{ cursor: "pointer" }}
-                              style={{ paddingLeft: "9px", margin: "auto 0" }}
-                              onClick={handleClickGreek}
-                            />
-                          </Tooltip>
-                        )}
-                        <MoreHorizIcon
-                          color="secondary"
-                          sx={{ cursor: "pointer" }}
-                          style={{ paddingLeft: "9px", margin: "auto 0" }}
-                          onClick={handleClickGreekMore}
-                        />
-                      </div>
-                      <div style={{ display: "flex", flexDirection: "row" }}>
-                        <FormControl
-                          fullWidth
-                          style={{ maxWidth: 400, minWidth: 400 }}
-                          size="small"
-                        >
-                          <InputLabel
-                            shrink={true}
-                            id="select-hebrew-font-label"
-                            htmlFor="select-hebrew-font-id"
-                            sx={sx.inputLabel}
-                          >
-                            {doI18n(
-                              "pages:core-settings:select_hebrewscriptfont",
-                              i18nRef.current,
-                            )}
-                          </InputLabel>
-                          <Select
-                            variant="outlined"
-                            labelId="select-hebrew-font-label"
-                            name="select-hebrew-font-name"
-                            inputProps={{
-                              id: "select-hebrew-font-id",
-                            }}
-                            displayEmpty={true}
-                            value={selectedHebrewFontClassSubstr.toString()}
-                            label={doI18n(
-                              "pages:core-settings:select_hebrewscriptfont",
-                              i18nRef.current,
-                            )}
-                            onChange={handleOnHebrewChange}
-                            sx={sx.select}
-                          >
-                            {WebFontsHebrewShortlist}
-                          </Select>
-                        </FormControl>
-                        {!isHebrewDefault && (
-                          <Tooltip title="Ezra SIL" placement="right" arrow>
-                            <RestoreIcon
-                              color="secondary"
-                              sx={{ cursor: "pointer" }}
-                              style={{ paddingLeft: "9px", margin: "auto 0" }}
-                              onClick={handleClickHebrew}
-                            />
-                          </Tooltip>
-                        )}
-                        <MoreHorizIcon
-                          color="secondary"
-                          sx={{ cursor: "pointer" }}
-                          style={{ paddingLeft: "9px", margin: "auto 0" }}
-                          onClick={handleClickHebrewMore}
-                        />
-                      </div>
-                      <div style={{ display: "flex", flexDirection: "row" }}>
-                        <FormControl
-                          fullWidth
-                          style={{ maxWidth: 400, minWidth: 400 }}
-                          size="small"
-                        >
-                          <InputLabel
-                            shrink={true}
-                            id="select-arabic-urdu-font-label"
-                            htmlFor="select-arabic-urdu-font-id"
-                            sx={sx.inputLabel}
-                          >
-                            {doI18n(
-                              "pages:core-settings:select_arabicurduscriptfont",
-                              i18nRef.current,
-                            )}
-                          </InputLabel>
-                          <Select
-                            variant="outlined"
-                            labelId="select-arabic-urdu-font-label"
-                            name="select-arabic-urdu-font-name"
-                            inputProps={{
-                              id: "select-arabic-urdu-font-id",
-                            }}
-                            displayEmpty={true}
-                            value={selectedArabicUrduFontClassSubstr.toString()}
-                            label={doI18n(
-                              "pages:core-settings:select_arabicurduscriptfont",
-                              i18nRef.current,
-                            )}
-                            onChange={handleOnArabicUrduChange}
-                            sx={sx.select}
-                            style={{ lineheight: adjHeight }}
-                          >
-                            {WebFontsArabicUrduShortlist}
-                          </Select>
-                        </FormControl>
-                        {!isArabicUrduDefault && (
-                          <Tooltip
-                            title={[
-                              "Awami Nastaliq",
-                              !isGraphite && " -- ",
-                              !isGraphite &&
-                                doI18n(
-                                  "pages:core-settings:replace_awami",
-                                  i18nRef.current,
-                                ),
-                              !isGraphite &&
-                                isFirefox &&
-                                doI18n(
-                                  "pages:core-settings:graphite_is_off",
-                                  i18nRef.current,
-                                ),
-                            ]
-                              .filter(Boolean)
-                              .join(" ")}
-                            placement="right"
-                            arrow
-                          >
-                            <RestoreIcon
-                              color="secondary"
-                              sx={{ cursor: "pointer" }}
-                              style={{ paddingLeft: "9px", margin: "auto 0" }}
-                              onClick={handleClickArabicUrdu}
-                            />
-                          </Tooltip>
-                        )}
-                        <MoreHorizIcon
-                          color="secondary"
-                          sx={{ cursor: "pointer" }}
-                          style={{ paddingLeft: "9px", margin: "auto 0" }}
-                          onClick={handleClickArabicUrduMore}
-                        />
-                        {isAwami && !isGraphite && (
-                          <Tooltip
-                            title={[
-                              doI18n(
-                                "pages:core-settings:replace_noto",
-                                i18nRef.current,
-                              ),
-                              !isFirefox &&
-                                doI18n(
-                                  "pages:core-settings:graphite_support",
-                                  i18nRef.current,
-                                ),
-                            ]
-                              .filter(Boolean)
-                              .join(" ")}
-                            placement="right"
-                          >
-                            {isGraphite ? (
-                              <InfoIcon
-                                color="secondary"
-                                style={{ paddingLeft: "9px", margin: "auto 0" }}
-                              />
-                            ) : (
-                              <WarningSharpIcon
-                                style={{
-                                  color: "yellow",
-                                  background: "black",
-                                  margin: "auto 9px",
-                                }}
-                              />
-                            )}
-                          </Tooltip>
-                        )}
-                        {isAwami && !isGraphite && (
-                          <div
-                            className={adjSelectedFontClass}
-                            style={{ margin: "auto 0", fontSize: "100%" }}
-                          >
-                            {doI18n(
-                              "pages:core-settings:best_with",
-                              i18nRef.current,
-                            )}{" "}
-                            {isFirefox &&
-                              doI18n(
-                                "pages:core-settings:graphite_is_off",
-                                i18nRef.current,
-                              )}
-                          </div>
-                        )}
-                      </div>
-                      <div style={{ display: "flex", flexDirection: "row" }}>
-                        <FormControl
-                          fullWidth
-                          style={{ maxWidth: 400, minWidth: 400 }}
-                          size="small"
-                        >
-                          <InputLabel
-                            shrink={true}
-                            id="select-myanmar-font-label"
-                            htmlFor="select-myanmar-font-id"
-                            sx={sx.inputLabel}
-                          >
-                            {doI18n(
-                              "pages:core-settings:select_myanmarscriptfont",
-                              i18nRef.current,
-                            )}
-                          </InputLabel>
-                          <Select
-                            variant="outlined"
-                            labelId="select-myanmar-font-label"
-                            name="select-myanmar-font-name"
-                            inputProps={{
-                              id: "select-myanmar-font-id",
-                            }}
-                            displayEmpty={true}
-                            value={selectedMyanmarFontClassSubstr.toString()}
-                            label={doI18n(
-                              "pages:core-settings:select_myanmarscriptfont",
-                              i18nRef.current,
-                            )}
-                            onChange={handleOnMyanmarChange}
-                            sx={sx.select}
-                          >
-                            {WebFontsMyanmarShortlist}
-                          </Select>
-                        </FormControl>
-                        {!isMyanmarDefault && (
-                          <Tooltip title="Padauk" placement="right" arrow>
-                            <RestoreIcon
-                              color="secondary"
-                              sx={{ cursor: "pointer" }}
-                              style={{ paddingLeft: "9px", margin: "auto 0" }}
-                              onClick={handleClickMyanmar}
-                            />
-                          </Tooltip>
-                        )}
-                        <MoreHorizIcon
-                          color="secondary"
-                          sx={{ cursor: "pointer" }}
-                          style={{ paddingLeft: "9px", margin: "auto 0" }}
-                          onClick={handleClickMyanmarMore}
-                        />
-                      </div>
-                      <div
-                        className={adjSelectedFontClass}
-                        style={{
-                          display: "flex",
-                          flexDirection: "row",
-                          fontSize: "100%",
-                        }}
-                      >
-                        {!isCurrentDefault && (
-                          <Tooltip
-                            title={
-                              <Fragment>
-                                {doI18n(
-                                  "pages:core-settings:base_font",
-                                  i18nRef.current,
-                                )}
-                                : Gentium
-                                <br />
-                                <br />
-                                {doI18n(
-                                  "pages:core-settings:select_greekscript",
-                                  i18nRef.current,
-                                )}
-                                : Cardo
-                                <br />
-                                <br />
-                                {doI18n(
-                                  "pages:core-settings:select_hebrewscript",
-                                  i18nRef.current,
-                                )}
-                                : Ezra SIL
-                                <br />
-                                <br />
-                                {doI18n(
-                                  "pages:core-settings:select_arabicurduscript",
-                                  i18nRef.current,
-                                )}
-                                : Awami Nastaliq{" "}
-                                {!isGraphite &&
-                                  " -- " +
-                                    doI18n(
-                                      "pages:core-settings:replace_awami",
-                                      i18nRef.current,
-                                    )}
-                                <br />
-                                <br />
-                                {doI18n(
-                                  "pages:core-settings:select_myanmarscript",
-                                  i18nRef.current,
-                                )}
-                                : Padauk
-                              </Fragment>
-                            }
-                            placement="right"
-                            arrow
-                          >
-                            <RestoreIcon
-                              color="secondary"
-                              sx={{ cursor: "pointer" }}
-                              style={{ padding: "0px 9px", margin: "auto 0" }}
-                              onClick={handleClickAll}
-                            />
-                          </Tooltip>
-                        )}
-                        {!isCurrentDefault && (
-                          <div style={{ margin: "auto 0" }}>
-                            {doI18n(
-                              "pages:core-settings:factory_settings",
-                              i18nRef.current,
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    </Stack>
-                  </div>
-                </Grid2>
-              </Grid2>
-            </FormControl>
-          </Box>
-        </div>
-      )}
-      {fontMenu === "moreBase" && (
-        <div>
-          <h1>{doI18n("pages:core-settings:base_font", i18nRef.current)}</h1>
-          <div key="toolbar" style={{ width: "100%" }}>
+                    {exampleText}
+                  </Typography>
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
+        </List>
+      </Box>
+
+      {/* Main Content */}
+      <Box sx={{ flexGrow: 1, p: 3 }}>
+        {selectedTab === "base" && (
+          <Stack spacing={3}>
+            <h2>{doI18n("pages:core-settings:base_font", i18nRef.current)}</h2>
             <Box>
               {fontSetStr !== "fonts-" && (
                 <BlendedFontBaseSelection {...blendedFontBaseSelectionProps} />
               )}
             </Box>
-          </div>
-        </div>
-      )}
-      {fontMenu === "moreGreek" && (
-        <div>
-          <h1>
-            {doI18n("pages:core-settings:select_greekscript", i18nRef.current)}
-          </h1>
-          <div key="toolbar" style={{ width: "100%" }}>
+          </Stack>
+        )}
+
+        {selectedTab === "greek" && (
+          <Stack spacing={3}>
+            <h1>
+              {doI18n(
+                "pages:core-settings:select_greekscript",
+                i18nRef.current,
+              )}
+            </h1>
             <Box>
               {fontSetStr !== "fonts-" && (
                 <BlendedFontGreekSelection
@@ -1396,15 +1107,17 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                 />
               )}
             </Box>
-          </div>
-        </div>
-      )}
-      {fontMenu === "moreHebrew" && (
-        <div>
-          <h1>
-            {doI18n("pages:core-settings:select_hebrewscript", i18nRef.current)}
-          </h1>
-          <div key="toolbar" style={{ width: "100%" }}>
+          </Stack>
+        )}
+
+        {selectedTab === "hebrew" && (
+          <Stack spacing={3}>
+            <h1>
+              {doI18n(
+                "pages:core-settings:select_hebrewscript",
+                i18nRef.current,
+              )}
+            </h1>
             <Box>
               {fontSetStr !== "fonts-" && (
                 <BlendedFontHebrewSelection
@@ -1412,18 +1125,17 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                 />
               )}
             </Box>
-          </div>
-        </div>
-      )}
-      {fontMenu === "moreArabicUrdu" && (
-        <div>
-          <h1>
-            {doI18n(
-              "pages:core-settings:select_arabicurduscript",
-              i18nRef.current,
-            )}
-          </h1>
-          <div key="toolbar" style={{ width: "100%" }}>
+          </Stack>
+        )}
+
+        {selectedTab === "arabicUrdu" && (
+          <Stack spacing={3}>
+            <h1>
+              {doI18n(
+                "pages:core-settings:select_arabicurduscript",
+                i18nRef.current,
+              )}
+            </h1>
             <Box>
               {fontSetStr !== "fonts-" && (
                 <BlendedFontArabicUrduSelection
@@ -1431,18 +1143,17 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                 />
               )}
             </Box>
-          </div>
-        </div>
-      )}
-      {fontMenu === "moreMyanmar" && (
-        <div>
-          <h1>
-            {doI18n(
-              "pages:core-settings:select_myanmarscript",
-              i18nRef.current,
-            )}
-          </h1>
-          <div key="toolbar" style={{ width: "100%" }}>
+          </Stack>
+        )}
+
+        {selectedTab === "myanmar" && (
+          <Stack spacing={3}>
+            <h1>
+              {doI18n(
+                "pages:core-settings:select_myanmarscript",
+                i18nRef.current,
+              )}
+            </h1>
             <Box>
               {fontSetStr !== "fonts-" && (
                 <BlendedFontMyanmarSelection
@@ -1450,10 +1161,10 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                 />
               )}
             </Box>
-          </div>
-        </div>
-      )}
-    </div>
+          </Stack>
+        )}
+      </Box>
+    </Box>
   );
 }
 

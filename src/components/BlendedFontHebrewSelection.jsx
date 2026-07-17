@@ -31,6 +31,8 @@ export default function BlendedFontHebrewSelection(
     hebrewFontName,
     setHebrewFontName,
     webFontsHebrew,
+    hebrewFontDisplayName,
+    setHebrewFontDisplayName,
     unicodeRanges,
     adjSelectedFontClass,
     isHebrewDefault,
@@ -48,6 +50,10 @@ export default function BlendedFontHebrewSelection(
    */
   const handleChangeHebrew = (event) => {
     setSelectedHebrewFontClassSubstr(event.target.value);
+    const hebrewDisplayName = webFontsHebrew
+      .filter((font) => font.id === event.target.value)
+      .map((font, index) => font.display_name);
+    setHebrewFontDisplayName(hebrewDisplayName);
     const hebrewName = webFontsHebrew
       .filter((font) => font.id === event.target.value)
       .map((font, index) => font.name);
@@ -95,7 +101,7 @@ export default function BlendedFontHebrewSelection(
 
   return (
     <Grid2 container spacing={2}>
-      <Grid2 size={12} color="secondary" sx={{ borderTop: 1 }}>
+      <Grid2 size={12} color="secondary">
         <div className={adjSelectedFontClass} style={{ fontSize: "100%" }}>
           <Stack direction="row">
             <FormControl
@@ -182,6 +188,10 @@ BlendedFontHebrewSelection.propTypes = {
   hebrewFontName: PropTypes.string,
   /** Set Hebrew Font Name */
   setHebrewFontName: PropTypes.func.isRequired,
+  /** Hebrew Font Display Name */
+  hebrewFontDisplayName: PropTypes.array,
+  /** Set Hebrew Font Display Name */
+  setHebrewFontDisplayName: PropTypes.func.isRequired,
   /** Available Hebrew Fonts */
   webFontsHebrew: PropTypes.array.isRequired,
   /** Unicode ranges for RegEx by script type for editable examples */

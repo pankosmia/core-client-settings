@@ -31,6 +31,8 @@ export default function BlendedFontGreekSelection(
     greekFontName,
     setGreekFontName,
     webFontsGreek,
+    greekFontDisplayName,
+    setGreekFontDisplayName,
     unicodeRanges,
     adjSelectedFontClass,
     isGreekDefault,
@@ -48,6 +50,10 @@ export default function BlendedFontGreekSelection(
    */
   const handleChangeGreek = (event) => {
     setSelectedGreekFontClassSubstr(event.target.value);
+    const greekDisplayName = webFontsGreek
+      .filter((font) => font.id === event.target.value)
+      .map((font, index) => font.display_name);
+    setGreekFontDisplayName(greekDisplayName);
     const greekName = webFontsGreek
       .filter((font) => font.id === event.target.value)
       .map((font, index) => font.name);
@@ -183,6 +189,10 @@ BlendedFontGreekSelection.propTypes = {
   greekFontName: PropTypes.string,
   /** Set Greek Font Name */
   setGreekFontName: PropTypes.func.isRequired,
+  /** Greek Font Display Name */
+  greekFontDisplayName: PropTypes.array,
+  /** Set Greek Font Display Name */
+  setGreekFontDisplayName: PropTypes.func.isRequired,
   /** Unicode ranges for RegEx by script type for editable examples */
   unicodeRanges: PropTypes.array.isRequired,
   /** Selected Font Class */
