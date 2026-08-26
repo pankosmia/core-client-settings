@@ -2,7 +2,7 @@ import { useEffect, useContext, useState } from "react";
 
 import PropTypes from "prop-types";
 import {
-  Grid2,
+  Grid,
   Box,
   InputLabel,
   MenuItem,
@@ -221,8 +221,8 @@ export default function BlendedFontArabicUrduSelection(
   const showArabicUrduTextArea = selectedArabicUrduFontClassSubstr.length !== 0;
 
   return (
-    <Grid2 container spacing={2}>
-      <Grid2 size={12}>
+    <Grid container spacing={2}>
+      <Grid size={12}>
         <div className={adjSelectedFontClass} style={{ fontSize: "100%" }}>
           <Stack direction="row">
             <FormControl
@@ -339,8 +339,8 @@ export default function BlendedFontArabicUrduSelection(
             )}
           </Stack>
         </div>
-      </Grid2>
-      <Grid2 size={12}>
+      </Grid>
+      <Grid size={12}>
         <Box sx={{ padding: "10pt 0 5pt 20pt" }}>
           {showArabicUrduTextArea && (
             <TextareaAutosize
@@ -367,9 +367,9 @@ export default function BlendedFontArabicUrduSelection(
             />
           )}
         </Box>
-      </Grid2>
+      </Grid>
       <br />
-    </Grid2>
+    </Grid>
   );
 }
 

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {
   Box,
   FormControl,
-  Grid2,
+  Grid,
   MenuItem,
   Select,
   InputLabel,
@@ -950,8 +950,8 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
             sx={{ position: "relative", display: "flex", alignItems: "center" }}
           >
             <FormControl component="fieldset">
-              <Grid2 container sx={{}}>
-                <Grid2 item>
+              <Grid container sx={{}}>
+                <Grid item>
                   <div
                     className={adjSelectedFontClass}
                     style={{ fontSize: "100%" }}
@@ -1365,8 +1365,8 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                       </div>
                     </Stack>
                   </div>
-                </Grid2>
-              </Grid2>
+                </Grid>
+              </Grid>
             </FormControl>
           </Box>
         </div>

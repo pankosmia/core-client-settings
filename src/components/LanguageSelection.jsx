@@ -18,7 +18,7 @@ import { useState, useEffect, useContext } from "react";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import LanguageMenuItem from "./LanguageMenuItem";
 import { DragIndicator } from "@mui/icons-material";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 
 export default function LanguageSelection({
   languageChoices,
@@ -104,7 +104,7 @@ export default function LanguageSelection({
                             aria-label="delete"
                             onClick={() => removeLanguage(item.id)}
                           >
-                            <DeleteOutlineIcon />
+                            <DeleteOutlinedIcon />
                           </IconButton>
                         }
                         ref={provided.innerRef}

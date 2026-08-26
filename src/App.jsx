@@ -1,4 +1,4 @@
-import { Grid2, Box } from "@mui/material";
+import { Grid, Box } from "@mui/material";
 import Settings from "./components/Settings";
 import { useContext } from "react";
 import { productContext, ScrollableBody } from "pankosmia-rcl";
@@ -20,11 +20,11 @@ function App() {
           width: "100%",
         }}
       >
-        <Grid2 container sx={{ mx: 2 }}>
-          <Grid2 item size={12}>
+        <Grid container sx={{ mx: 2 }}>
+          <Grid item size={12}>
             <Settings />
-          </Grid2>
-        </Grid2>
+          </Grid>
+        </Grid>
       </Box>
     </ScrollableBody>
   );
