@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Grid2, Stack, Typography } from "@mui/material";
+import { Grid, Stack, Typography } from "@mui/material";
 import { doI18n } from "pankosmia-lib/i18n";
 import { i18nContext, netContext } from "pankosmia-rcl";
 
@@ -16,8 +16,8 @@ export default function AboutViewServer({ dataServer }) {
   }
 
   return (
-    <Grid2 container spacing={2}>
-      <Grid2 size={12}>
+    <Grid container spacing={2}>
+      <Grid size={12}>
         <Typography>
           {dataServer ? (
             <Stack spacing={1}>
@@ -35,8 +35,8 @@ export default function AboutViewServer({ dataServer }) {
             </Stack>
           ) : null}
         </Typography>
-      </Grid2>
-      <Grid2 size={12}>
+      </Grid>
+      <Grid size={12}>
         <Stack spacing={1}>
           <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
             {doI18n("pages:core-settings:credit", i18nRef.current)}
@@ -80,7 +80,7 @@ export default function AboutViewServer({ dataServer }) {
             )}
           </Typography>
         </Stack>
-      </Grid2>
-    </Grid2>
+      </Grid>
+    </Grid>
   );
 }
