@@ -3,11 +3,12 @@ import { Button, LinearProgress, Typography, Stack } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckOutlined";
 import ErrorIcon from "@mui/icons-material/ErrorOutlined";
 import DownloadIcon from "@mui/icons-material/SaveAltOutlined";
-import { i18nContext } from "pankosmia-rcl";
+import { i18nContext, netContext } from "pankosmia-rcl";
 import { doI18n } from "pankosmia-lib/i18n";
 
 export default function AssetDownloadButton({ asset }) {
   const { i18nRef } = useContext(i18nContext);
+  const { enabledRef } = useContext(netContext);
   const [installed, setInstalled] = useState(false);
   const [status, setStatus] = useState("checking"); // checking | idle | downloading | complete | error | unavailable
   const [progress, setProgress] = useState(null);
@@ -157,7 +158,8 @@ export default function AssetDownloadButton({ asset }) {
             status === "checking" ||
             status === "downloading" ||
             status === "complete" ||
-            !isElectron
+            !isElectron ||
+            !enabledRef.current
           }
           color={
             status === "complete"
