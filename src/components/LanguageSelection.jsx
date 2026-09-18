@@ -11,13 +11,14 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import { doI18n, postEmptyJson } from "pithekos-lib";
+import { postEmptyJson } from "pankosmia-lib/http";
+import { doI18n } from "pankosmia-lib/i18n";
 import { i18nContext } from "pankosmia-rcl";
 import { useState, useEffect, useContext } from "react";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import LanguageMenuItem from "./LanguageMenuItem";
 import { DragIndicator } from "@mui/icons-material";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 
 export default function LanguageSelection({
   languageChoices,
@@ -53,7 +54,7 @@ export default function LanguageSelection({
     const newOrder = reorderedItems.map((item) => item.id);
     setLanguageChoices(newOrder);
     const languageString = newOrder.join("/");
-    postEmptyJson(`/settings/languages/${languageString}`);
+    postEmptyJson(`/api/settings/languages/${languageString}`);
   };
 
   const doChange = (selected) => {
@@ -66,7 +67,7 @@ export default function LanguageSelection({
         updated.push("en");
       }
       const languageString = updated.join("/");
-      postEmptyJson(`/settings/languages/${languageString}`).then();
+      postEmptyJson(`/api/settings/languages/${languageString}`).then();
       return updated;
     });
   };
@@ -74,7 +75,7 @@ export default function LanguageSelection({
     setLanguageChoices((prev) => {
       let updated = prev.filter((id) => id !== langId);
       const languageString = updated.join("/");
-      postEmptyJson(`/settings/languages/${languageString}`);
+      postEmptyJson(`/api/settings/languages/${languageString}`);
       return updated;
     });
   };
@@ -103,7 +104,7 @@ export default function LanguageSelection({
                             aria-label="delete"
                             onClick={() => removeLanguage(item.id)}
                           >
-                            <DeleteOutlineIcon />
+                            <DeleteOutlinedIcon />
                           </IconButton>
                         }
                         ref={provided.innerRef}

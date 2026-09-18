@@ -1,13 +1,15 @@
 import { useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Tabs, Tab, Box } from "@mui/material";
-import { doI18n, getAndSetJson, postEmptyJson, getJson } from "pithekos-lib";
-import { i18nContext, debugContext } from "pankosmia-rcl";
+import { getAndSetJson, postEmptyJson, getJson } from "pankosmia-lib/http";
+import { doI18n } from "pankosmia-lib/i18n";
+import { i18nContext, debugContext, productContext } from "pankosmia-rcl";
 
 import BlendedFontsPage from "./BlendedFontsPage";
 import LanguageSelection from "./LanguageSelection";
 import GraphiteTest from "./GraphiteTest";
 import AboutViewServer from "./AboutViewServer";
+import SystemPluginPage from "./SystemPluginPage";
 
 const CustomTabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -41,6 +43,7 @@ const a11yProps = (index) => {
 export default function Settings() {
   const [value, setValue] = useState(0);
   const { i18nRef } = useContext(i18nContext);
+  const { productRef } = useContext(productContext);
   const [languageLookup, setLanguageLookup] = useState([]);
 
   const [languageChoices, setLanguageChoices] = useState(["en"]);
@@ -101,7 +104,7 @@ export default function Settings() {
   useEffect(() => {
     if (!languageChoices.some((item) => item === "en")) {
       const languageString = languageChoices.join("/") + "/api/en";
-      postEmptyJson(`/settings/languages/${languageString}`).then();
+      postEmptyJson(`/api/settings/languages/${languageString}`).then();
       setLanguageChoices((previous) => [...previous, "en"]);
     }
   }, [languageChoices]);
@@ -141,6 +144,14 @@ export default function Settings() {
             label={doI18n("pages:core-settings:fonts", i18nRef.current)}
             {...a11yProps(1)}
           />
+          {productRef.current && productRef.current.os !== "android" && (
+            <Tab
+              label={doI18n(
+                "pages:core-settings:system_plugins",
+                i18nRef.current,
+              )}
+            />
+          )}
           <Tab
             label={`${doI18n("pages:core-settings:about_server", i18nRef.current)} ${nameServer || null}`}
           />
@@ -156,7 +167,19 @@ export default function Settings() {
       <CustomTabPanel value={value} index={1}>
         <BlendedFontsPage {...blendedFontsPageProps} />
       </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
+      {productRef.current && productRef.current.os !== "android" && (
+        <>
+          <CustomTabPanel value={value} index={2}>
+            <SystemPluginPage />
+          </CustomTabPanel>
+        </>
+      )}
+      <CustomTabPanel
+        value={value}
+        index={
+          productRef.current && productRef.current.os !== "android" ? 3 : 2
+        }
+      >
         <AboutViewServer dataServer={dataServer} />
       </CustomTabPanel>
     </Box>

@@ -134,23 +134,24 @@
       "id": "@Tambah"
     },
     "user_interface_title": {
-      "en": "User interface",
-      "fr": "Interface utilisateur",
-      "es": "Interfaz de usuario",
-      "id": "Antarmuka pengguna"
+      "en": "Preferred language order",
+      "fr": "Ordre de préférence des langues",
+      "es": "@Interfaz de usuario",
+      "id": "@Antarmuka pengguna"
     },
     "user_interface_desc": {
-      "en": "Choose your preferred language or languages. If a translation is missing in your first choice, the interface will fall back to the next language in the list.",
-      "fr": "Choisissez votre langue ou langues préférée(s). Si une traduction est manquante dans votre premier choix, l'interface passera à la langue suivante.",
-      "es": "Elige tu idioma preferido o agrega varios. Si falta una de las traducciones, la interfaz recurrirá al siguiente idioma.",
-      "id": "Pilih bahasa atau tambah beberapa bahasa. Jika tidak ada terjemahan, antarmuka akan pakai bahasa berikutnya."
+      "en": "Choose your preferred language or languages for the user interface. If a translation is missing in your first choice, the interface will fall back to the next language in the list.",
+      "fr": "Choisissez votre ou vos langue(s) préférée(s) pour l'interface utilisateur. Si une traduction est manquante dans votre premier choix, l'interface passera à la langue suivante.",
+      "es": "@Elige tu idioma preferido o agrega varios. Si falta una de las traducciones, la interfaz recurrirá al siguiente idioma.",
+      "id": "@Pilih bahasa atau tambah beberapa bahasa. Jika tidak ada terjemahan, antarmuka akan pakai bahasa berikutnya."
     },
     "about_server": {
       "en": "About",
-      "fr": "A propos de "
+      "fr": "À propos de "
     },
-    "update": {
-      "en": "Updates"
+    "about": {
+      "en": "About",
+      "fr": "À propos"
     },
     "version": {
       "en": "Version",
@@ -167,20 +168,80 @@
       "fr": "Complète, les langues suivantes ne seront pas utilisées"
     },
     "text_git": {
-      "en": "Thanks to Jason Long for the  <a href='https://git-scm.com/community/logos'> {Git Logo} </a>, licensed under the <a href=' https://creativecommons.org/licenses/by/3.0/'> {Creative Commons Attribution 3.0 Unported License} </a>.<br/>The logo was inverted (background removed and logo filled).",
-      "fr": "Merci à Jason Long pour le <a href='https://git-scm.com/community/logos'>  {Logo Git} </a>, sous <a href=' https://creativecommons.org/licenses/by/3.0/'> {licence Creative Commons Attribution 3.0 non transposé}.</a>.<br/>Le logo a été inversé (arrière-plan supprimé et logo rempli)."
+      "en": "Thanks to Jason Long for the {1}, licensed under the {2}.The logo was inverted (background removed and logo filled).",
+      "fr": "Merci à Jason Long pour le {1}, sous {2}.Le logo a été inversé (arrière-plan supprimé et logo rempli)."
     },
     "git_logo": {
       "en": "Git logo",
       "fr": "Logo Git"
     },
     "license_creative_commons": {
-      "en": "Creative Commons Attribution 3.O Unported License",
+      "en": "Creative Commons Attribution 3.0 Unported License",
       "fr": "licence Creative Commons Attribution 3.0 non transposé"
     },
     "credit": {
       "en": "Credits",
       "fr": "Crédits"
+    },
+    "system_plugins": {
+      "en": "System Plugins",
+      "fr": "Plugins système"
+    },
+    "system_plugins_intro": {
+      "en": "Some functionalities rely on external utilities you need to install to use.",
+      "fr": "Certaines fonctionnalités reposent sur des utilitaires externes que vous devez installer pour les utiliser."
+    },
+    "ffmpeg_title": {
+      "en": "FFmpeg for audio",
+      "fr": "FFmpeg pour l'audio"
+    },
+    "ffmpeg_desc": {
+      "en": "FFmpeg is a multimedia framework. It is used for the audio editor, to generate final audio files or to export Open Bible Stories videos.",
+      "fr": "FFmpeg est un framework multimédia. Il est utilisé pour l'éditeur audio, pour générer les fichiers audio finaux ou pour exporter les vidéos Open Bible Stories."
+    },
+    "pdf_engine_title": {
+      "en": "Render engine for PDF",
+      "fr": "Moteur de rendu pour PDF"
+    },
+    "pdf_engine_desc": {
+      "en": "This render engine is used to generate large PDFs with complex fonts.",
+      "fr": "Ce moteur de rendu est utilisé pour générer de grands PDF avec des polices complexes."
+    },
+    "download": {
+      "en": "Download",
+      "fr": "Télécharger"
+    },
+    "download_unavailable": {
+      "en": "Unavailable",
+      "fr": "Indisponible"
+    },
+    "download_unavailable_tip": {
+      "en": "Unavailable in web browser",
+      "fr": "Indisponible dans le navigateur web"
+    },
+    "download_checking": {
+      "en": "Checking…",
+      "fr": "Vérification…"
+    },
+    "download_downloading": {
+      "en": "Downloading…",
+      "fr": "Téléchargement…"
+    },
+    "download_installed": {
+      "en": "Installed",
+      "fr": "Installé"
+    },
+    "download_retry": {
+      "en": "Retry Download",
+      "fr": "Réessayer le téléchargement"
+    },
+    "download_percent_complete": {
+      "en": "complete",
+      "fr": "terminé"
+    },
+    "download_failed": {
+      "en": "Download failed",
+      "fr": "Échec du téléchargement"
     }
   }
 }

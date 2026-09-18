@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {
   Box,
   FormControl,
-  Grid2,
+  Grid,
   MenuItem,
   Select,
   InputLabel,
@@ -17,7 +17,8 @@ import RestoreIcon from "@mui/icons-material/Restore";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 import { fontFeatureSettings, useAssumeGraphite } from "font-detect-rhl";
-import { postEmptyJson, doI18n } from "pithekos-lib";
+import { postEmptyJson } from "pankosmia-lib/http";
+import { doI18n } from "pankosmia-lib/i18n";
 import { i18nContext as I18nContext, typographyContext } from "pankosmia-rcl";
 
 import UsePrevious from "./helpers/UsePrevious";
@@ -585,8 +586,8 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
       typographyRef.current.font_set !== fontSetStr
     ) {
       //#[post("/typography/<font_set>/<size>/<direction>")]
-      const typographyStr = fontSetStr + "/api/medium/ltr";
-      postEmptyJson(`/settings/typography/${typographyStr}`).then();
+      const typographyStr = fontSetStr + "/medium/ltr";
+      postEmptyJson(`/api/settings/typography/${typographyStr}`).then();
       setSelectedFontClass(fontSetStr);
     }
   }, [fontSetStr, typographyRef]);
@@ -949,8 +950,8 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
             sx={{ position: "relative", display: "flex", alignItems: "center" }}
           >
             <FormControl component="fieldset">
-              <Grid2 container sx={{}}>
-                <Grid2 item>
+              <Grid container sx={{}}>
+                <Grid item>
                   <div
                     className={adjSelectedFontClass}
                     style={{ fontSize: "100%" }}
@@ -1364,8 +1365,8 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
                       </div>
                     </Stack>
                   </div>
-                </Grid2>
-              </Grid2>
+                </Grid>
+              </Grid>
             </FormControl>
           </Box>
         </div>

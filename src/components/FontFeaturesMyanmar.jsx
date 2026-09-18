@@ -7,7 +7,7 @@ import {
   FormControl,
   createTheme,
   ThemeProvider,
-  Grid2,
+  Grid,
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { renderToString } from "react-dom/server";
@@ -207,13 +207,13 @@ export default function FontFeaturesMyanmar(fontFeaturesMyanmarProps) {
 
   const DrawerList = (
     <FormControl style={{ direction: labelDir }}>
-      <Grid2 container sx={{ maxWidth: 500 }}>
-        <Grid2 item>
+      <Grid container sx={{ maxWidth: 500 }}>
+        <Grid item>
           <div style={{ marginRight: 25, marginLeft: 25 }}>
             <FontFeatureSettings {...fontFeatureSettingsProps} />
           </div>
-        </Grid2>
-      </Grid2>
+        </Grid>
+      </Grid>
     </FormControl>
   );
 
