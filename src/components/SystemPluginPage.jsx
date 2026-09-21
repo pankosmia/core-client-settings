@@ -5,8 +5,10 @@ import ErrorIcon from "@mui/icons-material/Error";
 import { i18nContext, netContext } from "pankosmia-rcl";
 import { doI18n } from "pankosmia-lib/i18n";
 import AssetDownloadButton from "./AssetDownloadButton";
+import { getJson } from "pankosmia-lib/http";
+import { findFieldsInClientConfig } from "../utils/findFieldsInClientConfig";
 
-export default function SystemPluginPage() {
+export default function SystemPluginPage({ clientConfig }) {
   const { i18nRef } = useContext(i18nContext);
 
   return (
@@ -16,28 +18,32 @@ export default function SystemPluginPage() {
       </Typography>
 
       {/* FFmpeg for audio */}
-      <Stack spacing={1}>
-        <Typography sx={{ fontWeight: "bold" }}>
-          {doI18n("pages:core-settings:ffmpeg_title", i18nRef.current)}
-        </Typography>
-        <Typography variant="body2">
-          {doI18n("pages:core-settings:ffmpeg_desc", i18nRef.current)}
-        </Typography>
+      {clientConfig && findFieldsInClientConfig(clientConfig, "ffmpeg") && (
+        <Stack spacing={1}>
+          <Typography sx={{ fontWeight: "bold" }}>
+            {doI18n("pages:core-settings:ffmpeg_title", i18nRef.current)}
+          </Typography>
+          <Typography variant="body2">
+            {doI18n("pages:core-settings:ffmpeg_desc", i18nRef.current)}
+          </Typography>
 
-        <AssetDownloadButton asset="ffmpeg" />
-      </Stack>
+          <AssetDownloadButton asset="ffmpeg" />
+        </Stack>
+      )}
 
       {/* Firefox for pdf */}
-      <Stack spacing={1}>
-        <Typography sx={{ fontWeight: "bold" }}>
-          {doI18n("pages:core-settings:pdf_engine_title", i18nRef.current)}
-        </Typography>
-        <Typography variant="body2">
-          {doI18n("pages:core-settings:pdf_engine_desc", i18nRef.current)}
-        </Typography>
+      {clientConfig && findFieldsInClientConfig(clientConfig, "firefox") && (
+        <Stack spacing={1}>
+          <Typography sx={{ fontWeight: "bold" }}>
+            {doI18n("pages:core-settings:pdf_engine_title", i18nRef.current)}
+          </Typography>
+          <Typography variant="body2">
+            {doI18n("pages:core-settings:pdf_engine_desc", i18nRef.current)}
+          </Typography>
 
-        <AssetDownloadButton asset="firefox" />
-      </Stack>
+          <AssetDownloadButton asset="firefox" />
+        </Stack>
+      )}
     </Stack>
   );
 }
