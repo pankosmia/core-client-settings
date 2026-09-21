@@ -6,34 +6,10 @@ import { i18nContext, netContext } from "pankosmia-rcl";
 import { doI18n } from "pankosmia-lib/i18n";
 import AssetDownloadButton from "./AssetDownloadButton";
 import { getJson } from "pankosmia-lib/http";
-import { enqueueSnackbar } from "notistack";
+import { findFieldsInClientConfig } from "../utils/findFieldsInClientConfig";
 
-function findFields(clientConf, fieldToFind) {
-  return Object.entries(clientConf).find(([k, v]) =>
-    v.find((v2) => v2.fields.find((e) => e.id === fieldToFind && e.value)),
-  );
-}
-
-export default function SystemPluginPage() {
+export default function SystemPluginPage({ clientConfig }) {
   const { i18nRef } = useContext(i18nContext);
-  const [clientConfig, setClientConfig] = useState(null);
-
-  useEffect(() => {
-    async function getClientConfig() {
-      let clientConf = await getJson("/api/client-config");
-      if (clientConf.ok) {
-        setClientConfig(clientConf.json);
-      } else {
-        enqueueSnackbar(
-          doI18n(`pages:core-client-settings:errorGet`, i18nRef.current) +
-            " /api/client-config" +
-            `${clientConf.status}): ${clientConf.error}`,
-          { variant: "error" },
-        );
-      }
-    }
-    getClientConfig();
-  }, []);
 
   return (
     <Stack spacing={2}>
@@ -42,7 +18,7 @@ export default function SystemPluginPage() {
       </Typography>
 
       {/* FFmpeg for audio */}
-      {clientConfig && findFields(clientConfig, "ffmpeg") && (
+      {clientConfig && findFieldsInClientConfig(clientConfig, "ffmpeg") && (
         <Stack spacing={1}>
           <Typography sx={{ fontWeight: "bold" }}>
             {doI18n("pages:core-settings:ffmpeg_title", i18nRef.current)}
@@ -56,7 +32,7 @@ export default function SystemPluginPage() {
       )}
 
       {/* Firefox for pdf */}
-      {clientConfig && findFields(clientConfig, "firefox") && (
+      {clientConfig && findFieldsInClientConfig(clientConfig, "firefox") && (
         <Stack spacing={1}>
           <Typography sx={{ fontWeight: "bold" }}>
             {doI18n("pages:core-settings:pdf_engine_title", i18nRef.current)}
