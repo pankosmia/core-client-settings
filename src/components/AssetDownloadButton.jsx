@@ -1,5 +1,11 @@
 import { useState, useEffect, useContext } from "react";
-import { Button, LinearProgress, Typography, Stack } from "@mui/material";
+import {
+  Button,
+  LinearProgress,
+  Typography,
+  Stack,
+  Tooltip,
+} from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckOutlined";
 import ErrorIcon from "@mui/icons-material/ErrorOutlined";
 import DownloadIcon from "@mui/icons-material/SaveAltOutlined";
@@ -142,56 +148,81 @@ export default function AssetDownloadButton({ asset }) {
   return (
     <>
       <Stack sx={{ maxWidth: 200 }}>
-        <Button
-          variant="contained"
-          startIcon={
-            status === "complete" ? (
-              <CheckCircleIcon />
-            ) : status === "error" ? (
-              <ErrorIcon />
-            ) : (
-              <DownloadIcon />
-            )
-          }
-          onClick={() => handleInstall(asset)}
-          disabled={
-            status === "checking" ||
-            status === "downloading" ||
-            status === "complete" ||
-            !isElectron ||
-            !enabledRef.current
-          }
-          color={
-            status === "complete"
-              ? "success"
-              : status === "error"
-                ? "error"
-                : "primary"
-          }
+        <Tooltip
           title={
-            !isElectron
-              ? doI18n(
-                  "pages:core-settings:download_unavailable_tip",
-                  i18nRef.current,
-                )
-              : doI18n("pages:core-settings:download", i18nRef.current)
+            !isElectron ||
+            (!enabledRef.current &&
+              doI18n(
+                "pages:core-settings:tooltip_offline_mode",
+                i18nRef.current,
+              ))
           }
         >
-          {status === "checking" &&
-            !isElectron &&
-            doI18n("pages:core-settings:download_unavailable", i18nRef.current)}
-          {status === "checking" &&
-            isElectron &&
-            doI18n("pages:core-settings:download_checking", i18nRef.current)}
-          {status === "idle" &&
-            doI18n("pages:core-settings:download", i18nRef.current)}
-          {status === "downloading" &&
-            doI18n("pages:core-settings:download_downloading", i18nRef.current)}
-          {status === "complete" &&
-            doI18n("pages:core-settings:download_installed", i18nRef.current)}
-          {status === "error" &&
-            doI18n("pages:core-settings:download_retry", i18nRef.current)}
-        </Button>
+          <span>
+            <Button
+              variant="contained"
+              startIcon={
+                status === "complete" ? (
+                  <CheckCircleIcon />
+                ) : status === "error" ? (
+                  <ErrorIcon />
+                ) : (
+                  <DownloadIcon />
+                )
+              }
+              onClick={() => handleInstall(asset)}
+              disabled={
+                status === "checking" ||
+                status === "downloading" ||
+                status === "complete" ||
+                !isElectron ||
+                !enabledRef.current
+              }
+              color={
+                status === "complete"
+                  ? "success"
+                  : status === "error"
+                    ? "error"
+                    : "primary"
+              }
+              title={
+                !isElectron
+                  ? doI18n(
+                      "pages:core-settings:download_unavailable_tip",
+                      i18nRef.current,
+                    )
+                  : doI18n("pages:core-settings:download", i18nRef.current)
+              }
+            >
+              {status === "checking" &&
+                !isElectron &&
+                doI18n(
+                  "pages:core-settings:download_unavailable",
+                  i18nRef.current,
+                )}
+              {status === "checking" &&
+                isElectron &&
+                doI18n(
+                  "pages:core-settings:download_checking",
+                  i18nRef.current,
+                )}
+              {status === "idle" &&
+                doI18n("pages:core-settings:download", i18nRef.current)}
+              {status === "downloading" &&
+                doI18n(
+                  "pages:core-settings:download_downloading",
+                  i18nRef.current,
+                )}
+              {status === "complete" &&
+                doI18n(
+                  "pages:core-settings:download_installed",
+                  i18nRef.current,
+                )}
+              {status === "error" &&
+                doI18n("pages:core-settings:download_retry", i18nRef.current)}
+            </Button>
+          </span>
+        </Tooltip>
 
         {status === "downloading" && (
           <>

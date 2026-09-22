@@ -246,6 +246,10 @@
     "errorGet": {
       "en": "Could not fetch",
       "fr": "N'as pas pu fetch"
+    },
+    "tooltip_offline_mode": {
+      "en": "Switch the app online to use this feature",
+      "fr": "Passez l'application en ligne pour utiliser cette fonctionnalité"
     }
   }
 }
