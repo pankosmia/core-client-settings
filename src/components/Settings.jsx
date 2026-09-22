@@ -10,6 +10,8 @@ import LanguageSelection from "./LanguageSelection";
 import GraphiteTest from "./GraphiteTest";
 import AboutViewServer from "./AboutViewServer";
 import SystemPluginPage from "./SystemPluginPage";
+import { findFieldsInClientConfig } from "../utils/findFieldsInClientConfig";
+import { enqueueSnackbar } from "notistack";
 
 const CustomTabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -53,6 +55,24 @@ export default function Settings() {
   const [fontMenu, setFontMenu] = useState("shortlist");
   const [dataServer, setDataServer] = useState();
   const [nameServer, setNameServer] = useState();
+  const [clientConfig, setClientConfig] = useState(null);
+
+  useEffect(() => {
+    async function getClientConfig() {
+      let clientConf = await getJson("/api/client-config");
+      if (clientConf.ok) {
+        setClientConfig(clientConf.json);
+      } else {
+        enqueueSnackbar(
+          doI18n(`pages:core-client-settings:errorGet`, i18nRef.current) +
+            " /api/client-config" +
+            `${clientConf.status}): ${clientConf.error}`,
+          { variant: "error" },
+        );
+      }
+    }
+    getClientConfig();
+  }, []);
   const getServerVersion = async () => {
     const summariesResponse = await getJson(
       `/api/version`,
@@ -144,14 +164,18 @@ export default function Settings() {
             label={doI18n("pages:core-settings:fonts", i18nRef.current)}
             {...a11yProps(1)}
           />
-          {productRef.current && productRef.current.os !== "android" && (
-            <Tab
-              label={doI18n(
-                "pages:core-settings:system_plugins",
-                i18nRef.current,
-              )}
-            />
-          )}
+          {productRef.current &&
+            productRef.current.os !== "android" &&
+            clientConfig &&
+            (findFieldsInClientConfig(clientConfig, "ffmpeg") ||
+              findFieldsInClientConfig(clientConfig, "firefox")) && (
+              <Tab
+                label={doI18n(
+                  "pages:core-settings:system_plugins",
+                  i18nRef.current,
+                )}
+              />
+            )}
           <Tab
             label={`${doI18n("pages:core-settings:about_server", i18nRef.current)} ${nameServer || null}`}
           />
@@ -167,13 +191,15 @@ export default function Settings() {
       <CustomTabPanel value={value} index={1}>
         <BlendedFontsPage {...blendedFontsPageProps} />
       </CustomTabPanel>
-      {productRef.current && productRef.current.os !== "android" && (
-        <>
+      {productRef.current &&
+        productRef.current.os !== "android" &&
+        clientConfig &&
+        (findFieldsInClientConfig(clientConfig, "ffmpeg") ||
+          findFieldsInClientConfig(clientConfig, "firefox")) && (
           <CustomTabPanel value={value} index={2}>
-            <SystemPluginPage />
+            <SystemPluginPage clientConfig={clientConfig} />
           </CustomTabPanel>
-        </>
-      )}
+        )}
       <CustomTabPanel
         value={value}
         index={

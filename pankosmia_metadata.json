@@ -242,6 +242,10 @@
     "download_failed": {
       "en": "Download failed",
       "fr": "Échec du téléchargement"
+    },
+    "errorGet": {
+      "en": "Could not fetch",
+      "fr": "N'as pas pu fetch"
     }
   }
 }
