@@ -127,6 +127,12 @@ export default function Settings() {
     setFontMenu("shortlist");
   };
 
+  const showPlugins =
+    productRef.current &&
+    productRef.current.os !== "android" &&
+    clientConfig &&
+    (findFieldsInClientConfig(clientConfig, "ffmpeg") ||
+      findFieldsInClientConfig(clientConfig, "firefox"));
   return (
     <Box sx={{ width: "100%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -146,18 +152,14 @@ export default function Settings() {
             label={doI18n("pages:core-settings:fonts", i18nRef.current)}
             {...a11yProps(1)}
           />
-          {productRef.current &&
-            productRef.current.os !== "android" &&
-            clientConfig &&
-            (findFieldsInClientConfig(clientConfig, "ffmpeg") ||
-              findFieldsInClientConfig(clientConfig, "firefox")) && (
-              <Tab
-                label={doI18n(
-                  "pages:core-settings:system_plugins",
-                  i18nRef.current,
-                )}
-              />
-            )}
+          {showPlugins && (
+            <Tab
+              label={doI18n(
+                "pages:core-settings:system_plugins",
+                i18nRef.current,
+              )}
+            />
+          )}
           <Tab
             label={`${doI18n("pages:core-settings:about_server", i18nRef.current)} ${productRef?.current?.product_name || null}`}
           />
@@ -173,21 +175,13 @@ export default function Settings() {
       <CustomTabPanel value={value} index={1}>
         <BlendedFontsPage {...blendedFontsPageProps} />
       </CustomTabPanel>
-      {productRef.current &&
-        productRef.current.os !== "android" &&
-        clientConfig &&
-        (findFieldsInClientConfig(clientConfig, "ffmpeg") ||
-          findFieldsInClientConfig(clientConfig, "firefox")) && (
-          <CustomTabPanel value={value} index={2}>
-            <SystemPluginPage clientConfig={clientConfig} />
-          </CustomTabPanel>
-        )}
-      <CustomTabPanel
-        value={value}
-        index={
-          productRef.current && productRef.current.os !== "android" ? 3 : 2
-        }
-      >
+      {showPlugins && (
+        <CustomTabPanel value={value} index={2}>
+          <SystemPluginPage clientConfig={clientConfig} />
+        </CustomTabPanel>
+      )}
+
+      <CustomTabPanel value={value} index={showPlugins ? 3 : 2}>
         <AboutViewServer />
       </CustomTabPanel>
     </Box>
