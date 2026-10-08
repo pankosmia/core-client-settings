@@ -53,7 +53,6 @@ export default function Settings() {
   const [usedEndonyms, setUsedEndonyms] = useState([]);
 
   const [fontMenu, setFontMenu] = useState("shortlist");
-  const [dataServer, setDataServer] = useState({});
   const [nameServer, setNameServer] = useState();
   const [clientConfig, setClientConfig] = useState(null);
 
@@ -72,23 +71,6 @@ export default function Settings() {
       }
     }
     getClientConfig();
-  }, []);
-  const getServerVersion = async () => {
-    const summariesResponse = await getJson(
-      `/api/version`,
-      debugContext.current,
-    );
-    if (summariesResponse.ok) {
-      const data = summariesResponse.json;
-      setDataServer(data);
-      setNameServer(data.product_name);
-    } else {
-      console.error(`error fetching data`);
-    }
-  };
-
-  useEffect(() => {
-    getServerVersion();
   }, []);
 
   useEffect(
@@ -177,7 +159,7 @@ export default function Settings() {
               />
             )}
           <Tab
-            label={`${doI18n("pages:core-settings:about_server", i18nRef.current)} ${nameServer || null}`}
+            label={`${doI18n("pages:core-settings:about_server", i18nRef.current)} ${productRef?.current?.product_name || null}`}
           />
         </Tabs>
       </Box>
@@ -206,7 +188,7 @@ export default function Settings() {
           productRef.current && productRef.current.os !== "android" ? 3 : 2
         }
       >
-        <AboutViewServer dataServer={dataServer} />
+        <AboutViewServer />
       </CustomTabPanel>
     </Box>
   );

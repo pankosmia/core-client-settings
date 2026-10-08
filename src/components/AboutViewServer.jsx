@@ -1,15 +1,21 @@
 import { useContext } from "react";
 import { Grid, Stack, Typography } from "@mui/material";
 import { doI18n } from "pankosmia-lib/i18n";
-import { i18nContext, netContext } from "pankosmia-rcl";
+import {
+  i18nContext,
+  netContext,
+  debugContext,
+  productContext,
+} from "pankosmia-rcl";
 import { useEffect, useState } from "react";
 import { getJson } from "pankosmia-lib/http";
 
-export default function AboutViewServer({ dataServer }) {
-  console.log("🚀 ~ AboutViewServer ~ dataServer:", dataServer);
+export default function AboutViewServer() {
   const { i18nRef } = useContext(i18nContext);
   const { enabledRef } = useContext(netContext);
   const [clientInterfaces, setClientInterfaces] = useState({});
+  const { productRef } = useContext(productContext);
+  console.log("🚀 ~ AboutViewServer ~ productRef:", productRef);
 
   function interpolate(text, replacements) {
     return text.split(/(\{[^}]+\})/).map((part) => {
@@ -29,21 +35,21 @@ export default function AboutViewServer({ dataServer }) {
     <Grid container spacing={2}>
       <Grid size={12}>
         <Typography>
-          {dataServer ? (
+          {productRef.current && (
             <Stack spacing={1}>
               <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
                 {doI18n("pages:core-settings:about", i18nRef.current)}
               </Typography>
               <Typography fullWidth size="small">
                 {doI18n("pages:core-settings:version", i18nRef.current)}{" "}
-                {dataServer.product_version}
+                {productRef.current.product_version}
               </Typography>
               <Typography fullWidth size="small">
                 {doI18n("pages:core-settings:built", i18nRef.current)}{" "}
-                {dataServer.product_date_time}
+                {productRef.current.product_date_time}
               </Typography>
             </Stack>
-          ) : null}
+          )}
         </Typography>
       </Grid>
       {Object.keys(clientInterfaces).includes(
