@@ -53,7 +53,7 @@ export default function Settings() {
   const [usedEndonyms, setUsedEndonyms] = useState([]);
 
   const [fontMenu, setFontMenu] = useState("shortlist");
-  const [dataServer, setDataServer] = useState();
+  const [dataServer, setDataServer] = useState({});
   const [nameServer, setNameServer] = useState();
   const [clientConfig, setClientConfig] = useState(null);
 
