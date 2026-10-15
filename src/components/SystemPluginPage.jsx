@@ -2,9 +2,8 @@ import { useState, useEffect, useContext } from "react";
 import { Button, LinearProgress, Typography, Stack } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ErrorIcon from "@mui/icons-material/Error";
-import { i18nContext, netContext } from "pankosmia-rcl";
+import { i18nContext, netContext, AssetDownloadButton } from "pankosmia-rcl";
 import { doI18n } from "pankosmia-lib/i18n";
-import AssetDownloadButton from "./AssetDownloadButton";
 import { getJson } from "pankosmia-lib/http";
 import { findFieldsInClientConfig } from "../utils/findFieldsInClientConfig";
 
