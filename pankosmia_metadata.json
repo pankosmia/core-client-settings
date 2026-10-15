@@ -207,49 +207,9 @@
       "en": "This render engine is used to generate large PDFs with complex fonts.",
       "fr": "Ce moteur de rendu est utilisé pour générer de grands PDF avec des polices complexes."
     },
-    "download": {
-      "en": "Download",
-      "fr": "Télécharger"
-    },
-    "download_unavailable": {
-      "en": "Unavailable",
-      "fr": "Indisponible"
-    },
-    "download_unavailable_tip": {
-      "en": "Unavailable in web browser",
-      "fr": "Indisponible dans le navigateur web"
-    },
-    "download_checking": {
-      "en": "Checking…",
-      "fr": "Vérification…"
-    },
-    "download_downloading": {
-      "en": "Downloading…",
-      "fr": "Téléchargement…"
-    },
-    "download_installed": {
-      "en": "Installed",
-      "fr": "Installé"
-    },
-    "download_retry": {
-      "en": "Retry Download",
-      "fr": "Réessayer le téléchargement"
-    },
-    "download_percent_complete": {
-      "en": "complete",
-      "fr": "terminé"
-    },
-    "download_failed": {
-      "en": "Download failed",
-      "fr": "Échec du téléchargement"
-    },
     "errorGet": {
       "en": "Could not fetch",
       "fr": "N'as pas pu fetch"
-    },
-    "tooltip_offline_mode": {
-      "en": "Switch the app online to use this feature",
-      "fr": "Passez l'application en ligne pour utiliser cette fonctionnalité"
     }
   }
 }
