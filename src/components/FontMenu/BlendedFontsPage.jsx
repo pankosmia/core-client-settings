@@ -21,7 +21,7 @@ import { postEmptyJson } from "pankosmia-lib/http";
 import { doI18n } from "pankosmia-lib/i18n";
 import { i18nContext as I18nContext, typographyContext } from "pankosmia-rcl";
 
-import UsePrevious from "./helpers/UsePrevious";
+import UsePrevious from "../helpers/UsePrevious";
 import FontMenuItem from "./FontMenuItem";
 import sx from "./Selection.styles";
 import BlendedFontArabicUrduSelection from "./BlendedFontArabicUrduSelection";

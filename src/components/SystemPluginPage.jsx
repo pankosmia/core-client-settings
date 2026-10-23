@@ -4,10 +4,9 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ErrorIcon from "@mui/icons-material/Error";
 import { i18nContext, netContext } from "pankosmia-rcl";
 import { doI18n } from "pankosmia-lib/i18n";
-import AssetDownloadButton from "./AssetDownloadButton";
 import { getJson } from "pankosmia-lib/http";
 import { findFieldsInClientConfig } from "../utils/findFieldsInClientConfig";
-
+import { AssetDownloadButton } from "pankosmia-rcl";
 export default function SystemPluginPage({ clientConfig }) {
   const { i18nRef } = useContext(i18nContext);
 

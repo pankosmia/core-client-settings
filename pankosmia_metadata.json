@@ -210,6 +210,22 @@
     "errorGet": {
       "en": "Could not fetch",
       "fr": "N'as pas pu fetch"
+    },
+    "debugModeEnable": {
+      "fr": "Mode débogage pour développeurs",
+      "en": "Debug mode for developers"
+    },
+    "SwitchToDebug": {
+      "fr": "Passer en mode débogage ?",
+      "en": "Switch to debug mode? "
+    },
+    "SureToDebug": {
+      "fr": "Activez cette option à vos propres risques, uniquement si vous savez ce que vous faites.",
+      "en": "Enable this at your own risk, only if you know what you are doing."
+    },
+    "debug": {
+      "en": "Debug",
+      "fr": "Débogage"
     }
   }
 }

@@ -9,13 +9,13 @@ import {
 } from "pankosmia-rcl";
 import { useEffect, useState } from "react";
 import { getJson } from "pankosmia-lib/http";
+import { DebugButton } from "./DebugButton";
 
 export default function AboutViewServer() {
   const { i18nRef } = useContext(i18nContext);
   const { enabledRef } = useContext(netContext);
   const [clientInterfaces, setClientInterfaces] = useState({});
   const { productRef } = useContext(productContext);
-  console.log("🚀 ~ AboutViewServer ~ productRef:", productRef);
 
   function interpolate(text, replacements) {
     return text.split(/(\{[^}]+\})/).map((part) => {
@@ -101,6 +101,14 @@ export default function AboutViewServer() {
           </Stack>
         </Grid>
       )}
+      <Grid size={12}>
+        <Stack spacing={1}>
+          <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
+            {doI18n("pages:core-settings:debug", i18nRef.current)}
+          </Typography>
+          <DebugButton />
+        </Stack>
+      </Grid>
     </Grid>
   );
 }

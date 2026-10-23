@@ -13,25 +13,24 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { renderToString } from "react-dom/server";
 import { useDetectDir } from "font-detect-rhl";
 
-import awamiFfsLessPuncAndSpacing from "./data/awamiFfsLessPuncAndSpacing.json";
-import FontFeatureDefaults from "./helpers/FontFeatureDefaults";
-import RadioLabelText from "./helpers/RadioLabelText";
-import FontFeatureSettings from "./helpers/FontFeatureSettings";
+import FontFeatureDefaults from "../helpers/FontFeatureDefaults";
+import RadioLabelText from "../helpers/RadioLabelText";
+import FontFeatureSettings from "../helpers/FontFeatureSettings";
 
-export default function FontFeaturesArabicUrdu(fontFeaturesArabicUrduProps) {
+export default function FontFeaturesMyanmar(fontFeaturesMyanmarProps) {
   const {
-    arabicUrduFontSettings, // Selected options (initially default)
-    setArabicUrduFontSettings,
+    myanmarFontSettings, // Selected options (initially default)
+    setMyanmarFontSettings,
     ffsId,
     fontName,
     fontDisplayName,
     fontSize,
     lineHeight,
     isGraphite,
-    // ffsArr, // Options
+    ffsArr, // Options
     exampleRegex,
-    setExampleArabicUrdu, // Example text
-  } = fontFeaturesArabicUrduProps;
+    setExampleMyanmar, // Example text
+  } = fontFeaturesMyanmarProps;
 
   const [open, setOpen] = useState(false);
 
@@ -80,7 +79,7 @@ export default function FontFeaturesArabicUrdu(fontFeaturesArabicUrduProps) {
   const diffStyle = "color: purple;";
 
   const fontSettingsArrProps = {
-    ffsArr: awamiFfsLessPuncAndSpacing, // Removing wdsp and punc for now by using awamiFfsLessPuncAndSpacing.
+    ffsArr,
     isGraphite,
   };
 
@@ -88,7 +87,7 @@ export default function FontFeaturesArabicUrdu(fontFeaturesArabicUrduProps) {
 
   useEffect(() => {
     if (fontSettingsArr.length !== 0) {
-      setArabicUrduFontSettings(fontSettingsArr);
+      setMyanmarFontSettings(fontSettingsArr);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ffsId]);
@@ -116,25 +115,25 @@ export default function FontFeaturesArabicUrdu(fontFeaturesArabicUrduProps) {
     if (fontSettingsArr.length !== 0) {
       // eslint-disable-next-line no-control-regex
       const exampleStr =
-        "في البدء كان الكلمة والكلمة كان عند الله وكان الكلمة الله. " +
+        "အစဦး၌ နှုတ်ကပတ်တော်ရှိ၏။ နှုတ်ကပတ်တော်သည် ဘုရားသခင်နှင့်အတူရှိ၏။ နှုတ်ကပတ်တော် သည်လည်း ဘုရားသခင်ဖြစ်တော်မူ၏။ " +
         labelStr.replace(exampleRegex, "");
-      setExampleArabicUrdu(exampleStr);
+      setExampleMyanmar(exampleStr);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ffsId]);
 
   const handleChange = useMemo(
     () => (event) => {
-      const newState = arabicUrduFontSettings.map((obj) => {
+      const newState = myanmarFontSettings.map((obj) => {
         if (obj.name === event.target.name) {
           return { ...obj, value: +event.target.value };
         }
         // otherwise return the object as is
         return obj;
       });
-      setArabicUrduFontSettings(newState);
+      setMyanmarFontSettings(newState);
     },
-    [arabicUrduFontSettings, setArabicUrduFontSettings],
+    [myanmarFontSettings, setMyanmarFontSettings],
   );
   const [placementDir, setPlacementDir] = useState("left");
   const [radioRightMargin, setRadioRightMargin] = useState("16px");
@@ -195,7 +194,7 @@ export default function FontFeaturesArabicUrdu(fontFeaturesArabicUrduProps) {
 
   const fontFeatureSettingsProps = {
     fontDisplayName,
-    fontSettings: arabicUrduFontSettings,
+    fontSettings: myanmarFontSettings,
     handleChange,
     placementDir,
     radioRightMargin,
@@ -203,7 +202,7 @@ export default function FontFeaturesArabicUrdu(fontFeaturesArabicUrduProps) {
     labelStyle,
     diffStyle,
     isGraphite,
-    ffsArr: awamiFfsLessPuncAndSpacing, // Current unicode ranges always result in 'punc 2' (Latin); Removing that option for now.
+    ffsArr,
   };
 
   const DrawerList = (
@@ -243,11 +242,11 @@ export default function FontFeaturesArabicUrdu(fontFeaturesArabicUrduProps) {
   );
 }
 
-FontFeaturesArabicUrdu.propTypes = {
-  /** ArabicUrdu Font Settings (initially default) */
-  arabicUrduFontSettings: PropTypes.array,
-  /** Set ArabicUrdu Font Settings */
-  setArabicUrduFontSettings: PropTypes.func.isRequired,
+FontFeaturesMyanmar.propTypes = {
+  /** Myanmar Font Settings (initially default) */
+  myanmarFontSettings: PropTypes.array,
+  /** Set Myanmar Font Settings */
+  setMyanmarFontSettings: PropTypes.func.isRequired,
   /** Font Feature Settings ID  */
   ffsId: PropTypes.string,
   /** Font Name */
@@ -261,9 +260,9 @@ FontFeaturesArabicUrdu.propTypes = {
   /** Is Rendering in Graphite? */
   isGraphite: PropTypes.bool.isRequired,
   /** Font Feature Settings Array (Options)*/
-  // ffsArr: PropTypes.array.isRequired, : // Removing wdsp and punc for now by using awamiFfsLessPuncAndSpacing.
+  ffsArr: PropTypes.array.isRequired,
   /** Example Regular Expression */
   exampleRegex: PropTypes.func.isRequired,
-  /** Set Example ArabicUrdu Text */
-  setExampleArabicUrdu: PropTypes.func.isRequired,
+  /** Set Example Myanmar Text */
+  setExampleMyanmar: PropTypes.func.isRequired,
 };
