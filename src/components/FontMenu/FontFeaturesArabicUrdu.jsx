@@ -13,24 +13,25 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { renderToString } from "react-dom/server";
 import { useDetectDir } from "font-detect-rhl";
 
-import FontFeatureDefaults from "./helpers/FontFeatureDefaults";
-import RadioLabelText from "./helpers/RadioLabelText";
-import FontFeatureSettings from "./helpers/FontFeatureSettings";
+import awamiFfsLessPuncAndSpacing from "../data/awamiFfsLessPuncAndSpacing.json";
+import FontFeatureDefaults from "../helpers/FontFeatureDefaults";
+import RadioLabelText from "../helpers/RadioLabelText";
+import FontFeatureSettings from "../helpers/FontFeatureSettings";
 
-export default function FontFeaturesBase(fontFeaturesBaseProps) {
+export default function FontFeaturesArabicUrdu(fontFeaturesArabicUrduProps) {
   const {
-    baseFontSettings, // Selected options (initially default)
-    setBaseFontSettings,
+    arabicUrduFontSettings, // Selected options (initially default)
+    setArabicUrduFontSettings,
     ffsId,
     fontName,
     fontDisplayName,
     fontSize,
     lineHeight,
     isGraphite,
-    ffsArr, // Options
+    // ffsArr, // Options
     exampleRegex,
-    setExampleBase, // Example text
-  } = fontFeaturesBaseProps;
+    setExampleArabicUrdu, // Example text
+  } = fontFeaturesArabicUrduProps;
 
   const [open, setOpen] = useState(false);
 
@@ -79,7 +80,7 @@ export default function FontFeaturesBase(fontFeaturesBaseProps) {
   const diffStyle = "color: purple;";
 
   const fontSettingsArrProps = {
-    ffsArr,
+    ffsArr: awamiFfsLessPuncAndSpacing, // Removing wdsp and punc for now by using awamiFfsLessPuncAndSpacing.
     isGraphite,
   };
 
@@ -87,7 +88,7 @@ export default function FontFeaturesBase(fontFeaturesBaseProps) {
 
   useEffect(() => {
     if (fontSettingsArr.length !== 0) {
-      setBaseFontSettings(fontSettingsArr);
+      setArabicUrduFontSettings(fontSettingsArr);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ffsId]);
@@ -115,32 +116,25 @@ export default function FontFeaturesBase(fontFeaturesBaseProps) {
     if (fontSettingsArr.length !== 0) {
       // eslint-disable-next-line no-control-regex
       const exampleStr =
-        "Au commencement... / In the beginning... " +
-        labelStr
-          .replace(exampleRegex, "")
-          .replace("(all letters with capital equivalents)", "")
-          .replace("(all capitals)", "")
-          .replace(
-            "                                                                    ",
-            "",
-          );
-      setExampleBase(exampleStr);
+        "في البدء كان الكلمة والكلمة كان عند الله وكان الكلمة الله. " +
+        labelStr.replace(exampleRegex, "");
+      setExampleArabicUrdu(exampleStr);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ffsId]);
 
   const handleChange = useMemo(
     () => (event) => {
-      const newState = baseFontSettings.map((obj) => {
+      const newState = arabicUrduFontSettings.map((obj) => {
         if (obj.name === event.target.name) {
           return { ...obj, value: +event.target.value };
         }
         // otherwise return the object as is
         return obj;
       });
-      setBaseFontSettings(newState);
+      setArabicUrduFontSettings(newState);
     },
-    [baseFontSettings, setBaseFontSettings],
+    [arabicUrduFontSettings, setArabicUrduFontSettings],
   );
   const [placementDir, setPlacementDir] = useState("left");
   const [radioRightMargin, setRadioRightMargin] = useState("16px");
@@ -201,7 +195,7 @@ export default function FontFeaturesBase(fontFeaturesBaseProps) {
 
   const fontFeatureSettingsProps = {
     fontDisplayName,
-    fontSettings: baseFontSettings,
+    fontSettings: arabicUrduFontSettings,
     handleChange,
     placementDir,
     radioRightMargin,
@@ -209,7 +203,7 @@ export default function FontFeaturesBase(fontFeaturesBaseProps) {
     labelStyle,
     diffStyle,
     isGraphite,
-    ffsArr,
+    ffsArr: awamiFfsLessPuncAndSpacing, // Current unicode ranges always result in 'punc 2' (Latin); Removing that option for now.
   };
 
   const DrawerList = (
@@ -249,11 +243,11 @@ export default function FontFeaturesBase(fontFeaturesBaseProps) {
   );
 }
 
-FontFeaturesBase.propTypes = {
-  /** Base Font Settings (initially default) */
-  baseFontSettings: PropTypes.array,
-  /** Set Base Font Settings */
-  setBaseFontSettings: PropTypes.func.isRequired,
+FontFeaturesArabicUrdu.propTypes = {
+  /** ArabicUrdu Font Settings (initially default) */
+  arabicUrduFontSettings: PropTypes.array,
+  /** Set ArabicUrdu Font Settings */
+  setArabicUrduFontSettings: PropTypes.func.isRequired,
   /** Font Feature Settings ID  */
   ffsId: PropTypes.string,
   /** Font Name */
@@ -267,9 +261,9 @@ FontFeaturesBase.propTypes = {
   /** Is Rendering in Graphite? */
   isGraphite: PropTypes.bool.isRequired,
   /** Font Feature Settings Array (Options)*/
-  ffsArr: PropTypes.array.isRequired,
+  // ffsArr: PropTypes.array.isRequired, : // Removing wdsp and punc for now by using awamiFfsLessPuncAndSpacing.
   /** Example Regular Expression */
   exampleRegex: PropTypes.func.isRequired,
-  /** Set Example Base Text */
-  setExampleBase: PropTypes.func.isRequired,
+  /** Set Example ArabicUrdu Text */
+  setExampleArabicUrdu: PropTypes.func.isRequired,
 };

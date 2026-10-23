@@ -5,10 +5,10 @@ import { getAndSetJson, postEmptyJson, getJson } from "pankosmia-lib/http";
 import { doI18n } from "pankosmia-lib/i18n";
 import { i18nContext, debugContext, productContext } from "pankosmia-rcl";
 
-import BlendedFontsPage from "./BlendedFontsPage";
-import LanguageSelection from "./LanguageSelection";
+import BlendedFontsPage from "./FontMenu/BlendedFontsPage";
+import LanguageSelection from "./Language/LanguageSelection";
 import GraphiteTest from "./GraphiteTest";
-import AboutViewServer from "./AboutViewServer";
+import AboutViewServer from "./About/AboutViewServer";
 import SystemPluginPage from "./SystemPluginPage";
 import { findFieldsInClientConfig } from "../utils/findFieldsInClientConfig";
 import { enqueueSnackbar } from "notistack";

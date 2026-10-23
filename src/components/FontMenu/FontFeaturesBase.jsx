@@ -13,14 +13,14 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { renderToString } from "react-dom/server";
 import { useDetectDir } from "font-detect-rhl";
 
-import FontFeatureDefaults from "./helpers/FontFeatureDefaults";
-import RadioLabelText from "./helpers/RadioLabelText";
-import FontFeatureSettings from "./helpers/FontFeatureSettings";
+import FontFeatureDefaults from "../helpers/FontFeatureDefaults";
+import RadioLabelText from "../helpers/RadioLabelText";
+import FontFeatureSettings from "../helpers/FontFeatureSettings";
 
-export default function FontFeaturesMyanmar(fontFeaturesMyanmarProps) {
+export default function FontFeaturesBase(fontFeaturesBaseProps) {
   const {
-    myanmarFontSettings, // Selected options (initially default)
-    setMyanmarFontSettings,
+    baseFontSettings, // Selected options (initially default)
+    setBaseFontSettings,
     ffsId,
     fontName,
     fontDisplayName,
@@ -29,8 +29,8 @@ export default function FontFeaturesMyanmar(fontFeaturesMyanmarProps) {
     isGraphite,
     ffsArr, // Options
     exampleRegex,
-    setExampleMyanmar, // Example text
-  } = fontFeaturesMyanmarProps;
+    setExampleBase, // Example text
+  } = fontFeaturesBaseProps;
 
   const [open, setOpen] = useState(false);
 
@@ -87,7 +87,7 @@ export default function FontFeaturesMyanmar(fontFeaturesMyanmarProps) {
 
   useEffect(() => {
     if (fontSettingsArr.length !== 0) {
-      setMyanmarFontSettings(fontSettingsArr);
+      setBaseFontSettings(fontSettingsArr);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ffsId]);
@@ -115,25 +115,32 @@ export default function FontFeaturesMyanmar(fontFeaturesMyanmarProps) {
     if (fontSettingsArr.length !== 0) {
       // eslint-disable-next-line no-control-regex
       const exampleStr =
-        "အစဦး၌ နှုတ်ကပတ်တော်ရှိ၏။ နှုတ်ကပတ်တော်သည် ဘုရားသခင်နှင့်အတူရှိ၏။ နှုတ်ကပတ်တော် သည်လည်း ဘုရားသခင်ဖြစ်တော်မူ၏။ " +
-        labelStr.replace(exampleRegex, "");
-      setExampleMyanmar(exampleStr);
+        "Au commencement... / In the beginning... " +
+        labelStr
+          .replace(exampleRegex, "")
+          .replace("(all letters with capital equivalents)", "")
+          .replace("(all capitals)", "")
+          .replace(
+            "                                                                    ",
+            "",
+          );
+      setExampleBase(exampleStr);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ffsId]);
 
   const handleChange = useMemo(
     () => (event) => {
-      const newState = myanmarFontSettings.map((obj) => {
+      const newState = baseFontSettings.map((obj) => {
         if (obj.name === event.target.name) {
           return { ...obj, value: +event.target.value };
         }
         // otherwise return the object as is
         return obj;
       });
-      setMyanmarFontSettings(newState);
+      setBaseFontSettings(newState);
     },
-    [myanmarFontSettings, setMyanmarFontSettings],
+    [baseFontSettings, setBaseFontSettings],
   );
   const [placementDir, setPlacementDir] = useState("left");
   const [radioRightMargin, setRadioRightMargin] = useState("16px");
@@ -194,7 +201,7 @@ export default function FontFeaturesMyanmar(fontFeaturesMyanmarProps) {
 
   const fontFeatureSettingsProps = {
     fontDisplayName,
-    fontSettings: myanmarFontSettings,
+    fontSettings: baseFontSettings,
     handleChange,
     placementDir,
     radioRightMargin,
@@ -242,11 +249,11 @@ export default function FontFeaturesMyanmar(fontFeaturesMyanmarProps) {
   );
 }
 
-FontFeaturesMyanmar.propTypes = {
-  /** Myanmar Font Settings (initially default) */
-  myanmarFontSettings: PropTypes.array,
-  /** Set Myanmar Font Settings */
-  setMyanmarFontSettings: PropTypes.func.isRequired,
+FontFeaturesBase.propTypes = {
+  /** Base Font Settings (initially default) */
+  baseFontSettings: PropTypes.array,
+  /** Set Base Font Settings */
+  setBaseFontSettings: PropTypes.func.isRequired,
   /** Font Feature Settings ID  */
   ffsId: PropTypes.string,
   /** Font Name */
@@ -263,6 +270,6 @@ FontFeaturesMyanmar.propTypes = {
   ffsArr: PropTypes.array.isRequired,
   /** Example Regular Expression */
   exampleRegex: PropTypes.func.isRequired,
-  /** Set Example Myanmar Text */
-  setExampleMyanmar: PropTypes.func.isRequired,
+  /** Set Example Base Text */
+  setExampleBase: PropTypes.func.isRequired,
 };

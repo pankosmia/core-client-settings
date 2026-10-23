@@ -1,12 +1,8 @@
-import { useState, useEffect, useContext } from "react";
-import { Button, LinearProgress, Typography, Stack } from "@mui/material";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import ErrorIcon from "@mui/icons-material/Error";
-import { i18nContext, netContext, AssetDownloadButton } from "pankosmia-rcl";
+import { useContext } from "react";
+import { Typography, Stack } from "@mui/material";
+import { i18nContext, AssetDownloadButton } from "pankosmia-rcl";
 import { doI18n } from "pankosmia-lib/i18n";
-import { getJson } from "pankosmia-lib/http";
 import { findFieldsInClientConfig } from "../utils/findFieldsInClientConfig";
-
 export default function SystemPluginPage({ clientConfig }) {
   const { i18nRef } = useContext(i18nContext);
 
