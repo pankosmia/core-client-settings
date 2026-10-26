@@ -3,6 +3,8 @@
   "require": {
     "net": false
   },
+  "minServerVersion": "0.20.3",
+
   "exclude_from_menu": true,
   "exclude_from_dashboard": true,
   "i18n": {
@@ -207,49 +209,25 @@
       "en": "This render engine is used to generate large PDFs with complex fonts.",
       "fr": "Ce moteur de rendu est utilisé pour générer de grands PDF avec des polices complexes."
     },
-    "download": {
-      "en": "Download",
-      "fr": "Télécharger"
-    },
-    "download_unavailable": {
-      "en": "Unavailable",
-      "fr": "Indisponible"
-    },
-    "download_unavailable_tip": {
-      "en": "Unavailable in web browser",
-      "fr": "Indisponible dans le navigateur web"
-    },
-    "download_checking": {
-      "en": "Checking…",
-      "fr": "Vérification…"
-    },
-    "download_downloading": {
-      "en": "Downloading…",
-      "fr": "Téléchargement…"
-    },
-    "download_installed": {
-      "en": "Installed",
-      "fr": "Installé"
-    },
-    "download_retry": {
-      "en": "Retry Download",
-      "fr": "Réessayer le téléchargement"
-    },
-    "download_percent_complete": {
-      "en": "complete",
-      "fr": "terminé"
-    },
-    "download_failed": {
-      "en": "Download failed",
-      "fr": "Échec du téléchargement"
-    },
     "errorGet": {
       "en": "Could not fetch",
       "fr": "N'as pas pu fetch"
     },
-    "tooltip_offline_mode": {
-      "en": "Switch the app online to use this feature",
-      "fr": "Passez l'application en ligne pour utiliser cette fonctionnalité"
+    "debugModeEnable": {
+      "fr": "Mode débogage pour développeurs",
+      "en": "Debug mode for developers"
+    },
+    "SwitchToDebug": {
+      "fr": "Passer en mode débogage ?",
+      "en": "Switch to debug mode? "
+    },
+    "SureToDebug": {
+      "fr": "Activez cette option à vos propres risques, uniquement si vous savez ce que vous faites.",
+      "en": "Enable this at your own risk, only if you know what you are doing."
+    },
+    "debug": {
+      "en": "Debug",
+      "fr": "Débogage"
     }
   }
 }
