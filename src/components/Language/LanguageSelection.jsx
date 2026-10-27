@@ -11,7 +11,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import { postEmptyJson } from "pankosmia-lib/http";
+import { postEmpty } from "pankosmia-lib/http";
 import { doI18n } from "pankosmia-lib/i18n";
 import { i18nContext } from "pankosmia-rcl";
 import { useState, useEffect, useContext } from "react";
@@ -54,7 +54,7 @@ export default function LanguageSelection({
     const newOrder = reorderedItems.map((item) => item.id);
     setLanguageChoices(newOrder);
     const languageString = newOrder.join("/");
-    postEmptyJson(`/api/settings/languages/${languageString}`);
+    postEmpty(`/api/settings/languages/${languageString}`);
   };
 
   const doChange = (selected) => {
@@ -67,7 +67,7 @@ export default function LanguageSelection({
         updated.push("en");
       }
       const languageString = updated.join("/");
-      postEmptyJson(`/api/settings/languages/${languageString}`).then();
+      postEmpty(`/api/settings/languages/${languageString}`).then();
       return updated;
     });
   };
@@ -75,7 +75,7 @@ export default function LanguageSelection({
     setLanguageChoices((prev) => {
       let updated = prev.filter((id) => id !== langId);
       const languageString = updated.join("/");
-      postEmptyJson(`/api/settings/languages/${languageString}`);
+      postEmpty(`/api/settings/languages/${languageString}`);
       return updated;
     });
   };

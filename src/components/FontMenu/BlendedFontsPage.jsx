@@ -17,7 +17,7 @@ import RestoreIcon from "@mui/icons-material/Restore";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 import { fontFeatureSettings, useAssumeGraphite } from "font-detect-rhl";
-import { postEmptyJson } from "pankosmia-lib/http";
+import { postEmpty } from "pankosmia-lib/http";
 import { doI18n } from "pankosmia-lib/i18n";
 import { i18nContext as I18nContext, typographyContext } from "pankosmia-rcl";
 
@@ -587,7 +587,7 @@ export default function BlendedFontsPage(blendedFontsPageProps) {
     ) {
       //#[post("/typography/<font_set>/<size>/<direction>")]
       const typographyStr = fontSetStr + "/medium/ltr";
-      postEmptyJson(`/api/settings/typography/${typographyStr}`).then();
+      postEmpty(`/api/settings/typography/${typographyStr}`).then();
       setSelectedFontClass(fontSetStr);
     }
   }, [fontSetStr, typographyRef]);
