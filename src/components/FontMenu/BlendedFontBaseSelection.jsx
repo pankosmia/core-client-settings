@@ -13,7 +13,7 @@ import {
   Tooltip,
 } from "@mui/material";
 import RestoreIcon from "@mui/icons-material/Restore";
-import { postEmptyJson } from "pankosmia-lib/http";
+import { postEmpty } from "pankosmia-lib/http";
 import { doI18n } from "pankosmia-lib/i18n";
 import { i18nContext as I18nContext } from "pankosmia-rcl";
 
@@ -144,7 +144,7 @@ export default function BlendedFontBaseSelection(
             const ffsStr = renderToString(nextBaseFfsCssArr[i])
               .replace(" &quot;", "")
               .replace("&quot; ", "/");
-            postEmptyJson(
+            postEmpty(
               `/api/settings/typography-feature/${ffsBaseFontName}/${ffsStr}`,
             ).then();
           }

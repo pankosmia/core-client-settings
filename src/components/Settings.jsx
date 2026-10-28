@@ -1,9 +1,9 @@
 import { useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Tabs, Tab, Box } from "@mui/material";
-import { getAndSetJson, postEmptyJson, getJson } from "pankosmia-lib/http";
+import { getAndSetJson, postEmpty, getJson } from "pankosmia-lib/http";
 import { doI18n } from "pankosmia-lib/i18n";
-import { i18nContext, debugContext, productContext } from "pankosmia-rcl";
+import { i18nContext, productContext } from "pankosmia-rcl";
 
 import BlendedFontsPage from "./FontMenu/BlendedFontsPage";
 import LanguageSelection from "./Language/LanguageSelection";
@@ -106,7 +106,7 @@ export default function Settings() {
   useEffect(() => {
     if (!languageChoices.some((item) => item === "en")) {
       const languageString = languageChoices.join("/") + "/api/en";
-      postEmptyJson(`/api/settings/languages/${languageString}`).then();
+      postEmpty(`/api/settings/languages/${languageString}`).then();
       setLanguageChoices((previous) => [...previous, "en"]);
     }
   }, [languageChoices]);
