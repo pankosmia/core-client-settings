@@ -42,12 +42,23 @@ export function DebugButton() {
           justifyContent: "flex-start",
         }}
       >
-        <Switch edge="end" onChange={toggleDebug} checked={debugRef.current} />
+        <Switch
+          edge="end"
+          onChange={() => {
+            if (debugRef.current) {
+              toggleDebug();
+            } else {
+              setOpen(true);
+            }
+          }}
+          checked={debugRef.current}
+        />
 
         <Typography color="inherit">
           {doI18n("pages:core-settings:debugModeEnable", i18nRef.current)}
         </Typography>
       </Button>
+
       <PanBasicDialog
         titleLabel={doI18n(
           "pages:core-settings:SwitchToDebug",
