@@ -6,7 +6,7 @@ import { doI18n } from "pankosmia-lib/i18n";
 import { i18nContext, productContext } from "pankosmia-rcl";
 
 import BlendedFontsPage from "./FontMenu/BlendedFontsPage";
-import LanguageSelection from "./Language/LanguageSelection";
+import InterfaceTab from "./Interfaces/InterfaceTab";
 import GraphiteTest from "./GraphiteTest";
 import AboutViewServer from "./About/AboutViewServer";
 import SystemPluginPage from "./SystemPluginPage";
@@ -144,7 +144,7 @@ export default function Settings() {
           aria-label="basic tabs example"
         >
           <Tab
-            label={doI18n("pages:core-settings:language", i18nRef.current)}
+            label={doI18n("pages:core-settings:interface", i18nRef.current)}
             {...a11yProps(0)}
           />
           <Tab
@@ -166,7 +166,7 @@ export default function Settings() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <LanguageSelection
+        <InterfaceTab
           languageChoices={languageChoices}
           setLanguageChoices={setLanguageChoices}
           usedLanguages={usedEndonyms}
