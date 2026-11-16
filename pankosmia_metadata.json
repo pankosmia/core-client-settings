@@ -30,12 +30,12 @@
       "id": "Fon-fon",
       "grc": "Γράμματα"
     },
-    "language": {
-      "en": "Languages",
-      "fr": "Langues",
-      "id": "Bahasa",
-      "grc": "Γλώσσες",
-      "es": "Idiomas"
+    "interface": {
+      "en": "Interface",
+      "fr": "Interface",
+      "id": "Antarmuka",
+      "grc": "Διεπαφή",
+      "es": "Interfaz"
     },
     "select_hebrewscript": {
       "en": "Hebrew Script",
@@ -228,6 +228,18 @@
     "debug": {
       "en": "Debug",
       "fr": "Débogage"
+    },
+    "displayDirection": {
+      "en": "Display direction",
+      "fr": "Sens d'affichage"
+    },
+    "ltr": {
+      "en": "Left-to-right (LTR)",
+      "fr": "Gauche à droite (LTR)"
+    },
+    "rtl": {
+      "en": "Right-to-left (RTL)",
+      "fr": "Droite à gauche (RTL)"
     }
   }
 }

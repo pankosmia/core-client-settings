@@ -1,3 +1,9 @@
+import { Droppable } from "@hello-pangea/dnd";
+import { Draggable } from "@hello-pangea/dnd";
+import { DragDropContext } from "@hello-pangea/dnd";
+import { DragIndicator } from "@mui/icons-material";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+
 import {
   Box,
   FormControl,
@@ -11,23 +17,17 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import { postEmpty } from "pankosmia-lib/http";
 import { doI18n } from "pankosmia-lib/i18n";
-import { i18nContext } from "pankosmia-rcl";
-import { useState, useEffect, useContext } from "react";
-import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
+import { useState, useEffect } from "react";
 import LanguageMenuItem from "./LanguageMenuItem";
-import { DragIndicator } from "@mui/icons-material";
-import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 
-export default function LanguageSelection({
+export default function LanguageSection({
   languageChoices,
   usedLanguages,
   setLanguageChoices,
+  i18nRef,
 }) {
-  const { i18nRef } = useContext(i18nContext);
   const [items, setItems] = useState([]);
-  const enIndex = items.findIndex((item) => item.id === "en");
 
   useEffect(() => {
     const newItems = languageChoices?.map((choice) => {
@@ -36,6 +36,8 @@ export default function LanguageSelection({
     });
     setItems(newItems);
   }, [languageChoices, usedLanguages]);
+
+  const enIndex = items.findIndex((item) => item.id === "en");
 
   const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
@@ -145,7 +147,6 @@ export default function LanguageSelection({
                               color: index > enIndex ? "gray" : "black",
                             }}
                           >
-                            {" "}
                             {item.content} ({item.id})
                           </ListItemText>
                         </Tooltip>
