@@ -20,6 +20,7 @@ import {
 import { doI18n } from "pankosmia-lib/i18n";
 import { useState, useEffect } from "react";
 import LanguageMenuItem from "./LanguageMenuItem";
+import { postEmpty } from "pankosmia-lib/http";
 
 export default function LanguageSection({
   languageChoices,

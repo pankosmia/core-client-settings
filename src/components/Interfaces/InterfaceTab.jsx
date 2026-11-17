@@ -1,7 +1,6 @@
 import { Box } from "@mui/material";
-import { postEmpty } from "pankosmia-lib/http";
 import { i18nContext } from "pankosmia-rcl";
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import LanguageSection from "./LanguageSection";
 import DisplayDirection from "./DisplayDirection";
 
