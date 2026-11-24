@@ -11,13 +11,11 @@ import { typographyContext } from "pankosmia-rcl";
 import { doI18n } from "pankosmia-lib/i18n";
 export default function DisplayDirection({ i18nRef }) {
   const { typographyRef } = useContext(typographyContext);
-  const [direction, setDirection] = useState("ltr");
-
+  const [direction, setDirection] = useState("");
   const handleDirectionChange = (event) => {
     const value = event.target.value;
 
     setDirection(value);
-
     postEmpty(
       `/api/settings/typography/${typographyRef.current.font_set}/${typographyRef.current.size}/${value}`,
     );
@@ -30,7 +28,10 @@ export default function DisplayDirection({ i18nRef }) {
       </Typography>
 
       <Box sx={{ width: 550 }}>
-        <RadioGroup value={direction} onChange={handleDirectionChange}>
+        <RadioGroup
+          value={direction || typographyRef.current.direction}
+          onChange={handleDirectionChange}
+        >
           <FormControlLabel
             value="ltr"
             control={<Radio />}
