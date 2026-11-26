@@ -7,7 +7,7 @@ import {
   PanDialogActionsArray,
 } from "pankosmia-rcl";
 import { useContext, useState } from "react";
-import { getJson } from "pankosmia-lib/http";
+import { postEmpty } from "pankosmia-lib/http";
 
 export function DebugButton() {
   const { debugRef } = useContext(debugContext);
@@ -15,7 +15,7 @@ export function DebugButton() {
   const [open, setOpen] = useState(false);
 
   const toggleDebug = (ev) => {
-    getJson(`/api/debug/${debugRef.current ? "disable" : "enable"}`).then();
+    postEmpty(`/api/debug/${debugRef.current ? "disable" : "enable"}`).then();
   };
 
   return (
